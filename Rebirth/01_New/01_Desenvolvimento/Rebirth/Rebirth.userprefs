@@ -1,37 +1,10 @@
-﻿<Properties>
+﻿<Properties StartupItem="Rebirth\Rebirth.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Rebirth/PhysicsManager.cs">
-    <Files>
-      <File FileName="Rebirth/Player.cs" Line="115" Column="25" />
-      <File FileName="Rebirth/Box.cs" Line="9" Column="33" />
-      <File FileName="Rebirth/RectangleF.cs" Line="74" Column="70" />
-      <File FileName="Rebirth/PhysicsManager.cs" Line="1" Column="1" />
-      <File FileName="Rebirth/GameObject.cs" Line="20" Column="27" />
-      <File FileName="Rebirth/Collider.cs" Line="15" Column="6" />
-      <File FileName="Rebirth/Screen2.cs" Line="48" Column="27" />
-      <File FileName="Rebirth/Ground.cs" Line="31" Column="4" />
-      <File FileName="Rebirth/MoveableObject.cs" Line="11" Column="3" />
-      <File FileName="Rebirth/Character.cs" Line="5" Column="18" />
-      <File FileName="Rebirth/PolygonR.cs" Line="36" Column="47" />
-      <File FileName="Rebirth/VertexR.cs" Line="22" Column="17" />
-      <File FileName="Rebirth/Edge.cs" Line="7" Column="10" />
-      <File FileName="Rebirth/Collision.cs" Line="14" Column="3" />
-    </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Rebirth" expanded="True">
-            <Node name="Content" expanded="True">
-              <Node name="Texture" expanded="True" />
-            </Node>
-            <Node name="PhysicsManager.cs" selected="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\cedrik\Documents\42bits\Rebirth\trunk\Rebirth\01_New\01_Desenvolvimento\Rebirth\Rebirth\Player.cs" line="1" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
