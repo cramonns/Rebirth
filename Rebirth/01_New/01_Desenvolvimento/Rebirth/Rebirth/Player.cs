@@ -20,7 +20,7 @@ namespace Rebirth{
 		const float ATRITO = .5f/60f;
 		const float JUMP_IMPULSE = 15f/60f;
 		const float JUMP_ACCLERATION = 1.3f/60f;
-		const float JUMP_TOP_HIGH = 200f/60f;
+		const float JUMP_TOP_HIGH = 180f/60f;
 		const float JUMP_TOP_SPEED = 6f/60f;
 		const float AIR_RESISTANCE = 0.05f/60f;
 		const float CHAR_WIDTH = .6f;
@@ -38,21 +38,29 @@ namespace Rebirth{
 
 		public Player(){
 			this.usePhysics = true;
-			this.position = new Vector2(0, 50f/60f);
 			direction = 'r';
 			state = playerStates.WAITING;
+
+			/*this.position = new Vector2(0, 50f/60f);
 			width = CHAR_WIDTH;
-			height = CHAR_HEIGHT;
+			height = CHAR_HEIGHT;*/
+			shape = new RectangleF (new Vector2 (0, 100 / 60f), CHAR_WIDTH, CHAR_HEIGHT);
+
+
 
 			createDefaultBounds();
+
 		}
 
 		private void startFall(){
 			state = playerStates.FALLING;
 			ControllerManager.TriggerJumping = false;
+			setGroundedState (false);
 		}
 
 		public override void Update(){
+			//updateBounds();
+
 			//Movement
 			if (ControllerManager.direction == TriggerDirection.Right) {
 				direction = 'r';
@@ -85,14 +93,15 @@ namespace Rebirth{
 			//Jumping
 			if (ControllerManager.TriggerJumping) {
 				if (state != playerStates.JUMPING && state != playerStates.FALLING) {
-					jumpStartPos = position.Y;
-					position.Y += JUMP_IMPULSE;
+					jumpStartPos = shape.y;
+					shape.y += JUMP_IMPULSE;
 					speed.Y += JUMP_ACCLERATION;
 					state = playerStates.JUMPING;
+					setGroundedState (false);
 					if (movingSpeed != 0) jumping_direction = direction;
 					else jumping_direction = 'n';
 				} else if (state == playerStates.JUMPING) {
-					if (position.Y - jumpStartPos >= JUMP_TOP_HIGH) {
+					if (shape.y - jumpStartPos >= JUMP_TOP_HIGH) {
 						startFall();
 					} else if (speed.Y > JUMP_TOP_HIGH/2) {
 						speed.Y -= JUMP_ACCLERATION/2;
@@ -117,15 +126,19 @@ namespace Rebirth{
 			speed.X = movingSpeed;
 
 			//Update position after all movement is computed
-			position.X += speed.X;
-			position.Y += speed.Y;
+			shape.x += speed.X;
+			shape.y += speed.Y;
+		}
+
+		Vector2 position(){
+			return new Vector2 (shape.x, shape.y);
 		}
 
 		public override void Draw(SpriteBatch sb, ScreenManager sm){
 			if (direction == 'r') {
-				sb.Draw (texture, sm.scaleTexture(this.position, CHAR_WIDTH, CHAR_HEIGHT), Color.Red);
+				sb.Draw (texture, sm.scaleTexture(this.position(), CHAR_WIDTH, CHAR_HEIGHT), Color.Red);
 			} else {
-				sb.Draw(texture, sm.scaleTexture(this.position, CHAR_WIDTH, CHAR_HEIGHT), null, Color.Red, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+				sb.Draw(texture, sm.scaleTexture(this.position(), CHAR_WIDTH, CHAR_HEIGHT), null, Color.Red, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
 			}
 		}
 
@@ -134,32 +147,39 @@ namespace Rebirth{
 			loaded = true;
 		}
 
-		public override bool isGrounded (){
-			if (position.Y <= 50f/60f) {
-				position.Y = 50f/60f;
-				state = playerStates.WAITING;
-				return true;
-			} else return false;
-		}
+		public override void collide(GameObject b){
 
-		public override void treatCollisions(){
-			//if (2 == (int)Bounds.WESTERN)
-			if (colliders[(int)Bounds.EASTER].currentCollisions.Count != 0) {
-				foreach (GameObject g in colliders[(int)Bounds.EASTER].currentCollisions){
-					if (position.X + width > g.position.X) position.X = g.position.X - width;
-				}
+			VertexR c1 = this.shape.getCenter();
+			VertexR c2 = b.shape.getCenter();
+
+			c2.x = c1.x;
+
+			/*c1.x -= shape.x;
+			c2.x -= shape.x;
+			c1.y -= shape.y;
+			c2.y -= shape.y;*/
+
+			Console.WriteLine ("X: " + shape.x + "  Y: " + shape.y);
+			Console.WriteLine ("C1 X: " + c1.x + "  Y: " + c1.y);
+			Console.WriteLine ("C2 X: " + c2.x + "  Y: " + c2.y);
+
+			if (colliders[(int)Bounds.EASTER].getColliderShape().intersects(c1, c2)) {
+				shape.x = b.shape.x - shape.width;
 			}
-			if (colliders[(int)Bounds.LOWER].currentCollisions.Count != 0) {
-				foreach (GameObject g in colliders[(int)Bounds.LOWER].currentCollisions){
-					if (position.Y < g.position.Y + g.height) {
-						position.Y = g.position.Y + g.height;
-					}
-				}
-			}
-			if (colliders[(int)Bounds.WESTERN].currentCollisions.Count != 0) {
-				foreach (GameObject g in colliders[(int)Bounds.WESTERN].currentCollisions){
-					if (position.X < g.position.X + g.width) position.X = g.position.X + g.width;
-				}
+
+
+			if (colliders [(int)Bounds.LOWER].getColliderShape().intersects (c1, c2)) {
+				shape.y = b.shape.y + b.shape.height;
+
+				if (b.isGrounded ()) {
+					setGroundedState (true);
+					state = playerStates.WAITING;
+				} else startFall();
+
+			} else startFall();
+
+			if (colliders[(int)Bounds.WESTERN].getColliderShape().intersects(c1, c2)) {
+				shape.x = b.shape.x + b.shape.width;
 			}
 		}
 	}

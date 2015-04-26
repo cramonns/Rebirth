@@ -8,6 +8,10 @@ namespace Rebirth{
 
 		public Ground(){
 			loaded = false;
+
+			shape = new RectangleF(new Vector2 (0f, 0f), 1600f/60f, 50f/60f);
+			createDefaultBounds();
+
 		}
 
 		public override void Update(){
@@ -22,11 +26,7 @@ namespace Rebirth{
 			loaded = true;
 		}
 
-		public override bool isGrounded(){
-			return true;
-		}
-
-		public override void treatCollisions(){
+		public override void collide(GameObject B){
 
 		}
 	}

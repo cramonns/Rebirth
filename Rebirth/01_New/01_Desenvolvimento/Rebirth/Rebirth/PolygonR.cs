@@ -11,8 +11,9 @@ namespace Rebirth{
 		VertexR center;
 
 		public PolygonR (LinkedList<VertexR> vertices){
-			center.x = 0;
-			center.y = 0;
+			center = new VertexR (0, 0);
+			/*center.x = 0;
+			center.y = 0;*/
 			verticesCount = vertices.Count;
 			this.vertices = vertices;
 			vertices = new LinkedList<VertexR> ();
@@ -25,7 +26,8 @@ namespace Rebirth{
 				center.y += v.y;
 				aux = v;	
 			}
-			center /= (float)verticesCount;
+			center.x /= (float)verticesCount;
+			center.y /= (float)verticesCount;
 			this.edges.AddLast(new Edge(aux, vertices.First.Value as VertexR));
 		}
 
@@ -33,8 +35,8 @@ namespace Rebirth{
 			return verticesCount;
 		}
 
-		public bool detectCollision(PolygonR b, ref float distance){
-			
+		public bool detectCollision(PolygonR b){
+			return true;
 		}
 	}
 }

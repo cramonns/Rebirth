@@ -16,13 +16,12 @@ namespace Rebirth{
 			loaded = false;
 			objects = new List<GameObject>();
 			objects.Add(new Ground());
-			objects.Add(new Box());
+			//objects.Add(new Box());
 		}
 
 		public override void LoadScreen(ContentManager Content){
 			foreach (GameObject o in objects) {
-				if (!o.loaded)
-					o.Load(Content);
+				if (!o.loaded) o.Load(Content);
 			}
 			screen2physx = new PhysicsManager(objects);
 			loaded = true;
@@ -35,7 +34,6 @@ namespace Rebirth{
 			}
 			screen2physx.checkCollisions();
 			screen2physx.treatCollisions();
-
 		}
 
 		public override void Draw(){

@@ -7,42 +7,77 @@ namespace Rebirth{
 
 		const float GRAVITY = .4f/60f;
 
-		List<MoveableObject> objects;
+		List<GameObject> objects;
 		LinkedList<Collision> currentCollisions;
+		QuadTree collisionTree;
 
 		public PhysicsManager(List<GameObject> objectsFromScene){
-			this.objects = new List<MoveableObject>();
+			this.objects = new List<GameObject>();
 			foreach (GameObject g in objectsFromScene) {
 				if (g is MoveableObject)
-					objects.Add(g as MoveableObject); //UsePhysics
+					objects.Add (g as MoveableObject); //UsePhysics
+				else
+					objects.Add (g);
 			}
 			currentCollisions = new LinkedList<Collision>();
+			collisionTree = new QuadTree (0, new RectangleF (0, 0, 500, 500));
 		}
 
 		public void applyGravity(){
 			//Gravity
-			foreach (MoveableObject g in objects) {
-				if (!g.isGrounded ()) g.speed.Y -= GRAVITY;
-				else g.speed.Y = 0;
+			foreach (GameObject h in objects) {
+				if (h is MoveableObject) {
+					MoveableObject g = h as MoveableObject;
+					if (!g.isGrounded ())
+						g.speed.Y -= GRAVITY;
+					else
+						g.speed.Y = 0;
+				}
 			}
 		}
 
 		public void checkCollisions(){
-			float collisionDistane;
+			//float collisionDistane = 0;
 			currentCollisions.Clear();
-			foreach (MoveableObject g in objects) {
-				foreach (GameObject h in objects) {
-					if (h != g) {
-						if (g.collider.shape.detectCollision(h.collider, ref collisionDistane))
-							currentCollisions.AddLast(new Collision(g,h,collisionDistane));
+
+			collisionTree.clear();
+
+			List<GameObject> candidates = new List<GameObject>();
+
+			foreach (GameObject g in objects) {
+				collisionTree.insert (g);
+			}
+
+			foreach (GameObject j in objects) {
+				if (j is MoveableObject) {
+					MoveableObject g = j as MoveableObject;
+					candidates.Clear();
+					candidates = collisionTree.retrieve(candidates, j.shape);
+					foreach (GameObject h in candidates) {
+						if (h != g) {
+							CollisionDistance d = g.shape.AxisDistance(h.shape);
+							if (d.direction == CollisionDistance.CD_Direction.DOWN) {
+								//if (g.speed.Y <= 0 && d.Y <= 0) {
+								g.speed.Y = (g.speed.Y < -d.length) ? -d.length : g.speed.Y;
+							} else if (d.direction == CollisionDistance.CD_Direction.UP){
+								//if (g.speed.Y > 0 && d.Y > 0) {
+								g.speed.Y = (g.speed.Y > d.length) ? d.length : g.speed.Y;
+							} else if (d.direction == CollisionDistance.CD_Direction.WEST){
+								//if (g.speed.X <= 0 && d.X <= 0) {
+								g.speed.X = (g.speed.X < -d.length) ? -d.length : g.speed.X;
+							} else if (d.direction == CollisionDistance.CD_Direction.EAST){
+								//if (g.speed.X > 0 && d.X > 0) {
+								g.speed.X = (g.speed.X > d.length) ? d.length : g.speed.X;
+							}
+						}
 					}
 				}
 			}
 		}
 
 		public void treatCollisions(){
-			foreach (GameObject g in objects) {
-				g.treatCollisions();
+			foreach (Collision c in currentCollisions) {
+				c.treatCollision();
 			}
 		}
 	}

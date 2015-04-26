@@ -4,12 +4,15 @@ namespace Rebirth{
 	public class Collision{
 
 		public GameObject a, b;
-		public float distance;
 
-		public Collision (GameObject a, GameObject b, float collisionDistance){
+		public Collision (GameObject a, GameObject b){
 			this.a = a;
 			this.b = b;
-			distance = collisionDistance;
+		}
+
+		public void treatCollision(){
+			a.collide(this.b);
+			b.collide(this.a);
 		}
 	}
 }

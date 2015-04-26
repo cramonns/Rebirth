@@ -13,29 +13,24 @@ namespace Rebirth{
 			loaded = false;
 			colliders = new List<Collider>();
 			isFixed = false;
-			position = new Vector2 (10f, 10f);
 			speed = new Vector2 (0f, 0f);
+
+			/*position = new Vector2 (10f, 10f);
 			width = 2;
-			height = 2;
+			height = 2;*/
+			shape = new RectangleF(new Vector2 (10f, 10f), 2, 2);
 
 			createDefaultBounds();
 		}
 
-		public override bool isGrounded (){
-			if (position.Y <= 50f/60f) {
-				position.Y = 50f/60f;
-				return true;
-			} else return false;
-		}
-
 		public override void Update(){
 			//Update position after all movement is computed
-			position.X += speed.X;
-			position.Y += speed.Y;
+			shape.x += speed.X;
+			shape.y += speed.Y;
 		}
 
 		public override void Draw(SpriteBatch sb, ScreenManager sm){
-			sb.Draw (texture, sm.scaleTexture(this.position, 2, 2), Color.Black);
+			sb.Draw(texture, sm.scaleTexture(new Vector2(this.shape.x, this.shape.y), 2, 2), Color.Black);
 		}
 
 		public override void Load(ContentManager Content){
@@ -43,8 +38,26 @@ namespace Rebirth{
 			loaded = true;
 		}
 
-		public override void treatCollisions(){
+		public override void collide(GameObject b){
+			VertexR c1 = this.shape.getCenter();
+			VertexR c2 = b.shape.getCenter();
 
+			/*c1.x -= shape.x;
+			c2.x -= shape.x;
+			c1.y -= shape.y;
+			c2.y -= shape.y;*/
+
+			c2.x = c1.x;
+
+			if (colliders [(int)Bounds.LOWER].getColliderShape().intersects (c1, c2)) {
+				shape.y = b.shape.y + b.shape.height;
+
+				if (b.isGrounded ()) {
+					setGroundedState (true);
+				} else setGroundedState (false);
+
+
+			} else setGroundedState (false);
 		}
 	}
 }
