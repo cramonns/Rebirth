@@ -63,8 +63,8 @@ namespace Rebirth{
  		*/
 		private int getIndex(RectangleF pRect) {
 			int index = -1;
-			double verticalMidpoint = bounds.x + (bounds.width / 2);
-			double horizontalMidpoint = bounds.y + (bounds.height / 2);
+			float verticalMidpoint = bounds.x + (bounds.width / 2);
+			float horizontalMidpoint = bounds.y + (bounds.height / 2);
 
 			// Object can completely fit within the top quadrants
 			bool topQuadrant = (pRect.y < horizontalMidpoint && pRect.y + pRect.height < horizontalMidpoint);
@@ -138,6 +138,20 @@ namespace Rebirth{
 			returnObjects.AddRange(objects);
 
 			return returnObjects;
+		}
+
+		public void remove (GameObject g){
+			RectangleF pRect = g.getCollisionShape();
+			if (nodes[0] != null) {
+				int index = getIndex(pRect);
+
+				if (index != -1) {
+					nodes[index].remove(g);
+					return;
+				}
+			}
+
+			objects.Remove(g);
 		}
 
 	}

@@ -24,9 +24,7 @@ namespace Rebirth{
 		}
 
 		public override void Update(){
-			//Update position after all movement is computed
-			shape.x += speed.X;
-			shape.y += speed.Y;
+
 		}
 
 		public override void Draw(SpriteBatch sb, ScreenManager sm){
@@ -41,11 +39,6 @@ namespace Rebirth{
 		public override void collide(GameObject b){
 			VertexR c1 = this.shape.getCenter();
 			VertexR c2 = b.shape.getCenter();
-
-			/*c1.x -= shape.x;
-			c2.x -= shape.x;
-			c1.y -= shape.y;
-			c2.y -= shape.y;*/
 
 			c2.x = c1.x;
 

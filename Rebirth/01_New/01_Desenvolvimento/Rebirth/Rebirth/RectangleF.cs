@@ -5,6 +5,8 @@ namespace Rebirth{
 
 	public class RectangleF{
 
+		private const float contactErrorMargin = 0.02f;
+
 		public float x, y;
 		public float width, height;
 		private VertexR center;
@@ -85,7 +87,6 @@ namespace Rebirth{
 
 		public bool intersects(VertexR v1, VertexR v2){
 
-
 			float x1 = v1.x;
 			float x2 = v2.x;
 			float y1 = v1.y;
@@ -124,7 +125,43 @@ namespace Rebirth{
 		}
 
 		public CollisionDistance internalDistance(RectangleF r){
-			return null;
+			if (y > r.y + r.height - contactErrorMargin && y < r.y + r.height + contactErrorMargin) {//Check if it is inside numerical error margins
+				return new CollisionDistance (CollisionDistance.CD_Direction.DOWN, 0);
+			} else if (y + height > r.y - contactErrorMargin && y + height < r.y + contactErrorMargin) {//Check if it is inside numerical error margins
+				return new CollisionDistance (CollisionDistance.CD_Direction.UP, 0);
+			} else if (x > r.x + r.width - contactErrorMargin && x < r.x + r.width + contactErrorMargin) {//Check if it is inside numerical error margins
+				return new CollisionDistance (CollisionDistance.CD_Direction.WEST, 0);
+			} else if (x + width > r.x - contactErrorMargin && x + width < r.x + contactErrorMargin) {//Check if it is inside numerical error margins
+				return new CollisionDistance (CollisionDistance.CD_Direction.EAST, 0);
+			} else {
+				float distYD, distYU, distXW, distXE;
+				float distY, distX;
+				distYD = r.y + r.height - y;
+				distYU = y + height - r.y;
+				distXW = r.x + r.width - x;
+				distXE = x + width - r.x;
+
+				CollisionDistance.CD_Direction dirY, dirX;
+
+				if (distYD < distYU) {
+					dirY = CollisionDistance.CD_Direction.DOWN;
+					distY = distYD;
+				} else {
+					dirY = CollisionDistance.CD_Direction.UP;
+					distY = distYU;
+				}
+				if (distXW < distXE) {
+					dirX = CollisionDistance.CD_Direction.WEST;
+					distX = distXW;
+				} else {
+					dirX = CollisionDistance.CD_Direction.EAST;
+					distX = distXE;
+				}
+
+				if (distY < distX) {
+					return new CollisionDistance(dirY, -distY);
+				} else return new CollisionDistance(dirX, -distX);
+			}
 		}
 
 		public CollisionDistance AxisDistance(RectangleF r){

@@ -51,23 +51,46 @@ namespace Rebirth{
 			foreach (GameObject j in objects) {
 				if (j is MoveableObject) {
 					MoveableObject g = j as MoveableObject;
+					g.setGroundedState(false);
+					//collisionTree.remove (g);
 					candidates.Clear();
 					candidates = collisionTree.retrieve(candidates, j.shape);
 					foreach (GameObject h in candidates) {
 						if (h != g) {
-							CollisionDistance d = g.shape.AxisDistance(h.shape);
-							if (d.direction == CollisionDistance.CD_Direction.DOWN) {
-								//if (g.speed.Y <= 0 && d.Y <= 0) {
-								g.speed.Y = (g.speed.Y < -d.length) ? -d.length : g.speed.Y;
-							} else if (d.direction == CollisionDistance.CD_Direction.UP){
-								//if (g.speed.Y > 0 && d.Y > 0) {
-								g.speed.Y = (g.speed.Y > d.length) ? d.length : g.speed.Y;
-							} else if (d.direction == CollisionDistance.CD_Direction.WEST){
-								//if (g.speed.X <= 0 && d.X <= 0) {
-								g.speed.X = (g.speed.X < -d.length) ? -d.length : g.speed.X;
-							} else if (d.direction == CollisionDistance.CD_Direction.EAST){
-								//if (g.speed.X > 0 && d.X > 0) {
-								g.speed.X = (g.speed.X > d.length) ? d.length : g.speed.X;
+							if (g.getCollisionShape ().intersects (h.getCollisionShape ())) {
+								CollisionDistance d = g.shape.AxisDistance(h.shape);
+								if (d.direction == CollisionDistance.CD_Direction.DOWN) {
+									if (d.length < 0) {
+										g.speed.Y = -d.length;
+										if (h.isGrounded ()) {
+											g.setGroundedState (true);
+										}
+									} else {
+										if (d.length == 0) {
+											//g.shape.y = h.shape.y + h.shape.height;//position correction to reduce precision problems
+											if (h.isGrounded ()) {
+												g.setGroundedState (true);
+											}
+										}
+
+										g.speed.Y = (g.speed.Y < -d.length) ? -d.length : g.speed.Y;
+									}
+								} else if (d.direction == CollisionDistance.CD_Direction.UP) {
+									if (d.length < 0) {
+										g.speed.Y = d.length;
+									}
+									else g.speed.Y = (g.speed.Y > d.length) ? d.length : g.speed.Y;
+								} else if (d.direction == CollisionDistance.CD_Direction.WEST) {
+									if (d.length < 0) {
+										g.speed.X = -d.length;
+									}
+									else g.speed.X = (g.speed.X < -d.length) ? -d.length : g.speed.X;
+								} else if (d.direction == CollisionDistance.CD_Direction.EAST) {
+									if (d.length < 0) {
+										g.speed.X = d.length;
+									}
+									else g.speed.X = (g.speed.X > d.length) ? d.length : g.speed.X;
+								}
 							}
 						}
 					}
@@ -78,6 +101,15 @@ namespace Rebirth{
 		public void treatCollisions(){
 			foreach (Collision c in currentCollisions) {
 				c.treatCollision();
+			}
+		}
+
+		public void integratePosition(){
+			foreach (GameObject j in objects) {
+				if (j is MoveableObject) {
+					MoveableObject g = j as MoveableObject;
+					g.integratePosition();
+				}
 			}
 		}
 	}

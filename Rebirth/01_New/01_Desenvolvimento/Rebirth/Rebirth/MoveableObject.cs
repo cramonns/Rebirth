@@ -10,7 +10,7 @@ namespace Rebirth{
 
 		private bool grounded = false;
 
-		public void setGroundedState(bool state){
+		public virtual void setGroundedState(bool state){
 			grounded = state;
 		}
 
@@ -28,6 +28,12 @@ namespace Rebirth{
 			if (speed.Y > 0) colH += speed.Y;
 			else colY += speed.Y;
 			return new RectangleF(colX, colY, colW, colH);
+		}
+
+		public void integratePosition(){
+			//Update position after all movement is computed
+			shape.x += speed.X;
+			shape.y += speed.Y;
 		}
 	}
 }

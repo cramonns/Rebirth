@@ -16,7 +16,7 @@ namespace Rebirth{
 			loaded = false;
 			objects = new List<GameObject>();
 			objects.Add(new Ground());
-			//objects.Add(new Box());
+			objects.Add(new Box());
 		}
 
 		public override void LoadScreen(ContentManager Content){
@@ -34,6 +34,7 @@ namespace Rebirth{
 			}
 			screen2physx.checkCollisions();
 			screen2physx.treatCollisions();
+			screen2physx.integratePosition();
 		}
 
 		public override void Draw(){

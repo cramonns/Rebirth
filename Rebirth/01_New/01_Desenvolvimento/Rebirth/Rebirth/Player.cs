@@ -41,12 +41,7 @@ namespace Rebirth{
 			direction = 'r';
 			state = playerStates.WAITING;
 
-			/*this.position = new Vector2(0, 50f/60f);
-			width = CHAR_WIDTH;
-			height = CHAR_HEIGHT;*/
 			shape = new RectangleF (new Vector2 (0, 100 / 60f), CHAR_WIDTH, CHAR_HEIGHT);
-
-
 
 			createDefaultBounds();
 
@@ -55,7 +50,6 @@ namespace Rebirth{
 		private void startFall(){
 			state = playerStates.FALLING;
 			ControllerManager.TriggerJumping = false;
-			setGroundedState (false);
 		}
 
 		public override void Update(){
@@ -125,9 +119,7 @@ namespace Rebirth{
 
 			speed.X = movingSpeed;
 
-			//Update position after all movement is computed
-			shape.x += speed.X;
-			shape.y += speed.Y;
+
 		}
 
 		Vector2 position(){
@@ -145,6 +137,12 @@ namespace Rebirth{
 		public override void Load(ContentManager Content){
 			texture = Content.Load<Texture2D>("Texture/red");
 			loaded = true;
+		}
+
+		public override void setGroundedState(bool newState){
+			base.setGroundedState (newState);
+			if (newState) this.state = playerStates.WAITING;
+			else if (this.state != playerStates.JUMPING) startFall();
 		}
 
 		public override void collide(GameObject b){
