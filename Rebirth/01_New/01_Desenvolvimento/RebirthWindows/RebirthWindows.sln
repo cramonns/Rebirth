@@ -1,9 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebirth", "Rebirth\Rebirth.csproj", "{FB54FB76-74A6-4DAF-893C-50E94A80394D}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RebirthWindows", "RebirthWindows\RebirthWindows.csproj", "{2AD1876E-4F1C-438E-A819-E0BD0A8F4729}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +9,10 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FB54FB76-74A6-4DAF-893C-50E94A80394D}.Debug|x86.ActiveCfg = Debug|x86
-		{FB54FB76-74A6-4DAF-893C-50E94A80394D}.Debug|x86.Build.0 = Debug|x86
-		{FB54FB76-74A6-4DAF-893C-50E94A80394D}.Release|x86.ActiveCfg = Release|x86
-		{FB54FB76-74A6-4DAF-893C-50E94A80394D}.Release|x86.Build.0 = Release|x86
+		{2AD1876E-4F1C-438E-A819-E0BD0A8F4729}.Debug|x86.ActiveCfg = Debug|x86
+		{2AD1876E-4F1C-438E-A819-E0BD0A8F4729}.Debug|x86.Build.0 = Debug|x86
+		{2AD1876E-4F1C-438E-A819-E0BD0A8F4729}.Release|x86.ActiveCfg = Release|x86
+		{2AD1876E-4F1C-438E-A819-E0BD0A8F4729}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

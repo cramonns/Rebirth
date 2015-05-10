@@ -1,0 +1,101 @@
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace Rebirth {
+    [Serializable]
+    public class SceneContainer {
+        //class attributes
+        int id;
+        RectangleF shapeBox;
+        int previousScene = -1;
+        int nextScene = -1;
+        string name;
+        
+        public LinkedList<GameObject> objects;
+
+        //class properties
+        public int ID{
+            get{return id;}
+            set{id = value;}
+        }
+        public float X{
+            get {return shapeBox.x;}
+            set {shapeBox.x = value;}
+        }
+        public float Y{
+            get {return shapeBox.y;}
+            set {shapeBox.y = value;}
+        }
+        public Vector2 position{
+            get {return new Vector2(shapeBox.x,shapeBox.y);}
+            set {shapeBox.x = value.X; shapeBox.y = value.Y;}
+        }
+        public float Width{
+            get {return shapeBox.width;}
+            set {shapeBox.width = value;}
+        }
+        public float Height{
+            get {return shapeBox.height;}
+            set {shapeBox.height = value;}
+        }
+        public string Name{
+            get {return name;}
+            set {name = value;}
+        }
+        public int PreviousScene{
+            get {return previousScene;}
+        }
+        public int NextScene{
+            get {return nextScene;}
+        }
+        
+        //class constructors
+        public SceneContainer(RectangleF sb, int id){
+            objects = new LinkedList<GameObject>();            
+            shapeBox = sb;
+            this.id = id;
+            name = "Container_"+id.ToString();
+        }
+
+        public SceneContainer(RectangleF sb, int id, int prevScene):this(sb, id){
+            previousScene = prevScene;
+        }
+
+        public SceneContainer(RectangleF sb, int id, int prevScene, int nextScene):this(sb, id, prevScene){
+            this.nextScene = nextScene;
+        }
+
+        public void add(GameObject o){
+            objects.AddFirst(o);
+        }
+
+        public void unLoad(){
+            objects.Clear();
+        }
+
+        public void extendWidth(float extension){
+            shapeBox.width += extension;
+        }
+
+        public void extendHeight(float extension){
+            shapeBox.height += extension;
+        }
+
+        public RectangleF getHalfRightBounds(){
+            return new RectangleF(shapeBox.x + shapeBox.width/2, shapeBox.y, shapeBox.width/2, shapeBox.height);
+        }
+
+        public RectangleF getHalfLeftBounds(){
+            return new RectangleF(shapeBox.x, shapeBox.y, shapeBox.width/2, shapeBox.height);
+        }
+
+        public void Draw(SpriteBatch sb, DisplayManager sm, GameTime gameTime){
+            foreach (GameObject g in objects) {
+				g.Draw(sb, sm, gameTime);
+			}
+        }
+
+    }
+}
