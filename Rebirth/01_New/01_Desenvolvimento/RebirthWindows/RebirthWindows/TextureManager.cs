@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
 namespace Rebirth {
-    public class TextureManager {
+    public static class TextureManager {
 
         public enum TextureID{
             player,
@@ -15,19 +15,19 @@ namespace Rebirth {
             selectedContainer
         }
 
-        private ContentManager Content;
-        public Texture2D[] textures;
+        private static ContentManager Content;
+        public static Texture2D[] textures;
 
-        public TextureManager(ContentManager cm){
+        public static void initialize(ContentManager cm){
             textures = new Texture2D[Enum.GetNames(typeof(TextureID)).Length];
             Content = cm;
         }
 
-        public bool isLoaded(TextureID id){
+        public static bool isLoaded(TextureID id){
             return textures[(int)id] != null;
         }
 
-        public Texture2D load(TextureID id){
+        public static Texture2D load(TextureID id){
             switch(id){
                 case TextureID.player:
                     textures[(int)id] = Content.Load<Texture2D>("Texture/red");
@@ -54,7 +54,11 @@ namespace Rebirth {
             return textures[(int)id];
         }
 
-        public void unLoad(TextureID id){
+        public static Texture2D getTexture(TextureID id){
+            return textures[(int)id];
+        }
+
+        public static void unLoad(TextureID id){
             textures[(int)id].Dispose();
             textures[(int)id] = null;
         }

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Xna.Framework;
 
 namespace Rebirth {
     public partial class LevelEditor : Form {
@@ -33,11 +34,12 @@ namespace Rebirth {
 
         private void containerToolStripMenuItem_Click(object sender, EventArgs e) {
             SceneContainer c = gameEditor.newContainer();
-            gameEntry.getWorld().loadScene(c);
-            gameEntry.loadCurrentScreen();
             tabControlContainer.TabPages.Add(c.Name);
             gameEditor.addContainerToNextTab(c.ID);
             tabControlContainer.SelectedIndex++;
+            gameEntry.getWorld().loadScene(c);
+            gameEntry.loadCurrentScreen();
+            DisplayManager.screenShift.X = -10;
         }
 
         private void LevelEditor_FormClosed(object sender, FormClosedEventArgs e) {
@@ -52,8 +54,13 @@ namespace Rebirth {
 
         private void tabControlContainer_SelectedIndexChanged(object sender, EventArgs e) {
             int index = tabControlContainer.SelectedIndex;
-            gameEditor.getContainerInTab(index);
-
+            if (index == 0){
+                buttonInsertObject.Enabled = false;
+                gameEntry.getWorld().loadScene(gameEditor.SceneManagerView);
+            } else {
+                buttonInsertObject.Enabled = true;
+                gameEntry.getWorld().loadScene(gameEditor.getContainerInTab(index));
+            }
         }
 
         private void containerToolStripMenuItem1_Click(object sender, EventArgs e) {
@@ -61,6 +68,23 @@ namespace Rebirth {
             if (index > 0){
                 gameEditor.saveContainer(gameEntry.getWorld().currentContainer());
             }
+        }
+
+        private void buttonInsertObject_Click(object sender, EventArgs e) {
+            gameEntry.getWorld().insertMode((Enumerations.ObjectTypes)comboBoxObjectList.SelectedIndex);
+        }
+
+        private void gameBox_MouseEnter(object sender, EventArgs e) {
+            this.gameBox.Focus();
+            MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X, PictureBox.MousePosition.Y));
+        }
+
+        private void gameBox_MouseMove(object sender, MouseEventArgs e) {
+            MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X, PictureBox.MousePosition.Y));
+        }
+
+        private void gameBox_MouseLeave(object sender, EventArgs e) {
+            MouseManager.mousePosition = DisplayManager.screenShift - new Vector2(1000,1000);
         }
         
     }

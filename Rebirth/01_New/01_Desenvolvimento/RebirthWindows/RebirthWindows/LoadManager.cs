@@ -4,17 +4,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 namespace Rebirth {
-    public class LoadManager {
+    public static class LoadManager {
 
-        TextureManager tm;
-        VideoManager vm;
-
-        public LoadManager(TextureManager tm, VideoManager vm){
-            this.tm = tm;
-            this.vm = vm;
-        }
-
-        public void Update(SceneContainer[] scenes, int preloadAmount, Vector2 playerPosition){
+        public static void Update(SceneContainer[] scenes, int preloadAmount, Vector2 playerPosition){
             int playerPosID = 0;
             if (scenes[preloadAmount] == null){
                 scenes[preloadAmount] = Load(playerPosID);
@@ -30,7 +22,7 @@ namespace Rebirth {
             }
         }
 
-        public SceneContainer Load(int id){
+        public static SceneContainer Load(int id){
             BinaryFormatter binFormat = new BinaryFormatter();
             string fileName = "Lvl/" + id.ToString() + ".scn";
             using(Stream fStream = File.OpenRead(fileName)){
@@ -38,18 +30,10 @@ namespace Rebirth {
             }
         }
 
-        public void LoadObjects(SceneContainer scene){
+        public static void LoadObjects(SceneContainer scene){
             foreach (GameObject o in scene.objects) {
-				o.Load(tm);
+				o.Load();
 			}
-        }
-
-        public ContainerManager loadContainerManager(){
-            BinaryFormatter binFormat = new BinaryFormatter();
-            string path = "Lvl/Containers.info";
-            using ( Stream fStream = File.OpenRead(path) ){
-                return (ContainerManager)binFormat.Deserialize(fStream);
-            }
         }
 
     }

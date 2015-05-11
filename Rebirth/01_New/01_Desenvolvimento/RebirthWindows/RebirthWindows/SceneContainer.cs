@@ -91,10 +91,18 @@ namespace Rebirth {
             return new RectangleF(shapeBox.x, shapeBox.y, shapeBox.width/2, shapeBox.height);
         }
 
-        public void Draw(SpriteBatch sb, DisplayManager sm, GameTime gameTime){
+        public virtual void Draw(SpriteBatch sb, GameTime gameTime){ //MAKE NOT VIRTUAL WHEN DISABLING EDITOR
             foreach (GameObject g in objects) {
-				g.Draw(sb, sm, gameTime);
+				g.Draw(sb, gameTime);
 			}
+        }
+
+        public void DrawBounds(SpriteBatch sb, GameTime gameTime){
+            Texture2D line = TextureManager.getTexture(TextureManager.TextureID.player);
+            sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x),(int)DisplayManager.getScreenY(shapeBox.y),(int)DisplayManager.screenLength(shapeBox.height),1),Color.White);
+            sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x),(int)DisplayManager.getScreenY(shapeBox.y+shapeBox.height),1,(int)DisplayManager.screenLength(shapeBox.width)),Color.White);
+            sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x+shapeBox.width),(int)DisplayManager.getScreenY(shapeBox.y),(int)DisplayManager.screenLength(shapeBox.height),1),Color.White);
+            sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x),(int)DisplayManager.getScreenY(shapeBox.y),1,(int)DisplayManager.screenLength(shapeBox.width)),Color.White);
         }
 
     }

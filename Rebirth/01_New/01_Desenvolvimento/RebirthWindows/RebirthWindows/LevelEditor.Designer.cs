@@ -30,6 +30,7 @@ namespace Rebirth {
             this.groupBoxTest = new System.Windows.Forms.GroupBox();
             this.buttonPlay = new System.Windows.Forms.Button();
             this.groupBoxObjects = new System.Windows.Forms.GroupBox();
+            this.buttonInsertObject = new System.Windows.Forms.Button();
             this.labelSelectObject = new System.Windows.Forms.Label();
             this.comboBoxObjectList = new System.Windows.Forms.ComboBox();
             this.groupBoxContainer = new System.Windows.Forms.GroupBox();
@@ -37,11 +38,10 @@ namespace Rebirth {
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.containerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControlContainer = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.buttonInsertObject = new System.Windows.Forms.Button();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.containerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControlContainer = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBoxTest.SuspendLayout();
@@ -60,6 +60,9 @@ namespace Rebirth {
             this.gameBox.Size = new System.Drawing.Size(712, 531);
             this.gameBox.TabIndex = 0;
             this.gameBox.TabStop = false;
+            this.gameBox.MouseEnter += new System.EventHandler(this.gameBox_MouseEnter);
+            this.gameBox.MouseLeave += new System.EventHandler(this.gameBox_MouseLeave);
+            this.gameBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gameBox_MouseMove);
             // 
             // panel1
             // 
@@ -108,6 +111,17 @@ namespace Rebirth {
             this.groupBoxObjects.TabIndex = 2;
             this.groupBoxObjects.TabStop = false;
             this.groupBoxObjects.Text = "Objects";
+            // 
+            // buttonInsertObject
+            // 
+            this.buttonInsertObject.Enabled = false;
+            this.buttonInsertObject.Location = new System.Drawing.Point(50, 85);
+            this.buttonInsertObject.Name = "buttonInsertObject";
+            this.buttonInsertObject.Size = new System.Drawing.Size(75, 23);
+            this.buttonInsertObject.TabIndex = 3;
+            this.buttonInsertObject.Text = "Insert";
+            this.buttonInsertObject.UseVisualStyleBackColor = true;
+            this.buttonInsertObject.Click += new System.EventHandler(this.buttonInsertObject_Click);
             // 
             // labelSelectObject
             // 
@@ -164,7 +178,7 @@ namespace Rebirth {
             this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.containerToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // containerToolStripMenuItem
@@ -173,6 +187,21 @@ namespace Rebirth {
             this.containerToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.containerToolStripMenuItem.Text = "Container";
             this.containerToolStripMenuItem.Click += new System.EventHandler(this.containerToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.containerToolStripMenuItem1});
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // containerToolStripMenuItem1
+            // 
+            this.containerToolStripMenuItem1.Name = "containerToolStripMenuItem1";
+            this.containerToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
+            this.containerToolStripMenuItem1.Text = "Container";
+            this.containerToolStripMenuItem1.Click += new System.EventHandler(this.containerToolStripMenuItem1_Click);
             // 
             // tabControlContainer
             // 
@@ -195,31 +224,6 @@ namespace Rebirth {
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "ContainerView";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // buttonInsertObject
-            // 
-            this.buttonInsertObject.Enabled = false;
-            this.buttonInsertObject.Location = new System.Drawing.Point(50, 85);
-            this.buttonInsertObject.Name = "buttonInsertObject";
-            this.buttonInsertObject.Size = new System.Drawing.Size(75, 23);
-            this.buttonInsertObject.TabIndex = 3;
-            this.buttonInsertObject.Text = "Insert";
-            this.buttonInsertObject.UseVisualStyleBackColor = true;
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.containerToolStripMenuItem1});
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveToolStripMenuItem.Text = "Save";
-            // 
-            // containerToolStripMenuItem1
-            // 
-            this.containerToolStripMenuItem1.Name = "containerToolStripMenuItem1";
-            this.containerToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.containerToolStripMenuItem1.Text = "Container";
-            this.containerToolStripMenuItem1.Click += new System.EventHandler(this.containerToolStripMenuItem1_Click);
             // 
             // LevelEditor
             // 

@@ -17,9 +17,6 @@ namespace Rebirth{
 		public GraphicsDeviceManager graphics;
 		public SpriteBatch spriteBatch;		
 		GameScreen[] screens;
-		DisplayManager screenManager;
-        TextureManager textureManager;
-        VideoManager videoManager;
         
         Control gameForm;
         IntPtr drawingSurface;
@@ -39,7 +36,7 @@ namespace Rebirth{
 		public Game1(){
 			//this.Content = new Microsoft.Xna.Framework.Content.ContentManager(null, "Content");
 			Content.RootDirectory = "Content";	            
-			screenManager = new DisplayManager(this);
+			DisplayManager.initialize(this);
             screens = new GameScreen[Enum.GetNames(typeof(ScreenID)).Length];
             currentScreen = ScreenID.intro;
 		}
@@ -57,7 +54,7 @@ namespace Rebirth{
             this.parentForm = parentForm;
             this.pictureBox = pictureBox;
 
-            screenManager = new DisplayManager(this, pictureBox.Width, pictureBox.Height);
+            DisplayManager.initialize(this, pictureBox.Width, pictureBox.Height);
 
             // prepare graphics event
             graphics.PreparingDeviceSettings +=
@@ -99,18 +96,18 @@ namespace Rebirth{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //create the content managers
-            textureManager = new TextureManager(Content);
-            videoManager = new VideoManager(Content);
+            TextureManager.initialize(Content);
+            VideoManager.initialize(Content);
 
 			//create all screens
-            screens[(int)ScreenID.intro] = new IntroScreen(spriteBatch, screenManager);
-            screens[(int)ScreenID.menu] = new MenuScreen(spriteBatch, screenManager);
-            screens[(int)ScreenID.world] = new GameWorld(spriteBatch, screenManager, textureManager, videoManager);
+            screens[(int)ScreenID.intro] = new IntroScreen(spriteBatch);
+            screens[(int)ScreenID.menu] = new MenuScreen(spriteBatch);
+            screens[(int)ScreenID.world] = new GameWorld(spriteBatch);
 
             //load all screens
             int totalScreens = Enum.GetNames(typeof(ScreenID)).Length;
             for (int i = 0; i < totalScreens; i++)
-			    screens[i].LoadScreen(textureManager, videoManager);
+			    screens[i].LoadScreen();
 
             //editor
             if (editor) (screens[(int)ScreenID.world] as GameWorld).editMode();
@@ -143,16 +140,12 @@ namespace Rebirth{
 			base.Draw(gameTime);
 		}
 
-		public DisplayManager getScreenManager(){
-			return screenManager;
-		}
-
         public GameWorld getWorld(){
             return screens[(int)ScreenID.world] as GameWorld;
         }
 
         public void loadCurrentScreen(){
-            screens[(int)currentScreen].LoadScreen(textureManager, videoManager);
+            screens[(int)currentScreen].LoadScreen();
         }
 	}
 }

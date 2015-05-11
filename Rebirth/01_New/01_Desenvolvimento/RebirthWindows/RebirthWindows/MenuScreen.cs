@@ -8,9 +8,8 @@ namespace Rebirth {
 
         Texture2D startButton;
 
-        public MenuScreen(SpriteBatch sb,  DisplayManager sm){
+        public MenuScreen(SpriteBatch sb){
             this.sb = sb;
-            this.sm = sm;
         }
 
         public override void Update(GameTime gameTime){
@@ -20,11 +19,11 @@ namespace Rebirth {
         }
 
 		public override void Draw(GameTime gameTime){
-            sb.Draw(startButton, new Rectangle((int)(sm.DisplayWidth-390)/2,(int)(sm.DisplayHeight*0.4),390,137), Color.White);
+            sb.Draw(startButton, new Rectangle((int)(DisplayManager.DisplayWidth-390)/2,(int)(DisplayManager.DisplayHeight*0.4),390,137), Color.White);
         }
 
-		public override void LoadScreen(TextureManager tm, VideoManager vm){
-            startButton = tm.load(TextureManager.TextureID.startButton);
+		public override void LoadScreen(){
+            startButton = TextureManager.load(TextureManager.TextureID.startButton);
         }
     }
 }

@@ -27,6 +27,7 @@ namespace Rebirth {
         public ContainerManager(){
             lastContainerID = -1;
             seqID = new List<int>();
+            containers = new List<ContainerProperties>();
         }
 
         public void addContainer(SceneContainer sc){
@@ -63,13 +64,15 @@ namespace Rebirth {
             this.texture = texture;
         }
 
-        public void Draw(SpriteBatch sb, DisplayManager sm){
+        public void Draw(SpriteBatch sb){
             float x = startPositionX;
             foreach (ContainerProperties cp in containers){
-                sb.Draw(texture, sm.scaleTexture(new Vector2(x, cp.y), cp.width, cp.height), Color.Black);
+                sb.Draw(texture, DisplayManager.scaleTexture(new Vector2(x, cp.y), cp.width, cp.height), Color.Black);
                 x += cp.width;
             }
         }
+
+
 
     }
 }

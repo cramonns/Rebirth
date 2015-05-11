@@ -14,17 +14,16 @@ namespace Rebirth {
         private Texture2D videoTexture;
         private double time;
 
-        public IntroScreen(SpriteBatch sb, DisplayManager sm){
+        public IntroScreen(SpriteBatch sb){
             player = new VideoPlayer();
             this.sb = sb;
-            this.sm = sm;
             time = 0;
         }
 
-        public override void LoadScreen(TextureManager tm, VideoManager vm){
-            video = vm.load(VideoManager.VideoID.intro);
+        public override void LoadScreen(){
+            video = VideoManager.load(VideoManager.VideoID.intro);
             if (video == null){
-                videoTexture = tm.load(TextureManager.TextureID.logo42bits);
+                videoTexture = TextureManager.load(TextureManager.TextureID.logo42bits);
             }
         }
 

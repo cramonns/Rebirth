@@ -7,12 +7,11 @@ namespace Rebirth{
 	public abstract class GameScreen{
 
 		protected SpriteBatch sb;
-		protected DisplayManager sm;
         public bool loaded;
 
 		public abstract void Update(GameTime gameTime);
 		public abstract void Draw(GameTime gameTime);
-		public abstract void LoadScreen(TextureManager tm, VideoManager vm);
+		public abstract void LoadScreen();
 		//public abstract void addObject(GameObject newObject);
 
 	}

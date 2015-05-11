@@ -9,7 +9,10 @@ namespace Rebirth{
     [Serializable]
 	public class Box:MoveableObject{
 
-		public Box(){
+        public const float DefaultWidth = 2f;
+        public const float DefaultHeight = 2f;
+
+		public Box(Vector2 position){
 			usePhysics = true;
 			loaded = false;
 			colliders = new List<Collider>();
@@ -18,7 +21,9 @@ namespace Rebirth{
 
             textureId = TextureManager.TextureID.box;
 
-			boundingBox = new RectangleF(new Vector2 (10f, 10f), 2, 2);
+            if (position == null)
+			    boundingBox = new RectangleF(new Vector2 (10f, 10f), DefaultWidth, DefaultHeight);
+            else boundingBox = new RectangleF(position, DefaultWidth, DefaultHeight);
 
 			createDefaultBounds();
 		}
@@ -27,8 +32,8 @@ namespace Rebirth{
 
 		}
 
-		public override void Draw(SpriteBatch sb, DisplayManager sm, GameTime gameTime){
-			sb.Draw(texture, sm.scaleTexture(new Vector2(this.boundingBox.x, this.boundingBox.y), 2, 2), Color.Black);
+		public override void Draw(SpriteBatch sb, GameTime gameTime){
+			sb.Draw(texture, DisplayManager.scaleTexture(new Vector2(this.boundingBox.x, this.boundingBox.y), boundingBox.width, boundingBox.height), Color.Black);
 		}
 
 		public override void collide(GameObject b){
@@ -46,6 +51,7 @@ namespace Rebirth{
 
 			} else setGroundedState (false);
 		}
+
 	}
 }
 

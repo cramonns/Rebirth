@@ -8,8 +8,7 @@ namespace Rebirth {
 
         public enum ObjectTypes{
             Box,
-            Ground,
-            Player
+            Ground
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Rebirth{
 		}
 
 		public abstract void Update(GameTime gameTime);
-		public abstract void Draw(SpriteBatch sb, DisplayManager sm, GameTime gameTime);
+		public abstract void Draw(SpriteBatch sb, GameTime gameTime);
 		public abstract void collide(GameObject b);
 
 		protected void createDefaultBounds(){
@@ -61,11 +61,11 @@ namespace Rebirth{
 			return boundingBox;
 		}
 
-        public virtual void Load(TextureManager tm){
-            if (!tm.isLoaded(textureId)){
-                texture = tm.load(textureId);
+        public virtual void Load(){
+            if (!TextureManager.isLoaded(textureId)){
+                texture = TextureManager.load(textureId);
             }
-            else texture = tm.textures[(int)textureId];
+            else texture = TextureManager.textures[(int)textureId];
             loaded = true;
         }
 

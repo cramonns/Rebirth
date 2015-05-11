@@ -128,11 +128,11 @@ namespace Rebirth{
 			return new Vector2 (boundingBox.x, boundingBox.y);
 		}
 
-		public override void Draw(SpriteBatch sb, DisplayManager sm, GameTime gameTime){
+		public override void Draw(SpriteBatch sb, GameTime gameTime){
 			if (direction == 'r') {
-				sb.Draw (texture, sm.scaleTexture(this.position(), CHAR_WIDTH, CHAR_HEIGHT), Color.Red);
+				sb.Draw (texture, DisplayManager.scaleTexture(this.position(), CHAR_WIDTH, CHAR_HEIGHT), Color.Red);
 			} else {
-				sb.Draw(texture, sm.scaleTexture(this.position(), CHAR_WIDTH, CHAR_HEIGHT), null, Color.Red, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+				sb.Draw(texture, DisplayManager.scaleTexture(this.position(), CHAR_WIDTH, CHAR_HEIGHT), null, Color.Red, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
 			}
 		}
 

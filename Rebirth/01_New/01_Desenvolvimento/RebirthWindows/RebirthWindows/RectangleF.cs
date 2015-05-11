@@ -12,6 +12,14 @@ namespace Rebirth{
 		public float width, height;
 		private VertexR center;
 
+        public Vector2 Position{
+            get { return new Vector2(x,y); }
+            set {
+                x = value.X;
+                y = value.Y;
+            }
+        }
+
 		public RectangleF(float x, float y, float width, float height){
 			this.x = x;
 			this.y = y;

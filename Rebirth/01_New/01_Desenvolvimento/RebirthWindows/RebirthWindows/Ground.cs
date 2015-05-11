@@ -8,10 +8,15 @@ namespace Rebirth{
     [Serializable]
     public class Ground:GameObject{
 
-		public Ground(){
+        public const float DefaultWidth = 10f;
+        public const float DefaultHeight = 50/60f;
+
+		public Ground(Vector2 position){
 			loaded = false;
 
-			boundingBox = new RectangleF(new Vector2 (0f, 0f), 30f, 50f/60f);
+            if (position == null)
+			    boundingBox = new RectangleF(new Vector2 (0f, 0f), DefaultWidth, DefaultHeight);
+            else boundingBox = new RectangleF(position, DefaultWidth, DefaultHeight);
 
             textureId = TextureManager.TextureID.ground;
 			createDefaultBounds();
@@ -21,8 +26,8 @@ namespace Rebirth{
 		public override void Update(GameTime gameTime){
 		}
 
-		public override void Draw(SpriteBatch sb, DisplayManager sm, GameTime gameTime){
-			sb.Draw (texture, sm.scaleTexture(new Vector2(0,0), 30f, 50f/60f), null, Color.White);
+		public override void Draw(SpriteBatch sb, GameTime gameTime){
+			sb.Draw (texture, DisplayManager.scaleTexture(new Vector2(0,0), 30f, 50f/60f), null, Color.White);
 		}
 
 		/*public override void Load(ContentManager Content){
@@ -33,5 +38,6 @@ namespace Rebirth{
 		public override void collide(GameObject B){
 
 		}
+
 	}
 }

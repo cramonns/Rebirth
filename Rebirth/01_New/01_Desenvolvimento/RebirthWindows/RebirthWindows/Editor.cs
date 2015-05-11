@@ -10,11 +10,19 @@ namespace Rebirth {
     public class Editor{
 
         ContainerManager cm;
+        SceneContainerManager scm;
 
         List<int> containerTab;
 
         public Editor(){
-            cm = new ContainerManager();
+            if (File.Exists("Lvl/Containers.info")){
+                BinaryFormatter binFormat = new BinaryFormatter();
+                string path = "Lvl/Containers.info";
+                using ( Stream fStream = File.OpenRead(path) ){
+                    cm = (ContainerManager)binFormat.Deserialize(fStream);
+                }
+            } else cm = new ContainerManager();
+            scm = new SceneContainerManager(cm);
             containerTab = new List<int>();
             containerTab.Add(-1);
         }
@@ -48,6 +56,11 @@ namespace Rebirth {
                 binFormat.Serialize(fStream, sc);
             }
             cm.lastContainerID++;
+            cm.saveContainerManager();
+        }
+
+        public SceneContainer SceneManagerView{
+            get {return scm;}
         }
 
     }

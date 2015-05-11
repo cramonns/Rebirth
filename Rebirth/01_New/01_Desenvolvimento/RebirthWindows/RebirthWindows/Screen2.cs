@@ -12,24 +12,22 @@ namespace Rebirth{
 		//PhysicsManager screen2physx;
         Player player;
 
-		public Screen2(SpriteBatch sb, DisplayManager sm){
+		public Screen2(SpriteBatch sb){
 			this.sb = sb;
-			this.sm = sm;
 			loaded = false;
 			objects = new List<GameObject>();
-			objects.Add(new Ground());
-			objects.Add(new Box());
+			objects.Add(new Ground(new Vector2(0,0)));
+			objects.Add(new Box(new Vector2(0,0)));
 
             player = new Player();
             objects.Add(player);
 
 		}
 
-		public override void LoadScreen(TextureManager tm, VideoManager vm){
+		public override void LoadScreen(){
 			foreach (GameObject o in objects) {
-				if (!o.loaded) o.Load(tm);
+				if (!o.loaded) o.Load();
 			}
-			//screen2physx = new PhysicsManager(objects);
 			loaded = true;
 		}
 
@@ -46,7 +44,7 @@ namespace Rebirth{
 
 		public override void Draw(GameTime gameTime){
 			foreach (GameObject g in objects) {
-				g.Draw(sb, sm, gameTime);
+				g.Draw(sb, gameTime);
 			}
 		}
 
