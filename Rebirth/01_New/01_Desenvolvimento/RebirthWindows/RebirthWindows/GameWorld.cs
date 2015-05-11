@@ -60,7 +60,7 @@ namespace Rebirth {
 			    worldPhysics.checkCollisions();
 			    worldPhysics.treatCollisions();
 			    worldPhysics.integratePosition();
-                DisplayManager.Update(new Vector2(player.boundingBox.x, player.boundingBox.y));
+                DisplayManager.Update(player.Position);
             }
         }
 
@@ -95,7 +95,7 @@ namespace Rebirth {
                     insertPermit = true;
                     color = Color.White * 0.5f;
                     foreach (GameObject o in scenes[preloadAmount].objects){
-                        if (rectangle.intersects(o.boundingBox)){
+                        if (rectangle.intersects(o.BoundingBox)){
                             insertPermit = false;
                             color = Color.Red*0.5f;
                             break;

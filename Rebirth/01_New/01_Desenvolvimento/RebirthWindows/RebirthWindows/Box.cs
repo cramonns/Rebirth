@@ -38,12 +38,12 @@ namespace Rebirth{
 
 		public override void collide(GameObject b){
 			VertexR c1 = this.boundingBox.getCenter();
-			VertexR c2 = b.boundingBox.getCenter();
+			VertexR c2 = b.BoundingBox.getCenter();
 
 			c2.x = c1.x;
 
 			if (colliders [(int)Bounds.LOWER].getColliderShape().intersects (c1, c2)) {
-				boundingBox.y = b.boundingBox.y + b.boundingBox.height;
+				boundingBox.y = b.Y + b.Height;
 
 				if (b.isGrounded ()) {
 					setGroundedState (true);

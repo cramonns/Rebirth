@@ -20,7 +20,7 @@ namespace Rebirth{
         [NonSerialized]
 		public bool loaded;
 		public bool isFixed;
-		public RectangleF boundingBox;
+		protected RectangleF boundingBox;
         public TextureManager.TextureID textureId;
         [NonSerialized]
         public List<Collider> colliders;
@@ -28,6 +28,30 @@ namespace Rebirth{
         [NonSerialized]
 		protected Texture2D texture;
 
+        public RectangleF BoundingBox{
+            get {return boundingBox;}
+        }
+        public Vector2 Position{
+            get {return boundingBox.Position;}
+            set {boundingBox.Position = value;}
+        }
+        public float Width{
+            get {return boundingBox.width;}
+            set {boundingBox.width = value;}
+        }
+        public float Height{
+            get {return boundingBox.height;}
+            set {boundingBox.height = value;}
+        }
+        public float X{
+            get {return boundingBox.x;}
+            set {boundingBox.x = value;}
+        }
+        public float Y{
+            get {return boundingBox.y;}
+            set {boundingBox.y = value;}
+        }
+        
 		public GameObject(){
 			isFixed = false;
             textureId = TextureManager.TextureID.ground;

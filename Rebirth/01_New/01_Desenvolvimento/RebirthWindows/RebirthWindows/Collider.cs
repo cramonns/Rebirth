@@ -15,7 +15,7 @@ namespace Rebirth{
 		}
 
 		public RectangleF getColliderShape(){
-			return new RectangleF (new Vector2(shape.x + owner.boundingBox.x, shape.y + owner.boundingBox.y), shape.width, shape.height);
+			return new RectangleF (new Vector2(shape.x + owner.X, shape.y + owner.Y), shape.width, shape.height);
 		}
 	}
 }

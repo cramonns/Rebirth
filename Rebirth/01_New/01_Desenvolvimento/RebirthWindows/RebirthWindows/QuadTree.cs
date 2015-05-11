@@ -117,7 +117,7 @@ namespace Rebirth{
 				}
 
 				foreach (GameObject h in objects){
-					int index = getIndex(h.boundingBox);
+					int index = getIndex(h.BoundingBox);
 					if (index != -1) {
 						nodes[index].insert(h);
 						objects.Remove(h);

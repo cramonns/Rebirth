@@ -44,7 +44,7 @@ namespace Rebirth{
 					foreach (GameObject h in candidates) {
 						if (h != g) {
 							if (g.getCollisionShape().intersects(h.getCollisionShape())) {
-								CollisionDistance d = g.boundingBox.AxisDistance(h.boundingBox);
+								CollisionDistance d = g.BoundingBox.AxisDistance(h.BoundingBox);
 				                currentCollisions.AddFirst(new Collision(g,h,d));
 							}
 						}
@@ -81,7 +81,7 @@ namespace Rebirth{
                 simulatedZone = left.getHalfRightBounds();
                 foreach (GameObject g in left.objects){ 
                     collisionTree.insert(g);
-                    if (simulatedZone.intersects(g.boundingBox)){
+                    if (simulatedZone.intersects(g.BoundingBox)){
                         simulatedObjects.Add(g);
                     }
                 }
@@ -98,7 +98,7 @@ namespace Rebirth{
                 simulatedZone = right.getHalfLeftBounds();
                 foreach (GameObject g in left.objects){ 
                     collisionTree.insert(g);
-                    if (simulatedZone.intersects(g.boundingBox)){
+                    if (simulatedZone.intersects(g.BoundingBox)){
                         simulatedObjects.Add(g);    
                     }
                 }

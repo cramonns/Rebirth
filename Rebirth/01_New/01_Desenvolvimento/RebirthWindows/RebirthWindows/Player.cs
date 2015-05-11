@@ -144,8 +144,8 @@ namespace Rebirth{
 
 		public override void collide(GameObject b){
 
-			VertexR c1 = this.boundingBox.getCenter();
-			VertexR c2 = b.boundingBox.getCenter();
+			VertexR c1 = this.BoundingBox.getCenter();
+			VertexR c2 = b.BoundingBox.getCenter();
 
 			c2.x = c1.x;
 
@@ -159,12 +159,12 @@ namespace Rebirth{
 			Console.WriteLine ("C2 X: " + c2.x + "  Y: " + c2.y);
 
 			if (colliders[(int)Bounds.EASTER].getColliderShape().intersects(c1, c2)) {
-				boundingBox.x = b.boundingBox.x - boundingBox.width;
+				boundingBox.x = b.X - boundingBox.width;
 			}
 
 
 			if (colliders [(int)Bounds.LOWER].getColliderShape().intersects (c1, c2)) {
-				boundingBox.y = b.boundingBox.y + b.boundingBox.height;
+				boundingBox.y = b.Y + b.Height;
 
 				if (b.isGrounded ()) {
 					setGroundedState (true);
@@ -174,14 +174,9 @@ namespace Rebirth{
 			} else startFall();
 
 			if (colliders[(int)Bounds.WESTERN].getColliderShape().intersects(c1, c2)) {
-				boundingBox.x = b.boundingBox.x + b.boundingBox.width;
+				boundingBox.x = b.X + b.Width;
 			}
 		}
-
-        public void setPosition(float x, float y){
-            this.boundingBox.x = x;
-            this.boundingBox.y = y;
-        }
 
 	}
 }
