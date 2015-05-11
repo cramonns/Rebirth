@@ -39,6 +39,10 @@ namespace Rebirth{
 			DisplayManager.initialize(this);
             screens = new GameScreen[Enum.GetNames(typeof(ScreenID)).Length];
             currentScreen = ScreenID.intro;
+
+            //create the content managers
+            TextureManager.initialize(Content);
+            VideoManager.initialize(Content);
 		}
 
         private void graphics_PreparingDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e){
@@ -46,7 +50,7 @@ namespace Rebirth{
             e.GraphicsDeviceInformation.PresentationParameters.DeviceWindowHandle = drawingSurface;
         }
 
-        public Game1(IntPtr drawingSurface, System.Windows.Forms.Form parentForm, System.Windows.Forms.PictureBox pictureBox){
+        public Game1(IntPtr drawingSurface, Form parentForm, System.Windows.Forms.PictureBox pictureBox){
             Content.RootDirectory = "Content";	            
             screens = new GameScreen[Enum.GetNames(typeof(ScreenID)).Length];
 
@@ -70,6 +74,7 @@ namespace Rebirth{
             editor = true;
             
             currentScreen = ScreenID.world;
+
         }
 
         private void gameForm_VisiblilityChanged(object sender, EventArgs e){
@@ -84,7 +89,7 @@ namespace Rebirth{
 		/// and initialize them as well.
 		/// </summary>
 		protected override void Initialize(){
-			base.Initialize();
+            base.Initialize();
 		}
 
 		/// <summary>
@@ -110,7 +115,10 @@ namespace Rebirth{
 			    screens[i].LoadScreen();
 
             //editor
-            if (editor) (screens[(int)ScreenID.world] as GameWorld).editMode();
+            if (editor) {
+                (screens[(int)ScreenID.world] as GameWorld).editMode();
+                (parentForm as LevelEditor).startEditor();
+            }
 
 		}
 
@@ -132,7 +140,7 @@ namespace Rebirth{
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime){
 			graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
-			spriteBatch.Begin();
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
 			screens[(int)currentScreen].Draw(gameTime);
 

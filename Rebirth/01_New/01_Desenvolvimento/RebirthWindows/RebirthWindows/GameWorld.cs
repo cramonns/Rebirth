@@ -14,6 +14,7 @@ namespace Rebirth {
         private Vector2 worldStartDragPos;
         private Vector2 mouseDragDisplacement;
         private bool insertionMode = false;
+        public bool insertPermit;
         private Enumerations.ObjectTypes insertionType;
 
         private int preloadAmount = 1;
@@ -36,9 +37,9 @@ namespace Rebirth {
 
         public override void Update(GameTime gameTime){
             if (editorMode){
-                drawPlayer = true;
+                drawPlayer = false;
 
-                if (Mouse.GetState().LeftButton == ButtonState.Pressed){
+                /*if (Mouse.GetState().LeftButton == ButtonState.Pressed){
                     if (!prevFramePressed) {
                         mouseStartDragPos = Mouse.GetState().Position.ToVector2();
                         worldStartDragPos = DisplayManager.screenShift;
@@ -48,9 +49,7 @@ namespace Rebirth {
                     prevFramePressed = true;
                 } else {
                     prevFramePressed = false;
-                }
-    
-                
+                }*/
             }
             else {
                 LoadManager.Update(scenes,preloadAmount,new Vector2(0,0));
@@ -81,14 +80,34 @@ namespace Rebirth {
             }
             if (drawPlayer) player.Draw(sb, gameTime);
             if (insertionMode){
+                Color color = Color.White * 0.5f;
+                Texture2D texture = TextureManager.load(TextureManager.TextureID.white);
+                RectangleF rectangle = new RectangleF(0,0,0,0);
                 switch (insertionType){
                     case Enumerations.ObjectTypes.Box:
-                        sb.Draw(TextureManager.load(TextureManager.TextureID.box), DisplayManager.scaleTexture(MouseManager.mousePosition, Box.DefaultWidth, Box.DefaultHeight), Color.White);
+                        rectangle.set(MouseManager.mousePosition - new Vector2(Box.DefaultWidth/2, Box.DefaultHeight/2 + scenes[preloadAmount].Height/2), Box.DefaultWidth, Box.DefaultHeight);
                         break;
                     case Enumerations.ObjectTypes.Ground:
-                        sb.Draw(TextureManager.load(TextureManager.TextureID.ground), DisplayManager.scaleTexture(MouseManager.mousePosition, Ground.DefaultWidth, Ground.DefaultHeight), Color.White);
+                        rectangle.set(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2, Ground.DefaultHeight/2 + scenes[preloadAmount].Height/2), Ground.DefaultWidth, Ground.DefaultHeight);
                         break;
                 }
+                if (rectangle.inside(scenes[preloadAmount].Shape)){
+                    insertPermit = true;
+                    color = Color.White * 0.5f;
+                    foreach (GameObject o in scenes[preloadAmount].objects){
+                        if (rectangle.intersects(o.boundingBox)){
+                            insertPermit = false;
+                            color = Color.Red*0.5f;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    insertPermit = false;
+                    color = Color.Red*0.5f;
+                }
+                rectangle.y += scenes[preloadAmount].Height/2;
+                sb.Draw(texture, DisplayManager.scaleTexture(rectangle), color);
             }
         }
 
@@ -114,6 +133,10 @@ namespace Rebirth {
             insertionType = type;
         }
 
+        public void leaveInsertMode(){
+            insertionMode = false;
+        }
+
         public void loadScene(SceneContainer sc){
             scenes[preloadAmount] = sc;
             /*sc.add(new Ground());
@@ -129,6 +152,22 @@ namespace Rebirth {
 
         public SceneContainer currentContainer(){
             return scenes[preloadAmount];
+        }
+
+        private GameObject newObject(Enumerations.ObjectTypes objectType){
+            switch (objectType){
+                case Enumerations.ObjectTypes.Box:
+                    return new Box(MouseManager.mousePosition - new Vector2(Box.DefaultWidth/2,Box.DefaultHeight/2));
+                case Enumerations.ObjectTypes.Ground:
+                    return new Ground(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2,Ground.DefaultHeight/2));
+            }
+            return null;
+        }
+
+        public void createObject(Enumerations.ObjectTypes objectType){
+            GameObject g = newObject(objectType);
+            scenes[preloadAmount].add(g);
+            g.Load();
         }
 
     }

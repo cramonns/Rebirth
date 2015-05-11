@@ -27,7 +27,7 @@ namespace Rebirth{
 		}
 
 		public override void Draw(SpriteBatch sb, GameTime gameTime){
-			sb.Draw (texture, DisplayManager.scaleTexture(new Vector2(0,0), 30f, 50f/60f), null, Color.White);
+			sb.Draw (texture, DisplayManager.scaleTexture(boundingBox), null, Color.White);
 		}
 
 		/*public override void Load(ContentManager Content){

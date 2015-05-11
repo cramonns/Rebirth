@@ -216,6 +216,21 @@ namespace Rebirth{
 			} else return new CollisionDistance (xDir, Math.Abs (distX));
 		}
 
+        public bool inside(RectangleF rect){
+            return (this.x >= rect.x && this.y >= rect.y && this.x + this.width <= rect.x + rect.width && this.y + this.height <= rect.y + rect.height);
+        }
+
+        public Rectangle ToRectangle(){
+            return new Rectangle((int)x,(int)(y+height),(int)width,(int)height);
+        }
+
+        public void set(Vector2 position, float width, float height){
+			this.x = position.X;
+			this.y = position.Y;
+			this.height = height;
+			this.width = width;
+			center = new VertexR ((x + width) / 2, (y + height) / 2);
+		}
 	}
 
 }

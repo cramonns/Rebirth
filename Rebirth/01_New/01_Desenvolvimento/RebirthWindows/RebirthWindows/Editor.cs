@@ -21,6 +21,7 @@ namespace Rebirth {
                 using ( Stream fStream = File.OpenRead(path) ){
                     cm = (ContainerManager)binFormat.Deserialize(fStream);
                 }
+                cm.texture = TextureManager.load(TextureManager.TextureID.container);
             } else cm = new ContainerManager();
             scm = new SceneContainerManager(cm);
             containerTab = new List<int>();
@@ -34,7 +35,8 @@ namespace Rebirth {
         }
 
         public SceneContainer newContainer(){
-            SceneContainer sc = new SceneContainer(new RectangleF(newPosition(), 40, 40), cm.lastContainerID+1);
+            SceneContainer sc = new SceneContainer(new RectangleF(newPosition(), 40, 20), cm.lastContainerID+1);
+            cm.addContainer(sc);
             return sc;
         }
 

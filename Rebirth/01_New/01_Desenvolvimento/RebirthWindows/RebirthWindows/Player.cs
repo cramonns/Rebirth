@@ -130,9 +130,9 @@ namespace Rebirth{
 
 		public override void Draw(SpriteBatch sb, GameTime gameTime){
 			if (direction == 'r') {
-				sb.Draw (texture, DisplayManager.scaleTexture(this.position(), CHAR_WIDTH, CHAR_HEIGHT), Color.Red);
+				sb.Draw (texture, DisplayManager.scaleTexture(this.position(), CHAR_WIDTH, CHAR_HEIGHT), Color.White);
 			} else {
-				sb.Draw(texture, DisplayManager.scaleTexture(this.position(), CHAR_WIDTH, CHAR_HEIGHT), null, Color.Red, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+				sb.Draw(texture, DisplayManager.scaleTexture(this.position(), CHAR_WIDTH, CHAR_HEIGHT), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
 			}
 		}
 

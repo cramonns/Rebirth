@@ -34,7 +34,6 @@ namespace Rebirth{
                         }
 
                         LevelEditor form = new LevelEditor();
-                        form.gameEditor = new Editor();
                         form.Show();
                         // This line creates a Game1 object in the gameEntry field created earlier.
                         form.gameEntry = new Game1(form.gameBox.Handle, form, form.gameBox);

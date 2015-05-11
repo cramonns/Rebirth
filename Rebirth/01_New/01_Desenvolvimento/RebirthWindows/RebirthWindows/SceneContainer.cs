@@ -50,6 +50,9 @@ namespace Rebirth {
         public int NextScene{
             get {return nextScene;}
         }
+        public RectangleF Shape{
+            get {return shapeBox;}
+        }
         
         //class constructors
         public SceneContainer(RectangleF sb, int id){
@@ -99,10 +102,14 @@ namespace Rebirth {
 
         public void DrawBounds(SpriteBatch sb, GameTime gameTime){
             Texture2D line = TextureManager.getTexture(TextureManager.TextureID.player);
-            sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x),(int)DisplayManager.getScreenY(shapeBox.y),(int)DisplayManager.screenLength(shapeBox.height),1),Color.White);
-            sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x),(int)DisplayManager.getScreenY(shapeBox.y+shapeBox.height),1,(int)DisplayManager.screenLength(shapeBox.width)),Color.White);
-            sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x+shapeBox.width),(int)DisplayManager.getScreenY(shapeBox.y),(int)DisplayManager.screenLength(shapeBox.height),1),Color.White);
-            sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x),(int)DisplayManager.getScreenY(shapeBox.y),1,(int)DisplayManager.screenLength(shapeBox.width)),Color.White);
+            //leftLine
+            sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x),(int)DisplayManager.getScreenY(shapeBox.y + shapeBox.height),1,(int)DisplayManager.screenLength(shapeBox.height)),Color.White);
+            //topLine
+            sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x),(int)DisplayManager.getScreenY(shapeBox.y + shapeBox.height),(int)DisplayManager.screenLength(shapeBox.width),1),Color.White);
+            //rightLine
+            sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x + shapeBox.width),(int)DisplayManager.getScreenY(shapeBox.y + shapeBox.height),1,(int)DisplayManager.screenLength(shapeBox.height)),Color.White);
+            //bottomLine
+            sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x),(int)DisplayManager.getScreenY(shapeBox.y),(int)DisplayManager.screenLength(shapeBox.width),1),Color.White);
         }
 
     }

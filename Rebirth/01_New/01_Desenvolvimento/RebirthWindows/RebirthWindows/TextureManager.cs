@@ -12,7 +12,8 @@ namespace Rebirth {
             startButton,
             logo42bits,
             container,
-            selectedContainer
+            selectedContainer,
+            white
         }
 
         private static ContentManager Content;
@@ -49,7 +50,10 @@ namespace Rebirth {
                     break;
                 case TextureID.selectedContainer:
                     textures[(int)id] = Content.Load<Texture2D>("Texture/SelectedContainer");
-                    break;            
+                    break;          
+                case TextureID.white:
+                    textures[(int)id] = Content.Load<Texture2D>("Texture/White_square");
+                    break;  
             }
             return textures[(int)id];
         }

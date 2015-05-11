@@ -66,3 +66,6 @@ D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWind
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\RebirthWindows.csproj.GenerateResource.Cache
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\RebirthWindows.exe
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\RebirthWindows.pdb
+D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Release\Content\Texture\Container.jpg
+D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Release\Content\Texture\SelectedContainer.jpg
+D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Release\Content\Texture\White_square.png

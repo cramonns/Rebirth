@@ -33,7 +33,7 @@ namespace Rebirth{
 		}
 
 		public override void Draw(SpriteBatch sb, GameTime gameTime){
-			sb.Draw(texture, DisplayManager.scaleTexture(new Vector2(this.boundingBox.x, this.boundingBox.y), boundingBox.width, boundingBox.height), Color.Black);
+			sb.Draw(texture, DisplayManager.scaleTexture(boundingBox), Color.White);
 		}
 
 		public override void collide(GameObject b){

@@ -11,6 +11,7 @@ namespace Rebirth{
 		private static float screenHeight;
 		private static float Ratio;
         private static float cameraPercentageToFollow = 0.4f;
+        public static bool followPlayer;
         public static Vector2 screenShift;
 
         //ScreenManager properties
@@ -42,6 +43,8 @@ namespace Rebirth{
         public static void initialize(Game1 game, int sWidth, int sHeight){
 			game.graphics = new GraphicsDeviceManager(game);
 			game.graphics.IsFullScreen = false;
+            
+            followPlayer = true;
 
             screenWidth = (float)sWidth;
             screenHeight = (float)sHeight;
@@ -58,6 +61,10 @@ namespace Rebirth{
         public static float screenLength(float worldLength){
             return worldLength/Ratio;
         }
+
+        public static float ToWorldLength(float screenLength){
+            return screenLength*Ratio;
+        }
         
         public static float getScreenX(float worldX){
             return (worldX - screenShift.X) / Ratio;
@@ -69,7 +76,7 @@ namespace Rebirth{
 
         public static Vector2 worldPosition(Vector2 ScreenPosition){
             float worldX = ScreenPosition.X*Ratio + screenShift.X;
-            float worldY =  (screenHeight - ScreenPosition.Y)*Ratio + screenShift.Y;
+            float worldY =  (screenHeight - ScreenPosition.Y)*Ratio;// + screenShift.Y;
             return new Vector2(worldX, worldY);
         }
 
@@ -90,9 +97,15 @@ namespace Rebirth{
 			return new Rectangle ((int)screenX, (int)screenY, (int)screenW, (int)screenH);
 		}
 
+        public static Rectangle scaleTexture(RectangleF source){
+            return scaleTexture(source.Position, source.width, source.height);
+        }
+
         public static void Update(Vector2 playerPosition){
-            if (playerPosition.X - screenShift.X >= (1 - cameraPercentageToFollow)*WORLD_WIDTH) screenShift.X = playerPosition.X - (1 - cameraPercentageToFollow)*WORLD_WIDTH;
-            if (playerPosition.X - screenShift.X <= cameraPercentageToFollow*WORLD_WIDTH) screenShift.X = playerPosition.X - cameraPercentageToFollow*WORLD_WIDTH;
+            if (followPlayer){
+                if (playerPosition.X - screenShift.X >= (1 - cameraPercentageToFollow)*WORLD_WIDTH) screenShift.X = playerPosition.X - (1 - cameraPercentageToFollow)*WORLD_WIDTH;
+                if (playerPosition.X - screenShift.X <= cameraPercentageToFollow*WORLD_WIDTH) screenShift.X = playerPosition.X - cameraPercentageToFollow*WORLD_WIDTH;
+            }
         }
 	}
 }
