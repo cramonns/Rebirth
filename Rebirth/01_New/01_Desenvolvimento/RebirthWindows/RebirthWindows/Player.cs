@@ -12,10 +12,14 @@ namespace Rebirth{
 			WAITING,
 			MOVING,
 			JUMPING,
-			FALLING
+			FALLING,
+            DUCKING,
+            CROUCHING,
+            FLOATING
 		};
 
 		const float MOVING_TOP_SPEED = 6f/60f;
+        const float CROUCHING_TOP_SPEED = 3.6f/60f;
 		const float MOVING_ACCELERATION = .8f/60f;
 		const float JUMP_MOVING_ACCELERATION = .1f/60f;
 		const float ATRITO = .5f/60f;
@@ -26,6 +30,7 @@ namespace Rebirth{
 		const float AIR_RESISTANCE = 0.05f/60f;
 		const float CHAR_WIDTH = .6f;
 		const float CHAR_HEIGHT = 1.4f;
+        const float FLOATING_MAX_FALLING_SPEED = 3f/60f;
 
 		playerStates state;
 
@@ -58,6 +63,10 @@ namespace Rebirth{
 		public override void Update(GameTime gameTime){
 			//updateBounds();
 
+
+
+            if (state == playerStates.FLOATING) state = playerStates.FALLING;
+
 			//Movement
 			if (ControllerManager.direction == TriggerDirection.Right) {
 				direction = 'r';
@@ -70,7 +79,10 @@ namespace Rebirth{
 				else if (state == playerStates.FALLING) {
 					movingSpeed += JUMP_MOVING_ACCELERATION;
 				}
-				else movingSpeed += MOVING_ACCELERATION;
+				else {
+                    movingSpeed += MOVING_ACCELERATION;
+                    state = playerStates.MOVING;
+                }
 				if (movingSpeed > MOVING_TOP_SPEED)
 					movingSpeed = MOVING_TOP_SPEED;
 			} else if (ControllerManager.direction == TriggerDirection.Left) {
@@ -82,7 +94,10 @@ namespace Rebirth{
 				else if (state == playerStates.FALLING) {
 					movingSpeed -= JUMP_MOVING_ACCELERATION;
 				}
-				else movingSpeed -= MOVING_ACCELERATION;
+				else {
+                    movingSpeed -= MOVING_ACCELERATION;
+                    state = playerStates.MOVING;
+                }
 				if (movingSpeed < -MOVING_TOP_SPEED)
 					movingSpeed = -MOVING_TOP_SPEED;
 			}
@@ -113,9 +128,33 @@ namespace Rebirth{
 				if (speed.Y > 0) speed.Y = 0;
 				startFall();
 			}
+            //Crouching
+            else if (ControllerManager.TriggerDown){
+                if (state == playerStates.WAITING) state = playerStates.DUCKING;
+                else {
+                    state = playerStates.CROUCHING;              
+                    
+                    if (movingSpeed > CROUCHING_TOP_SPEED) movingSpeed = CROUCHING_TOP_SPEED;
+                    else if (movingSpeed < -CROUCHING_TOP_SPEED) movingSpeed = -CROUCHING_TOP_SPEED;
+                }
+                boundingBox.height = CHAR_HEIGHT*0.6f;
+                boundingBox.width = CHAR_WIDTH*1.2f;
+            }
+            else {
+                boundingBox.height = CHAR_HEIGHT;
+                boundingBox.width = CHAR_WIDTH;
+            }
+
+            //Floating
+            if (ControllerManager.TriggerFloating){
+                if (state == playerStates.FALLING){
+                    state = playerStates.FLOATING;
+                    if (speed.Y < -FLOATING_MAX_FALLING_SPEED) speed.Y = -FLOATING_MAX_FALLING_SPEED;
+                }
+            }
 
 			//Atrito
-			float resistance = (state == playerStates.JUMPING || state == playerStates.FALLING) ? AIR_RESISTANCE : ATRITO;
+			float resistance = (state == playerStates.JUMPING || state == playerStates.FALLING || state == playerStates.FLOATING) ? AIR_RESISTANCE : ATRITO;
 			if (movingSpeed < resistance && movingSpeed > -resistance) movingSpeed = 0;
 			else if (movingSpeed > 0) movingSpeed -= resistance;
 			else movingSpeed += resistance;
@@ -124,11 +163,11 @@ namespace Rebirth{
 
 		}
 
-		public override void Draw(SpriteBatch sb, GameTime gameTime){
+        public override void Draw(SpriteBatch sb, GameTime gameTime){
 			if (direction == 'r') {
-				sb.Draw (texture, DisplayManager.scaleTexture(Position, CHAR_WIDTH, CHAR_HEIGHT), Color.White);
+				sb.Draw (texture, DisplayManager.scaleTexture(Position, boundingBox.width, boundingBox.height), Color.White);
 			} else {
-				sb.Draw(texture, DisplayManager.scaleTexture(Position, CHAR_WIDTH, CHAR_HEIGHT), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+				sb.Draw(texture, DisplayManager.scaleTexture(Position, boundingBox.width, boundingBox.height), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
 			}
 		}
 

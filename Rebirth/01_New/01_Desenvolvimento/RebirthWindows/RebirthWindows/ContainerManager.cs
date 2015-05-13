@@ -89,19 +89,34 @@ namespace Rebirth {
             return new Vector2(x,0);
         }
 
-        public int positionID(Vector2 position){
+        private ContainerProperties getContainerProperties(int id){
+            int count = containers.Count;
+            for (int i = id; i < count; i++){
+                if (containers[i].id == id) return containers[i];
+            }
+            return containers[id];
+        }
+
+        public int positionID(float px){
             float x = startPositionX;
             int selectedId = containers[firstContainerID].id;
+            if (px < x) return selectedId;
             ContainerProperties cp;
             int count = containers.Count;
             for (int i = 0; i < count; i++){
                 cp = containers[i];
-                if (position.X > x){
+                if (px > x){
                     selectedId = cp.id;
                 }
                 else break;
                 x += cp.width;
             }
+            return selectedId;
+        }
+
+        public int positionID(Vector2 position){
+            int selectedId = positionID(position.X);
+            ContainerProperties cp = getContainerProperties(selectedId);
             cp = containers[selectedId];
             if (position.Y > cp.y && position.Y < cp.y + cp.height)
                 return selectedId;

@@ -34,11 +34,18 @@ namespace Rebirth{
 			return new RectangleF(colX, colY, colW, colH);
 		}
 
-		public void integratePosition(){
+		public virtual void integratePosition(){
 			//Update position after all movement is computed
 			boundingBox.x += speed.X;
 			boundingBox.y += speed.Y;
 		}
+
+        public virtual void applyGravity(float gravity){
+            if (!grounded)
+				speed.Y -= gravity;
+			else
+				speed.Y = 0;
+        }
 	}
 }
 

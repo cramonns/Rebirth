@@ -103,6 +103,11 @@ namespace Rebirth{
             if (followPlayer){
                 if (playerPosition.X - screenShift.X >= (1 - cameraPercentageToFollow)*WORLD_WIDTH) screenShift.X = playerPosition.X - (1 - cameraPercentageToFollow)*WORLD_WIDTH;
                 if (playerPosition.X - screenShift.X <= cameraPercentageToFollow*WORLD_WIDTH) screenShift.X = playerPosition.X - cameraPercentageToFollow*WORLD_WIDTH;
+
+                
+                if (playerPosition.Y - screenShift.Y >= (1 - cameraPercentageToFollow/2)*screenHeight*Ratio) screenShift.Y = playerPosition.Y - (1 - cameraPercentageToFollow/2)*screenHeight*Ratio;
+                if (playerPosition.Y - screenShift.Y <= (cameraPercentageToFollow/2)*screenHeight*Ratio) screenShift.Y = playerPosition.Y - (cameraPercentageToFollow/2)*screenHeight*Ratio;
+                
             }
         }
 	}

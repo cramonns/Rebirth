@@ -22,10 +22,7 @@ namespace Rebirth{
 			foreach (GameObject h in simulatedObjects) {
 				if (h is MoveableObject) {
 					MoveableObject g = h as MoveableObject;
-					if (!g.isGrounded ())
-						g.speed.Y -= GRAVITY;
-					else
-						g.speed.Y = 0;
+					g.applyGravity(GRAVITY);
 				}
 			}
 		}
