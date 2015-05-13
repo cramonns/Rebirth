@@ -18,7 +18,6 @@ namespace Rebirth{
         public static float DisplayWidth{
             get{ return screenWidth; }          
             set{
-                //Ratio = WORLD_WIDTH / screenWidth;
                 screenWidth = value; 
                 Ratio = WORLD_WIDTH / screenWidth;
             }
@@ -53,7 +52,6 @@ namespace Rebirth{
             game.graphics.PreferredBackBufferHeight = (int)screenHeight;
 
             Ratio = WORLD_WIDTH / screenWidth;
-            //RatioH = WORLD_WIDTH / screenHeight;
 
             screenShift = new Vector2(0, 0);
 		}
@@ -76,7 +74,7 @@ namespace Rebirth{
 
         public static Vector2 worldPosition(Vector2 ScreenPosition){
             float worldX = ScreenPosition.X*Ratio + screenShift.X;
-            float worldY =  (screenHeight - ScreenPosition.Y)*Ratio;// + screenShift.Y;
+            float worldY =  (screenHeight - ScreenPosition.Y)*Ratio + screenShift.Y;
             return new Vector2(worldX, worldY);
         }
 
@@ -89,7 +87,7 @@ namespace Rebirth{
 
 		public static Rectangle scaleTexture(Vector2 WorldPosition, float sourceWidth, float sourceHeight){
 			float screenX = (WorldPosition.X - screenShift.X) / Ratio;
-			float screenY = (WorldPosition.Y + sourceHeight) / Ratio;
+			float screenY = (WorldPosition.Y + sourceHeight - screenShift.Y) / Ratio;
 			screenY = screenHeight - screenY;
 			float screenW = sourceWidth / Ratio;
 			float screenH = sourceHeight / Ratio;

@@ -116,13 +116,21 @@ namespace Rebirth{
 					split();
 				}
 
+                List<GameObject> removeObjects = new List<GameObject>();
+
 				foreach (GameObject h in objects){
+                    
 					int index = getIndex(h.BoundingBox);
 					if (index != -1) {
 						nodes[index].insert(h);
-						objects.Remove(h);
+						removeObjects.Add(h);
 					}
 				}
+
+                foreach (GameObject h in removeObjects){
+                    objects.Remove(h);
+                }
+                removeObjects.Clear();
 			}
 		}
 

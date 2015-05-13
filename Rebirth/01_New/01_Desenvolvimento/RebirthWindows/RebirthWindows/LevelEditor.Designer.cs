@@ -40,9 +40,9 @@ namespace Rebirth {
             this.containerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.containerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlContainer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).BeginInit();
             this.panel1.SuspendLayout();
@@ -67,6 +67,8 @@ namespace Rebirth {
             this.gameBox.MouseEnter += new System.EventHandler(this.gameBox_MouseEnter);
             this.gameBox.MouseLeave += new System.EventHandler(this.gameBox_MouseLeave);
             this.gameBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gameBox_MouseMove);
+            this.gameBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gameBox_MouseUp);
+            this.gameBox.Resize += new System.EventHandler(this.gameBox_Resize);
             // 
             // panel1
             // 
@@ -144,6 +146,7 @@ namespace Rebirth {
             this.comboBoxObjectList.Name = "comboBoxObjectList";
             this.comboBoxObjectList.Size = new System.Drawing.Size(172, 21);
             this.comboBoxObjectList.TabIndex = 0;
+            this.comboBoxObjectList.SelectedIndexChanged += new System.EventHandler(this.comboBoxObjectList_SelectedIndexChanged);
             // 
             // groupBoxContainer
             // 
@@ -208,6 +211,13 @@ namespace Rebirth {
             this.containerToolStripMenuItem1.Text = "Container";
             this.containerToolStripMenuItem1.Click += new System.EventHandler(this.containerToolStripMenuItem1_Click);
             // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // tabControlContainer
             // 
             this.tabControlContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -229,13 +239,6 @@ namespace Rebirth {
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "ContainerView";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // button1
             // 

@@ -6,11 +6,10 @@ namespace Rebirth{
     [Serializable]
 	public class RectangleF{
 
-		private const float contactErrorMargin = 0.02f;
+		private const float contactErrorMargin = 0;
 
 		public float x, y;
 		public float width, height;
-		private VertexR center;
 
         public Vector2 Position{
             get { return new Vector2(x,y); }
@@ -19,13 +18,19 @@ namespace Rebirth{
                 y = value.Y;
             }
         }
+        public Vector2 Center{
+            get { return new Vector2(x+width/2,y+height/2); }
+            set {
+                x = value.X - width/2;
+                y = value.Y - height/2;
+            }
+        }
 
 		public RectangleF(float x, float y, float width, float height){
 			this.x = x;
 			this.y = y;
 			this.height = height;
 			this.width = width;
-			center = new VertexR ((x + width) / 2, (y + height) / 2);
 		}
 
 		public RectangleF(Vector2 position, float width, float height){
@@ -33,7 +38,6 @@ namespace Rebirth{
 			this.y = position.Y;
 			this.height = height;
 			this.width = width;
-			center = new VertexR ((x + width) / 2, (y + height) / 2);
 		}
 
 		public bool intersects(RectangleF rect){
@@ -125,12 +129,6 @@ namespace Rebirth{
 			if (x > minX && x < maxX) return true;
 
 			return false;
-		}
-
-		public VertexR getCenter(){
-			center.x = x+(width/2f);
-			center.y = y+(height/2f);
-			return center;
 		}
 
 		public CollisionDistance internalDistance(RectangleF r){
@@ -225,11 +223,10 @@ namespace Rebirth{
         }
 
         public void set(Vector2 position, float width, float height){
-			this.x = position.X;
-			this.y = position.Y;
 			this.height = height;
 			this.width = width;
-			center = new VertexR ((x + width) / 2, (y + height) / 2);
+            Center = position;
+			//center = new VertexR ((x + width) / 2, (y + height) / 2);
 		}
 	}
 

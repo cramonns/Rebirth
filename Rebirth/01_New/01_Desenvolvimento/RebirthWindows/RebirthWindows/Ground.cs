@@ -30,11 +30,6 @@ namespace Rebirth{
 			sb.Draw (texture, DisplayManager.scaleTexture(boundingBox), null, Color.White);
 		}
 
-		/*public override void Load(ContentManager Content){
-			texture = Content.Load<Texture2D>("Texture/ground");
-			loaded = true;
-		}*/
-
 		public override void collide(GameObject B){
 
 		}

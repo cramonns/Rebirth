@@ -10,23 +10,26 @@ namespace Rebirth {
     [Serializable]
     struct ContainerProperties{
         public float width, height, y;
+        public int id;
     }
 
     [Serializable]
     public class ContainerManager {
         
         List<ContainerProperties> containers;
-        float startPositionX = 0;
+        public float startPositionX = 0;
         public int lastContainerID;
+        public int firstContainerID;
 
         [NonSerialized]
         public Texture2D texture;
 
-        List<int> seqID;
+        //List<int> seqID;
 
         public ContainerManager(){
+            firstContainerID = -1;
             lastContainerID = -1;
-            seqID = new List<int>();
+            //seqID = new List<int>();
             containers = new List<ContainerProperties>();
             texture = TextureManager.load(TextureManager.TextureID.container);
         }
@@ -36,10 +39,19 @@ namespace Rebirth {
             cp.width = sc.Width;
             cp.height = sc.Height;
             cp.y = sc.Y;
-            containers.Add(cp);
-            if (seqID.Count == 0){
+            cp.id = sc.ID;
+            sc.PreviousScene = lastContainerID;
+            if (containers.Count == 0){
                 startPositionX = sc.X;
+                firstContainerID = sc.ID;
             }
+            else{
+                SceneContainer prevScene = LoadManager.Load(lastContainerID);
+                prevScene.NextScene = sc.ID;
+                prevScene.save();
+            }
+            containers.Add(cp);
+            lastContainerID++;
         }
 
 /*        public void addContainerAfter(SceneContainer sc, int index){
@@ -67,6 +79,33 @@ namespace Rebirth {
                 sb.Draw(texture, DisplayManager.scaleTexture(new Vector2(x, cp.y), cp.width, cp.height), Color.White);
                 x += cp.width;
             }
+        }
+
+        public Vector2 newPosition(){
+            float x = startPositionX;
+            foreach (ContainerProperties cp in containers){
+                x += cp.width;
+            }
+            return new Vector2(x,0);
+        }
+
+        public int positionID(Vector2 position){
+            float x = startPositionX;
+            int selectedId = containers[firstContainerID].id;
+            ContainerProperties cp;
+            int count = containers.Count;
+            for (int i = 0; i < count; i++){
+                cp = containers[i];
+                if (position.X > x){
+                    selectedId = cp.id;
+                }
+                else break;
+                x += cp.width;
+            }
+            cp = containers[selectedId];
+            if (position.Y > cp.y && position.Y < cp.y + cp.height)
+                return selectedId;
+            else return -1;
         }
 
     }

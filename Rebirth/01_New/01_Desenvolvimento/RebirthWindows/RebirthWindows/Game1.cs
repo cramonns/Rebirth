@@ -22,7 +22,7 @@ namespace Rebirth{
         IntPtr drawingSurface;
         Form parentForm;
         PictureBox pictureBox;
-        bool editor;
+        bool editor = false;
 
         public enum ScreenID{
             intro,
@@ -119,7 +119,8 @@ namespace Rebirth{
                 (screens[(int)ScreenID.world] as GameWorld).editMode();
                 (parentForm as LevelEditor).startEditor();
             }
-
+            else
+                LoadManager.LoadContainerManager();
 		}
 
 		/// <summary>

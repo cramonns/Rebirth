@@ -3,6 +3,8 @@ using System;
 namespace Rebirth{
 	public class Collision{
 
+        private const float contactError = 1E-4f;
+
 		public GameObject a, b;
 		public CollisionDistance cd;
 
@@ -51,7 +53,7 @@ namespace Rebirth{
 
 		private void treatCollision(MoveableObject m, GameObject g, CollisionDistance cd){
             push(m, cd);
-            if (cd.direction == CollisionDistance.CD_Direction.DOWN && cd.length <= 0){
+            if (cd.direction == CollisionDistance.CD_Direction.DOWN && cd.length <= contactError){
                 m.setGroundedState(true);
             }
 		}
@@ -70,9 +72,9 @@ namespace Rebirth{
                     push(m,cd.reverse());
                 }
             }
-            if (cd.direction == CollisionDistance.CD_Direction.UP && cd.length <= 0){
+            if (cd.direction == CollisionDistance.CD_Direction.UP && cd.length <= contactError){
                 m.setGroundedState(true);
-            } else if (cd.direction == CollisionDistance.CD_Direction.DOWN && cd.length <= 0){
+            } else if (cd.direction == CollisionDistance.CD_Direction.DOWN && cd.length <= contactError){
                 p.setGroundedState(true);
             }
         }

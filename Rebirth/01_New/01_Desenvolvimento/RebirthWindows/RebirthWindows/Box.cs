@@ -37,7 +37,7 @@ namespace Rebirth{
 		}
 
 		public override void collide(GameObject b){
-			VertexR c1 = this.boundingBox.getCenter();
+			/*VertexR c1 = this.boundingBox.getCenter();
 			VertexR c2 = b.BoundingBox.getCenter();
 
 			c2.x = c1.x;
@@ -49,7 +49,7 @@ namespace Rebirth{
 					setGroundedState (true);
 				} else setGroundedState (false);
 
-			} else setGroundedState (false);
+			} else setGroundedState (false);*/
 		}
 
 	}

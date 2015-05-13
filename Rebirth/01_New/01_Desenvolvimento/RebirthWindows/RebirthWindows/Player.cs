@@ -124,15 +124,11 @@ namespace Rebirth{
 
 		}
 
-		Vector2 position(){
-			return new Vector2 (boundingBox.x, boundingBox.y);
-		}
-
 		public override void Draw(SpriteBatch sb, GameTime gameTime){
 			if (direction == 'r') {
-				sb.Draw (texture, DisplayManager.scaleTexture(this.position(), CHAR_WIDTH, CHAR_HEIGHT), Color.White);
+				sb.Draw (texture, DisplayManager.scaleTexture(Position, CHAR_WIDTH, CHAR_HEIGHT), Color.White);
 			} else {
-				sb.Draw(texture, DisplayManager.scaleTexture(this.position(), CHAR_WIDTH, CHAR_HEIGHT), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+				sb.Draw(texture, DisplayManager.scaleTexture(Position, CHAR_WIDTH, CHAR_HEIGHT), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
 			}
 		}
 
@@ -143,16 +139,16 @@ namespace Rebirth{
 		}
 
 		public override void collide(GameObject b){
-
+            /*
 			VertexR c1 = this.BoundingBox.getCenter();
 			VertexR c2 = b.BoundingBox.getCenter();
 
 			c2.x = c1.x;
 
-			/*c1.x -= shape.x;
-			c2.x -= shape.x;
-			c1.y -= shape.y;
-			c2.y -= shape.y;*/
+			//c1.x -= shape.x;
+			//c2.x -= shape.x;
+			//c1.y -= shape.y;
+			//c2.y -= shape.y;
 
 			Console.WriteLine ("X: " + boundingBox.x + "  Y: " + boundingBox.y);
 			Console.WriteLine ("C1 X: " + c1.x + "  Y: " + c1.y);
@@ -175,7 +171,7 @@ namespace Rebirth{
 
 			if (colliders[(int)Bounds.WESTERN].getColliderShape().intersects(c1, c2)) {
 				boundingBox.x = b.X + b.Width;
-			}
+			}*/
 		}
 
 	}

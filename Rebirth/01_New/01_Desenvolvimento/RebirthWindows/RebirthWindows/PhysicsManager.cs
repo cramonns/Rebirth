@@ -37,6 +37,7 @@ namespace Rebirth{
 			foreach (GameObject j in simulatedObjects) {
 				if (j is MoveableObject) {
 					MoveableObject g = j as MoveableObject;
+                    //bool grounded = false;
 					g.setGroundedState(false);
 					collisionTree.remove(j);
 					candidates.Clear();
@@ -96,7 +97,7 @@ namespace Rebirth{
             
             if (right != null){
                 simulatedZone = right.getHalfLeftBounds();
-                foreach (GameObject g in left.objects){ 
+                foreach (GameObject g in right.objects){ 
                     collisionTree.insert(g);
                     if (simulatedZone.intersects(g.BoundingBox)){
                         simulatedObjects.Add(g);    

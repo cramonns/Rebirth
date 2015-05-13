@@ -52,7 +52,7 @@ namespace Rebirth {
                 }*/
             }
             else {
-                LoadManager.Update(scenes,preloadAmount,new Vector2(0,0));
+                LoadManager.Update(scenes,preloadAmount,player.Position);
                 worldPhysics.restart();
                 worldPhysics.addObjects(scenes[preloadAmount-1], scenes[preloadAmount], scenes[preloadAmount+1], player);
                 worldPhysics.applyGravity();
@@ -85,16 +85,18 @@ namespace Rebirth {
                 RectangleF rectangle = new RectangleF(0,0,0,0);
                 switch (insertionType){
                     case Enumerations.ObjectTypes.Box:
-                        rectangle.set(MouseManager.mousePosition - new Vector2(Box.DefaultWidth/2, Box.DefaultHeight/2 + scenes[preloadAmount].Height/2), Box.DefaultWidth, Box.DefaultHeight);
+                        rectangle.set(MouseManager.mousePosition, Box.DefaultWidth, Box.DefaultHeight);
                         break;
                     case Enumerations.ObjectTypes.Ground:
-                        rectangle.set(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2, Ground.DefaultHeight/2 + scenes[preloadAmount].Height/2), Ground.DefaultWidth, Ground.DefaultHeight);
+                        rectangle.set(MouseManager.mousePosition, Ground.DefaultWidth, Ground.DefaultHeight);
                         break;
                 }
                 if (rectangle.inside(scenes[preloadAmount].Shape)){
                     insertPermit = true;
                     color = Color.White * 0.5f;
+                    
                     foreach (GameObject o in scenes[preloadAmount].objects){
+                        
                         if (rectangle.intersects(o.BoundingBox)){
                             insertPermit = false;
                             color = Color.Red*0.5f;
@@ -106,7 +108,6 @@ namespace Rebirth {
                     insertPermit = false;
                     color = Color.Red*0.5f;
                 }
-                rectangle.y += scenes[preloadAmount].Height/2;
                 sb.Draw(texture, DisplayManager.scaleTexture(rectangle), color);
             }
         }
@@ -139,10 +140,6 @@ namespace Rebirth {
 
         public void loadScene(SceneContainer sc){
             scenes[preloadAmount] = sc;
-            /*sc.add(new Ground());
-			sc.add(new Box());*/
-            //sc.add(player);
-            //player.setPosition(0,100f/60f);*/
         }
 
         public void loadScene(int sceneId){
@@ -168,6 +165,10 @@ namespace Rebirth {
             GameObject g = newObject(objectType);
             scenes[preloadAmount].add(g);
             g.Load();
+        }
+
+        public void saveScene(){
+            scenes[preloadAmount].save();
         }
 
     }

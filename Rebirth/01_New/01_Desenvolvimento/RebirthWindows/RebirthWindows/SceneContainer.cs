@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace Rebirth {
     [Serializable]
@@ -45,10 +47,12 @@ namespace Rebirth {
             set {name = value;}
         }
         public int PreviousScene{
+            set {previousScene = value;}
             get {return previousScene;}
         }
         public int NextScene{
             get {return nextScene;}
+            set {nextScene = value;}
         }
         public RectangleF Shape{
             get {return shapeBox;}
@@ -112,5 +116,16 @@ namespace Rebirth {
             sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x),(int)DisplayManager.getScreenY(shapeBox.y),(int)DisplayManager.screenLength(shapeBox.width),1),Color.White);
         }
 
+        public void save(){
+            BinaryFormatter binFormat = new BinaryFormatter();
+            string fileName = "Lvl/" + ID.ToString() + ".scn";
+            if (!Directory.Exists("Lvl")){
+                Directory.CreateDirectory("Lvl");
+            }
+            using(Stream fStream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None)){
+                binFormat.Serialize(fStream, this);
+            }
+        }
+        
     }
 }

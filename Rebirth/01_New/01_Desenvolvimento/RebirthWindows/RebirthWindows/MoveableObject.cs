@@ -11,6 +11,8 @@ namespace Rebirth{
 		public bool usePhysics;
 
 		private bool grounded = false;
+        //[NonSerialized]
+        //private bool previousGroundedState = false;
 
 		public virtual void setGroundedState(bool state){
 			grounded = state;
