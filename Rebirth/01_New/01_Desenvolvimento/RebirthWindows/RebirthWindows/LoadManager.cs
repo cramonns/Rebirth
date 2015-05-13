@@ -25,7 +25,19 @@ namespace Rebirth {
         }
 
         private static void moveScenesRight(SceneContainer[] scenes, int preloadAmount){
-            
+            int count = scenes.Length-1;
+            int i;
+            if (scenes[count] != null){
+                scenes[count].unLoad();
+            }
+            for (i = count; i > 0; i--){
+                scenes[i] = scenes[i-1];
+            }
+            if (scenes[1] != null){
+                count = scenes[1].PreviousScene;
+                if (count != -1) scenes[0] = Load(count);
+            }
+            else scenes[0] = null;
         }
 
         public static void Update(SceneContainer[] scenes, int preloadAmount, Vector2 playerPosition){
