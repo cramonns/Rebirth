@@ -32,10 +32,6 @@ namespace Rebirth{
 
 		}
 
-		public override void Draw(SpriteBatch sb, GameTime gameTime){
-			sb.Draw(texture, DisplayManager.scaleTexture(boundingBox), Color.White);
-		}
-
 		public override void collide(GameObject b){
 			/*VertexR c1 = this.boundingBox.getCenter();
 			VertexR c2 = b.BoundingBox.getCenter();

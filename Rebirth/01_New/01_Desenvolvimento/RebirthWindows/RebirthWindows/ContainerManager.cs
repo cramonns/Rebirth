@@ -24,12 +24,12 @@ namespace Rebirth {
         [NonSerialized]
         public Texture2D texture;
 
-        //List<int> seqID;
+        [NonSerialized]
+        public int[] IdIndexes;
 
         public ContainerManager(){
             firstContainerID = -1;
             lastContainerID = -1;
-            //seqID = new List<int>();
             containers = new List<ContainerProperties>();
             texture = TextureManager.load(TextureManager.TextureID.container);
         }
@@ -90,11 +90,9 @@ namespace Rebirth {
         }
 
         private ContainerProperties getContainerProperties(int id){
-            int count = containers.Count;
-            for (int i = id; i < count; i++){
-                if (containers[i].id == id) return containers[i];
-            }
-            return containers[id];
+            int index = IdIndexes[id];
+            if (index == -1) return containers[id];
+            else return containers[index];
         }
 
         public int positionID(float px){
@@ -121,6 +119,16 @@ namespace Rebirth {
             if (position.Y > cp.y && position.Y < cp.y + cp.height)
                 return selectedId;
             else return -1;
+        }
+
+        public void LoadIdIndexes(){
+            IdIndexes = new int[lastContainerID+1];
+            for (int i = 0; i < lastContainerID; i++){
+                IdIndexes[i] = -1;
+            }
+            for (int i = 0; i < containers.Count; i++){
+                IdIndexes[containers[i].id] = i;
+            }
         }
 
     }

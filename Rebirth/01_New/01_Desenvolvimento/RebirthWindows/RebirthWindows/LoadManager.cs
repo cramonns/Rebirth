@@ -94,6 +94,7 @@ namespace Rebirth {
                 }
                 cm.texture = TextureManager.load(TextureManager.TextureID.container);
             } else cm = new ContainerManager();
+            cm.LoadIdIndexes();
             return cm;
         }
 

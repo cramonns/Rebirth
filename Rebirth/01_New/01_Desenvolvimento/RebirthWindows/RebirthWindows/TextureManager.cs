@@ -18,9 +18,12 @@ namespace Rebirth {
 
         private static ContentManager Content;
         public static Texture2D[] textures;
+        public static int[] texturesCount;
 
         public static void initialize(ContentManager cm){
-            textures = new Texture2D[Enum.GetNames(typeof(TextureID)).Length];
+            int count = Enum.GetNames(typeof(TextureID)).Length;
+            textures = new Texture2D[count];
+            texturesCount = new int[count];
             Content = cm;
         }
 
@@ -29,32 +32,35 @@ namespace Rebirth {
         }
 
         public static Texture2D load(TextureID id){
-            switch(id){
-                case TextureID.player:
-                    textures[(int)id] = Content.Load<Texture2D>("Texture/red");
-                    break;
-                case TextureID.ground:
-                    textures[(int)id] = Content.Load<Texture2D>("Texture/ground");
-                    break;
-                case TextureID.box:
-                    textures[(int)id] = Content.Load<Texture2D>("Texture/blackSquare");
-                    break;
-                case TextureID.startButton:
-                    textures[(int)id] = Content.Load<Texture2D>("Texture/startButton");
-                    break;
-                case TextureID.logo42bits:
-                    textures[(int)id] = Content.Load<Texture2D>("Texture/LogoVideo");
-                    break;
-                case TextureID.container:
-                    textures[(int)id] = Content.Load<Texture2D>("Texture/Container");
-                    break;
-                case TextureID.selectedContainer:
-                    textures[(int)id] = Content.Load<Texture2D>("Texture/SelectedContainer");
-                    break;          
-                case TextureID.white:
-                    textures[(int)id] = Content.Load<Texture2D>("Texture/White_square");
-                    break;  
+            if (textures[(int)id] == null){
+                switch(id){
+                    case TextureID.player:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/red");
+                        break;
+                    case TextureID.ground:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/ground");
+                        break;
+                    case TextureID.box:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/blackSquare");
+                        break;
+                    case TextureID.startButton:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/startButton");
+                        break;
+                    case TextureID.logo42bits:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/LogoVideo");
+                        break;
+                    case TextureID.container:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/Container");
+                        break;
+                    case TextureID.selectedContainer:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/SelectedContainer");
+                        break;          
+                    case TextureID.white:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/White_square");
+                        break;  
+                }
             }
+            texturesCount[(int)id]++;
             return textures[(int)id];
         }
 
@@ -63,8 +69,11 @@ namespace Rebirth {
         }
 
         public static void unLoad(TextureID id){
-            textures[(int)id].Dispose();
-            textures[(int)id] = null;
+            texturesCount[(int)id]--;
+            if (texturesCount[(int)id] == 0){
+                textures[(int)id].Dispose();
+                textures[(int)id] = null;
+            }
         }
     }
 }

@@ -59,8 +59,12 @@ namespace Rebirth{
 		}
 
 		public abstract void Update(GameTime gameTime);
-		public abstract void Draw(SpriteBatch sb, GameTime gameTime);
 		public abstract void collide(GameObject b);
+
+        public virtual void Draw(SpriteBatch sb, GameTime gameTime){
+            sb.Draw(texture, DisplayManager.scaleTexture(boundingBox), Color.White);
+        }
+
 
 		protected void createDefaultBounds(){
 			RectangleF upper, lower, easter, western;
@@ -86,16 +90,18 @@ namespace Rebirth{
 		}
 
         public virtual void Load(){
-            if (!TextureManager.isLoaded(textureId)){
-                texture = TextureManager.load(textureId);
-            }
-            else texture = TextureManager.textures[(int)textureId];
+            texture = TextureManager.load(textureId);
             loaded = true;
         }
 
         public virtual void defaultValues(){
             loaded = false;
 			colliders = new List<Collider>();
+        }
+
+        public void unLoad(){
+            TextureManager.unLoad(textureId);
+            loaded = false;
         }
 	}
 }

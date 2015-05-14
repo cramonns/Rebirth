@@ -54,6 +54,14 @@ namespace Rebirth {
             get {return nextScene;}
             set {nextScene = value;}
         }
+        public float Right{
+            get {return shapeBox.x + shapeBox.width;}
+            set {shapeBox.x = value - shapeBox.width;}
+        }
+        public float Top{
+            get {return shapeBox.y + shapeBox.height;}
+            set {shapeBox.y = value - shapeBox.height;}
+        }
         public RectangleF Shape{
             get {return shapeBox;}
         }
@@ -79,6 +87,7 @@ namespace Rebirth {
         }
 
         public void unLoad(){
+            foreach (GameObject g in objects) g.unLoad();
             objects.Clear();
         }
 

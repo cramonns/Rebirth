@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
 int main(){
-	system("taskkill /IM LevelEditor.exe");
+	system("RebirthWindows.exe -loadDemo");
 	return 0;
 }

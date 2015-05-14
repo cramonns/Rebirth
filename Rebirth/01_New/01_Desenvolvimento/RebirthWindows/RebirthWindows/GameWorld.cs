@@ -67,16 +67,20 @@ namespace Rebirth {
 		public override void Draw(GameTime gameTime){
             
             if (scenes[preloadAmount-1] != null){
-                scenes[preloadAmount-1].Draw(sb, gameTime);
-                if (editorMode) scenes[preloadAmount-1].DrawBounds(sb, gameTime);
+                if (!(player.X - scenes[preloadAmount].X >= 25)){
+                    scenes[preloadAmount-1].Draw(sb, gameTime);
+                    if (editorMode) scenes[preloadAmount-1].DrawBounds(sb, gameTime);
+                }
             }
             if (scenes[preloadAmount] != null){
                 scenes[preloadAmount].Draw(sb, gameTime);
                 if (editorMode) scenes[preloadAmount].DrawBounds(sb, gameTime);
             }
             if (scenes[preloadAmount+1] != null){
-                scenes[preloadAmount+1].Draw(sb, gameTime);
-                if (editorMode) scenes[preloadAmount+1].DrawBounds(sb, gameTime);
+                if (!(scenes[preloadAmount].Right - player.X >= 25)){
+                    scenes[preloadAmount+1].Draw(sb, gameTime);
+                    if (editorMode) scenes[preloadAmount+1].DrawBounds(sb, gameTime);
+                }
             }
             if (drawPlayer) player.Draw(sb, gameTime);
             if (insertionMode){

@@ -26,10 +26,6 @@ namespace Rebirth{
 		public override void Update(GameTime gameTime){
 		}
 
-		public override void Draw(SpriteBatch sb, GameTime gameTime){
-			sb.Draw (texture, DisplayManager.scaleTexture(boundingBox), null, Color.White);
-		}
-
 		public override void collide(GameObject B){
 
 		}
