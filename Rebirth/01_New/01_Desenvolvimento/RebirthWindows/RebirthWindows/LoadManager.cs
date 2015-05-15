@@ -11,9 +11,12 @@ namespace Rebirth {
         private static void moveScenesLeft(SceneContainer[] scenes, int preloadAmount){
             int count = scenes.Length-1;
             int i;
-            if (scenes[0] != null){
+            SceneContainer aux = scenes[0];
+            //This code was modified in order to prevent unloading and reloading of an object in the same frame.
+            //The old scene must be unloaded only when the new scene has already been loaded
+            /*if (scenes[0] != null){
                 scenes[0].unLoad();
-            }
+            }*/
             for (i = 0; i < count; i++){
                 scenes[i] = scenes[i+1];
             }
@@ -22,13 +25,17 @@ namespace Rebirth {
                 if (count != -1) scenes[i] = Load(count);
             }
             else scenes[i] = null;
+            if (aux != null) aux.unLoad();
         }
 
         private static void moveScenesRight(SceneContainer[] scenes, int preloadAmount){
             int count = scenes.Length-1;
-            if (scenes[count] != null){
+            SceneContainer aux = scenes[count];
+            //This code was modified in order to prevent unloading and reloading of an object in the same frame.
+            //The old scene must be unloaded only when the new scene has already been loaded
+            /*if (scenes[count] != null){
                 scenes[count].unLoad();
-            }
+            }*/
             for (int i = count; i > 0; i--){
                 scenes[i] = scenes[i-1];
             }
@@ -37,6 +44,7 @@ namespace Rebirth {
                 if (count != -1) scenes[0] = Load(count);
             }
             else scenes[0] = null;
+            if (aux != null) aux.unLoad();
         }
 
         public static bool Update(SceneContainer[] scenes, int preloadAmount, Vector2 playerPosition){
