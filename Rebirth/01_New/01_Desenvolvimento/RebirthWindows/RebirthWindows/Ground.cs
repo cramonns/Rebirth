@@ -26,7 +26,7 @@ namespace Rebirth{
 		public override void Update(GameTime gameTime){
 		}
 
-		public override void collide(GameObject B){
+		public override void collide(GameObject B, CollisionDistance cd){
 
 		}
 

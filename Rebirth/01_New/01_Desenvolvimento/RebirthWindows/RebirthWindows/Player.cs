@@ -22,12 +22,10 @@ namespace Rebirth{
         const float CROUCHING_TOP_SPEED = 3.6f/60f;
 		const float MOVING_ACCELERATION = .8f/60f;
 		const float JUMP_MOVING_ACCELERATION = .1f/60f;
-		const float ATRITO = .5f/60f;
 		const float JUMP_IMPULSE = 15f/60f;
 		const float JUMP_ACCLERATION = 1.3f/60f;
 		const float JUMP_TOP_HIGH = 180f/60f;
 		const float JUMP_TOP_SPEED = 6f/60f;
-		const float AIR_RESISTANCE = 0.05f/60f;
 		const float CHAR_WIDTH = .6f;
 		const float CHAR_HEIGHT = 1.4f;
         const float FLOATING_MAX_FALLING_SPEED = 3f/60f;
@@ -62,8 +60,6 @@ namespace Rebirth{
 
 		public override void Update(GameTime gameTime){
 			//updateBounds();
-
-
 
             if (state == playerStates.FLOATING) state = playerStates.FALLING;
 
@@ -153,15 +149,15 @@ namespace Rebirth{
                 }
             }
 
-			//Atrito
-			float resistance = (state == playerStates.JUMPING || state == playerStates.FALLING || state == playerStates.FLOATING) ? AIR_RESISTANCE : ATRITO;
+		}
+
+        public override void applyAtrict(float atrict, float airResistance) {
+            float resistance = (grounded) ? atrict : airResistance;
 			if (movingSpeed < resistance && movingSpeed > -resistance) movingSpeed = 0;
 			else if (movingSpeed > 0) movingSpeed -= resistance;
 			else movingSpeed += resistance;
-
-			speed.X = movingSpeed;
-
-		}
+            speed.X = movingSpeed;
+        }
 
         public override void Draw(SpriteBatch sb, GameTime gameTime){
 			if (direction == 'r') {
@@ -177,40 +173,23 @@ namespace Rebirth{
 			else if (this.state != playerStates.JUMPING) startFall();
 		}
 
-		public override void collide(GameObject b){
-            /*
-			VertexR c1 = this.BoundingBox.getCenter();
-			VertexR c2 = b.BoundingBox.getCenter();
-
-			c2.x = c1.x;
-
-			//c1.x -= shape.x;
-			//c2.x -= shape.x;
-			//c1.y -= shape.y;
-			//c2.y -= shape.y;
-
-			Console.WriteLine ("X: " + boundingBox.x + "  Y: " + boundingBox.y);
-			Console.WriteLine ("C1 X: " + c1.x + "  Y: " + c1.y);
-			Console.WriteLine ("C2 X: " + c2.x + "  Y: " + c2.y);
-
-			if (colliders[(int)Bounds.EASTER].getColliderShape().intersects(c1, c2)) {
-				boundingBox.x = b.X - boundingBox.width;
-			}
-
-
-			if (colliders [(int)Bounds.LOWER].getColliderShape().intersects (c1, c2)) {
-				boundingBox.y = b.Y + b.Height;
-
-				if (b.isGrounded ()) {
-					setGroundedState (true);
-					state = playerStates.WAITING;
-				} else startFall();
-
-			} else startFall();
-
-			if (colliders[(int)Bounds.WESTERN].getColliderShape().intersects(c1, c2)) {
-				boundingBox.x = b.X + b.Width;
-			}*/
+		public override void collide(GameObject b, CollisionDistance cd){
+            switch (cd.direction){
+                case CollisionDistance.CD_Direction.UP:
+                    if (state == playerStates.JUMPING){
+                        speed.Y = 0;
+                        startFall();
+                    }
+                    break;
+                case CollisionDistance.CD_Direction.DOWN:
+                    break;
+                case CollisionDistance.CD_Direction.EAST:
+                    if (movingSpeed > 0 && ControllerManager.direction != TriggerDirection.Right) movingSpeed = 0;
+                    break;
+                case CollisionDistance.CD_Direction.WEST:
+                    if (movingSpeed < 0  && ControllerManager.direction != TriggerDirection.Left) movingSpeed = 0;
+                    break;
+            }
 		}
 
 	}

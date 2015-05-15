@@ -59,7 +59,7 @@ namespace Rebirth{
 		}
 
 		public abstract void Update(GameTime gameTime);
-		public abstract void collide(GameObject b);
+		public abstract void collide(GameObject b, CollisionDistance cd);
 
         public virtual void Draw(SpriteBatch sb, GameTime gameTime){
             sb.Draw(texture, DisplayManager.scaleTexture(boundingBox), Color.White);

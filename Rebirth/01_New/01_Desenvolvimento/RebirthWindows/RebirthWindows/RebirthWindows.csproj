@@ -61,6 +61,7 @@
     <Compile Include="GameObject.cs" />
     <Compile Include="GameScreen.cs" />
     <Compile Include="Ground.cs" />
+    <Compile Include="MathUtils.cs" />
     <Compile Include="MenuScreen.cs" />
     <Compile Include="MouseManager.cs" />
     <Compile Include="MoveableObject.cs" />

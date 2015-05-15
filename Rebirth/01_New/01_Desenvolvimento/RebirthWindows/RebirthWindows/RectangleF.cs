@@ -6,8 +6,6 @@ namespace Rebirth{
     [Serializable]
 	public class RectangleF{
 
-		private const float contactErrorMargin = 0;
-
 		public float x, y;
 		public float width, height;
 
@@ -47,20 +45,29 @@ namespace Rebirth{
 			float rw = rect.width;
 			float rh = rect.height;
 
-			if ((rx >= x && rx <= x + width) || (rx + rw >= x && rx + rw <= x + width)) {
-				if ((ry >= y && ry <= y + height) || (ry + rh >= y && ry + rh <= y + height)) {
+			if (( MathUtils.FLOAT_GREATEQ(rx, x) && MathUtils.FLOAT_LESSEQ(rx, x + width) ) || 
+                ( MathUtils.FLOAT_GREATEQ(rx + rw, x) && MathUtils.FLOAT_LESSEQ(rx + rw, x + width) )) 
+            {
+				if (( MathUtils.FLOAT_GREATEQ(ry, y) && MathUtils.FLOAT_LESSEQ(ry, y + height) ) || 
+                    ( MathUtils.FLOAT_GREATEQ(ry + rh, y) && MathUtils.FLOAT_LESSEQ(ry + rh, y + height) )) 
+                {
 					return true;
 				} else {
-					if ((y >= ry && y <= ry + rh) || (y + height >= ry && y + height <= ry + rh)) {
+					if (( MathUtils.FLOAT_GREATEQ(y, ry) && MathUtils.FLOAT_LESSEQ(y, ry + rh) ) || 
+                        ( MathUtils.FLOAT_GREATEQ(y + height, ry) && MathUtils.FLOAT_LESSEQ(y + height, ry + rh) )) 
+                    {
 						return true;
 					}
 				}
 			} else {
-				if ((x >= rx && x <= rx + rw) || (x + width >= rx && x + width <= rx + rw)) {
-					if ((ry >= y && ry <= y + height) || (ry + rh >= y && ry + rh <= y + height)) {
+				if ((MathUtils.FLOAT_GREATEQ(x, rx) && MathUtils.FLOAT_LESSEQ(x, rx + rw) ) || 
+                    (MathUtils.FLOAT_GREATEQ(x + width, rx) && MathUtils.FLOAT_LESSEQ(x + width, rx + rw) )) {
+					if ((MathUtils.FLOAT_GREATEQ(ry, y) && MathUtils.FLOAT_LESSEQ(ry, y + height) ) || 
+                        (MathUtils.FLOAT_GREATEQ(ry + rh, y) && MathUtils.FLOAT_LESSEQ(ry + rh, y + height) )) {
 						return true;
 					} else {
-						if ((y >= ry && y <= ry + rh) || (y + height >= ry && y + height <= ry + rh)) {
+						if ( (MathUtils.FLOAT_GREATEQ(y, ry) && MathUtils.FLOAT_LESSEQ(y, ry + rh)) || 
+                            (MathUtils.FLOAT_GREATEQ(y + height, ry) && MathUtils.FLOAT_LESSEQ(y + height, ry + rh) ) ) {
 							return true;
 						}
 					}
@@ -111,8 +118,13 @@ namespace Rebirth{
 			float maxY = minY + height;
 
 			// Completely outside.
-			if ((x1 <= minX && x2 <= minX) || (y1 <= minY && y2 <= minY) || (x1 >= maxX && x2 >= maxX) || (y1 >= maxY && y2 >= maxY))
+			if ((MathUtils.FLOAT_LESSEQ(x1, minX) && MathUtils.FLOAT_LESSEQ(x2, minX) ) || 
+                (MathUtils.FLOAT_LESSEQ(y1, minY) && MathUtils.FLOAT_LESSEQ(y2, minY) ) || 
+                (MathUtils.FLOAT_GREATEQ(x1, maxX) && MathUtils.FLOAT_GREATEQ(x2, maxX) ) || 
+                (MathUtils.FLOAT_GREATEQ(y1, maxY) && MathUtils.FLOAT_GREATEQ(y2, maxY) ) )
+            {
 				return false;
+            }
 
 			float m = (y2 - y1) / (x2 - x1);
 
@@ -132,13 +144,13 @@ namespace Rebirth{
 		}
 
 		public CollisionDistance internalDistance(RectangleF r){
-			if (y > r.y + r.height - contactErrorMargin && y < r.y + r.height + contactErrorMargin) {//Check if it is inside numerical error margins
+			if ( MathUtils.FLOAT_EQUALS(y, r.y + r.height) ) {
 				return new CollisionDistance (CollisionDistance.CD_Direction.DOWN, 0);
-			} else if (y + height > r.y - contactErrorMargin && y + height < r.y + contactErrorMargin) {//Check if it is inside numerical error margins
+			} else if ( MathUtils.FLOAT_EQUALS(y + height, r.y) ) {
 				return new CollisionDistance (CollisionDistance.CD_Direction.UP, 0);
-			} else if (x > r.x + r.width - contactErrorMargin && x < r.x + r.width + contactErrorMargin) {//Check if it is inside numerical error margins
+			} else if ( MathUtils.FLOAT_EQUALS(x, r.x + r.width) ) {
 				return new CollisionDistance (CollisionDistance.CD_Direction.WEST, 0);
-			} else if (x + width > r.x - contactErrorMargin && x + width < r.x + contactErrorMargin) {//Check if it is inside numerical error margins
+			} else if ( MathUtils.FLOAT_EQUALS(x + width, r.x) ) {
 				return new CollisionDistance (CollisionDistance.CD_Direction.EAST, 0);
 			} else {
 				float distYD, distYU, distXW, distXE;
@@ -215,7 +227,11 @@ namespace Rebirth{
 		}
 
         public bool inside(RectangleF rect){
-            return (this.x >= rect.x && this.y >= rect.y && this.x + this.width <= rect.x + rect.width && this.y + this.height <= rect.y + rect.height);
+            return (this.x >= rect.x && 
+                    this.y >= rect.y && 
+                    MathUtils.FLOAT_LESSEQ(this.x + this.width, rect.x + rect.width) && 
+                    MathUtils.FLOAT_LESSEQ(this.y + this.height, rect.y + rect.height)
+                    );
         }
 
         public Rectangle ToRectangle(){

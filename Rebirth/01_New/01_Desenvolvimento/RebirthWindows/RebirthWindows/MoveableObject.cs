@@ -10,7 +10,7 @@ namespace Rebirth{
 		public Vector2 speed;
 		public bool usePhysics;
 
-		private bool grounded = false;
+		protected bool grounded = false;
         //[NonSerialized]
         //private bool previousGroundedState = false;
 
@@ -45,6 +45,13 @@ namespace Rebirth{
 				speed.Y -= gravity;
 			else
 				speed.Y = 0;
+        }
+
+        public virtual void applyAtrict(float atrict, float airResistance) {
+            float resistance = (this.grounded) ? atrict : airResistance;
+			if (speed.X < resistance && speed.X > -resistance) speed.X = 0;
+			else if (speed.X > 0) speed.X -= resistance;
+			else speed.X += resistance;
         }
 	}
 }

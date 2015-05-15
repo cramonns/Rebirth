@@ -47,11 +47,11 @@ namespace Rebirth{
 			if (Keyboard.GetState().IsKeyDown(Keys.Up) || GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed) {
 				if (!prev_SpacePressed)	TriggerJumping = true;
 				prev_SpacePressed = true;
-			}
-			if (Keyboard.GetState().IsKeyUp(Keys.Up) && GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Released) {
-				TriggerJumping = false;
-				prev_SpacePressed = false;
-			}
+			} else
+			    if (Keyboard.GetState().IsKeyUp(Keys.Up) && GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Released) {
+				    TriggerJumping = false;
+				    prev_SpacePressed = false;
+			    }
 
             TriggerStart = false;
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) || GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed) {

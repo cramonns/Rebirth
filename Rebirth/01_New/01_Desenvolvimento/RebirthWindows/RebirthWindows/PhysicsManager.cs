@@ -6,45 +6,42 @@ namespace Rebirth{
 	public class PhysicsManager{
 
 		const float GRAVITY = .4f/60f;
+        const float ATRICT = .5f/60f;
+        const float AIR_RESISTANCE = 0.05f/60f;
 
-        List<GameObject> simulatedObjects;
+        List<MoveableObject> simulatedObjects;
 		LinkedList<Collision> currentCollisions;
 		QuadTree collisionTree;
 
 		public PhysicsManager(){
-            this.simulatedObjects = new List<GameObject>();
+            this.simulatedObjects = new List<MoveableObject>();
 			currentCollisions = new LinkedList<Collision>();
 			collisionTree = new QuadTree (0, new RectangleF (0, 0, 500, 500));
 		}
 
-		public void applyGravity(){
-			//Gravity
-			foreach (GameObject h in simulatedObjects) {
-				if (h is MoveableObject) {
-					MoveableObject g = h as MoveableObject;
-					g.applyGravity(GRAVITY);
-				}
-			}
-		}
+        public void Update(GameTime gameTime){
+            foreach (MoveableObject g in simulatedObjects) {
+                g.applyGravity(GRAVITY);
+                g.Update(gameTime);
+                g.applyAtrict(ATRICT, AIR_RESISTANCE);
+            }
+        }
 
 		public void checkCollisions(){
 
 			List<GameObject> candidates = new List<GameObject>();
 
-			foreach (GameObject j in simulatedObjects) {
-				if (j is MoveableObject) {
-					MoveableObject g = j as MoveableObject;
-                    //bool grounded = false;
-					g.setGroundedState(false);
-					collisionTree.remove(j);
-					candidates.Clear();
-					candidates = collisionTree.retrieve(candidates, g.getCollisionShape());
-					foreach (GameObject h in candidates) {
-						if (h != g) {
-							if (g.getCollisionShape().intersects(h.getCollisionShape())) {
-								CollisionDistance d = g.BoundingBox.AxisDistance(h.BoundingBox);
-				                currentCollisions.AddFirst(new Collision(g,h,d));
-							}
+			foreach (MoveableObject g in simulatedObjects) {
+                //bool grounded = false;
+				g.setGroundedState(false);
+				collisionTree.remove(g);
+				candidates.Clear();
+				candidates = collisionTree.retrieve(candidates, g.getCollisionShape());
+				foreach (GameObject h in candidates) {
+					if (h != g) {
+						if (g.getCollisionShape().intersects(h.getCollisionShape())) {
+							CollisionDistance d = g.BoundingBox.AxisDistance(h.BoundingBox);
+				            currentCollisions.AddFirst(new Collision(g,h,d));
 						}
 					}
 				}
@@ -54,40 +51,46 @@ namespace Rebirth{
 		public void treatCollisions(){
 			foreach (Collision c in currentCollisions) {
 				c.treatCollision();
+                c.a.collide(c.b, c.cd);
+                c.b.collide(c.a, c.cd.reverse());
 			}
 		}
 
 		public void integratePosition(){
-			foreach (GameObject j in simulatedObjects) {
-				if (j is MoveableObject) (j as MoveableObject).integratePosition();
+			foreach (MoveableObject g in simulatedObjects) {
+				g.integratePosition();
 			}
 		}
 
         public void restart(){ 
-            simulatedObjects.Clear();
             currentCollisions.Clear();
 			collisionTree.clear();
         }
 
-        public void addObjects(SceneContainer left, SceneContainer center, SceneContainer right, Player p){
+        public void addObjects(SceneContainer left, SceneContainer center, SceneContainer right, Player p, bool reload){
+            //reload = true;
+            if (reload){
+                simulatedObjects.Clear();
+                simulatedObjects.Add(p);
+            }
+            
             RectangleF simulatedZone;
             
-            simulatedObjects.Add(p);
             collisionTree.insert(p);
             
             if (left != null){
                 simulatedZone = left.getHalfRightBounds();
                 foreach (GameObject g in left.objects){ 
                     collisionTree.insert(g);
-                    if (simulatedZone.intersects(g.BoundingBox)){
-                        simulatedObjects.Add(g);
+                    if (simulatedZone.intersects(g.BoundingBox) && g is MoveableObject && reload){
+                        simulatedObjects.Add(g as MoveableObject);
                     }
                 }
             }
 
             if (center != null){
                 foreach (GameObject g in center.objects){ 
-                    simulatedObjects.Add(g);
+                    if (g is MoveableObject && reload) simulatedObjects.Add(g as MoveableObject);
                     collisionTree.insert(g);
                 }
             }
@@ -96,18 +99,12 @@ namespace Rebirth{
                 simulatedZone = right.getHalfLeftBounds();
                 foreach (GameObject g in right.objects){ 
                     collisionTree.insert(g);
-                    if (simulatedZone.intersects(g.BoundingBox)){
-                        simulatedObjects.Add(g);    
+                    if (simulatedZone.intersects(g.BoundingBox) && g is MoveableObject && reload){
+                        simulatedObjects.Add(g as MoveableObject);    
                     }
                 }
             }
 
-        }
-
-        public void Update(GameTime gameTime){
-            foreach (GameObject g in simulatedObjects){
-                g.Update(gameTime);
-            }
         }
 
 	}

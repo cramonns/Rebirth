@@ -36,6 +36,7 @@ namespace Rebirth {
         }
 
         public override void Update(GameTime gameTime){
+            
             if (editorMode){
                 drawPlayer = false;
 
@@ -52,10 +53,9 @@ namespace Rebirth {
                 }*/
             }
             else {
-                LoadManager.Update(scenes,preloadAmount,player.Position);
+                bool updated = LoadManager.Update(scenes,preloadAmount,player.Position);
                 worldPhysics.restart();
-                worldPhysics.addObjects(scenes[preloadAmount-1], scenes[preloadAmount], scenes[preloadAmount+1], player);
-                worldPhysics.applyGravity();
+                worldPhysics.addObjects(scenes[preloadAmount-1], scenes[preloadAmount], scenes[preloadAmount+1], player, updated);
                 worldPhysics.Update(gameTime);
 			    worldPhysics.checkCollisions();
 			    worldPhysics.treatCollisions();
@@ -67,7 +67,7 @@ namespace Rebirth {
 		public override void Draw(GameTime gameTime){
             
             if (scenes[preloadAmount-1] != null){
-                if (!(player.X - scenes[preloadAmount].X >= 25)){
+                if (!(scenes[preloadAmount-1].Right < DisplayManager.screenShift.X)){
                     scenes[preloadAmount-1].Draw(sb, gameTime);
                     if (editorMode) scenes[preloadAmount-1].DrawBounds(sb, gameTime);
                 }
@@ -77,7 +77,7 @@ namespace Rebirth {
                 if (editorMode) scenes[preloadAmount].DrawBounds(sb, gameTime);
             }
             if (scenes[preloadAmount+1] != null){
-                if (!(scenes[preloadAmount].Right - player.X >= 25)){
+                if (!(scenes[preloadAmount+1].X > DisplayManager.Right)){
                     scenes[preloadAmount+1].Draw(sb, gameTime);
                     if (editorMode) scenes[preloadAmount+1].DrawBounds(sb, gameTime);
                 }

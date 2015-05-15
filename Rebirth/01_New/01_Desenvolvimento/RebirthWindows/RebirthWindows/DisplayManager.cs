@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Rebirth{
 	public static class DisplayManager{
 
-        //ScreenManager members
+        //DisplayManager members
 		private static float WORLD_WIDTH = 30;
 		private static float screenWidth;
 		private static float screenHeight;
@@ -16,7 +16,7 @@ namespace Rebirth{
 
         private static bool loadDemo = false;
 
-        //ScreenManager properties
+        //DisplayManager properties
         public static float DisplayWidth{
             get{ return screenWidth; }          
             set{
@@ -35,8 +35,12 @@ namespace Rebirth{
                 Ratio = WORLD_WIDTH / screenWidth;
             }
         }
+        public static float Right{
+            get {return screenShift.X + WORLD_WIDTH;}
+            set {screenShift.X = value - WORLD_WIDTH;}
+        }
 
-        //constructors
+        //initializer
 		public static void initialize(Game1 game){
 			initialize(game,1280,720);
 		}
@@ -44,7 +48,7 @@ namespace Rebirth{
         public static void initialize(Game1 game, int sWidth, int sHeight){
 
             if (loadDemo){
-                cameraPercentageToFollow.X = 0.05f;
+                cameraPercentageToFollow.X = 0.3f;
                 cameraPercentageToFollow.Y = 0.4f;
                 WORLD_WIDTH = 250;
             }
@@ -112,8 +116,7 @@ namespace Rebirth{
             if (followPlayer){
                 if (playerPosition.X - screenShift.X >= (1 - cameraPercentageToFollow.X)*WORLD_WIDTH) screenShift.X = playerPosition.X - (1 - cameraPercentageToFollow.X)*WORLD_WIDTH;
                 if (playerPosition.X - screenShift.X <= cameraPercentageToFollow.X*WORLD_WIDTH) screenShift.X = playerPosition.X - cameraPercentageToFollow.X*WORLD_WIDTH;
-
-                
+          
                 if (playerPosition.Y - screenShift.Y >= (1 - cameraPercentageToFollow.Y)*screenHeight*Ratio) screenShift.Y = playerPosition.Y - (1 - cameraPercentageToFollow.Y)*screenHeight*Ratio;
                 if (playerPosition.Y - screenShift.Y <= (cameraPercentageToFollow.Y)*screenHeight*Ratio) screenShift.Y = playerPosition.Y - (cameraPercentageToFollow.Y)*screenHeight*Ratio;
                 

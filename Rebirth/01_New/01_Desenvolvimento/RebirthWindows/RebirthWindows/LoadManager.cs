@@ -39,9 +39,11 @@ namespace Rebirth {
             else scenes[0] = null;
         }
 
-        public static void Update(SceneContainer[] scenes, int preloadAmount, Vector2 playerPosition){
+        public static bool Update(SceneContainer[] scenes, int preloadAmount, Vector2 playerPosition){
+            bool updated = false;
             int playerPosID = cm.positionID(playerPosition.X);
             if (scenes[preloadAmount] == null){
+                updated = true;
                 scenes[preloadAmount] = Load(playerPosID);
                 for (int i = preloadAmount - 1, auxId = scenes[preloadAmount].PreviousScene; i >= 0 && auxId != -1; auxId = scenes[i].PreviousScene, i--){
                     scenes[i] = Load(auxId);
@@ -52,18 +54,21 @@ namespace Rebirth {
             }
             else {
                 if (playerPosID > scenes[preloadAmount].ID){
+                    updated = true;
                     while (playerPosID > scenes[preloadAmount].ID){
                         moveScenesLeft(scenes, preloadAmount);
                     }
                 }
                 else {
                     if (playerPosID < scenes[preloadAmount].ID){
+                        updated = true;
                         while (playerPosID < scenes[preloadAmount].ID){
                             moveScenesRight(scenes, preloadAmount);
                         }
                     }
                 }
             }
+            return updated;
         }
 
         public static SceneContainer Load(int id){

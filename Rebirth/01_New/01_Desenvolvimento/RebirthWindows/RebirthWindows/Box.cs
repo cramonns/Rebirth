@@ -32,7 +32,7 @@ namespace Rebirth{
 
 		}
 
-		public override void collide(GameObject b){
+		public override void collide(GameObject b, CollisionDistance cd){
 			/*VertexR c1 = this.boundingBox.getCenter();
 			VertexR c2 = b.BoundingBox.getCenter();
 
