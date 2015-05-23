@@ -53,5 +53,12 @@ namespace Rebirth {
             get {return scm;}
         }
 
+        public int getTab(int id){
+            for (int i = 0; i < containerTab.Count; i++){
+                if (containerTab[i] == id) return i;
+            }
+            return -1;
+        }
+
     }
 }

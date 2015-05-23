@@ -148,17 +148,8 @@ namespace Rebirth {
         }
 
         private void gameBox_Click(object sender, EventArgs e) {
-            GameWorld gameWorld = gameEntry.getWorld();
-            int index = tabControlContainer.SelectedIndex;
-            if (index == 0){
-                int id = gameEditor.containerManager.positionID(MouseManager.mousePosition);
-                if (id != -1){
-                    addSceneTab(LoadManager.Load(id));
-                }
-            }
-            if (gameWorld.insertPermit){
-                gameWorld.createObject((Enumerations.ObjectTypes)comboBoxObjectList.SelectedIndex);
-            }
+            gameBox.Focus();
+            
         }
 
         private void gameBox_MouseDown(object sender, MouseEventArgs e) {
@@ -197,6 +188,24 @@ namespace Rebirth {
         private void gameBox_MouseUp(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left){
                 wasMouseClicked = false;
+            }
+        }
+
+        private void gameBox_DoubleClick(object sender, EventArgs e) {
+            GameWorld gameWorld = gameEntry.getWorld();
+            int index = tabControlContainer.SelectedIndex;
+            if (index == 0){
+                int id = gameEditor.containerManager.positionID(MouseManager.mousePosition);
+                if (id != -1){
+                    int tab = gameEditor.getTab(id);
+                    if (tab == -1){
+                        addSceneTab(LoadManager.Load(id));
+                    }
+                    else this.tabControlContainer.SelectedIndex = tab;
+                }
+            }
+            if (gameWorld.insertPermit){
+                gameWorld.createObject((Enumerations.ObjectTypes)comboBoxObjectList.SelectedIndex);
             }
         }
         

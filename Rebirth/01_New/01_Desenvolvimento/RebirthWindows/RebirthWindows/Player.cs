@@ -39,6 +39,9 @@ namespace Rebirth{
 
 		//support variables
 		float jumpStartPos;
+        public bool allowStanding;
+
+        Attachment standingChecker;
 
 		public Player(){
 			this.usePhysics = true;
@@ -50,6 +53,8 @@ namespace Rebirth{
 			createDefaultBounds();
 
             textureId = TextureManager.TextureID.player;
+
+            standingChecker = new Attachment(LogicalObject.Treatment.standingCheck, this);
 
 		}
 
@@ -97,56 +102,61 @@ namespace Rebirth{
 				if (movingSpeed < -MOVING_TOP_SPEED)
 					movingSpeed = -MOVING_TOP_SPEED;
 			}
-					
-			//Jumping
-			if (ControllerManager.TriggerJumping) {
-				if (state != playerStates.JUMPING && state != playerStates.FALLING) {
-					jumpStartPos = boundingBox.y;
-					boundingBox.y += JUMP_IMPULSE;
-					speed.Y += JUMP_ACCLERATION;
-					state = playerStates.JUMPING;
-					setGroundedState (false);
-					if (movingSpeed != 0) jumping_direction = direction;
-					else jumping_direction = 'n';
-				} else if (state == playerStates.JUMPING) {
-					if (boundingBox.y - jumpStartPos >= JUMP_TOP_HIGH) {
-						startFall();
-					} else if (speed.Y > JUMP_TOP_HIGH/2) {
-						speed.Y -= JUMP_ACCLERATION/2;
-					} else speed.Y += JUMP_ACCLERATION;
-					if (speed.Y > JUMP_TOP_SPEED) {
-						speed.Y = JUMP_TOP_SPEED;
-					} else if (speed.Y > JUMP_TOP_SPEED/2){
-						speed.Y -= JUMP_ACCLERATION / 2;
-					}
-				}
-			} else if (!isGrounded()) {
-				if (speed.Y > 0) speed.Y = 0;
-				startFall();
-			}
+			
             //Crouching
-            else if (ControllerManager.TriggerDown){
-                if (state == playerStates.WAITING) state = playerStates.DUCKING;
-                else {
-                    state = playerStates.CROUCHING;              
-                    
-                    if (movingSpeed > CROUCHING_TOP_SPEED) movingSpeed = CROUCHING_TOP_SPEED;
-                    else if (movingSpeed < -CROUCHING_TOP_SPEED) movingSpeed = -CROUCHING_TOP_SPEED;
+		    if (ControllerManager.TriggerDown){
+                if (grounded){
+                    if (state == playerStates.WAITING) state = playerStates.DUCKING;
+                    else {
+                        state = playerStates.CROUCHING;
+                        if (movingSpeed > CROUCHING_TOP_SPEED) movingSpeed = CROUCHING_TOP_SPEED;
+                        else if (movingSpeed < -CROUCHING_TOP_SPEED) movingSpeed = -CROUCHING_TOP_SPEED;
+                    }
                 }
-                boundingBox.height = CHAR_HEIGHT*0.6f;
-                boundingBox.width = CHAR_WIDTH*1.2f;
             }
             else {
-                boundingBox.height = CHAR_HEIGHT;
-                boundingBox.width = CHAR_WIDTH;
+			    //Jumping
+			    if (ControllerManager.TriggerJumping) {
+				    if ( state == playerStates.MOVING || state == playerStates.WAITING ) {
+					    jumpStartPos = boundingBox.y;
+					    boundingBox.y += JUMP_IMPULSE;
+					    speed.Y += JUMP_ACCLERATION;
+					    state = playerStates.JUMPING;
+					    setGroundedState (false);
+					    if (movingSpeed != 0) jumping_direction = direction;
+					    else jumping_direction = 'n';
+				    } else if (state == playerStates.JUMPING) {
+					    if (boundingBox.y - jumpStartPos >= JUMP_TOP_HIGH) {
+						    startFall();
+					    } else if (speed.Y > JUMP_TOP_HIGH/2) {
+						    speed.Y -= JUMP_ACCLERATION/2;
+					    } else speed.Y += JUMP_ACCLERATION;
+					    if (speed.Y > JUMP_TOP_SPEED) {
+						    speed.Y = JUMP_TOP_SPEED;
+					    } else if (speed.Y > JUMP_TOP_SPEED/2){
+						    speed.Y -= JUMP_ACCLERATION / 2;
+					    }
+				    }
+			    } else if (!isGrounded()) {
+				    if (speed.Y > 0) speed.Y = 0;
+				    startFall();
+			    }
             }
-
+            
             //Floating
             if (ControllerManager.TriggerFloating){
                 if (state == playerStates.FALLING){
                     state = playerStates.FLOATING;
                     if (speed.Y < -FLOATING_MAX_FALLING_SPEED) speed.Y = -FLOATING_MAX_FALLING_SPEED;
                 }
+            }
+
+            if (state == playerStates.DUCKING || state == playerStates.CROUCHING){
+                boundingBox.height = CHAR_HEIGHT*0.6f;
+                boundingBox.width = CHAR_WIDTH*1.2f;
+            } else {
+                boundingBox.height = CHAR_HEIGHT;
+                boundingBox.width = CHAR_WIDTH;
             }
 
 		}
@@ -169,7 +179,10 @@ namespace Rebirth{
 
 		public override void setGroundedState(bool newState){
 			base.setGroundedState (newState);
-			if (newState) this.state = playerStates.WAITING;
+			if (newState) {
+                if (this.state != playerStates.DUCKING && this.state != playerStates.CROUCHING)
+                    this.state = playerStates.WAITING;
+            }
 			else if (this.state != playerStates.JUMPING) startFall();
 		}
 

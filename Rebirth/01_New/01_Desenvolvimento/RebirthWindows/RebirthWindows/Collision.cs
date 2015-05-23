@@ -3,7 +3,7 @@ using System;
 namespace Rebirth{
 	public class Collision{
 
-        private const float contactError = 1E-4f;
+        //private const float contactError = 1E-4f;
 
 		public GameObject a, b;
 		public CollisionDistance cd;
@@ -43,27 +43,25 @@ namespace Rebirth{
         }
 
         public void treatCollision(){
-            if (a is MoveableObject){
-                if (b is MoveableObject){
-                    treatCollision(a as MoveableObject,b as MoveableObject,cd);
-                }
-                else treatCollision(a as MoveableObject, b, cd);
+            if (b is MoveableObject){
+                treatCollision(a as MoveableObject,b as MoveableObject,cd);
             }
+            else treatCollision(a as MoveableObject, b, cd);
         }
 
 		private void treatCollision(MoveableObject m, GameObject g, CollisionDistance cd){
             push(m, cd);
-            if (cd.direction == CollisionDistance.CD_Direction.DOWN && cd.length <= contactError){
+            if (cd.direction == CollisionDistance.CD_Direction.DOWN){
                 m.setGroundedState(true);
             }
 		}
 
         private void treatCollision(MoveableObject p, MoveableObject m, CollisionDistance cd){
-            if (p.speed.Length() == 0){
+            if (MathUtils.FLOAT_EQUALS(p.speed.Length(), 0)){
                 push(m, cd.reverse());
             }
             else {
-                if (m.speed.Length() == 0){
+                if (MathUtils.FLOAT_EQUALS(m.speed.Length(), 0)){
                     push(p,cd);
                 }
                 else {
@@ -72,9 +70,9 @@ namespace Rebirth{
                     push(m,cd.reverse());
                 }
             }
-            if (cd.direction == CollisionDistance.CD_Direction.UP && cd.length <= contactError){
+            if (cd.direction == CollisionDistance.CD_Direction.UP){
                 m.setGroundedState(true);
-            } else if (cd.direction == CollisionDistance.CD_Direction.DOWN && cd.length <= contactError){
+            } else if (cd.direction == CollisionDistance.CD_Direction.DOWN){
                 p.setGroundedState(true);
             }
         }

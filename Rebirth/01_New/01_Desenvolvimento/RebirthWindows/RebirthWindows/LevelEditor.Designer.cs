@@ -63,6 +63,7 @@ namespace Rebirth {
             this.gameBox.TabIndex = 0;
             this.gameBox.TabStop = false;
             this.gameBox.Click += new System.EventHandler(this.gameBox_Click);
+            this.gameBox.DoubleClick += new System.EventHandler(this.gameBox_DoubleClick);
             this.gameBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gameBox_MouseDown);
             this.gameBox.MouseEnter += new System.EventHandler(this.gameBox_MouseEnter);
             this.gameBox.MouseLeave += new System.EventHandler(this.gameBox_MouseLeave);
