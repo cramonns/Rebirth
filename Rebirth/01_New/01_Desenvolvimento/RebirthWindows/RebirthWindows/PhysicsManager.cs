@@ -32,7 +32,6 @@ namespace Rebirth{
 			List<GameObject> candidates = new List<GameObject>();
 
 			foreach (MoveableObject g in simulatedObjects) {
-                //bool grounded = false;
 				g.setGroundedState(false);
 				collisionTree.remove(g);
 				candidates.Clear();
@@ -72,6 +71,7 @@ namespace Rebirth{
             if (reload){
                 simulatedObjects.Clear();
                 simulatedObjects.Add(p);
+                simulatedObjects.Add(p.standingChecker);
             }
             
             RectangleF simulatedZone;

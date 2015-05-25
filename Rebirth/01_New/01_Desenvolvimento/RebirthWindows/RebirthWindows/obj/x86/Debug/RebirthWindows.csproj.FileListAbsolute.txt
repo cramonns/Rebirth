@@ -69,3 +69,6 @@ D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWind
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Debug\Content\Texture\Container.jpg
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Debug\Content\Texture\SelectedContainer.jpg
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Debug\Content\Texture\White_square.png
+D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Debug\Content\Texture\Background.jpg
+D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Debug\Content\Texture\Bowling_grass_pxr128.tif
+D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Debug\Content\Texture\Shale_rock_pxr128.tif

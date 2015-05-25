@@ -41,7 +41,7 @@ namespace Rebirth{
 		float jumpStartPos;
         public bool allowStanding;
 
-        Attachment standingChecker;
+        public Attachment standingChecker;
 
 		public Player(){
 			this.usePhysics = true;
@@ -50,59 +50,126 @@ namespace Rebirth{
 
 			boundingBox = new RectangleF (new Vector2 (0, 100 / 60f), CHAR_WIDTH, CHAR_HEIGHT);
 
-			createDefaultBounds();
-
             textureId = TextureManager.TextureID.player;
 
-            standingChecker = new Attachment(LogicalObject.Treatment.standingCheck, this);
+            standingChecker = new Attachment(LogicalObject.Treatment.standingCheck, this, 0, CHAR_HEIGHT*0.1f, CHAR_WIDTH, CHAR_HEIGHT*0.9f);
 
 		}
+
+        private void startJump(){
+            jumpStartPos = boundingBox.y;
+			boundingBox.y += JUMP_IMPULSE;
+	        speed.Y += JUMP_ACCLERATION;
+			state = playerStates.JUMPING;
+			setGroundedState (false);
+			if (movingSpeed != 0) jumping_direction = direction;
+			else jumping_direction = 'n';
+        }
 
 		private void startFall(){
 			state = playerStates.FALLING;
 			ControllerManager.TriggerJumping = false;
+            if (speed.Y > 0) speed.Y = 0;
 		}
 
 		public override void Update(GameTime gameTime){
 			//updateBounds();
+            float acceleration = MOVING_ACCELERATION;
+            float topSpeed = MOVING_TOP_SPEED;
 
-            if (state == playerStates.FLOATING) state = playerStates.FALLING;
+            //Update Player State
+            switch (state){
+                case playerStates.MOVING:
+                    goto case playerStates.WAITING;
+                case playerStates.WAITING:
+                    if (!grounded){
+                        startFall();
+                        acceleration = JUMP_MOVING_ACCELERATION;
+                    }
+                    else {
+                        if (ControllerManager.TriggerDown){
+                            state = playerStates.DUCKING;
+                        } else if (ControllerManager.TriggerJumping){
+                            startJump();
+                            acceleration = JUMP_MOVING_ACCELERATION;
+                        }
+                    }
+                    break;
+                case playerStates.JUMPING:
+                    if (boundingBox.y - jumpStartPos >= JUMP_TOP_HIGH || !ControllerManager.TriggerJumping) {
+						startFall();
+					} else {
+                        if (speed.Y > JUMP_TOP_HIGH/2) {
+						    speed.Y -= JUMP_ACCLERATION/2;
+					    } else speed.Y += JUMP_ACCLERATION;
+					    if (speed.Y > JUMP_TOP_SPEED) {
+						    speed.Y = JUMP_TOP_SPEED;
+					    } else if (speed.Y > JUMP_TOP_SPEED/2){
+						    speed.Y -= JUMP_ACCLERATION / 2;
+					    }
+                        break;
+                    }
+                    goto case playerStates.FALLING;
+                case playerStates.FALLING:
+                    goto case playerStates.FLOATING;
+                case playerStates.FLOATING:
+                    if (ControllerManager.TriggerFloating){
+                        state = playerStates.FLOATING;
+                        if (speed.Y < -FLOATING_MAX_FALLING_SPEED) speed.Y = -FLOATING_MAX_FALLING_SPEED;
+                    }
+                    else {
+                        state = playerStates.FALLING;                        
+                    }
+                    if (grounded) state = playerStates.WAITING;
+                    else acceleration = JUMP_MOVING_ACCELERATION;
+                    break;
+                case playerStates.CROUCHING:
+                    goto case playerStates.DUCKING;
+                case playerStates.DUCKING:
+                    if (!ControllerManager.TriggerDown && allowStanding){
+                        state = playerStates.WAITING;
+                        goto case playerStates.WAITING;
+                    }
+                    else if (!grounded){
+                        startFall();
+                        acceleration = JUMP_MOVING_ACCELERATION;
+                    }
+                    break;
+            }
 
 			//Movement
 			if (ControllerManager.direction == TriggerDirection.Right) {
+                movingSpeed += acceleration;
 				direction = 'r';
 				if (state == playerStates.JUMPING) {
-					movingSpeed += JUMP_MOVING_ACCELERATION;
-					if (jumping_direction == 'l' && movingSpeed > 0) {
-						startFall();
-					}
+					if (jumping_direction == 'l' && movingSpeed > 0) startFall();
 				}
-				else if (state == playerStates.FALLING) {
-					movingSpeed += JUMP_MOVING_ACCELERATION;
-				}
-				else {
-                    movingSpeed += MOVING_ACCELERATION;
+				else if (state == playerStates.WAITING){
                     state = playerStates.MOVING;
+                } 
+                else if (state == playerStates.DUCKING){
+                    state = playerStates.CROUCHING;
+                    topSpeed = CROUCHING_TOP_SPEED;
                 }
-				if (movingSpeed > MOVING_TOP_SPEED)
-					movingSpeed = MOVING_TOP_SPEED;
+				if (movingSpeed > topSpeed)
+					movingSpeed = topSpeed;
 			} else if (ControllerManager.direction == TriggerDirection.Left) {
-				direction = 'l';
+				movingSpeed -= acceleration;
+                direction = 'l';
 				if (state == playerStates.JUMPING) {
-					movingSpeed -= JUMP_MOVING_ACCELERATION;
 					if (jumping_direction == 'r' && movingSpeed < 0) startFall(); 
 				}
-				else if (state == playerStates.FALLING) {
-					movingSpeed -= JUMP_MOVING_ACCELERATION;
+				else if (state == playerStates.WAITING) {
+					state = playerStates.MOVING;
 				}
-				else {
-                    movingSpeed -= MOVING_ACCELERATION;
-                    state = playerStates.MOVING;
+				else if (state == playerStates.DUCKING){
+                    state = playerStates.CROUCHING;
+                    topSpeed = CROUCHING_TOP_SPEED;
                 }
-				if (movingSpeed < -MOVING_TOP_SPEED)
-					movingSpeed = -MOVING_TOP_SPEED;
+				if (movingSpeed < -topSpeed) movingSpeed = -topSpeed;
 			}
 			
+            /*
             //Crouching
 		    if (ControllerManager.TriggerDown){
                 if (grounded){
@@ -150,6 +217,7 @@ namespace Rebirth{
                     if (speed.Y < -FLOATING_MAX_FALLING_SPEED) speed.Y = -FLOATING_MAX_FALLING_SPEED;
                 }
             }
+            */
 
             if (state == playerStates.DUCKING || state == playerStates.CROUCHING){
                 boundingBox.height = CHAR_HEIGHT*0.6f;
@@ -158,6 +226,8 @@ namespace Rebirth{
                 boundingBox.height = CHAR_HEIGHT;
                 boundingBox.width = CHAR_WIDTH;
             }
+
+            allowStanding = true;
 
 		}
 
@@ -177,14 +247,14 @@ namespace Rebirth{
 			}
 		}
 
-		public override void setGroundedState(bool newState){
+		/*public override void setGroundedState(bool newState){
 			base.setGroundedState (newState);
 			if (newState) {
                 if (this.state != playerStates.DUCKING && this.state != playerStates.CROUCHING)
                     this.state = playerStates.WAITING;
             }
 			else if (this.state != playerStates.JUMPING) startFall();
-		}
+		}*/
 
 		public override void collide(GameObject b, CollisionDistance cd){
             switch (cd.direction){

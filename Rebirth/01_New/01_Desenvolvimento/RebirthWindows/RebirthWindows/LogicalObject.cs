@@ -41,5 +41,11 @@ namespace Rebirth {
         private void Default(GameObject collider, CollisionDistance cd){
         }
 
+        public override void Load() {
+        }
+
+        public override void unLoad() {
+        }
+
     }
 }

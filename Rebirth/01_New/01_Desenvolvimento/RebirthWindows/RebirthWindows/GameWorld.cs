@@ -66,6 +66,8 @@ namespace Rebirth {
 
 		public override void Draw(GameTime gameTime){
             
+            if (!editorMode) sb.Draw(TextureManager.getTexture(TextureManager.TextureID.Background), new Rectangle(0,0,1280,720), Color.White);
+
             if (scenes[preloadAmount-1] != null){
                 if (!(scenes[preloadAmount-1].Right < DisplayManager.screenShift.X)){
                     scenes[preloadAmount-1].Draw(sb, gameTime);

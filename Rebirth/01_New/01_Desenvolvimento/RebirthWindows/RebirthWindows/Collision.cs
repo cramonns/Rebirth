@@ -43,10 +43,13 @@ namespace Rebirth{
         }
 
         public void treatCollision(){
+            if (a is LogicalObject || b is LogicalObject){
+                return;
+            }
             if (b is MoveableObject){
                 treatCollision(a as MoveableObject,b as MoveableObject,cd);
             }
-            else treatCollision(a as MoveableObject, b, cd);
+            else treatCollision(a as MoveableObject, b, cd);    
         }
 
 		private void treatCollision(MoveableObject m, GameObject g, CollisionDistance cd){
@@ -75,6 +78,10 @@ namespace Rebirth{
             } else if (cd.direction == CollisionDistance.CD_Direction.DOWN){
                 p.setGroundedState(true);
             }
+        }
+
+        private void treatCollision(LogicalObject l, GameObject g, CollisionDistance cd){
+            
         }
 	}
 }

@@ -14,6 +14,7 @@ namespace Rebirth {
         int previousScene = -1;
         int nextScene = -1;
         string name;
+        LinkedList<TextureHolder> textureHolders;
         
         public LinkedList<GameObject> objects;
 
@@ -72,6 +73,7 @@ namespace Rebirth {
             shapeBox = sb;
             this.id = id;
             name = "Container_"+id.ToString();
+            textureHolders = new LinkedList<TextureHolder>();
         }
 
         public SceneContainer(RectangleF sb, int id, int prevScene):this(sb, id){
@@ -88,7 +90,9 @@ namespace Rebirth {
 
         public void unLoad(){
             foreach (GameObject g in objects) g.unLoad();
+            foreach (TextureHolder t in textureHolders) t.unLoad();
             objects.Clear();
+            textureHolders.Clear();
         }
 
         public void extendWidth(float extension){

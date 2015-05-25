@@ -149,7 +149,10 @@ namespace Rebirth {
 
         private void gameBox_Click(object sender, EventArgs e) {
             gameBox.Focus();
-            
+            GameWorld gameWorld = gameEntry.getWorld();
+            if (gameWorld.insertPermit){
+                gameWorld.createObject((Enumerations.ObjectTypes)comboBoxObjectList.SelectedIndex);
+            }
         }
 
         private void gameBox_MouseDown(object sender, MouseEventArgs e) {
@@ -192,7 +195,7 @@ namespace Rebirth {
         }
 
         private void gameBox_DoubleClick(object sender, EventArgs e) {
-            GameWorld gameWorld = gameEntry.getWorld();
+            //GameWorld gameWorld = gameEntry.getWorld();
             int index = tabControlContainer.SelectedIndex;
             if (index == 0){
                 int id = gameEditor.containerManager.positionID(MouseManager.mousePosition);
@@ -203,9 +206,6 @@ namespace Rebirth {
                     }
                     else this.tabControlContainer.SelectedIndex = tab;
                 }
-            }
-            if (gameWorld.insertPermit){
-                gameWorld.createObject((Enumerations.ObjectTypes)comboBoxObjectList.SelectedIndex);
             }
         }
         

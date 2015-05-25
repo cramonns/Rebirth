@@ -16,14 +16,10 @@ namespace Rebirth{
 			WESTERN
 		}
 
-		//public Vector2 position;
-        [NonSerialized]
-		public bool loaded;
 		public bool isFixed;
 		protected RectangleF boundingBox;
         public TextureManager.TextureID textureId;
-        [NonSerialized]
-        public List<Collider> colliders;
+        protected LinkedList<Attachment> attachments;
 
         [NonSerialized]
 		protected Texture2D texture;
@@ -51,11 +47,16 @@ namespace Rebirth{
             get {return boundingBox.y;}
             set {boundingBox.y = value;}
         }
+        public LinkedList<Attachment> Attachments{
+            get {return attachments;}
+        }
+
         
 		public GameObject(){
-			isFixed = false;
+			isFixed = true;
             textureId = TextureManager.TextureID.ground;
             defaultValues();
+            attachments = new LinkedList<Attachment>();
 		}
 
 		public abstract void Update(GameTime gameTime);
@@ -66,7 +67,7 @@ namespace Rebirth{
         }
 
 
-		protected void createDefaultBounds(){
+		/*protected void createDefaultBounds(){
 			RectangleF upper, lower, easter, western;
 
 			upper = new RectangleF(0f, boundingBox.height , boundingBox.width, 0.1f);
@@ -79,7 +80,7 @@ namespace Rebirth{
 			colliders.Add(new Collider(easter, this));
 			colliders.Add(new Collider(western, this));
 
-		}
+		}*/
 
 		public virtual bool isGrounded(){
 			return true;
@@ -91,17 +92,13 @@ namespace Rebirth{
 
         public virtual void Load(){
             texture = TextureManager.load(textureId);
-            loaded = true;
         }
 
         public virtual void defaultValues(){
-            loaded = false;
-			colliders = new List<Collider>();
         }
 
-        public void unLoad(){
+        public virtual void unLoad(){
             TextureManager.unLoad(textureId);
-            loaded = false;
         }
 	}
 }

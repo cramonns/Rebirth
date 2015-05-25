@@ -14,8 +14,6 @@ namespace Rebirth{
 
 		public Box(Vector2 position){
 			usePhysics = true;
-			loaded = false;
-			colliders = new List<Collider>();
 			isFixed = false;
 			speed = new Vector2 (0f, 0f);
 
@@ -24,8 +22,6 @@ namespace Rebirth{
             if (position == null)
 			    boundingBox = new RectangleF(new Vector2 (10f, 10f), DefaultWidth, DefaultHeight);
             else boundingBox = new RectangleF(position, DefaultWidth, DefaultHeight);
-
-			createDefaultBounds();
 		}
 
 		public override void Update(GameTime gameTime){

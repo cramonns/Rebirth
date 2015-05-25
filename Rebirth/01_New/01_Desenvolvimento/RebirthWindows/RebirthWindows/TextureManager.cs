@@ -13,7 +13,9 @@ namespace Rebirth {
             logo42bits,
             container,
             selectedContainer,
-            white
+            white,
+            Background,
+            grass
         }
 
         private static ContentManager Content;
@@ -38,10 +40,10 @@ namespace Rebirth {
                         textures[(int)id] = Content.Load<Texture2D>("Texture/red");
                         break;
                     case TextureID.ground:
-                        textures[(int)id] = Content.Load<Texture2D>("Texture/ground");
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/Bowling_grass_pxr128.tif");
                         break;
                     case TextureID.box:
-                        textures[(int)id] = Content.Load<Texture2D>("Texture/blackSquare");
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/Shale_rock_pxr128.tif");
                         break;
                     case TextureID.startButton:
                         textures[(int)id] = Content.Load<Texture2D>("Texture/startButton");
@@ -57,7 +59,13 @@ namespace Rebirth {
                         break;          
                     case TextureID.white:
                         textures[(int)id] = Content.Load<Texture2D>("Texture/White_square");
-                        break;  
+                        break; 
+                    case TextureID.Background:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/Background");
+                        break; 
+                    case TextureID.grass:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/Bowling_grass_pxr128");
+                        break; 
                 }
             }
             texturesCount[(int)id]++;

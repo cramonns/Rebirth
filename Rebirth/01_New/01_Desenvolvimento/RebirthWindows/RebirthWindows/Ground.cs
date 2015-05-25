@@ -12,14 +12,11 @@ namespace Rebirth{
         public const float DefaultHeight = 50/60f;
 
 		public Ground(Vector2 position){
-			loaded = false;
-
             if (position == null)
 			    boundingBox = new RectangleF(new Vector2 (0f, 0f), DefaultWidth, DefaultHeight);
             else boundingBox = new RectangleF(position, DefaultWidth, DefaultHeight);
 
             textureId = TextureManager.TextureID.ground;
-			createDefaultBounds();
 
 		}
 
