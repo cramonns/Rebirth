@@ -23,7 +23,6 @@ namespace Rebirth {
                     handler = Default;
                     break;
             }
-            
         }
 
         public override void Draw(SpriteBatch sb, GameTime gameTime) {

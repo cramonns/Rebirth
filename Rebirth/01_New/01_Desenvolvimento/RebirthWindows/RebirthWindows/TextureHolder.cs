@@ -8,7 +8,7 @@ namespace Rebirth {
         Texture2D texture;
 
         public TextureHolder(TextureManager.TextureID id){
-            this.id  = id;
+            this.id = id;
             texture = TextureManager.load(id);
         }
 

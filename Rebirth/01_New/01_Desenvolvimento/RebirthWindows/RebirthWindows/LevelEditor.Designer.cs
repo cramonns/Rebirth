@@ -44,12 +44,17 @@ namespace Rebirth {
             this.tabControlContainer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBoxTest.SuspendLayout();
             this.groupBoxObjects.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControlContainer.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gameBox
@@ -75,6 +80,7 @@ namespace Rebirth {
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.groupBoxTest);
             this.panel1.Controls.Add(this.groupBoxObjects);
             this.panel1.Controls.Add(this.groupBoxContainer);
@@ -87,9 +93,9 @@ namespace Rebirth {
             // groupBoxTest
             // 
             this.groupBoxTest.Controls.Add(this.buttonPlay);
-            this.groupBoxTest.Location = new System.Drawing.Point(9, 175);
+            this.groupBoxTest.Location = new System.Drawing.Point(3, 175);
             this.groupBoxTest.Name = "groupBoxTest";
-            this.groupBoxTest.Size = new System.Drawing.Size(178, 68);
+            this.groupBoxTest.Size = new System.Drawing.Size(184, 68);
             this.groupBoxTest.TabIndex = 2;
             this.groupBoxTest.TabStop = false;
             this.groupBoxTest.Text = "Test";
@@ -112,9 +118,9 @@ namespace Rebirth {
             this.groupBoxObjects.Controls.Add(this.buttonInsertObject);
             this.groupBoxObjects.Controls.Add(this.labelSelectObject);
             this.groupBoxObjects.Controls.Add(this.comboBoxObjectList);
-            this.groupBoxObjects.Location = new System.Drawing.Point(3, 249);
+            this.groupBoxObjects.Location = new System.Drawing.Point(3, 245);
             this.groupBoxObjects.Name = "groupBoxObjects";
-            this.groupBoxObjects.Size = new System.Drawing.Size(184, 306);
+            this.groupBoxObjects.Size = new System.Drawing.Size(184, 114);
             this.groupBoxObjects.TabIndex = 2;
             this.groupBoxObjects.TabStop = false;
             this.groupBoxObjects.Text = "Objects";
@@ -253,6 +259,46 @@ namespace Rebirth {
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Location = new System.Drawing.Point(3, 361);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(184, 97);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Object";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(9, 24);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(51, 17);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Fixed";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(6, 64);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(172, 21);
+            this.comboBox1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Texture:";
+            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,6 +324,8 @@ namespace Rebirth {
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControlContainer.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -303,5 +351,9 @@ namespace Rebirth {
         private System.Windows.Forms.ToolStripMenuItem containerToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

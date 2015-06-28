@@ -122,7 +122,7 @@ namespace Rebirth{
             else
                 LoadManager.LoadContainerManager();
 
-            TextureManager.load(TextureManager.TextureID.Background);
+            //TextureManager.load(TextureManager.TextureID.Background);
 		}
 
 		/// <summary>
