@@ -7,6 +7,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 namespace Rebirth {
+
+#if EDITOR
     public class Editor{
 
         ContainerManager cm;
@@ -28,6 +30,7 @@ namespace Rebirth {
         public SceneContainer newContainer(){
             SceneContainer sc = new SceneContainer(new RectangleF(cm.newPosition(), 40, 20), cm.lastContainerID+1);
             cm.addContainer(sc);
+            cm.LoadIdIndexes();
             sc.save();
             cm.saveContainerManager();
             return sc;
@@ -61,4 +64,5 @@ namespace Rebirth {
         }
 
     }
+#endif
 }

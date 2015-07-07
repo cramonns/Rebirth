@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if EDITOR
+using System;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
@@ -17,3 +18,4 @@ namespace Rebirth {
 
     }
 }
+#endif

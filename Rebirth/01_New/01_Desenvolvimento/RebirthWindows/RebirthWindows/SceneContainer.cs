@@ -13,7 +13,6 @@ namespace Rebirth {
         RectangleF shapeBox;
         int previousScene = -1;
         int nextScene = -1;
-        string name;
         LinkedList<TextureHolder> textureHolders;
         
         public LinkedList<GameObject> objects;
@@ -43,10 +42,6 @@ namespace Rebirth {
             get {return shapeBox.height;}
             set {shapeBox.height = value;}
         }
-        public string Name{
-            get {return name;}
-            set {name = value;}
-        }
         public int PreviousScene{
             set {previousScene = value;}
             get {return previousScene;}
@@ -72,7 +67,6 @@ namespace Rebirth {
             objects = new LinkedList<GameObject>();            
             shapeBox = sb;
             this.id = id;
-            name = "Container_"+id.ToString();
             textureHolders = new LinkedList<TextureHolder>();
         }
 

@@ -17,12 +17,6 @@ namespace Rebirth{
 		public GraphicsDeviceManager graphics;
 		public SpriteBatch spriteBatch;		
 		GameScreen[] screens;
-        
-        Control gameForm;
-        IntPtr drawingSurface;
-        Form parentForm;
-        PictureBox pictureBox;
-        bool editor = false;
 
         public enum ScreenID{
             intro,
@@ -31,19 +25,15 @@ namespace Rebirth{
         }
 
         public static ScreenID currentScreen;
+
+#if EDITOR
+        Control gameForm;
+        IntPtr drawingSurface;
+        Form parentForm;
+        PictureBox pictureBox;
+        bool editor = false;
+ 
         public static bool editorMode;
-
-		public Game1(){
-			//this.Content = new Microsoft.Xna.Framework.Content.ContentManager(null, "Content");
-			Content.RootDirectory = "Content";	            
-			DisplayManager.initialize(this);
-            screens = new GameScreen[Enum.GetNames(typeof(ScreenID)).Length];
-            currentScreen = ScreenID.intro;
-
-            //create the content managers
-            TextureManager.initialize(Content);
-            VideoManager.initialize(Content);
-		}
 
         private void graphics_PreparingDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e){
             // Finally attach game1's draw ability to the picture box in winforms.
@@ -81,6 +71,19 @@ namespace Rebirth{
             if (gameForm.Visible == true)
                 gameForm.Visible = false;
         }
+#endif
+
+        public Game1(){
+			//this.Content = new Microsoft.Xna.Framework.Content.ContentManager(null, "Content");
+			Content.RootDirectory = "Content";	            
+			DisplayManager.initialize(this);
+            screens = new GameScreen[Enum.GetNames(typeof(ScreenID)).Length];
+            currentScreen = ScreenID.intro;
+
+            //create the content managers
+            TextureManager.initialize(Content);
+            VideoManager.initialize(Content);
+		}
 
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
@@ -114,14 +117,14 @@ namespace Rebirth{
             for (int i = 0; i < totalScreens; i++)
 			    screens[i].LoadScreen();
 
-            //editor
+#if EDITOR
             if (editor) {
                 (screens[(int)ScreenID.world] as GameWorld).editMode();
                 (parentForm as LevelEditor).startEditor();
             }
             else
                 LoadManager.LoadContainerManager();
-
+#endif
             //TextureManager.load(TextureManager.TextureID.Background);
 		}
 

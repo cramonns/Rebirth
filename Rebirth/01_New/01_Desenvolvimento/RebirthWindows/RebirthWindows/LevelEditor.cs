@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if EDITOR
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -77,7 +79,7 @@ namespace Rebirth {
         }
 
         public void addSceneTab(SceneContainer c){
-            tabControlContainer.TabPages.Add(c.Name);
+            tabControlContainer.TabPages.Add(gameEditor.containerManager.getName(c.ID));
             gameEditor.addContainerToNextTab(c.ID);
             tabControlContainer.SelectedIndex = tabControlContainer.TabCount - 1;
             gameEntry.getWorld().loadScene(c);
@@ -211,3 +213,4 @@ namespace Rebirth {
         
     }
 }
+#endif

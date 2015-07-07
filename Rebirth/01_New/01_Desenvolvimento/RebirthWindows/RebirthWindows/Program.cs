@@ -15,7 +15,7 @@ namespace Rebirth{
         }
 
         static void callKiller(){
-             string target = "killer.exe";
+            string target = "killer.exe";
             target = Path.Combine(System.IO.Directory.GetCurrentDirectory(),target);
             try {
                 Process.Start(target);
@@ -30,6 +30,8 @@ namespace Rebirth{
         [STAThread]
         static void Main(string[] args){
 
+
+#if EDITOR
             if (args.Length != 0){
                 if (args.Length > 1) printError();
                 else {
@@ -52,9 +54,12 @@ namespace Rebirth{
                 }
             }
             else {
+#endif
                 game = new Game1();
                 game.Run();
+#if EDITOR
             }
+#endif
         }
     }
 }

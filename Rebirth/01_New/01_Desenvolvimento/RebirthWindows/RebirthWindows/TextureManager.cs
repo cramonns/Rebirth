@@ -15,7 +15,8 @@ namespace Rebirth {
             selectedContainer,
             white,
             Background,
-            grass
+            grass,
+            cyan
         }
 
         private static ContentManager Content;
@@ -65,6 +66,9 @@ namespace Rebirth {
                         break; 
                     case TextureID.grass:
                         textures[(int)id] = Content.Load<Texture2D>("Texture/Bowling_grass_pxr128");
+                        break; 
+                    case TextureID.cyan:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/cyan");
                         break; 
                 }
             }

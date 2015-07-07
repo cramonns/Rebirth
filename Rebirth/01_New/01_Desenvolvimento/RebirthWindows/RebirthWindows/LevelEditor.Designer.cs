@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if EDITOR
+using System;
 namespace Rebirth {
     partial class LevelEditor {
         /// <summary>
@@ -27,6 +28,10 @@ namespace Rebirth {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelEditor));
             this.gameBox = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBoxTest = new System.Windows.Forms.GroupBox();
             this.buttonPlay = new System.Windows.Forms.Button();
             this.groupBoxObjects = new System.Windows.Forms.GroupBox();
@@ -34,27 +39,23 @@ namespace Rebirth {
             this.labelSelectObject = new System.Windows.Forms.Label();
             this.comboBoxObjectList = new System.Windows.Forms.ComboBox();
             this.groupBoxContainer = new System.Windows.Forms.GroupBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.tabControlContainer = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.containerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.containerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControlContainer = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBoxTest.SuspendLayout();
             this.groupBoxObjects.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.tabControlContainer.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gameBox
@@ -90,6 +91,46 @@ namespace Rebirth {
             this.panel1.Size = new System.Drawing.Size(190, 558);
             this.panel1.TabIndex = 1;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Location = new System.Drawing.Point(3, 369);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(184, 97);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Object";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Texture:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(6, 64);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(172, 21);
+            this.comboBox1.TabIndex = 1;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(9, 24);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(51, 17);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Fixed";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // groupBoxTest
             // 
             this.groupBoxTest.Controls.Add(this.buttonPlay);
@@ -118,7 +159,7 @@ namespace Rebirth {
             this.groupBoxObjects.Controls.Add(this.buttonInsertObject);
             this.groupBoxObjects.Controls.Add(this.labelSelectObject);
             this.groupBoxObjects.Controls.Add(this.comboBoxObjectList);
-            this.groupBoxObjects.Location = new System.Drawing.Point(3, 245);
+            this.groupBoxObjects.Location = new System.Drawing.Point(3, 249);
             this.groupBoxObjects.Name = "groupBoxObjects";
             this.groupBoxObjects.Size = new System.Drawing.Size(184, 114);
             this.groupBoxObjects.TabIndex = 2;
@@ -167,16 +208,39 @@ namespace Rebirth {
             this.groupBoxContainer.TabStop = false;
             this.groupBoxContainer.Text = "Container";
             // 
-            // menuStrip1
+            // tabControlContainer
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(190, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.tabControlContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControlContainer.Controls.Add(this.tabPage1);
+            this.tabControlContainer.Location = new System.Drawing.Point(197, 0);
+            this.tabControlContainer.Name = "tabControlContainer";
+            this.tabControlContainer.SelectedIndex = 0;
+            this.tabControlContainer.Size = new System.Drawing.Size(684, 26);
+            this.tabControlContainer.TabIndex = 2;
+            this.tabControlContainer.SelectedIndexChanged += new System.EventHandler(this.tabControlContainer_SelectedIndexChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(676, 0);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "ContainerView";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(883, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(26, 26);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "X";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // fileToolStripMenuItem
             // 
@@ -225,79 +289,16 @@ namespace Rebirth {
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // tabControlContainer
+            // menuStrip1
             // 
-            this.tabControlContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControlContainer.Controls.Add(this.tabPage1);
-            this.tabControlContainer.Location = new System.Drawing.Point(197, 0);
-            this.tabControlContainer.Name = "tabControlContainer";
-            this.tabControlContainer.SelectedIndex = 0;
-            this.tabControlContainer.Size = new System.Drawing.Size(684, 26);
-            this.tabControlContainer.TabIndex = 2;
-            this.tabControlContainer.SelectedIndexChanged += new System.EventHandler(this.tabControlContainer_SelectedIndexChanged);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(676, 0);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "ContainerView";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(883, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(26, 26);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "X";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Location = new System.Drawing.Point(3, 361);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(184, 97);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Object";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(9, 24);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(51, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Fixed";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(6, 64);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(172, 21);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Texture:";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(190, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // LevelEditor
             // 
@@ -318,14 +319,14 @@ namespace Rebirth {
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBoxTest.ResumeLayout(false);
             this.groupBoxObjects.ResumeLayout(false);
             this.groupBoxObjects.PerformLayout();
+            this.tabControlContainer.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tabControlContainer.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -334,10 +335,6 @@ namespace Rebirth {
 
         public System.Windows.Forms.PictureBox gameBox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem containerToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBoxObjects;
         private System.Windows.Forms.GroupBox groupBoxContainer;
         private System.Windows.Forms.TabControl tabControlContainer;
@@ -347,13 +344,18 @@ namespace Rebirth {
         private System.Windows.Forms.GroupBox groupBoxTest;
         private System.Windows.Forms.Button buttonPlay;
         private System.Windows.Forms.Button buttonInsertObject;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem containerToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem containerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem containerToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
+#endif

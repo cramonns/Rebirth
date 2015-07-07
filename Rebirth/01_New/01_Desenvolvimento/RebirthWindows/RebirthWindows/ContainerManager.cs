@@ -10,6 +10,7 @@ namespace Rebirth {
     [Serializable]
     struct ContainerProperties{
         public float width, height, y;
+        public string name;
         public int id;
     }
 
@@ -35,11 +36,12 @@ namespace Rebirth {
         }
 
         public void addContainer(SceneContainer sc){
-            ContainerProperties cp;
+            ContainerProperties cp = new ContainerProperties();
             cp.width = sc.Width;
             cp.height = sc.Height;
             cp.y = sc.Y;
             cp.id = sc.ID;
+            cp.name = "Container_"+sc.ID.ToString();
             sc.PreviousScene = lastContainerID;
             if (containers.Count == 0){
                 startPositionX = sc.X;
@@ -129,6 +131,11 @@ namespace Rebirth {
             for (int i = 0; i < containers.Count; i++){
                 IdIndexes[containers[i].id] = i;
             }
+        }
+
+        public string getName(int id){
+            int index = IdIndexes[id];
+            return containers[index].name;
         }
 
     }
