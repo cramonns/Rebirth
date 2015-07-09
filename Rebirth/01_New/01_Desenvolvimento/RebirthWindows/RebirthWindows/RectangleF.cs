@@ -143,6 +143,14 @@ namespace Rebirth{
 			return false;
 		}
 
+        public bool intersects(VertexR v){
+            return (v.x >= this.x && v.x <= this.x + this.width && v.y >= this.y && v.y <= this.y + this.height);
+        }
+
+        public bool intersects(Vector2 v){
+            return intersects(new VertexR(v.X, v.Y));
+        }
+
 		public CollisionDistance internalDistance(RectangleF r){
 			if ( MathUtils.FLOAT_EQUALS(y, r.y + r.height) ) {
 				return new CollisionDistance (CollisionDistance.CD_Direction.DOWN, 0);

@@ -20,7 +20,7 @@ namespace Rebirth {
                 scenes[i] = scenes[i+1];
             }
             if (scenes[i-1] != null){
-                count = scenes[i-1].NextScene;
+                count = scenes[i-1].nextScene;
                 if (count != -1) scenes[i] = Load(count);
             }
             else scenes[i] = null;
@@ -38,7 +38,7 @@ namespace Rebirth {
                 scenes[i] = scenes[i-1];
             }
             if (scenes[1] != null){
-                count = scenes[1].PreviousScene;
+                count = scenes[1].previousScene;
                 if (count != -1) scenes[0] = Load(count);
             }
             else scenes[0] = null;
@@ -51,24 +51,24 @@ namespace Rebirth {
             if (scenes[preloadAmount] == null){
                 updated = true;
                 scenes[preloadAmount] = Load(playerPosID);
-                for (int i = preloadAmount - 1, auxId = scenes[preloadAmount].PreviousScene; i >= 0 && auxId != -1; auxId = scenes[i].PreviousScene, i--){
+                for (int i = preloadAmount - 1, auxId = scenes[preloadAmount].previousScene; i >= 0 && auxId != -1; auxId = scenes[i].previousScene, i--){
                     scenes[i] = Load(auxId);
                 }
-                for (int i = preloadAmount + 1, auxId = scenes[preloadAmount].NextScene; i < preloadAmount*2+1 && auxId != -1; auxId = scenes[i].NextScene, i++){
+                for (int i = preloadAmount + 1, auxId = scenes[preloadAmount].nextScene; i < preloadAmount*2+1 && auxId != -1; auxId = scenes[i].nextScene, i++){
                     scenes[i] = Load(auxId);
                 }
             }
             else {
-                if (playerPosID > scenes[preloadAmount].ID){
+                if (playerPosID > scenes[preloadAmount].id){
                     updated = true;
-                    while (playerPosID > scenes[preloadAmount].ID){
+                    while (playerPosID > scenes[preloadAmount].id){
                         moveScenesLeft(scenes, preloadAmount);
                     }
                 }
                 else {
-                    if (playerPosID < scenes[preloadAmount].ID){
+                    if (playerPosID < scenes[preloadAmount].id){
                         updated = true;
-                        while (playerPosID < scenes[preloadAmount].ID){
+                        while (playerPosID < scenes[preloadAmount].id){
                             moveScenesRight(scenes, preloadAmount);
                         }
                     }

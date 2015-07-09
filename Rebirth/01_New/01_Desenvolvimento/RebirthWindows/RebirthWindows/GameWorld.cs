@@ -1,4 +1,7 @@
 ﻿using System;
+#if EDITOR
+using System.Collections.Generic;
+#endif
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,11 +16,13 @@ namespace Rebirth {
         private bool insertionMode = false;
         public bool insertPermit;
         private Enumerations.ObjectTypes insertionType;
+        public GameObject selectedObject = null;
+        public RectangleF boundingBoxBackup = new RectangleF(0,0,0,0);
 #endif
-        private bool prevFramePressed = false;
+        /*private bool prevFramePressed = false;
         private Vector2 mouseStartDragPos;
         private Vector2 worldStartDragPos;
-        private Vector2 mouseDragDisplacement;
+        private Vector2 mouseDragDisplacement;*/
 
         private int preloadAmount = 1;
         private SceneContainer[] scenes;
@@ -72,12 +77,24 @@ namespace Rebirth {
 		public override void Draw(GameTime gameTime){
             
             //if (!editorMode) sb.Draw(TextureManager.getTexture(TextureManager.TextureID.Background), new Rectangle(0,0,1280,720), Color.White);
+#if EDITOR
+            Color color = Color.LightGray * 0.5f;
+            Texture2D texture = TextureManager.load(TextureManager.TextureID.white);
+            RectangleF rectangle = new RectangleF(0,0,0,0);
+            List<GameObject> candidates = new List<GameObject>();
+#endif
+            SceneContainer currentScene = null;
 
             if (scenes[preloadAmount-1] != null){
-                if (!(scenes[preloadAmount-1].Right < DisplayManager.screenShift.X)){
-                    scenes[preloadAmount-1].Draw(sb, gameTime);
+                currentScene = scenes[preloadAmount-1];
+                if (!(currentScene.Right < DisplayManager.screenShift.X)){
+                    currentScene.Draw(sb, gameTime);
 #if EDITOR
-                    if (editorMode) scenes[preloadAmount-1].DrawBounds(sb, gameTime);
+                    if (editorMode) {
+                        currentScene.DrawBounds(sb, gameTime);
+                        rectangle.set(currentScene.Shape.Center, currentScene.Shape.width, currentScene.Shape.height);
+                        sb.Draw(texture, DisplayManager.scaleTexture(rectangle), color);
+                    }
 #endif
                 }
             }
@@ -88,20 +105,23 @@ namespace Rebirth {
 #endif
             }
             if (scenes[preloadAmount+1] != null){
-                if (!(scenes[preloadAmount+1].X > DisplayManager.Right)){
-                    scenes[preloadAmount+1].Draw(sb, gameTime);
+                currentScene = scenes[preloadAmount+1];
+                if (!(currentScene.X > DisplayManager.Right)){
+                    currentScene.Draw(sb, gameTime);
 #if EDITOR
-                    if (editorMode) scenes[preloadAmount+1].DrawBounds(sb, gameTime);
+                    if (editorMode) {
+                        currentScene.DrawBounds(sb, gameTime);
+                        rectangle.set(currentScene.Shape.Center, currentScene.Shape.width, currentScene.Shape.height);
+                        sb.Draw(texture, DisplayManager.scaleTexture(rectangle), color);
+                    }
 #endif
                 }
             }
             if (drawPlayer) player.Draw(sb, gameTime);
             #region EDITOR_DRAWING
 #if EDITOR
+            color = Color.White * 0.5f;
             if (insertionMode){
-                Color color = Color.White * 0.5f;
-                Texture2D texture = TextureManager.load(TextureManager.TextureID.white);
-                RectangleF rectangle = new RectangleF(0,0,0,0);
                 switch (insertionType){
                     case Enumerations.ObjectTypes.Box:
                         rectangle.set(MouseManager.mousePosition, Box.DefaultWidth, Box.DefaultHeight);
@@ -124,7 +144,6 @@ namespace Rebirth {
                     color = Color.White * 0.5f;
                     
                     foreach (GameObject o in scenes[preloadAmount].objects){
-                        
                         if (rectangle.intersects(o.BoundingBox)){
                             insertPermit = false;
                             color = Color.Red*0.5f;
@@ -135,6 +154,23 @@ namespace Rebirth {
                 else {
                     insertPermit = false;
                     color = Color.Red*0.5f;
+                }
+                sb.Draw(texture, DisplayManager.scaleTexture(rectangle), color);
+            }
+            if (selectedObject != null){
+                color = Color.White * 0.5f;
+                rectangle.set(selectedObject.Position, selectedObject.Width, selectedObject.Height);
+                rectangle.x += rectangle.width/2;
+                rectangle.y += rectangle.height/2;
+                if (selectedObject != null){
+                    candidates = scenes[preloadAmount].objectsTree.retrieve(candidates, selectedObject.getCollisionShape());
+                    foreach (GameObject g in candidates){
+                        if (g != selectedObject){
+                            if (g.getCollisionShape().intersects(selectedObject.getCollisionShape())) {
+							    color = Color.Red * 0.5f;
+						    }
+                        }
+                    }
                 }
                 sb.Draw(texture, DisplayManager.scaleTexture(rectangle), color);
             }
@@ -152,6 +188,14 @@ namespace Rebirth {
 
         public void loadScene(SceneContainer sc){
             scenes[preloadAmount] = sc;
+            if (sc.previousScene == -1){
+                scenes[preloadAmount-1] = null;
+            }
+            else scenes[preloadAmount-1] = LoadManager.Load(sc.previousScene);
+            if (sc.nextScene == -1){
+                scenes[preloadAmount+1] = null;
+            }
+            else scenes[preloadAmount+1] = LoadManager.Load(sc.nextScene);
         }
 
         public void loadScene(int sceneId){
@@ -183,7 +227,7 @@ namespace Rebirth {
             insertionMode = false;
         }
 
-                private GameObject newObject(Enumerations.ObjectTypes objectType){
+        private GameObject newObject(Enumerations.ObjectTypes objectType){
             switch (objectType){
                 case Enumerations.ObjectTypes.Box:
                     return new Box(MouseManager.mousePosition - new Vector2(Box.DefaultWidth/2,Box.DefaultHeight/2));
@@ -203,11 +247,38 @@ namespace Rebirth {
             scenes[preloadAmount].save();
         }
 
+        public bool isInInsertMode(){
+            return insertionMode;
+        }
+
+        public GameObject objectAt(Vector2 mousePosition){
+            foreach (GameObject g in scenes[preloadAmount].objects){
+                if (g.BoundingBox.intersects(mousePosition)){
+                    return g;
+                }
+            }
+            return null;
+        }
+
+        public void transformSelectedObject(){
+            if (selectedObject == null) return;
+            List<GameObject> candidates = new List<GameObject>();
+            candidates = scenes[preloadAmount].objectsTree.retrieve(candidates, selectedObject.getCollisionShape());
+            foreach (GameObject g in candidates){
+                if (g != selectedObject){
+                    if (g.getCollisionShape().intersects(selectedObject.getCollisionShape())){
+						selectedObject.Position = boundingBoxBackup.Position;
+                        selectedObject.Width = boundingBoxBackup.width;
+                        selectedObject.Height = boundingBoxBackup.height;
+                        return;
+					}
+                }
+            }
+            boundingBoxBackup.set(selectedObject.BoundingBox.Center, selectedObject.Width, selectedObject.Height);
+        }
+
 #endif
 #endregion
-
-        
-
 
     }
 }

@@ -9,19 +9,20 @@ namespace Rebirth {
     [Serializable]
     public class SceneContainer {
         //class attributes
-        int id;
+        public int id;
+        public int previousScene = -1;
+        public int nextScene = -1;
         RectangleF shapeBox;
-        int previousScene = -1;
-        int nextScene = -1;
         LinkedList<TextureHolder> textureHolders;
-        
+       
         public LinkedList<GameObject> objects;
 
+#if EDITOR
+        [NonSerialized]
+        public QuadTree objectsTree;
+#endif
+
         //class properties
-        public int ID{
-            get{return id;}
-            set{id = value;}
-        }
         public float X{
             get {return shapeBox.x;}
             set {shapeBox.x = value;}
@@ -42,14 +43,6 @@ namespace Rebirth {
             get {return shapeBox.height;}
             set {shapeBox.height = value;}
         }
-        public int PreviousScene{
-            set {previousScene = value;}
-            get {return previousScene;}
-        }
-        public int NextScene{
-            get {return nextScene;}
-            set {nextScene = value;}
-        }
         public float Right{
             get {return shapeBox.x + shapeBox.width;}
             set {shapeBox.x = value - shapeBox.width;}
@@ -68,6 +61,9 @@ namespace Rebirth {
             shapeBox = sb;
             this.id = id;
             textureHolders = new LinkedList<TextureHolder>();
+#if EDITOR
+            objectsTree = new QuadTree(0,sb);
+#endif
         }
 
         public SceneContainer(RectangleF sb, int id, int prevScene):this(sb, id){
@@ -80,6 +76,9 @@ namespace Rebirth {
 
         public void add(GameObject o){
             objects.AddFirst(o);
+#if EDITOR
+            objectsTree.insert(o);
+#endif
         }
 
         public void unLoad(){
@@ -87,14 +86,9 @@ namespace Rebirth {
             foreach (TextureHolder t in textureHolders) t.unLoad();
             objects.Clear();
             textureHolders.Clear();
-        }
-
-        public void extendWidth(float extension){
-            shapeBox.width += extension;
-        }
-
-        public void extendHeight(float extension){
-            shapeBox.height += extension;
+#if EDITOR
+            if (objectsTree != null) objectsTree.clear();
+#endif
         }
 
         public RectangleF getHalfRightBounds(){
@@ -111,6 +105,8 @@ namespace Rebirth {
 			}
         }
 
+#if EDITOR
+
         public void DrawBounds(SpriteBatch sb, GameTime gameTime){
             Texture2D line = TextureManager.getTexture(TextureManager.TextureID.player);
             //leftLine
@@ -125,7 +121,7 @@ namespace Rebirth {
 
         public void save(){
             BinaryFormatter binFormat = new BinaryFormatter();
-            string fileName = "Lvl/" + ID.ToString() + ".scn";
+            string fileName = "Lvl/" + id.ToString() + ".scn";
             if (!Directory.Exists("Lvl")){
                 Directory.CreateDirectory("Lvl");
             }
@@ -133,6 +129,24 @@ namespace Rebirth {
                 binFormat.Serialize(fStream, this);
             }
         }
-        
+
+        public void remakeObjectsTree(){
+            if (objectsTree != null) objectsTree.clear();
+            objectsTree = new QuadTree(0, shapeBox);
+            foreach (GameObject g in objects) objectsTree.insert(g);
+        }
+
+        public void extendWidth(float extension){
+            shapeBox.width += extension;
+            remakeObjectsTree();
+        }
+
+        public void extendHeight(float extension){
+            shapeBox.height += extension;
+            remakeObjectsTree();
+        }
+
+#endif
+
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 namespace Rebirth {
     public static class Enumerations {
 
+#if EDITOR
         public enum ObjectTypes{
             Box,
             Ground,
@@ -13,5 +14,7 @@ namespace Rebirth {
             Trigger,
             TextureLoader
         }
+#endif
+
     }
 }

@@ -1,4 +1,7 @@
 using System;
+#if EDITOR
+using System.Windows.Forms;
+#endif
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -23,6 +26,11 @@ namespace Rebirth{
 
         [NonSerialized]
 		protected Texture2D texture;
+
+#if EDITOR
+        [NonSerialized]
+        Form propertiesForm;
+#endif
 
         public RectangleF BoundingBox{
             get {return boundingBox;}
@@ -100,6 +108,28 @@ namespace Rebirth{
         public virtual void unLoad(){
             TextureManager.unLoad(textureId);
         }
+
+
+#if EDITOR
+        public void extendRight(float extension){
+            Width += extension;
+        }
+
+        public void extendUp(float extension){
+            Height += extension;
+        }
+
+        public void extendLeft(float extension){
+            X -= extension;
+            Width += extension;
+        }
+
+        public void extendDown(float extension){
+            Y -= extension;
+            Height += extension;
+        }
+#endif
+
 	}
 }
 

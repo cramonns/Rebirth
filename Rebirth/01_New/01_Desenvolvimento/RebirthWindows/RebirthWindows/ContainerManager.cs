@@ -40,16 +40,16 @@ namespace Rebirth {
             cp.width = sc.Width;
             cp.height = sc.Height;
             cp.y = sc.Y;
-            cp.id = sc.ID;
-            cp.name = "Container_"+sc.ID.ToString();
-            sc.PreviousScene = lastContainerID;
+            cp.id = sc.id;
+            cp.name = "Container_"+sc.id.ToString();
+            sc.previousScene = lastContainerID;
             if (containers.Count == 0){
                 startPositionX = sc.X;
-                firstContainerID = sc.ID;
+                firstContainerID = sc.id;
             }
             else{
                 SceneContainer prevScene = LoadManager.Load(lastContainerID);
-                prevScene.NextScene = sc.ID;
+                prevScene.nextScene = sc.id;
                 prevScene.save();
             }
             containers.Add(cp);
@@ -70,7 +70,7 @@ namespace Rebirth {
         public void saveContainerManager(){
             BinaryFormatter binFormat = new BinaryFormatter();
             string path = "Lvl/Containers.info";
-            using ( Stream fStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None) ){
+            using (Stream fStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None) ){
                 binFormat.Serialize(fStream, this);
             }
         }

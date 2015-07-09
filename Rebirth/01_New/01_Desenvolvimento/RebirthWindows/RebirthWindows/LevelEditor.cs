@@ -1,5 +1,4 @@
 ﻿#if EDITOR
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,45 +22,16 @@ namespace Rebirth {
 
         Vector2 lastScreenShift;
         Vector2 lastMousePosition;
+        Vector2 mouseSelectedObjectOffset;
+        Vector2 mouseScreenShiftOffset;
+
         bool wasMouseClicked = false;
 
-        public LevelEditor() {
-            InitializeComponent();
-            InitializeExtra();
-        }
-
-        private void InitializeExtra(){
-            foreach (string s in Enum.GetNames(typeof(Enumerations.ObjectTypes))) this.comboBoxObjectList.Items.Add(s);
-            this.gameBox.MouseWheel += gameBox_MouseWheel;
-        }
-
-        private void Zoom(float delta){
-            /*if (DisplayManager.WorldWidth < delta/3){
-                Zoom(delta/3);
-            }
-            else {*/
-                DisplayManager.WorldWidth += delta;//*DisplayManager.WorldWidth/10f;
-                DisplayManager.screenShift -= new Vector2(delta/2);
-            //}
-        }
-
-        private void gameBox_MouseWheel(object sender, MouseEventArgs e){
-            Zoom(e.Delta);
-        }
-
-
-
-        public void startEditor(){
-            gameEditor = new Editor();
-            gameEntry.getWorld().loadScene(gameEditor.SceneManagerView);
-            adjustCamera(gameEditor.SceneManagerView);
-            DisplayManager.followPlayer = false;
-        }
-        
+        #region cameraSettings
         public void adjustCamera(SceneContainer sc){
             if (sc == gameEditor.SceneManagerView){
                 DisplayManager.screenShift.X = -50;
-                DisplayManager.screenShift.Y = -200;
+                DisplayManager.screenShift.Y = -100;
                 DisplayManager.WorldWidth = 300;
             }
             else {
@@ -78,14 +48,66 @@ namespace Rebirth {
             }
         }
 
-        public void addSceneTab(SceneContainer c){
-            tabControlContainer.TabPages.Add(gameEditor.containerManager.getName(c.ID));
-            gameEditor.addContainerToNextTab(c.ID);
-            tabControlContainer.SelectedIndex = tabControlContainer.TabCount - 1;
-            gameEntry.getWorld().loadScene(c);
-            gameEntry.loadCurrentScreen();
-            adjustCamera(c);
+        private void Zoom(float delta){
+            /*if (DisplayManager.WorldWidth < delta/3){
+                Zoom(delta/3);
+            }
+            else {*/
+                DisplayManager.WorldWidth += delta;//*DisplayManager.WorldWidth/10f;
+                DisplayManager.screenShift -= new Vector2(delta/2);
+            //}
         }
+
+        public void updateScreenShift(){
+            DisplayManager.screenShift = lastScreenShift - (MouseManager.mousePosition - lastMousePosition);
+        }
+        #endregion
+
+        #region Initialization
+        public LevelEditor() {
+            InitializeComponent();
+            InitializeExtra();
+        }
+
+        private void InitializeExtra(){
+            foreach (string s in Enum.GetNames(typeof(Enumerations.ObjectTypes))) this.comboBoxObjectList.Items.Add(s);
+            this.gameBox.MouseWheel += gameBox_MouseWheel;
+        }
+
+        public void startEditor(){
+            gameEditor = new Editor();
+            gameEntry.getWorld().loadScene(gameEditor.SceneManagerView);
+            adjustCamera(gameEditor.SceneManagerView);
+            DisplayManager.followPlayer = false;
+        }
+        #endregion
+
+        #region tabControls
+        public void addSceneTab(SceneContainer c){
+            tabControlContainer.TabPages.Add(gameEditor.containerManager.getName(c.id));
+            gameEditor.addContainerToNextTab(c.id);
+            tabControlContainer.SelectedIndex = tabControlContainer.TabCount - 1; //this line triggers SelectedIndexChanged event
+        }
+
+        private void tabControlContainer_SelectedIndexChanged(object sender, EventArgs e) {
+            int index = tabControlContainer.SelectedIndex;
+            if (lastTabIndex != 0){
+                gameEntry.getWorld().saveScene();
+            }
+            if (index == 0){
+                buttonInsertObject.Enabled = false;
+                gameEntry.getWorld().leaveInsertMode();
+                gameEntry.getWorld().loadScene(gameEditor.SceneManagerView);
+                adjustCamera(gameEditor.SceneManagerView);
+            } else {
+                buttonInsertObject.Enabled = true;
+                SceneContainer scene = LoadManager.Load(gameEditor.getContainerInTab(index));
+                scene.remakeObjectsTree();
+                gameEntry.getWorld().loadScene(scene);
+                adjustCamera(scene);
+            }
+        }
+        #endregion
 
         private void LevelEditor_Resize(object sender, EventArgs e) {
             
@@ -105,24 +127,6 @@ namespace Rebirth {
             editMode = !editMode;
         }
 
-        private void tabControlContainer_SelectedIndexChanged(object sender, EventArgs e) {
-            int index = tabControlContainer.SelectedIndex;
-            if (lastTabIndex != 0){
-                gameEntry.getWorld().saveScene();
-            }
-            if (index == 0){
-                buttonInsertObject.Enabled = false;
-                gameEntry.getWorld().leaveInsertMode();
-                gameEntry.getWorld().loadScene(gameEditor.SceneManagerView);
-                adjustCamera(gameEditor.SceneManagerView);
-            } else {
-                buttonInsertObject.Enabled = true;
-                SceneContainer scene = LoadManager.Load(gameEditor.getContainerInTab(index));
-                gameEntry.getWorld().loadScene(scene);
-                adjustCamera(scene);
-            }
-        }
-
         private void containerToolStripMenuItem1_Click(object sender, EventArgs e) {
             int index = tabControlContainer.SelectedIndex;
             if (index > 0){
@@ -132,43 +136,6 @@ namespace Rebirth {
 
         private void buttonInsertObject_Click(object sender, EventArgs e) {
             gameEntry.getWorld().insertMode((Enumerations.ObjectTypes)comboBoxObjectList.SelectedIndex);
-        }
-
-        private void gameBox_MouseEnter(object sender, EventArgs e) {
-            this.gameBox.Focus();
-            MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X - gameBox.Left, PictureBox.MousePosition.Y - gameBox.Top));
-        }
-
-        private void gameBox_MouseMove(object sender, MouseEventArgs e) {
-            MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X - gameBox.Left, PictureBox.MousePosition.Y - gameBox.Top));
-            if (wasMouseClicked) 
-                DisplayManager.screenShift = lastMousePosition - MouseManager.mousePosition + lastScreenShift;
-        }
-
-        private void gameBox_MouseLeave(object sender, EventArgs e) {
-            MouseManager.mousePosition = DisplayManager.screenShift - new Vector2(1000,1000);
-        }
-
-        private void gameBox_Click(object sender, EventArgs e) {
-            gameBox.Focus();
-            GameWorld gameWorld = gameEntry.getWorld();
-            if (gameWorld.insertPermit){
-                gameWorld.createObject((Enumerations.ObjectTypes)comboBoxObjectList.SelectedIndex);
-            }
-        }
-
-        private void gameBox_MouseDown(object sender, MouseEventArgs e) {
-            if (e.Button == MouseButtons.Left){
-                if (!wasMouseClicked){
-                    wasMouseClicked = true;
-                    lastMousePosition = MouseManager.mousePosition;
-                    lastScreenShift = DisplayManager.screenShift;
-                }
-            } else {
-                if (e.Button == MouseButtons.Right){
-                    gameEntry.getWorld().leaveInsertMode();
-                }
-            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -186,18 +153,21 @@ namespace Rebirth {
             }
         }
 
+        #region gameBoxEvents
+
         private void gameBox_Resize(object sender, EventArgs e) {
             
         }
 
         private void gameBox_MouseUp(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left){
+                gameEntry.getWorld().transformSelectedObject();
+                MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X - gameBox.Left, PictureBox.MousePosition.Y - gameBox.Top));
                 wasMouseClicked = false;
             }
         }
 
         private void gameBox_DoubleClick(object sender, EventArgs e) {
-            //GameWorld gameWorld = gameEntry.getWorld();
             int index = tabControlContainer.SelectedIndex;
             if (index == 0){
                 int id = gameEditor.containerManager.positionID(MouseManager.mousePosition);
@@ -210,7 +180,82 @@ namespace Rebirth {
                 }
             }
         }
+     
+        private void gameBox_MouseEnter(object sender, EventArgs e) {
+            this.gameBox.Focus();
+            MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X - gameBox.Left, PictureBox.MousePosition.Y - gameBox.Top));
+        }
+
+        private void gameBox_MouseMove(object sender, MouseEventArgs e) {
+            GameObject selectedObject = gameEntry.getWorld().selectedObject;
+            MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X - gameBox.Left, PictureBox.MousePosition.Y - gameBox.Top));
+            if (wasMouseClicked) {
+                if (selectedObject != null){
+                    selectedObject.Position = MouseManager.mousePosition - mouseSelectedObjectOffset;
+                }
+                else {
+                    updateScreenShift();
+                }
+            }
+            else if (selectedObject != null) {
+                if (selectedObject.BoundingBox.intersects(MouseManager.mousePosition)){
+                    gameBox.Cursor = Cursors.SizeAll;
+                }
+                else gameBox.Cursor = Cursors.Arrow;
+            }
+            else gameBox.Cursor = Cursors.Arrow;
+        }
+
+        private void gameBox_MouseLeave(object sender, EventArgs e) {
+            MouseManager.mousePosition = DisplayManager.screenShift - new Vector2(1000,1000);
+        }
+
+        private void gameBox_Click(object sender, EventArgs e) {
+            gameBox.Focus();
+            GameWorld gameWorld = gameEntry.getWorld();
+            RectangleF auxShape;
+            if (gameWorld.isInInsertMode()){
+                if (gameWorld.insertPermit){
+                    gameWorld.createObject((Enumerations.ObjectTypes)comboBoxObjectList.SelectedIndex);
+                }
+            }
+            else {
+                GameObject g = gameWorld.selectedObject;
+                gameWorld.selectedObject = gameWorld.objectAt(MouseManager.mousePosition);
+                if (gameWorld.selectedObject != null && g != gameWorld.selectedObject){
+                    auxShape = gameWorld.selectedObject.BoundingBox;
+                    gameWorld.boundingBoxBackup.set(auxShape.Center, auxShape.width, auxShape.height);
+                }
+            }
+        }
+
+        private void gameBox_MouseDown(object sender, MouseEventArgs e){
+            if (e.Button == MouseButtons.Left){
+                if (!wasMouseClicked){
+                    GameObject selectedObject = gameEntry.getWorld().selectedObject;
+                    wasMouseClicked = true;
+                    lastMousePosition = MouseManager.mousePosition;
+                    lastScreenShift = DisplayManager.screenShift;
+                    if (selectedObject != null && selectedObject.BoundingBox.intersects(MouseManager.mousePosition)){
+                        mouseSelectedObjectOffset = MouseManager.mousePosition - selectedObject.Position;
+                    }
+                    else {
+                        mouseScreenShiftOffset = MouseManager.mousePosition - DisplayManager.screenShift;
+                    }
+                }
+            } else {
+                if (e.Button == MouseButtons.Right){
+                    gameEntry.getWorld().leaveInsertMode();
+                }
+            }
+        }
         
+        private void gameBox_MouseWheel(object sender, MouseEventArgs e){
+            Zoom(e.Delta);
+        }
+
+        #endregion
+
     }
 }
 #endif

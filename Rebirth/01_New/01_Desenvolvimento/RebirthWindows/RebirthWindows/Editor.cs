@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if EDITOR
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ using System.IO;
 
 namespace Rebirth {
 
-#if EDITOR
     public class Editor{
 
         ContainerManager cm;
@@ -46,7 +46,7 @@ namespace Rebirth {
 
         public void saveContainer(SceneContainer sc){
             sc.save();
-            if (cm.firstContainerID == sc.ID){
+            if (cm.firstContainerID == sc.id){
                 cm.startPositionX = sc.X;
             }
             cm.saveContainerManager();
@@ -64,5 +64,5 @@ namespace Rebirth {
         }
 
     }
-#endif
 }
+#endif
