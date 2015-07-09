@@ -191,19 +191,74 @@ namespace Rebirth {
             MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X - gameBox.Left, PictureBox.MousePosition.Y - gameBox.Top));
             if (wasMouseClicked) {
                 if (selectedObject != null){
-                    selectedObject.Position = MouseManager.mousePosition - mouseSelectedObjectOffset;
+                    switch (gameEntry.getWorld().selectionTransformType){
+                        case GameWorld.SelectionTransformType.Move:
+                            selectedObject.Position = MouseManager.mousePosition - mouseSelectedObjectOffset;
+                            break;
+                        case GameWorld.SelectionTransformType.ExtendUp:
+                            if (MouseManager.mousePosition.Y >= selectedObject.BoundingBox.y)
+                                selectedObject.BoundingBox.height = MouseManager.mousePosition.Y - selectedObject.BoundingBox.y;
+                            else selectedObject.BoundingBox.height = 0;
+                            break;
+                        case GameWorld.SelectionTransformType.ExtendDown:
+                            float top = selectedObject.BoundingBox.y + selectedObject.BoundingBox.height;
+                            if (MouseManager.mousePosition.Y <= top){
+                                selectedObject.BoundingBox.y = MouseManager.mousePosition.Y;
+                                selectedObject.BoundingBox.height = top - selectedObject.BoundingBox.y;
+                            }
+                            else {
+                                selectedObject.BoundingBox.height = 0;
+                                selectedObject.BoundingBox.y = top;
+                            }
+                            break;
+                        case GameWorld.SelectionTransformType.ExtendRight:
+                            if (MouseManager.mousePosition.X >= selectedObject.BoundingBox.x)
+                                selectedObject.BoundingBox.width = MouseManager.mousePosition.X - selectedObject.BoundingBox.x;
+                            else selectedObject.BoundingBox.width = 0;
+                            break;
+                        case GameWorld.SelectionTransformType.ExtendLeft:
+                            float right = selectedObject.BoundingBox.x + selectedObject.BoundingBox.width;
+                            if (MouseManager.mousePosition.X <= right){
+                                selectedObject.BoundingBox.x = MouseManager.mousePosition.X;
+                                selectedObject.BoundingBox.width = right - selectedObject.BoundingBox.x;
+                            }
+                            else {
+                                selectedObject.BoundingBox.width = 0;
+                                selectedObject.BoundingBox.x = right;
+                            }
+                            break;
+                    }
                 }
                 else {
                     updateScreenShift();
                 }
             }
             else if (selectedObject != null) {
-                if (selectedObject.BoundingBox.intersects(MouseManager.mousePosition)){
+                if (selectedObject.getTopContact().intersects(MouseManager.mousePosition)){
+                    gameBox.Cursor = Cursors.SizeNS;
+                    gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.ExtendUp;
+                } else if (selectedObject.getDownContact().intersects(MouseManager.mousePosition)){
+                    gameBox.Cursor = Cursors.SizeNS;
+                    gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.ExtendDown;
+                } else if (selectedObject.getRightContact().intersects(MouseManager.mousePosition)){
+                    gameBox.Cursor = Cursors.SizeWE;
+                    gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.ExtendRight;
+                } else if (selectedObject.getLeftContact().intersects(MouseManager.mousePosition)){
+                    gameBox.Cursor = Cursors.SizeWE;
+                    gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.ExtendLeft;
+                }else if (selectedObject.BoundingBox.intersects(MouseManager.mousePosition)){
                     gameBox.Cursor = Cursors.SizeAll;
+                    gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.Move;
                 }
-                else gameBox.Cursor = Cursors.Arrow;
+                else {
+                    gameBox.Cursor = Cursors.Arrow;                    
+                    gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.None;
+                }
             }
-            else gameBox.Cursor = Cursors.Arrow;
+            else {
+                gameBox.Cursor = Cursors.Arrow;
+                gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.None;
+            }
         }
 
         private void gameBox_MouseLeave(object sender, EventArgs e) {
@@ -236,11 +291,11 @@ namespace Rebirth {
                     wasMouseClicked = true;
                     lastMousePosition = MouseManager.mousePosition;
                     lastScreenShift = DisplayManager.screenShift;
-                    if (selectedObject != null && selectedObject.BoundingBox.intersects(MouseManager.mousePosition)){
-                        mouseSelectedObjectOffset = MouseManager.mousePosition - selectedObject.Position;
-                    }
-                    else {
-                        mouseScreenShiftOffset = MouseManager.mousePosition - DisplayManager.screenShift;
+                    if (selectedObject != null){
+                        
+                        if (selectedObject.BoundingBox.intersects(MouseManager.mousePosition)){
+                            mouseSelectedObjectOffset = MouseManager.mousePosition - selectedObject.Position;
+                        }
                     }
                 }
             } else {

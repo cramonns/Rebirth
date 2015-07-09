@@ -243,7 +243,7 @@ namespace Rebirth{
         }
 
         public Rectangle ToRectangle(){
-            return new Rectangle((int)x,(int)(y+height),(int)width,(int)height);
+            return new Rectangle((int)x,(int)(y-height),(int)width,(int)height);
         }
 
         public void set(Vector2 position, float width, float height){

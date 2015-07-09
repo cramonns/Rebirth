@@ -12,17 +12,23 @@ namespace Rebirth {
     public class GameWorld:GameScreen {
 
 #if EDITOR
+        public enum SelectionTransformType{
+            None,
+            Move,
+            ExtendUp,
+            ExtendDown,
+            ExtendLeft,
+            ExtendRight
+        }
+
         private bool editorMode = false;
         private bool insertionMode = false;
         public bool insertPermit;
         private Enumerations.ObjectTypes insertionType;
         public GameObject selectedObject = null;
         public RectangleF boundingBoxBackup = new RectangleF(0,0,0,0);
+        public SelectionTransformType selectionTransformType = SelectionTransformType.None;
 #endif
-        /*private bool prevFramePressed = false;
-        private Vector2 mouseStartDragPos;
-        private Vector2 worldStartDragPos;
-        private Vector2 mouseDragDisplacement;*/
 
         private int preloadAmount = 1;
         private SceneContainer[] scenes;
@@ -173,6 +179,10 @@ namespace Rebirth {
                     }
                 }
                 sb.Draw(texture, DisplayManager.scaleTexture(rectangle), color);
+
+                /*color = color = Color.Red;
+                sb.Draw(texture, selectedObject.getRightContact().ToRectangle(), color);
+                sb.Draw(texture, selectedObject.getDownContact().ToRectangle(), color);*/
             }
 #endif
 #endregion
