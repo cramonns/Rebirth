@@ -22,8 +22,8 @@ namespace Rebirth {
             if (scenes[i-1] != null){
                 count = scenes[i-1].nextScene;
                 if (count != -1) scenes[i] = Load(count);
+                else scenes[i] = null;
             }
-            else scenes[i] = null;
             if (aux != null) aux.unLoad();
         }
 
@@ -40,8 +40,8 @@ namespace Rebirth {
             if (scenes[1] != null){
                 count = scenes[1].previousScene;
                 if (count != -1) scenes[0] = Load(count);
+                else scenes[0] = null;
             }
-            else scenes[0] = null;
             if (aux != null) aux.unLoad();
         }
 

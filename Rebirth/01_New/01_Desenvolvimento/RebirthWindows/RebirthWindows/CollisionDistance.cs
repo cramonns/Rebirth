@@ -3,7 +3,7 @@ using System;
 namespace Rebirth{
 	public class CollisionDistance{
 
-		public enum CD_Direction{
+		public enum CD_Direction:byte{
 			UP = 0,
 			DOWN,
 			EAST,

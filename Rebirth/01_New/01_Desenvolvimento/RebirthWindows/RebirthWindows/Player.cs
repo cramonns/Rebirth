@@ -18,14 +18,18 @@ namespace Rebirth{
             FLOATING
 		};
 
+        private enum Directions:byte{
+            NONE,
+            RIGHT,
+            LEFT
+        };
+
 		const float MOVING_TOP_SPEED = 6f/60f;
         const float CROUCHING_TOP_SPEED = 3.6f/60f;
 		const float MOVING_ACCELERATION = .8f/60f;
 		const float JUMP_MOVING_ACCELERATION = .1f/60f;
 		const float JUMP_IMPULSE = 15f/60f;
-		const float JUMP_ACCLERATION = 1.3f/60f;
-		const float JUMP_TOP_HIGH = 180f/60f;
-		const float JUMP_TOP_SPEED = 6f/60f;
+		const float JUMP_TOP_SPEED = 12f/60f;
 		const float CHAR_WIDTH = .6f;
 		const float CHAR_HEIGHT = 1.4f;
         const float FLOATING_MAX_FALLING_SPEED = 3f/60f;
@@ -34,8 +38,8 @@ namespace Rebirth{
 
 		//Player Attributes
 		float movingSpeed;
-		char direction;
-		char jumping_direction;
+		Directions direction;
+		Directions jumping_direction;
 
 		//support variables
 		float jumpStartPos;
@@ -45,7 +49,7 @@ namespace Rebirth{
 
 		public Player(){
 			this.usePhysics = true;
-			direction = 'r';
+			direction = Directions.RIGHT;
 			state = playerStates.WAITING;
 
 			boundingBox = new RectangleF (new Vector2 (0, 100 / 60f), CHAR_WIDTH, CHAR_HEIGHT);
@@ -59,11 +63,11 @@ namespace Rebirth{
         private void startJump(){
             jumpStartPos = boundingBox.y;
 			boundingBox.y += JUMP_IMPULSE;
-	        speed.Y += JUMP_ACCLERATION;
+	        speed.Y += JUMP_TOP_SPEED;
 			state = playerStates.JUMPING;
 			setGroundedState (false);
 			if (movingSpeed != 0) jumping_direction = direction;
-			else jumping_direction = 'n';
+			else jumping_direction = Directions.NONE;
         }
 
 		private void startFall(){
@@ -96,19 +100,9 @@ namespace Rebirth{
                     }
                     break;
                 case playerStates.JUMPING:
-                    if (boundingBox.y - jumpStartPos >= JUMP_TOP_HIGH || !ControllerManager.TriggerJumping) {
+                    if (!ControllerManager.TriggerJumping || speed.Y < 0) {
 						startFall();
-					} else {
-                        if (speed.Y > JUMP_TOP_HIGH/2) {
-						    speed.Y -= JUMP_ACCLERATION/2;
-					    } else speed.Y += JUMP_ACCLERATION;
-					    if (speed.Y > JUMP_TOP_SPEED) {
-						    speed.Y = JUMP_TOP_SPEED;
-					    } else if (speed.Y > JUMP_TOP_SPEED/2){
-						    speed.Y -= JUMP_ACCLERATION / 2;
-					    }
-                        break;
-                    }
+					} else break;
                     goto case playerStates.FALLING;
                 case playerStates.FALLING:
                     goto case playerStates.FLOATING;
@@ -140,9 +134,9 @@ namespace Rebirth{
 			//Movement
 			if (ControllerManager.direction == TriggerDirection.Right) {
                 movingSpeed += acceleration;
-				direction = 'r';
+				direction = Directions.RIGHT;
 				if (state == playerStates.JUMPING) {
-					if (jumping_direction == 'l' && movingSpeed > 0) startFall();
+					if (jumping_direction == Directions.LEFT && movingSpeed > 0) startFall();
 				}
 				else if (state == playerStates.WAITING){
                     state = playerStates.MOVING;
@@ -155,9 +149,9 @@ namespace Rebirth{
 					movingSpeed = topSpeed;
 			} else if (ControllerManager.direction == TriggerDirection.Left) {
 				movingSpeed -= acceleration;
-                direction = 'l';
+                direction = Directions.LEFT;
 				if (state == playerStates.JUMPING) {
-					if (jumping_direction == 'r' && movingSpeed < 0) startFall(); 
+					if (jumping_direction == Directions.RIGHT && movingSpeed < 0) startFall(); 
 				}
 				else if (state == playerStates.WAITING) {
 					state = playerStates.MOVING;
@@ -168,56 +162,6 @@ namespace Rebirth{
                 }
 				if (movingSpeed < -topSpeed) movingSpeed = -topSpeed;
 			}
-			
-            /*
-            //Crouching
-		    if (ControllerManager.TriggerDown){
-                if (grounded){
-                    if (state == playerStates.WAITING) state = playerStates.DUCKING;
-                    else {
-                        state = playerStates.CROUCHING;
-                        if (movingSpeed > CROUCHING_TOP_SPEED) movingSpeed = CROUCHING_TOP_SPEED;
-                        else if (movingSpeed < -CROUCHING_TOP_SPEED) movingSpeed = -CROUCHING_TOP_SPEED;
-                    }
-                }
-            }
-            else {
-			    //Jumping
-			    if (ControllerManager.TriggerJumping) {
-				    if ( state == playerStates.MOVING || state == playerStates.WAITING ) {
-					    jumpStartPos = boundingBox.y;
-					    boundingBox.y += JUMP_IMPULSE;
-					    speed.Y += JUMP_ACCLERATION;
-					    state = playerStates.JUMPING;
-					    setGroundedState (false);
-					    if (movingSpeed != 0) jumping_direction = direction;
-					    else jumping_direction = 'n';
-				    } else if (state == playerStates.JUMPING) {
-					    if (boundingBox.y - jumpStartPos >= JUMP_TOP_HIGH) {
-						    startFall();
-					    } else if (speed.Y > JUMP_TOP_HIGH/2) {
-						    speed.Y -= JUMP_ACCLERATION/2;
-					    } else speed.Y += JUMP_ACCLERATION;
-					    if (speed.Y > JUMP_TOP_SPEED) {
-						    speed.Y = JUMP_TOP_SPEED;
-					    } else if (speed.Y > JUMP_TOP_SPEED/2){
-						    speed.Y -= JUMP_ACCLERATION / 2;
-					    }
-				    }
-			    } else if (!isGrounded()) {
-				    if (speed.Y > 0) speed.Y = 0;
-				    startFall();
-			    }
-            }
-            
-            //Floating
-            if (ControllerManager.TriggerFloating){
-                if (state == playerStates.FALLING){
-                    state = playerStates.FLOATING;
-                    if (speed.Y < -FLOATING_MAX_FALLING_SPEED) speed.Y = -FLOATING_MAX_FALLING_SPEED;
-                }
-            }
-            */
 
             if (state == playerStates.DUCKING || state == playerStates.CROUCHING){
                 boundingBox.height = CHAR_HEIGHT*0.6f;
@@ -240,7 +184,7 @@ namespace Rebirth{
         }
 
         public override void Draw(SpriteBatch sb, GameTime gameTime){
-			if (direction == 'r') {
+			if (direction == Directions.RIGHT) {
 				sb.Draw (texture, DisplayManager.scaleTexture(Position, boundingBox.width, boundingBox.height), Color.White);
 			} else {
 				sb.Draw(texture, DisplayManager.scaleTexture(Position, boundingBox.width, boundingBox.height), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);

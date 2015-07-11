@@ -4,8 +4,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Rebirth{
 
-	public enum TriggerDirection{
-		none,
+	public enum TriggerDirection:byte{
+		None,
 		Right,
 		Left
 	};
@@ -19,7 +19,7 @@ namespace Rebirth{
 
         public static bool TriggerFloating = false;
 
-		public static TriggerDirection direction = TriggerDirection.none;
+		public static TriggerDirection direction = TriggerDirection.None;
 
         public static bool TriggerDown = false;
 
@@ -32,7 +32,7 @@ namespace Rebirth{
 				direction = TriggerDirection.Right;
 			} else if (Keyboard.GetState().IsKeyDown(Keys.Left) || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X < -analogDeadzone) {
 				direction = TriggerDirection.Left;
-			} else direction = TriggerDirection.none; //IMPROVE THIS CODE
+			} else direction = TriggerDirection.None; //IMPROVE THIS CODE
 
             TriggerDown = false;
             if (Keyboard.GetState().IsKeyDown(Keys.Down) || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y < -analogDeadzone){
