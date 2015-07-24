@@ -8,9 +8,6 @@ namespace Rebirth{
     [Serializable]
     public class Ground:GameObject{
 
-        public const float DefaultWidth = 10f;
-        public const float DefaultHeight = 50/60f;
-
 		public Ground(Vector2 position){
             if (position == null)
 			    boundingBox = new RectangleF(new Vector2 (0f, 0f), DefaultWidth, DefaultHeight);

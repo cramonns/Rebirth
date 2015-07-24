@@ -10,7 +10,6 @@ namespace Rebirth {
         public enum ObjectTypes{
             Box,
             Ground,
-            Logical,
             Trigger,
             TextureLoader
         }

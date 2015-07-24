@@ -81,8 +81,8 @@ namespace Rebirth{
             currentScreen = ScreenID.intro;
 
             //create the content managers
-            TextureManager.initialize(Content);
-            VideoManager.initialize(Content);
+            /*TextureManager.initialize(Content);
+            VideoManager.initialize(Content);*/
 		}
 
 		/// <summary>
@@ -122,10 +122,9 @@ namespace Rebirth{
                 (screens[(int)ScreenID.world] as GameWorld).editMode();
                 (parentForm as LevelEditor).startEditor();
             }
-            else
-                LoadManager.LoadContainerManager();
+            else               
 #endif
-            //TextureManager.load(TextureManager.TextureID.Background);
+                LoadManager.LoadContainerManager();
 		}
 
 		/// <summary>

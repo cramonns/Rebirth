@@ -1,10 +1,8 @@
-#region Using Statements
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-#endregion
 
 namespace Rebirth{
     static class Program{
@@ -29,7 +27,6 @@ namespace Rebirth{
         /// </summary>
         [STAThread]
         static void Main(string[] args){
-
 
 #if EDITOR
             if (args.Length != 0){
@@ -56,6 +53,7 @@ namespace Rebirth{
             else {
 #endif
                 game = new Game1();
+                game.graphics.IsFullScreen = true;
                 game.Run();
 #if EDITOR
             }

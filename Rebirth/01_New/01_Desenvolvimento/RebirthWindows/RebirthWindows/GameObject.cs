@@ -11,6 +11,9 @@ namespace Rebirth{
 
     [Serializable]
 	public abstract class GameObject{
+   
+        public const float DefaultWidth = 2f;
+        public const float DefaultHeight = 2f;
 
 		protected enum Bounds:byte{
 			UPPER = 0,
@@ -133,7 +136,25 @@ namespace Rebirth{
             return new RectangleF(boundingBox.x - worldPixel, boundingBox.y + 2*worldPixel, 3*worldPixel, boundingBox.height - 4*worldPixel);
         }
 
-        
+        public RectangleF getTopLeftContact(){
+            float worldPixel = DisplayManager.ToWorldLength(1);
+            return new RectangleF(boundingBox.x - worldPixel, boundingBox.y - worldPixel + boundingBox.height,3*worldPixel,3*worldPixel);
+        }
+
+        public RectangleF getTopRightContact(){
+            float worldPixel = DisplayManager.ToWorldLength(1);
+            return new RectangleF(boundingBox.x - worldPixel + boundingBox.width, boundingBox.y - worldPixel + boundingBox.height,3*worldPixel,3*worldPixel);
+        }
+
+        public RectangleF getDownLeftContact(){
+            float worldPixel = DisplayManager.ToWorldLength(1);
+            return new RectangleF(boundingBox.x - worldPixel, boundingBox.y - worldPixel,3*worldPixel,3*worldPixel);
+        }
+
+        public RectangleF getDownRightContact(){
+            float worldPixel = DisplayManager.ToWorldLength(1);
+            return new RectangleF(boundingBox.x - worldPixel + boundingBox.width, boundingBox.y - worldPixel,3*worldPixel,3*worldPixel);
+        }
 
         public void extendRight(float extension){
             Width += extension;

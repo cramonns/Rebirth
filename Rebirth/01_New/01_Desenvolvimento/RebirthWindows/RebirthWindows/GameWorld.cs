@@ -18,7 +18,11 @@ namespace Rebirth {
             ExtendUp,
             ExtendDown,
             ExtendLeft,
-            ExtendRight
+            ExtendRight,
+            ExtendTopLeft,
+            ExtendTopRight,
+            ExtendDownLeft,
+            ExtendDownRight
         }
 
         private bool editorMode = false;
@@ -52,18 +56,6 @@ namespace Rebirth {
 #if EDITOR
             if (editorMode){
                 drawPlayer = false;
-
-                /*if (Mouse.GetState().LeftButton == ButtonState.Pressed){
-                    if (!prevFramePressed) {
-                        mouseStartDragPos = Mouse.GetState().Position.ToVector2();
-                        worldStartDragPos = DisplayManager.screenShift;
-                    }
-                    mouseDragDisplacement = Mouse.GetState().Position.ToVector2() - mouseStartDragPos;
-                    DisplayManager.screenShift += DisplayManager.worldPosition(mouseDragDisplacement);
-                    prevFramePressed = true;
-                } else {
-                    prevFramePressed = false;
-                }*/
             }
             else {
 #endif
@@ -135,14 +127,11 @@ namespace Rebirth {
                     case Enumerations.ObjectTypes.Ground:
                         rectangle.set(MouseManager.mousePosition, Ground.DefaultWidth, Ground.DefaultHeight);
                         break;
-                    case Enumerations.ObjectTypes.Logical:
-                        rectangle.set(MouseManager.mousePosition, Ground.DefaultWidth, Ground.DefaultHeight);
-                        break;
                     case Enumerations.ObjectTypes.Trigger:
-                        rectangle.set(MouseManager.mousePosition, Ground.DefaultWidth, Ground.DefaultHeight);
+                        rectangle.set(MouseManager.mousePosition, Trigger.DefaultWidth, Ground.DefaultHeight);
                         break;
                     case Enumerations.ObjectTypes.TextureLoader:
-                        rectangle.set(MouseManager.mousePosition, Ground.DefaultWidth, Ground.DefaultHeight);
+                        rectangle.set(MouseManager.mousePosition, TextureLoader.DefaultWidth, Ground.DefaultHeight);
                         break;
                 }
                 if (rectangle.inside(scenes[preloadAmount].Shape)){
@@ -179,11 +168,19 @@ namespace Rebirth {
                     }
                 }
                 sb.Draw(texture, DisplayManager.scaleTexture(rectangle), color);
-
-                /*color = color = Color.Red;
-                sb.Draw(texture, selectedObject.getRightContact().ToRectangle(), color);
-                sb.Draw(texture, selectedObject.getDownContact().ToRectangle(), color);*/
             }
+
+            color = Color.White * 0.4f;
+            texture = TextureManager.load(TextureManager.TextureID.cyan);
+            
+            if (scenes[preloadAmount] != null){
+                foreach (GameObject g in scenes[preloadAmount].objects){
+                    if (g is Trigger && DeveloperSettings.drawTriggers){
+                        sb.Draw(texture, DisplayManager.scaleTexture(g.BoundingBox), color);
+                    }
+                }
+            }
+
 #endif
 #endregion
         }
@@ -243,6 +240,10 @@ namespace Rebirth {
                     return new Box(MouseManager.mousePosition - new Vector2(Box.DefaultWidth/2,Box.DefaultHeight/2));
                 case Enumerations.ObjectTypes.Ground:
                     return new Ground(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2,Ground.DefaultHeight/2));
+                case Enumerations.ObjectTypes.Trigger:
+                    return new Trigger(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2,Ground.DefaultHeight/2), LogicalObject.Treatment.Default, LogicalObject.Treatment.Default, LogicalObject.Treatment.Default);
+                case Enumerations.ObjectTypes.TextureLoader:
+                    return new TextureLoader(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2,Ground.DefaultHeight/2), TextureManager.TextureID.ground);
             }
             return null;
         }
@@ -271,7 +272,7 @@ namespace Rebirth {
         }
 
         public void transformSelectedObject(){
-            if (selectedObject == null) return;
+            if (selectedObject == null || selectedObject is LogicalObject) return;
             List<GameObject> candidates = new List<GameObject>();
             candidates = scenes[preloadAmount].objectsTree.retrieve(candidates, selectedObject.getCollisionShape());
             foreach (GameObject g in candidates){

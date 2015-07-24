@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Windows.Forms;
 
 namespace Rebirth{
 	public static class DisplayManager{
@@ -10,7 +11,7 @@ namespace Rebirth{
 		private static float screenWidth;
 		private static float screenHeight;
 		private static float Ratio;
-        private static Vector2 cameraPercentageToFollow = new Vector2(0.4f,0.2f);
+        private static Vector2 cameraPercentageToFollow = new Vector2(0.4f,0.4f);
         public static bool followPlayer;
         public static Vector2 screenShift;
 
@@ -42,7 +43,7 @@ namespace Rebirth{
 
         //initializer
 		public static void initialize(Game1 game){
-			initialize(game,1280,720);
+			initialize(game,Screen.PrimaryScreen.Bounds.Width,Screen.PrimaryScreen.Bounds.Height);
 		}
 
         public static void initialize(Game1 game, int sWidth, int sHeight){

@@ -13,7 +13,7 @@ namespace Rebirth {
         public int previousScene = -1;
         public int nextScene = -1;
         RectangleF shapeBox;
-        LinkedList<TextureHolder> textureHolders;
+        public LinkedList<TextureHolder> textureHolders;
        
         public LinkedList<GameObject> objects;
 

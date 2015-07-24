@@ -26,7 +26,33 @@ namespace Rebirth{
         public static bool TriggerStart = false;
         private static bool prev_StartPressed;
 
+#if DEV
+        private static bool prev_TPressed = false;
+#endif
+
 		public static void Update(GameTime gameTime){
+
+#if DEV
+            float multiplier;
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.RightShift)){
+                multiplier = .005f;
+            }
+            else multiplier = 0.05f;
+            if (Keyboard.GetState().IsKeyDown(Keys.OemMinus)){
+                DisplayManager.WorldWidth *= (1f + multiplier);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.OemPlus)){
+                DisplayManager.WorldWidth *= (1f - multiplier);
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.T)){
+                if (!prev_TPressed){
+                    DeveloperSettings.drawTriggers = !DeveloperSettings.drawTriggers;
+                }
+                prev_TPressed = true;
+            }
+            else prev_TPressed = false;
+#endif
 
 			if (Keyboard.GetState().IsKeyDown(Keys.Right) || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X > analogDeadzone) {
 				direction = TriggerDirection.Right;

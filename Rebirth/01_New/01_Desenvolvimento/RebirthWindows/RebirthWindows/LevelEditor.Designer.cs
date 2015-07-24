@@ -39,23 +39,25 @@ namespace Rebirth {
             this.labelSelectObject = new System.Windows.Forms.Label();
             this.comboBoxObjectList = new System.Windows.Forms.ComboBox();
             this.groupBoxContainer = new System.Windows.Forms.GroupBox();
-            this.tabControlContainer = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.containerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.containerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.tabControlContainer = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.buttonTHolders = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBoxTest.SuspendLayout();
             this.groupBoxObjects.SuspendLayout();
-            this.tabControlContainer.SuspendLayout();
+            this.groupBoxContainer.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.tabControlContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // gameBox
@@ -201,6 +203,8 @@ namespace Rebirth {
             this.groupBoxContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxContainer.Controls.Add(this.buttonTHolders);
+            this.groupBoxContainer.Enabled = false;
             this.groupBoxContainer.Location = new System.Drawing.Point(3, 27);
             this.groupBoxContainer.Name = "groupBoxContainer";
             this.groupBoxContainer.Size = new System.Drawing.Size(184, 141);
@@ -208,39 +212,16 @@ namespace Rebirth {
             this.groupBoxContainer.TabStop = false;
             this.groupBoxContainer.Text = "Container";
             // 
-            // tabControlContainer
+            // menuStrip1
             // 
-            this.tabControlContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControlContainer.Controls.Add(this.tabPage1);
-            this.tabControlContainer.Location = new System.Drawing.Point(197, 0);
-            this.tabControlContainer.Name = "tabControlContainer";
-            this.tabControlContainer.SelectedIndex = 0;
-            this.tabControlContainer.Size = new System.Drawing.Size(684, 26);
-            this.tabControlContainer.TabIndex = 2;
-            this.tabControlContainer.SelectedIndexChanged += new System.EventHandler(this.tabControlContainer_SelectedIndexChanged);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(676, 0);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "ContainerView";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(883, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(26, 26);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "X";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(190, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -289,16 +270,49 @@ namespace Rebirth {
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // menuStrip1
+            // tabControlContainer
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(190, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.tabControlContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControlContainer.Controls.Add(this.tabPage1);
+            this.tabControlContainer.Location = new System.Drawing.Point(197, 0);
+            this.tabControlContainer.Name = "tabControlContainer";
+            this.tabControlContainer.SelectedIndex = 0;
+            this.tabControlContainer.Size = new System.Drawing.Size(684, 26);
+            this.tabControlContainer.TabIndex = 2;
+            this.tabControlContainer.SelectedIndexChanged += new System.EventHandler(this.tabControlContainer_SelectedIndexChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(676, 0);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "ContainerView";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(883, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(26, 26);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "X";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // buttonTHolders
+            // 
+            this.buttonTHolders.Location = new System.Drawing.Point(35, 112);
+            this.buttonTHolders.Name = "buttonTHolders";
+            this.buttonTHolders.Size = new System.Drawing.Size(115, 23);
+            this.buttonTHolders.TabIndex = 0;
+            this.buttonTHolders.Text = "Texture Holders...";
+            this.buttonTHolders.UseVisualStyleBackColor = true;
+            this.buttonTHolders.Click += new System.EventHandler(this.buttonTHolders_Click);
             // 
             // LevelEditor
             // 
@@ -324,9 +338,10 @@ namespace Rebirth {
             this.groupBoxTest.ResumeLayout(false);
             this.groupBoxObjects.ResumeLayout(false);
             this.groupBoxObjects.PerformLayout();
-            this.tabControlContainer.ResumeLayout(false);
+            this.groupBoxContainer.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabControlContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -356,6 +371,7 @@ namespace Rebirth {
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem containerToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.Button buttonTHolders;
     }
 }
 #endif

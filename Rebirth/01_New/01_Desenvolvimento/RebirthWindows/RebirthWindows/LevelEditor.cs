@@ -27,6 +27,19 @@ namespace Rebirth {
 
         bool wasMouseClicked = false;
 
+        private void setContainerOperationsAvaiability(bool state){
+            buttonInsertObject.Enabled = state;
+            groupBoxContainer.Enabled = state;
+        }
+
+        private void enableContainerOperations(){
+            setContainerOperationsAvaiability(true);
+        }
+
+        private void disableCointainerOperations(){
+            setContainerOperationsAvaiability(false);
+        }
+
         #region cameraSettings
         public void adjustCamera(SceneContainer sc){
             if (sc == gameEditor.SceneManagerView){
@@ -49,13 +62,13 @@ namespace Rebirth {
         }
 
         private void Zoom(float delta){
-            /*if (DisplayManager.WorldWidth < delta/3){
-                Zoom(delta/3);
-            }
-            else {*/
-                DisplayManager.WorldWidth += delta;//*DisplayManager.WorldWidth/10f;
-                DisplayManager.screenShift -= new Vector2(delta/2);
-            //}
+
+            float multiplier = -0.001f;
+            multiplier *= delta;
+            Vector2 mp = new Vector2(MouseManager.mousePosition.X, MouseManager.mousePosition.Y);
+            DisplayManager.WorldWidth *= (1f + multiplier);
+            MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X - gameBox.Left, PictureBox.MousePosition.Y - gameBox.Top));
+            DisplayManager.screenShift += mp - MouseManager.mousePosition;
         }
 
         public void updateScreenShift(){
@@ -95,12 +108,12 @@ namespace Rebirth {
                 gameEntry.getWorld().saveScene();
             }
             if (index == 0){
-                buttonInsertObject.Enabled = false;
+                disableCointainerOperations();
                 gameEntry.getWorld().leaveInsertMode();
                 gameEntry.getWorld().loadScene(gameEditor.SceneManagerView);
                 adjustCamera(gameEditor.SceneManagerView);
             } else {
-                buttonInsertObject.Enabled = true;
+                enableContainerOperations();
                 SceneContainer scene = LoadManager.Load(gameEditor.getContainerInTab(index));
                 scene.remakeObjectsTree();
                 gameEntry.getWorld().loadScene(scene);
@@ -191,6 +204,7 @@ namespace Rebirth {
             MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X - gameBox.Left, PictureBox.MousePosition.Y - gameBox.Top));
             if (wasMouseClicked) {
                 if (selectedObject != null){
+                    float top, right;
                     switch (gameEntry.getWorld().selectionTransformType){
                         case GameWorld.SelectionTransformType.Move:
                             selectedObject.Position = MouseManager.mousePosition - mouseSelectedObjectOffset;
@@ -201,7 +215,7 @@ namespace Rebirth {
                             else selectedObject.BoundingBox.height = 0;
                             break;
                         case GameWorld.SelectionTransformType.ExtendDown:
-                            float top = selectedObject.BoundingBox.y + selectedObject.BoundingBox.height;
+                            top = selectedObject.BoundingBox.y + selectedObject.BoundingBox.height;
                             if (MouseManager.mousePosition.Y <= top){
                                 selectedObject.BoundingBox.y = MouseManager.mousePosition.Y;
                                 selectedObject.BoundingBox.height = top - selectedObject.BoundingBox.y;
@@ -217,7 +231,7 @@ namespace Rebirth {
                             else selectedObject.BoundingBox.width = 0;
                             break;
                         case GameWorld.SelectionTransformType.ExtendLeft:
-                            float right = selectedObject.BoundingBox.x + selectedObject.BoundingBox.width;
+                            right = selectedObject.BoundingBox.x + selectedObject.BoundingBox.width;
                             if (MouseManager.mousePosition.X <= right){
                                 selectedObject.BoundingBox.x = MouseManager.mousePosition.X;
                                 selectedObject.BoundingBox.width = right - selectedObject.BoundingBox.x;
@@ -226,6 +240,62 @@ namespace Rebirth {
                                 selectedObject.BoundingBox.width = 0;
                                 selectedObject.BoundingBox.x = right;
                             }
+                            break;
+                        case GameWorld.SelectionTransformType.ExtendTopLeft:
+                            if (MouseManager.mousePosition.Y >= selectedObject.BoundingBox.y)
+                                selectedObject.BoundingBox.height = MouseManager.mousePosition.Y - selectedObject.BoundingBox.y;
+                            else selectedObject.BoundingBox.height = 0;
+                            right = selectedObject.BoundingBox.x + selectedObject.BoundingBox.width;
+                            if (MouseManager.mousePosition.X <= right){
+                                selectedObject.BoundingBox.x = MouseManager.mousePosition.X;
+                                selectedObject.BoundingBox.width = right - selectedObject.BoundingBox.x;
+                            }
+                            else {
+                                selectedObject.BoundingBox.width = 0;
+                                selectedObject.BoundingBox.x = right;
+                            }
+                            break;
+                        case GameWorld.SelectionTransformType.ExtendTopRight:
+                            if (MouseManager.mousePosition.Y >= selectedObject.BoundingBox.y)
+                                selectedObject.BoundingBox.height = MouseManager.mousePosition.Y - selectedObject.BoundingBox.y;
+                            else selectedObject.BoundingBox.height = 0;
+                            if (MouseManager.mousePosition.X >= selectedObject.BoundingBox.x)
+                                selectedObject.BoundingBox.width = MouseManager.mousePosition.X - selectedObject.BoundingBox.x;
+                            else selectedObject.BoundingBox.width = 0;
+                            break;
+                        case GameWorld.SelectionTransformType.ExtendDownLeft:
+                            top = selectedObject.BoundingBox.y + selectedObject.BoundingBox.height;
+                            if (MouseManager.mousePosition.Y <= top){
+                                selectedObject.BoundingBox.y = MouseManager.mousePosition.Y;
+                                selectedObject.BoundingBox.height = top - selectedObject.BoundingBox.y;
+                            }
+                            else {
+                                selectedObject.BoundingBox.height = 0;
+                                selectedObject.BoundingBox.y = top;
+                            }
+                            right = selectedObject.BoundingBox.x + selectedObject.BoundingBox.width;
+                            if (MouseManager.mousePosition.X <= right){
+                                selectedObject.BoundingBox.x = MouseManager.mousePosition.X;
+                                selectedObject.BoundingBox.width = right - selectedObject.BoundingBox.x;
+                            }
+                            else {
+                                selectedObject.BoundingBox.width = 0;
+                                selectedObject.BoundingBox.x = right;
+                            }
+                            break;
+                        case GameWorld.SelectionTransformType.ExtendDownRight:
+                            top = selectedObject.BoundingBox.y + selectedObject.BoundingBox.height;
+                            if (MouseManager.mousePosition.Y <= top){
+                                selectedObject.BoundingBox.y = MouseManager.mousePosition.Y;
+                                selectedObject.BoundingBox.height = top - selectedObject.BoundingBox.y;
+                            }
+                            else {
+                                selectedObject.BoundingBox.height = 0;
+                                selectedObject.BoundingBox.y = top;
+                            }
+                            if (MouseManager.mousePosition.X >= selectedObject.BoundingBox.x)
+                                selectedObject.BoundingBox.width = MouseManager.mousePosition.X - selectedObject.BoundingBox.x;
+                            else selectedObject.BoundingBox.width = 0;
                             break;
                     }
                 }
@@ -246,6 +316,18 @@ namespace Rebirth {
                 } else if (selectedObject.getLeftContact().intersects(MouseManager.mousePosition)){
                     gameBox.Cursor = Cursors.SizeWE;
                     gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.ExtendLeft;
+                } else if (selectedObject.getTopLeftContact().intersects(MouseManager.mousePosition)){
+                    gameBox.Cursor = Cursors.SizeNWSE;
+                    gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.ExtendTopLeft;
+                } else if (selectedObject.getTopRightContact().intersects(MouseManager.mousePosition)){
+                    gameBox.Cursor = Cursors.SizeNESW;
+                    gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.ExtendTopRight;
+                } else if (selectedObject.getDownLeftContact().intersects(MouseManager.mousePosition)){
+                    gameBox.Cursor = Cursors.SizeNESW;
+                    gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.ExtendDownLeft;
+                } else if (selectedObject.getDownRightContact().intersects(MouseManager.mousePosition)){
+                    gameBox.Cursor = Cursors.SizeNWSE;
+                    gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.ExtendDownRight;
                 }else if (selectedObject.BoundingBox.intersects(MouseManager.mousePosition)){
                     gameBox.Cursor = Cursors.SizeAll;
                     gameEntry.getWorld().selectionTransformType = GameWorld.SelectionTransformType.Move;
@@ -292,7 +374,6 @@ namespace Rebirth {
                     lastMousePosition = MouseManager.mousePosition;
                     lastScreenShift = DisplayManager.screenShift;
                     if (selectedObject != null){
-                        
                         if (selectedObject.BoundingBox.intersects(MouseManager.mousePosition)){
                             mouseSelectedObjectOffset = MouseManager.mousePosition - selectedObject.Position;
                         }
@@ -310,6 +391,12 @@ namespace Rebirth {
         }
 
         #endregion
+
+        private void buttonTHolders_Click(object sender, EventArgs e) {
+            SceneContainer c = gameEntry.getWorld().currentContainer();
+            FormTextureHolders formTextureHolders = new FormTextureHolders(c, gameEditor.containerManager.getName(c.id));
+            formTextureHolders.Show();
+        }
 
     }
 }

@@ -47,7 +47,7 @@ namespace Rebirth {
                 if (player.State != MediaState.Stopped)
                     videoTexture = player.GetTexture();
             }
-            Rectangle screen = new Rectangle(0,0,1280,720);
+            Rectangle screen = new Rectangle(0,0,(int)DisplayManager.DisplayWidth,(int)DisplayManager.DisplayHeight);
                          
             sb.Draw(videoTexture, screen, Color.White);
         }

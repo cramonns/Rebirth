@@ -9,9 +9,6 @@ namespace Rebirth{
     [Serializable]
 	public class Box:MoveableObject{
 
-        public const float DefaultWidth = 2f;
-        public const float DefaultHeight = 2f;
-
 		public Box(Vector2 position){
 			usePhysics = true;
 			isFixed = false;

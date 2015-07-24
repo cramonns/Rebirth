@@ -80,7 +80,7 @@ namespace Rebirth{
             }
         }
 
-        private void treatCollision(LogicalObject l, GameObject g, CollisionDistance cd){
+        private void treatCollision(GameObject g, LogicalObject l, CollisionDistance cd){
             
         }
 	}

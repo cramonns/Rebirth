@@ -117,34 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="buttonInsertObject.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>200, 30</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonPlay.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        xAAADsQBlSsOGwAAAAd0SU1FB98FCRQlA/CBTlEAAAHDSURBVEhLvZY9rMFgFIa/xEBiEBMDK5vY2C0S
-        m9nCbhSJhJVBLCYxMdnFJBZ2JmYmi99ohPh5b07vaeRGS1u9nuTlo6fnySdy+onD4YDL5YLr9Yrb7fYv
-        od4UcgmSfQuSCnr5FrKQtqzGer3mlXWQS9zvd/74YLfboVAooNFoYLvd8refQy5NYTQahc1mQyKRQKvV
-        giRJfNU8b4VCCDl2ux3JZBKdTgfH45GrjKNbqMTpdCKVSqHX6+F8PnO1fgwLlbjdbqTTafT7fbmJEUwJ
-        lXg8HmSzWYxGI91iAZU6vUIlPp8PuVwO4/GYO2gj+P0PRoVKgsEgSqUSptMpd3rGUqGSUCiEcrmMxWLB
-        HR/8i5DicDhQrVax2Wy46y+WC2lYxONxtNtt1WFhqTAWi6HZbGK1WnGnZywRRiIR1Go1LJdL7qDNR8Jw
-        OIxKpYL5fM53vseUMBAIoFgsYjab8R36MST0+/3I5/OYTCZcaRxdQq/XK4+w4XDIFeZ5KXS5XMhkMhgM
-        BoaHtBaqwv1+j3q9jm63a+ox9ArVpwVxOp14ZR1kEjeLfio90Oa+f0z8upAGLC3ozEhbturfSCj9lOO+
-        JEn4ARb6NNr/wwytAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="buttonInsertObject.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
-  </metadata>
 </root>
