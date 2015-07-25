@@ -53,7 +53,7 @@ namespace Rebirth{
             else {
 #endif
                 game = new Game1();
-                game.graphics.IsFullScreen = true;
+                //game.graphics.IsFullScreen = true;
                 game.Run();
 #if EDITOR
             }

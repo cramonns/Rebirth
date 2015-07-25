@@ -26,6 +26,9 @@ namespace Rebirth{
         public static bool TriggerStart = false;
         private static bool prev_StartPressed;
 
+        public static bool rightAnalogWaiting = true;
+        public static float rightAnalogRotation;
+
 #if DEV
         private static bool prev_TPressed = false;
 #endif
@@ -87,6 +90,16 @@ namespace Rebirth{
 			if (Keyboard.GetState().IsKeyUp(Keys.Enter) && GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Released) {
 				prev_StartPressed = false;
 			}
+
+            float rightAnalogX = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X; 
+            float rightAnalogY = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.Y;
+            if (rightAnalogX > analogDeadzone || rightAnalogX < -analogDeadzone || rightAnalogY > analogDeadzone || rightAnalogY < -analogDeadzone){
+                rightAnalogWaiting = false;
+                rightAnalogRotation = (float)Math.Atan2(rightAnalogX, rightAnalogY);
+                if (rightAnalogRotation > 2.7f) rightAnalogRotation = 2.7f;
+                else if (rightAnalogRotation < -2.7f) rightAnalogRotation = -2.7f;
+            }
+            else rightAnalogWaiting = true;
 		}
 	}
 }

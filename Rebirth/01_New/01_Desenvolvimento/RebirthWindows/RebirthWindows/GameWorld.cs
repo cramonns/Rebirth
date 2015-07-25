@@ -214,6 +214,11 @@ namespace Rebirth {
             return scenes[preloadAmount];
         }
 
+        public void unLoad(){
+            player.unLoad();
+            scenes[preloadAmount] = null;
+        }
+
 #region EDITOR_FUNCTIONS
 #if EDITOR
         public void editMode(){
@@ -272,9 +277,21 @@ namespace Rebirth {
         }
 
         public void transformSelectedObject(){
-            if (selectedObject == null || selectedObject is LogicalObject) return;
+            if (selectedObject == null) return;
+            SceneContainer currentScene = scenes[preloadAmount];
+            if (selectedObject.X < currentScene.X ||
+                selectedObject.Y < currentScene.Y || 
+                selectedObject.X + selectedObject.Width > currentScene.Right || 
+                selectedObject.Y + selectedObject.Height > currentScene.Top)
+            {
+                selectedObject.Position = boundingBoxBackup.Position;
+                selectedObject.Width = boundingBoxBackup.width;
+                selectedObject.Height = boundingBoxBackup.height;
+                return;
+            }
+            if (selectedObject is LogicalObject) return;
             List<GameObject> candidates = new List<GameObject>();
-            candidates = scenes[preloadAmount].objectsTree.retrieve(candidates, selectedObject.getCollisionShape());
+            candidates = currentScene.objectsTree.retrieve(candidates, selectedObject.getCollisionShape());
             foreach (GameObject g in candidates){
                 if (g != selectedObject){
                     if (g.getCollisionShape().intersects(selectedObject.getCollisionShape())){

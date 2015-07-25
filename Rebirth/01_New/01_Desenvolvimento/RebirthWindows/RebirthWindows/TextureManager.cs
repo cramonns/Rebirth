@@ -65,7 +65,7 @@ namespace Rebirth {
                         textures[(int)id] = Content.Load<Texture2D>("Texture/Background");
                         break; 
                     case TextureID.grass:
-                        textures[(int)id] = Content.Load<Texture2D>("Texture/Bowling_grass_pxr128");
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/Bowling_grass_pxr128.tif");
                         break; 
                     case TextureID.cyan:
                         textures[(int)id] = Content.Load<Texture2D>("Texture/cyan");

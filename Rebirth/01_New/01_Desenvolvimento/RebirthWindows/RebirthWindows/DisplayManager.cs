@@ -42,12 +42,12 @@ namespace Rebirth{
         }
 
         //initializer
-		public static void initialize(Game1 game){
-			initialize(game,Screen.PrimaryScreen.Bounds.Width,Screen.PrimaryScreen.Bounds.Height);
+		public static void initialize(){
+			initialize(Screen.PrimaryScreen.Bounds.Width,Screen.PrimaryScreen.Bounds.Height);
 		}
 
-        public static void initialize(Game1 game, int sWidth, int sHeight){
-
+        public static void initialize(int sWidth, int sHeight){
+            Game1 game = GameManager.game;
             if (loadDemo){
                 cameraPercentageToFollow.X = 0.3f;
                 cameraPercentageToFollow.Y = 0.4f;

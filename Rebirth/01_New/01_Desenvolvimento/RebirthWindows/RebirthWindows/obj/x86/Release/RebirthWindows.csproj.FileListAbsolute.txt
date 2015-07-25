@@ -74,3 +74,4 @@ D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWind
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Release\Content\Texture\Shale_rock_pxr128.tif
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Release\Content\Texture\cyan.png
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.FormTextureHolders.resources
+D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.GameObjectForm.resources

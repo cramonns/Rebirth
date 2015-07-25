@@ -16,6 +16,8 @@ namespace Rebirth {
 
         public Editor gameEditor;
 
+        public GameObjectForm objectForm;
+
         bool editMode = true;
 
         int lastTabIndex = 0;
@@ -360,8 +362,13 @@ namespace Rebirth {
                 GameObject g = gameWorld.selectedObject;
                 gameWorld.selectedObject = gameWorld.objectAt(MouseManager.mousePosition);
                 if (gameWorld.selectedObject != null && g != gameWorld.selectedObject){
+                    objectForm = new GameObjectForm(gameWorld.selectedObject);
+                    objectForm.Show();
                     auxShape = gameWorld.selectedObject.BoundingBox;
                     gameWorld.boundingBoxBackup.set(auxShape.Center, auxShape.width, auxShape.height);
+                }
+                else {
+                    if (objectForm != null)objectForm.Close();
                 }
             }
         }

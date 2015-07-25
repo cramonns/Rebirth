@@ -47,7 +47,11 @@ namespace Rebirth {
 
         public static bool Update(SceneContainer[] scenes, int preloadAmount, Vector2 playerPosition){
             bool updated = false;
-            int playerPosID = cm.positionID(playerPosition.X);
+            int playerPosID = cm.positionID(playerPosition);
+            if (playerPosID == -1) {
+                GameManager.gameOver();
+                return true;
+            }
             if (scenes[preloadAmount] == null){
                 updated = true;
                 scenes[preloadAmount] = Load(playerPosID);
@@ -86,6 +90,9 @@ namespace Rebirth {
             }
             foreach (GameObject g in loadedScene.objects){
                 g.Load();
+            }
+            foreach (TextureHolder th in loadedScene.textureHolders){
+                th.load();
             }
             return loadedScene;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Runtime.CompilerServices; 
+using System.Runtime.CompilerServices;
+using Microsoft.Xna.Framework; 
 
 namespace Rebirth {
     public static class MathUtils {

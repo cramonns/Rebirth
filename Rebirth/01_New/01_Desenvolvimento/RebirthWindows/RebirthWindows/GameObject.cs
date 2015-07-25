@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace Rebirth{
 
+    /// <summary>
+    /// Class representing an object from the game
+    /// </summary>
     [Serializable]
 	public abstract class GameObject{
    
@@ -114,7 +117,6 @@ namespace Rebirth{
 
 
 #if EDITOR
-
         public RectangleF getTopContact(){
             float worldPixel = DisplayManager.ToWorldLength(1);
             return new RectangleF(boundingBox.x + 2*worldPixel, boundingBox.y - worldPixel + boundingBox.height,boundingBox.width - 4*worldPixel,3*worldPixel);

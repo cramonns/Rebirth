@@ -5,6 +5,51 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Rebirth{
 
+    public class Umbrella{
+        bool open;
+        Texture2D texture;
+        Player owner;
+
+        public Umbrella(Player p){
+            Color[] colors = new Color[] { Color.White };
+            texture = new Texture2D(GameManager.game.GraphicsDevice, 1, 1);
+            texture.SetData<Color>(colors);
+            //texture = TextureManager.load(TextureManager.TextureID.white);
+            open = false;
+            owner = p;
+        }
+
+
+        public void Update(){
+            if (ControllerManager.TriggerFloating){
+                open = true;
+            } else open = false;
+        }
+
+        public void draw(SpriteBatch sb, GameTime gameTime){
+            Rectangle rectangle = DisplayManager.scaleTexture(new Vector2(owner.X + owner.Width/2, owner.Y+owner.Height/2-1.5f),0.2f, 1.5f);
+            sb.Draw(texture, 
+                rectangle, 
+                null, 
+                Color.Black, 
+                ControllerManager.rightAnalogRotation, 
+                new Vector2(0.5f, 1f),
+                SpriteEffects.None, 
+                0f);
+            if (open){
+                rectangle = DisplayManager.scaleTexture(new Vector2(owner.X + owner.Width/2, owner.Y+owner.Height/2-0.5f),1.4f, 0.5f);
+                sb.Draw(texture,
+                    rectangle,
+                    null,
+                    Color.Black*0.4f,
+                    ControllerManager.rightAnalogRotation,
+                    new Vector2(0.5f, 3f),
+                    SpriteEffects.None,
+                    0f);
+            }
+        }
+    }
+
     [Serializable]
 	public class Player:Character{
 
@@ -45,6 +90,9 @@ namespace Rebirth{
 		float jumpStartPos;
         public bool allowStanding;
 
+        //Addons
+        public Umbrella umbrella;
+
         public Attachment standingChecker;
 
 		public Player(){
@@ -58,6 +106,7 @@ namespace Rebirth{
 
             standingChecker = new Attachment(LogicalObject.Treatment.standingCheck, this, 0, CHAR_HEIGHT*0.1f, CHAR_WIDTH, CHAR_HEIGHT*0.9f);
 
+            umbrella = new Umbrella(this);
 		}
 
         private void startJump(){
@@ -77,6 +126,8 @@ namespace Rebirth{
 		}
 
 		public override void Update(GameTime gameTime){
+            umbrella.Update();
+
 			//updateBounds();
             float acceleration = MOVING_ACCELERATION;
             float topSpeed = MOVING_TOP_SPEED;
@@ -107,7 +158,7 @@ namespace Rebirth{
                 case playerStates.FALLING:
                     goto case playerStates.FLOATING;
                 case playerStates.FLOATING:
-                    if (ControllerManager.TriggerFloating){
+                    if (ControllerManager.TriggerFloating && ControllerManager.rightAnalogRotation > -0.4 && ControllerManager.rightAnalogRotation < 0.4){
                         state = playerStates.FLOATING;
                         if (speed.Y < -FLOATING_MAX_FALLING_SPEED) speed.Y = -FLOATING_MAX_FALLING_SPEED;
                     }
@@ -189,6 +240,7 @@ namespace Rebirth{
 			} else {
 				sb.Draw(texture, DisplayManager.scaleTexture(Position, boundingBox.width, boundingBox.height), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
 			}
+            umbrella.draw(sb,gameTime);
 		}
 
 		/*public override void setGroundedState(bool newState){

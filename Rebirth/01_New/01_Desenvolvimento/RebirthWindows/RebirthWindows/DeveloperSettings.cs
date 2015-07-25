@@ -7,7 +7,7 @@ using System.Text;
 namespace Rebirth {
     public static class DeveloperSettings {
         
-        public static bool drawTriggers = true;
+        public static bool drawTriggers = false;
 
     }
 }

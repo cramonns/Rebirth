@@ -15,6 +15,8 @@ namespace Rebirth {
         public override void Update(GameTime gameTime){
             if (ControllerManager.TriggerStart){
                 Game1.currentScreen = Game1.ScreenID.world;
+                GameManager.game.getWorld().player = new Player();
+                GameManager.game.getWorld().player.Load();
             }
         }
 
