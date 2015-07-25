@@ -27,7 +27,7 @@ namespace Rebirth{
         }
 
         public void draw(SpriteBatch sb, GameTime gameTime){
-            Rectangle rectangle = DisplayManager.scaleTexture(new Vector2(owner.X + owner.Width/2, owner.Y+owner.Height/2-1.5f),0.2f, 1.5f);
+            Rectangle rectangle = DisplayManager.scaleTexture(new Vector2(owner.X + owner.Width/2, owner.Y+owner.Height/2-1.3f),0.2f, 1.3f);
             sb.Draw(texture, 
                 rectangle, 
                 null, 
@@ -43,7 +43,7 @@ namespace Rebirth{
                     null,
                     Color.Black*0.4f,
                     ControllerManager.rightAnalogRotation,
-                    new Vector2(0.5f, 3f),
+                    new Vector2(0.5f, 2.6f),
                     SpriteEffects.None,
                     0f);
             }
@@ -72,12 +72,13 @@ namespace Rebirth{
 		const float MOVING_TOP_SPEED = 6f/60f;
         const float CROUCHING_TOP_SPEED = 3.6f/60f;
 		const float MOVING_ACCELERATION = .8f/60f;
-		const float JUMP_MOVING_ACCELERATION = .1f/60f;
+		const float JUMP_MOVING_ACCELERATION = 0.1f/60f;
+        const float FLOATING_MOVING_TOP_SPEED = 3.5f/60f;
 		const float JUMP_IMPULSE = 15f/60f;
 		const float JUMP_TOP_SPEED = 12f/60f;
 		const float CHAR_WIDTH = .6f;
 		const float CHAR_HEIGHT = 1.4f;
-        const float FLOATING_MAX_FALLING_SPEED = 3f/60f;
+        const float FLOATING_MAX_FALLING_SPEED = 1.4f/60f;
 
 		playerStates state;
 
@@ -131,6 +132,7 @@ namespace Rebirth{
 			//updateBounds();
             float acceleration = MOVING_ACCELERATION;
             float topSpeed = MOVING_TOP_SPEED;
+            float topVariations = 0;
 
             //Update Player State
             switch (state){
@@ -151,6 +153,7 @@ namespace Rebirth{
                     }
                     break;
                 case playerStates.JUMPING:
+                    acceleration = JUMP_MOVING_ACCELERATION;
                     if (!ControllerManager.TriggerJumping || speed.Y < 0) {
 						startFall();
 					} else break;
@@ -160,13 +163,18 @@ namespace Rebirth{
                 case playerStates.FLOATING:
                     if (ControllerManager.TriggerFloating && ControllerManager.rightAnalogRotation > -0.4 && ControllerManager.rightAnalogRotation < 0.4){
                         state = playerStates.FLOATING;
-                        if (speed.Y < -FLOATING_MAX_FALLING_SPEED) speed.Y = -FLOATING_MAX_FALLING_SPEED;
+                        topVariations = ControllerManager.rightAnalogRotation/12;
+                        if (topVariations < 0) topVariations*=-1;
+                        if (speed.Y < -FLOATING_MAX_FALLING_SPEED - topVariations) speed.Y = -FLOATING_MAX_FALLING_SPEED - topVariations;
+                        topSpeed = FLOATING_MOVING_TOP_SPEED;
+                        topVariations = 20f/60f*ControllerManager.rightAnalogRotation;
                     }
                     else {
                         state = playerStates.FALLING;                        
                     }
                     if (grounded) state = playerStates.WAITING;
-                    else acceleration = JUMP_MOVING_ACCELERATION;
+                    else 
+                        acceleration = JUMP_MOVING_ACCELERATION;
                     break;
                 case playerStates.CROUCHING:
                     goto case playerStates.DUCKING;
@@ -186,32 +194,28 @@ namespace Rebirth{
 			if (ControllerManager.direction == TriggerDirection.Right) {
                 movingSpeed += acceleration;
 				direction = Directions.RIGHT;
-				if (state == playerStates.JUMPING) {
-					if (jumping_direction == Directions.LEFT && movingSpeed > 0) startFall();
-				}
-				else if (state == playerStates.WAITING){
+				if (state == playerStates.WAITING){
                     state = playerStates.MOVING;
                 } 
                 else if (state == playerStates.DUCKING){
                     state = playerStates.CROUCHING;
                     topSpeed = CROUCHING_TOP_SPEED;
                 }
-				if (movingSpeed > topSpeed)
-					movingSpeed = topSpeed;
+                topVariations = (topVariations>0)?topVariations:topVariations/8;
+				if (movingSpeed > topSpeed + topVariations)
+					movingSpeed = topSpeed + topVariations;
 			} else if (ControllerManager.direction == TriggerDirection.Left) {
 				movingSpeed -= acceleration;
                 direction = Directions.LEFT;
-				if (state == playerStates.JUMPING) {
-					if (jumping_direction == Directions.RIGHT && movingSpeed < 0) startFall(); 
-				}
-				else if (state == playerStates.WAITING) {
+				if (state == playerStates.WAITING) {
 					state = playerStates.MOVING;
 				}
 				else if (state == playerStates.DUCKING){
                     state = playerStates.CROUCHING;
                     topSpeed = CROUCHING_TOP_SPEED;
                 }
-				if (movingSpeed < -topSpeed) movingSpeed = -topSpeed;
+                topVariations = (topVariations<0)?topVariations:topVariations/8;
+				if (movingSpeed < -topSpeed + topVariations) movingSpeed = -topSpeed + topVariations;
 			}
 
             if (state == playerStates.DUCKING || state == playerStates.CROUCHING){
