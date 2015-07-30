@@ -117,46 +117,6 @@ namespace Rebirth{
 
 
 #if EDITOR
-        public RectangleF getTopContact(){
-            float worldPixel = DisplayManager.ToWorldLength(1);
-            return new RectangleF(boundingBox.x + 2*worldPixel, boundingBox.y - worldPixel + boundingBox.height,boundingBox.width - 4*worldPixel,3*worldPixel);
-        }
-
-        public RectangleF getDownContact(){
-            float worldPixel = DisplayManager.ToWorldLength(1);
-            return new RectangleF(boundingBox.x + 2*worldPixel, boundingBox.y - worldPixel,boundingBox.width - 4*worldPixel,3*worldPixel);
-        }
-
-        public RectangleF getRightContact(){
-            float worldPixel = DisplayManager.ToWorldLength(1);
-            return new RectangleF(boundingBox.x + boundingBox.width - worldPixel, boundingBox.y + 2*worldPixel, 3*worldPixel, boundingBox.height - 4*worldPixel);
-        }
-
-
-        public RectangleF getLeftContact(){
-            float worldPixel = DisplayManager.ToWorldLength(1);
-            return new RectangleF(boundingBox.x - worldPixel, boundingBox.y + 2*worldPixel, 3*worldPixel, boundingBox.height - 4*worldPixel);
-        }
-
-        public RectangleF getTopLeftContact(){
-            float worldPixel = DisplayManager.ToWorldLength(1);
-            return new RectangleF(boundingBox.x - worldPixel, boundingBox.y - worldPixel + boundingBox.height,3*worldPixel,3*worldPixel);
-        }
-
-        public RectangleF getTopRightContact(){
-            float worldPixel = DisplayManager.ToWorldLength(1);
-            return new RectangleF(boundingBox.x - worldPixel + boundingBox.width, boundingBox.y - worldPixel + boundingBox.height,3*worldPixel,3*worldPixel);
-        }
-
-        public RectangleF getDownLeftContact(){
-            float worldPixel = DisplayManager.ToWorldLength(1);
-            return new RectangleF(boundingBox.x - worldPixel, boundingBox.y - worldPixel,3*worldPixel,3*worldPixel);
-        }
-
-        public RectangleF getDownRightContact(){
-            float worldPixel = DisplayManager.ToWorldLength(1);
-            return new RectangleF(boundingBox.x - worldPixel + boundingBox.width, boundingBox.y - worldPixel,3*worldPixel,3*worldPixel);
-        }
 
         public void extendRight(float extension){
             Width += extension;

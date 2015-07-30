@@ -89,6 +89,8 @@ namespace Rebirth {
                 loadedScene = (SceneContainer)binFormat.Deserialize(fStream);
             }
             foreach (GameObject g in loadedScene.objects){
+                g.X += loadedScene.X;
+                g.Y += loadedScene.Y;
                 g.Load();
             }
             foreach (TextureHolder th in loadedScene.textureHolders){

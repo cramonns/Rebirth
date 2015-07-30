@@ -173,8 +173,7 @@ namespace Rebirth{
                         state = playerStates.FALLING;                        
                     }
                     if (grounded) state = playerStates.WAITING;
-                    else 
-                        acceleration = JUMP_MOVING_ACCELERATION;
+                    else acceleration = JUMP_MOVING_ACCELERATION;
                     break;
                 case playerStates.CROUCHING:
                     goto case playerStates.DUCKING;

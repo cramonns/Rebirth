@@ -46,9 +46,7 @@ namespace Rebirth {
 
         public void saveContainer(SceneContainer sc){
             sc.save();
-            if (cm.firstContainerID == sc.id){
-                cm.startPositionX = sc.X;
-            }
+            cm.updateContainer(sc);
             cm.saveContainerManager();
         }
 

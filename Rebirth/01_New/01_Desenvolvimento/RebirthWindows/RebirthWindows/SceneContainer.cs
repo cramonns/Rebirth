@@ -120,6 +120,10 @@ namespace Rebirth {
         }
 
         public void save(){
+            foreach (GameObject g in objects){
+                g.X -= shapeBox.x;
+                g.Y -= shapeBox.y;
+            }
             BinaryFormatter binFormat = new BinaryFormatter();
             string fileName = "Lvl/" + id.ToString() + ".scn";
             if (!Directory.Exists("Lvl")){

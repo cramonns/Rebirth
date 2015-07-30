@@ -138,5 +138,15 @@ namespace Rebirth {
             return containers[index].name;
         }
 
+        public void updateContainer(SceneContainer sc){
+            ContainerProperties cp = getContainerProperties(sc.id);
+            if (firstContainerID == sc.id){
+                startPositionX = sc.X;
+            }
+            cp.width = sc.Width;
+            cp.height = sc.Height;
+            cp.y = sc.Y;
+        }
+
     }
 }

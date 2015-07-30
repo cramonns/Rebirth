@@ -252,6 +252,47 @@ namespace Rebirth{
             Center = position;
 			//center = new VertexR ((x + width) / 2, (y + height) / 2);
 		}
+
+#if EDITOR
+
+        public void extendUp(){
+            if (MouseManager.mousePosition.Y >= y)
+                height = MouseManager.mousePosition.Y - y;
+            else height = 0;
+        }
+
+        public void extendDown(){
+            float top = y + height;
+            if (MouseManager.mousePosition.Y <= top){
+                y = MouseManager.mousePosition.Y;
+                height = top - y;
+            }
+            else {
+                height = 0;
+                y = top;
+            }
+        }
+
+        public void extendLeft(){
+            float right = x + width;
+            if (MouseManager.mousePosition.X <= right){
+                x = MouseManager.mousePosition.X;
+                width = right - x;
+            }
+            else {
+                width = 0;
+                x = right;
+            }
+        }
+
+        public void extendRight(){
+            if (MouseManager.mousePosition.X >= x)
+                width = MouseManager.mousePosition.X - x;
+            else width = 0;
+        }
+
+#endif
+
 	}
 
 }

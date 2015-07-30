@@ -99,6 +99,7 @@ namespace Rebirth {
             // 
             // buttonPlay
             // 
+            this.buttonPlay.Enabled = false;
             this.buttonPlay.Image = ((System.Drawing.Image)(resources.GetObject("buttonPlay.Image")));
             this.buttonPlay.Location = new System.Drawing.Point(14, 24);
             this.buttonPlay.Name = "buttonPlay";
@@ -309,7 +310,6 @@ namespace Rebirth {
         private System.Windows.Forms.ComboBox comboBoxObjectList;
         private System.Windows.Forms.Label labelSelectObject;
         private System.Windows.Forms.GroupBox groupBoxTest;
-        private System.Windows.Forms.Button buttonPlay;
         private System.Windows.Forms.Button buttonInsertObject;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -320,6 +320,7 @@ namespace Rebirth {
         private System.Windows.Forms.ToolStripMenuItem containerToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Button buttonTHolders;
+        private System.Windows.Forms.Button buttonPlay;
     }
 }
 #endif
