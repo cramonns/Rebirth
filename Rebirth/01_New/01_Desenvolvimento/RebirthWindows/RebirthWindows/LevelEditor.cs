@@ -218,6 +218,7 @@ namespace Rebirth {
 
         private void gameBox_MouseUp(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left){
+                gameEntry.getWorld().transformScene();
                 gameEntry.getWorld().transformSelectedObject();
                 MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X - gameBox.Left, PictureBox.MousePosition.Y - gameBox.Top));
                 wasMouseClicked = false;

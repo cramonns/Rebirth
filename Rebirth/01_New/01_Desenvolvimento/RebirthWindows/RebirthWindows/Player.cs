@@ -6,9 +6,16 @@ using Microsoft.Xna.Framework.Content;
 namespace Rebirth{
 
     public class Umbrella{
-        bool open;
+
+        const float LOWERING_ACCELERATION = 0.002f;
+        const float LOWERING_TOP_SPEED = 0.06f;
+
+        float lowering_speed = 0;
+
+        public bool open;
         Texture2D texture;
         Player owner;
+        public float rotation;
 
         public Umbrella(Player p){
             Color[] colors = new Color[] { Color.White };
@@ -22,8 +29,33 @@ namespace Rebirth{
 
         public void Update(){
             if (ControllerManager.TriggerFloating){
+                if (!open){
+                    if (ControllerManager.rightAnalogWaiting){
+                        rotation = 0;
+                    }
+                }
                 open = true;
             } else open = false;
+            if (ControllerManager.rightAnalogWaiting){
+                if ((ControllerManager.direction == TriggerDirection.Right && rotation < 0) ||
+                    (ControllerManager.direction == TriggerDirection.Left && rotation > 0) )
+                {
+                    rotation *= -1;
+                }
+                if (owner.isGrounded() && !open){
+                    lowering_speed += LOWERING_ACCELERATION;
+                    if (lowering_speed > LOWERING_TOP_SPEED) lowering_speed = LOWERING_TOP_SPEED;
+                    rotation += (rotation < 0)?-lowering_speed:lowering_speed;
+                } else lowering_speed = 0;
+            }
+            else {
+                rotation = ControllerManager.rightAnalogRotation;
+                lowering_speed = 0;
+            }
+            if (owner.isGrounded()){
+                if (rotation > 2.7f) rotation = 2.7f;
+                else if (rotation < -2.7f) rotation = -2.7f;
+            }
         }
 
         public void draw(SpriteBatch sb, GameTime gameTime){
@@ -32,7 +64,7 @@ namespace Rebirth{
                 rectangle, 
                 null, 
                 Color.Black, 
-                ControllerManager.rightAnalogRotation, 
+                rotation, 
                 new Vector2(0.5f, 1f),
                 SpriteEffects.None, 
                 0f);
@@ -42,7 +74,7 @@ namespace Rebirth{
                     rectangle,
                     null,
                     Color.Black*0.4f,
-                    ControllerManager.rightAnalogRotation,
+                    rotation,
                     new Vector2(0.5f, 2.6f),
                     SpriteEffects.None,
                     0f);
@@ -161,13 +193,13 @@ namespace Rebirth{
                 case playerStates.FALLING:
                     goto case playerStates.FLOATING;
                 case playerStates.FLOATING:
-                    if (ControllerManager.TriggerFloating && ControllerManager.rightAnalogRotation > -0.4 && ControllerManager.rightAnalogRotation < 0.4){
+                    if (umbrella.open && umbrella.rotation > -0.4 && umbrella.rotation < 0.4){
                         state = playerStates.FLOATING;
-                        topVariations = ControllerManager.rightAnalogRotation/12;
+                        topVariations = umbrella.rotation/12;
                         if (topVariations < 0) topVariations*=-1;
                         if (speed.Y < -FLOATING_MAX_FALLING_SPEED - topVariations) speed.Y = -FLOATING_MAX_FALLING_SPEED - topVariations;
                         topSpeed = FLOATING_MOVING_TOP_SPEED;
-                        topVariations = 20f/60f*ControllerManager.rightAnalogRotation;
+                        topVariations = 20f/60f*umbrella.rotation;
                     }
                     else {
                         state = playerStates.FALLING;                        

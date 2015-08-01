@@ -305,6 +305,19 @@ namespace Rebirth {
             boundingBoxBackup.set(selectedObject.BoundingBox.Center, selectedObject.Width, selectedObject.Height);
         }
 
+        public void transformScene(){
+            float diff = 0;
+            if (scenes[preloadAmount - 1] != null){
+                diff = scenes[preloadAmount - 1].X + scenes[preloadAmount - 1].Width - scenes[preloadAmount].X;
+                scenes[preloadAmount].shiftRight(diff);
+                DisplayManager.screenShift.X += diff;
+            }
+            if (scenes[preloadAmount+1] != null) {
+                diff = scenes[preloadAmount].X + scenes[preloadAmount].Width - scenes[preloadAmount + 1].X;
+                scenes[preloadAmount+1].shiftRight(diff);
+            }
+        }
+
 #endif
 #endregion
 

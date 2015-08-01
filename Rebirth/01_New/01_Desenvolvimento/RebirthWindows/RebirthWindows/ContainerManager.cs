@@ -139,11 +139,20 @@ namespace Rebirth {
         }
 
         public void updateContainer(SceneContainer sc){
-            ContainerProperties cp = getContainerProperties(sc.id);
+            int index = IdIndexes[sc.id];
+            ContainerProperties cp = containers[index];
             if (firstContainerID == sc.id){
                 startPositionX = sc.X;
             }
-            cp.width = sc.Width;
+            if (cp.width != sc.Width) {
+                float extension = sc.Width - cp.width;
+                cp.width = sc.Width;
+                for (index++; index < containers.Count; index++ ){
+                    SceneContainer scene = LoadManager.Load(containers[index].id);
+                    scene.shiftRight(extension);                
+                    scene.save();
+                }
+            }
             cp.height = sc.Height;
             cp.y = sc.Y;
         }
