@@ -36,22 +36,16 @@ namespace Rebirth {
             this.comboBoxObjectList = new System.Windows.Forms.ComboBox();
             this.groupBoxContainer = new System.Windows.Forms.GroupBox();
             this.buttonTHolders = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.containerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.containerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlContainer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
+            this.buttonNew = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBoxTest.SuspendLayout();
             this.groupBoxObjects.SuspendLayout();
             this.groupBoxContainer.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.tabControlContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,7 +75,6 @@ namespace Rebirth {
             this.panel1.Controls.Add(this.groupBoxTest);
             this.panel1.Controls.Add(this.groupBoxObjects);
             this.panel1.Controls.Add(this.groupBoxContainer);
-            this.panel1.Controls.Add(this.menuStrip1);
             this.panel1.Location = new System.Drawing.Point(1, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(190, 558);
@@ -158,82 +151,25 @@ namespace Rebirth {
             this.groupBoxContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxContainer.Controls.Add(this.buttonSave);
+            this.groupBoxContainer.Controls.Add(this.buttonNew);
             this.groupBoxContainer.Controls.Add(this.buttonTHolders);
-            this.groupBoxContainer.Enabled = false;
-            this.groupBoxContainer.Location = new System.Drawing.Point(3, 27);
+            this.groupBoxContainer.Location = new System.Drawing.Point(3, 3);
             this.groupBoxContainer.Name = "groupBoxContainer";
-            this.groupBoxContainer.Size = new System.Drawing.Size(184, 141);
+            this.groupBoxContainer.Size = new System.Drawing.Size(184, 165);
             this.groupBoxContainer.TabIndex = 1;
             this.groupBoxContainer.TabStop = false;
             this.groupBoxContainer.Text = "Container";
             // 
             // buttonTHolders
             // 
-            this.buttonTHolders.Location = new System.Drawing.Point(35, 112);
+            this.buttonTHolders.Location = new System.Drawing.Point(35, 118);
             this.buttonTHolders.Name = "buttonTHolders";
             this.buttonTHolders.Size = new System.Drawing.Size(115, 23);
             this.buttonTHolders.TabIndex = 0;
             this.buttonTHolders.Text = "Texture Holders...";
             this.buttonTHolders.UseVisualStyleBackColor = true;
             this.buttonTHolders.Click += new System.EventHandler(this.buttonTHolders_Click);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(190, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.containerToolStripMenuItem});
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.newToolStripMenuItem.Text = "New";
-            // 
-            // containerToolStripMenuItem
-            // 
-            this.containerToolStripMenuItem.Name = "containerToolStripMenuItem";
-            this.containerToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.containerToolStripMenuItem.Text = "Container";
-            this.containerToolStripMenuItem.Click += new System.EventHandler(this.containerToolStripMenuItem_Click);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.containerToolStripMenuItem1});
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.saveToolStripMenuItem.Text = "Save";
-            // 
-            // containerToolStripMenuItem1
-            // 
-            this.containerToolStripMenuItem1.Name = "containerToolStripMenuItem1";
-            this.containerToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
-            this.containerToolStripMenuItem1.Text = "Container";
-            this.containerToolStripMenuItem1.Click += new System.EventHandler(this.containerToolStripMenuItem1_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // tabControlContainer
             // 
@@ -269,6 +205,26 @@ namespace Rebirth {
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // buttonNew
+            // 
+            this.buttonNew.Location = new System.Drawing.Point(50, 24);
+            this.buttonNew.Name = "buttonNew";
+            this.buttonNew.Size = new System.Drawing.Size(75, 23);
+            this.buttonNew.TabIndex = 1;
+            this.buttonNew.Text = "New";
+            this.buttonNew.UseVisualStyleBackColor = true;
+            this.buttonNew.Click += new System.EventHandler(this.containerToolStripMenuItem_Click);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(50, 89);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 2;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.containerToolStripMenuItem1_Click);
+            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,7 +235,6 @@ namespace Rebirth {
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gameBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "LevelEditor";
             this.Text = "LevelEditor";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -287,13 +242,10 @@ namespace Rebirth {
             this.Resize += new System.EventHandler(this.LevelEditor_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.groupBoxTest.ResumeLayout(false);
             this.groupBoxObjects.ResumeLayout(false);
             this.groupBoxObjects.PerformLayout();
             this.groupBoxContainer.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.tabControlContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -312,15 +264,10 @@ namespace Rebirth {
         private System.Windows.Forms.GroupBox groupBoxTest;
         private System.Windows.Forms.Button buttonInsertObject;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem containerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem containerToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Button buttonTHolders;
         private System.Windows.Forms.Button buttonPlay;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonNew;
     }
 }
 #endif

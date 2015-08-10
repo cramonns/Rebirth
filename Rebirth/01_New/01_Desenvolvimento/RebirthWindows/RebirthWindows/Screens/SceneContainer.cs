@@ -153,7 +153,7 @@ namespace Rebirth {
         /* There's no need of a shiftLeft function.
          * When extending to the left, the current scene will be shifted, not the previous scene.
          */
-        public void shiftRight(float extension){
+        public void shiftHorizontal(float extension){
             foreach (GameObject g in objects){
                 g.X += extension;
             }

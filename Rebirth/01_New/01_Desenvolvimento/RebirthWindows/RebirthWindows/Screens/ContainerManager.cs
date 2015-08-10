@@ -149,7 +149,7 @@ namespace Rebirth {
                 cp.width = sc.Width;
                 for (index++; index < containers.Count; index++ ){
                     SceneContainer scene = LoadManager.Load(containers[index].id);
-                    scene.shiftRight(extension);                
+                    scene.shiftHorizontal(extension);                
                     scene.save();
                 }
             }
