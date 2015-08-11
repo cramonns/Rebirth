@@ -114,7 +114,6 @@
     <Compile Include="Screens\SceneContainer.cs" />
     <Compile Include="EditorClasses\SceneContainerManager.cs" />
     <Compile Include="GlobalControllers\DisplayManager.cs" />
-    <Compile Include="Screens\TextureHolder.cs" />
     <Compile Include="GlobalControllers\TextureManager.cs" />
     <Compile Include="GlobalControllers\UserSettings.cs" />
     <Compile Include="MathAndGeometry\VertexR.cs" />

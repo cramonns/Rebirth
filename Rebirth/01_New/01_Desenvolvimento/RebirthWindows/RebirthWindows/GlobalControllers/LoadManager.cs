@@ -93,8 +93,8 @@ namespace Rebirth {
                 g.Y += loadedScene.Y;
                 g.Load();
             }
-            foreach (TextureHolder th in loadedScene.textureHolders){
-                th.load();
+            foreach (TextureManager.TextureID th in loadedScene.textureHolders){
+                TextureManager.load(th);
             }
             return loadedScene;
         }

@@ -8,14 +8,20 @@ using System.IO;
 namespace Rebirth {
     [Serializable]
     public class SceneContainer {
+
+        private const int BACKGROUND_LEVELS = 7;
+        private const int FRONT_LEVELS = 3;
+
         //class attributes
         public int id;
         public int previousScene = -1;
         public int nextScene = -1;
         RectangleF shapeBox;
-        public LinkedList<TextureHolder> textureHolders;
+        public LinkedList<TextureManager.TextureID> textureHolders;
        
         public LinkedList<GameObject> objects;
+        public LinkedList<GameObject>[] backgroundObjects;
+        public LinkedList<GameObject>[] frontObjects;
 
 #if EDITOR
         [NonSerialized]
@@ -57,10 +63,16 @@ namespace Rebirth {
         
         //class constructors
         public SceneContainer(RectangleF sb, int id){
-            objects = new LinkedList<GameObject>();            
+            objects = new LinkedList<GameObject>(); 
+            backgroundObjects = new LinkedList<GameObject>[BACKGROUND_LEVELS];
+            frontObjects = new LinkedList<GameObject>[FRONT_LEVELS];
+            for (int i = 0; i < BACKGROUND_LEVELS; i++)
+                backgroundObjects[i] = new LinkedList<GameObject>();
+            for (int i = 0; i < FRONT_LEVELS; i++)
+                frontObjects[i] = new LinkedList<GameObject>();
             shapeBox = sb;
             this.id = id;
-            textureHolders = new LinkedList<TextureHolder>();
+            textureHolders = new LinkedList<TextureManager.TextureID>();
 #if EDITOR
             objectsTree = new QuadTree(0,sb);
 #endif
@@ -83,7 +95,7 @@ namespace Rebirth {
 
         public void unLoad(){
             foreach (GameObject g in objects) g.unLoad();
-            foreach (TextureHolder t in textureHolders) t.unLoad();
+            foreach (TextureManager.TextureID t in textureHolders) TextureManager.unLoad(t);
             objects.Clear();
             textureHolders.Clear();
 #if EDITOR

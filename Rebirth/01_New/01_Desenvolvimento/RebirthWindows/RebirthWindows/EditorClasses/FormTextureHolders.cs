@@ -20,8 +20,8 @@ namespace Rebirth {
             foreach (string s in Enum.GetNames(typeof(TextureManager.TextureID))){
                 checkedListBox1.Items.Add(s);
             }
-            foreach (TextureHolder th in sc.textureHolders){
-                checkedListBox1.SetItemChecked((int)th.id,true);
+            foreach (TextureManager.TextureID th in sc.textureHolders){
+                checkedListBox1.SetItemChecked((int)th,true);
             }
         }
 
@@ -38,7 +38,7 @@ namespace Rebirth {
         private void buttonConfirm_Click(object sender, EventArgs e) {
             container.textureHolders.Clear();
             foreach (int i in checkedListBox1.CheckedIndices){
-                container.textureHolders.AddFirst(new TextureHolder((TextureManager.TextureID)i));
+                container.textureHolders.AddFirst((TextureManager.TextureID)i);
             }
             container.save();
             Close();
