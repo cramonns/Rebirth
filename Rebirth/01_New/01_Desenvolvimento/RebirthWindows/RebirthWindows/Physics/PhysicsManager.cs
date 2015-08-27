@@ -71,7 +71,7 @@ namespace Rebirth{
             if (reload){
                 simulatedObjects.Clear();
                 simulatedObjects.Add(p);
-                simulatedObjects.Add(p.standingChecker);
+                //simulatedObjects.Add(p.standingChecker);
             }
             
             RectangleF simulatedZone;

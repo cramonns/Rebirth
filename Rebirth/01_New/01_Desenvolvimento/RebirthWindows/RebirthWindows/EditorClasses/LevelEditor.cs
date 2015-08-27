@@ -46,7 +46,6 @@ namespace Rebirth {
             return new RectangleF(boundingBox.x + boundingBox.width - worldPixel, boundingBox.y + 2*worldPixel, 3*worldPixel, boundingBox.height - 4*worldPixel);
         }
 
-
         public RectangleF getLeftContact(RectangleF boundingBox){
             float worldPixel = DisplayManager.ToWorldLength(1);
             return new RectangleF(boundingBox.x - worldPixel, boundingBox.y + 2*worldPixel, 3*worldPixel, boundingBox.height - 4*worldPixel);
@@ -74,7 +73,8 @@ namespace Rebirth {
 
         private void setContainerOperationsAvaiability(bool state){
             buttonInsertObject.Enabled = state;
-            groupBoxContainer.Enabled = state;
+            buttonSave.Enabled = state;
+            buttonTHolders.Enabled = state;
         }
 
         private void enableContainerOperations(){
@@ -147,6 +147,7 @@ namespace Rebirth {
         }
 
         private void tabControlContainer_SelectedIndexChanged(object sender, EventArgs e) {
+            gameEntry.getWorld().selectedObject = null;
             int index = tabControlContainer.SelectedIndex;
             if (lastTabIndex != 0){
                 gameEntry.getWorld().saveScene();
@@ -352,17 +353,18 @@ namespace Rebirth {
                 }
             }
             else {
-                GameObject g = gameWorld.selectedObject;
+                //GameObject g = gameWorld.selectedObject;
+                if (objectForm != null) {
+                    objectForm.Close();
+                    objectForm = null;
+                }
                 gameWorld.selectedObject = gameWorld.objectAt(MouseManager.mousePosition);
-                if (gameWorld.selectedObject != null && g != gameWorld.selectedObject){
+                if (gameWorld.selectedObject != null){
                     objectForm = new GameObjectForm(gameWorld.selectedObject);
                     objectForm.Show();
                     auxShape = gameWorld.selectedObject.BoundingBox;
                     gameWorld.boundingBoxBackup.set(auxShape.Center, auxShape.width, auxShape.height);
-                }
-                else {
-                    if (objectForm != null)objectForm.Close();
-                }
+                }                
             }
         }
 

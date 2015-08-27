@@ -27,6 +27,11 @@ namespace Rebirth {
             numericUpDownY.Value = (decimal)editingObject.Y;
             numericUpDownWidth.Value = (decimal)editingObject.Width;
             numericUpDownHeight.Value = (decimal)editingObject.Height;
+
+            if (g is MoveableObject){
+                tabControl1.TabPages.RemoveAt(0);
+            }
+            else tabControl1.TabPages.RemoveAt(1);
             
         }
 
@@ -58,6 +63,14 @@ namespace Rebirth {
             editingObject.unLoad();
             editingObject.textureId = (TextureManager.TextureID)comboBoxTexture.SelectedIndex;
             editingObject.Load();
+        }
+
+        private void numericUpDownSpeedX_ValueChanged(object sender, EventArgs e) {
+            (editingObject as MoveableObject).speed.X = (float)numericUpDownSpeedX.Value;
+        }
+
+        private void numericUpDownSpeedY_ValueChanged(object sender, EventArgs e) {
+            (editingObject as MoveableObject).speed.Y = (float)numericUpDownSpeedY.Value;
         }
     }
 }

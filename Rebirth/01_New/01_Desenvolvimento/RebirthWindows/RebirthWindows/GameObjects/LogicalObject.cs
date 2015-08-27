@@ -8,7 +8,9 @@ namespace Rebirth {
 
         public enum Treatment{
             Default,
-            standingCheck
+            standingCheck,
+            droppedUmprellaEnter,
+            droppedUmbrellaLeave
         }
 
         protected delegate void collisionHandler(GameObject collider, CollisionDistance cd);

@@ -9,6 +9,7 @@ namespace Rebirth{
 
         const float LOWERING_ACCELERATION = 0.002f;
         const float LOWERING_TOP_SPEED = 0.06f;
+        const float MAX_GROUND_ROTATION = (float)Math.PI/2;
 
         float lowering_speed = 0;
 
@@ -16,6 +17,8 @@ namespace Rebirth{
         Texture2D texture;
         Player owner;
         public float rotation;
+        public const float Thickness = 0.2f;
+        public const float Length = 1.3f;
 
         public Umbrella(Player p){
             Color[] colors = new Color[] { Color.White };
@@ -24,42 +27,53 @@ namespace Rebirth{
             //texture = TextureManager.load(TextureManager.TextureID.white);
             open = false;
             owner = p;
-        }
-
+        }        
 
         public void Update(){
-            if (ControllerManager.TriggerFloating){
-                if (!open){
+            if (ControllerManager.TriggerFloating || MouseManager.leftButtonPressed){
+                /*if (!open){
                     if (ControllerManager.rightAnalogWaiting){
                         rotation = 0;
                     }
-                }
+                }*/
                 open = true;
             } else open = false;
             if (ControllerManager.rightAnalogWaiting){
-                if ((ControllerManager.direction == TriggerDirection.Right && rotation < 0) ||
-                    (ControllerManager.direction == TriggerDirection.Left && rotation > 0) )
-                {
-                    rotation *= -1;
+                if (!MouseManager.mouseWaiting){
+                    rotation = (float)Math.Atan2(MouseManager.mousePosition.X - MouseManager.mouseSource.X, MouseManager.mousePosition.Y - MouseManager.mouseSource.Y);
+                }else {
+                    if (ControllerManager.increaseRotation){
+                        rotation += 0.02f;    
+                    }
+                    else if (ControllerManager.decreaseRotation){
+                        rotation -= 0.02f;
+                    }
+                    if ( !open && ((ControllerManager.direction == TriggerDirection.Right && rotation < 0) ||
+                        (ControllerManager.direction == TriggerDirection.Left && rotation > 0)) )
+                    {
+                        rotation *= -1;
+                    }
+                    MouseManager.updateSource(rotation);
                 }
-                if (owner.isGrounded() && !open){
+                /*if (owner.isGrounded() && !open){
                     lowering_speed += LOWERING_ACCELERATION;
                     if (lowering_speed > LOWERING_TOP_SPEED) lowering_speed = LOWERING_TOP_SPEED;
                     rotation += (rotation < 0)?-lowering_speed:lowering_speed;
-                } else lowering_speed = 0;
+                } else lowering_speed = 0;*/
             }
-            else {
+            else { 
                 rotation = ControllerManager.rightAnalogRotation;
                 lowering_speed = 0;
+                MouseManager.updateSource(rotation);
             }
             if (owner.isGrounded()){
-                if (rotation > 2.7f) rotation = 2.7f;
-                else if (rotation < -2.7f) rotation = -2.7f;
+                if (rotation > MAX_GROUND_ROTATION) rotation = MAX_GROUND_ROTATION;
+                else if (rotation < -MAX_GROUND_ROTATION) rotation = -MAX_GROUND_ROTATION;
             }
         }
 
         public void draw(SpriteBatch sb, GameTime gameTime){
-            Rectangle rectangle = DisplayManager.scaleTexture(new Vector2(owner.X + owner.Width/2, owner.Y+owner.Height/2-1.3f),0.2f, 1.3f);
+            Rectangle rectangle = DisplayManager.scaleTexture(new Vector2(owner.X + owner.Width/2, owner.Y+owner.Height/2-Length),Thickness, Length);
             sb.Draw(texture, 
                 rectangle, 
                 null, 
@@ -80,6 +94,24 @@ namespace Rebirth{
                     0f);
             }
         }
+    }
+
+    public class DroppedUmbrella:Trigger{
+
+    
+        public DroppedUmbrella(Player p):base(new Vector2(p.Center.X - Umbrella.Length/2, p.Y), Treatment.Default, Treatment.droppedUmprellaEnter, Treatment.droppedUmbrellaLeave){
+            Color[] colors = new Color[] { Color.White };
+            texture = new Texture2D(GameManager.game.GraphicsDevice, 1, 1);
+            texture.SetData<Color>(colors);
+            Width = Umbrella.Length;
+            Height = Umbrella.Thickness;
+        }
+
+        public override void Draw(SpriteBatch sb, GameTime gameTime) {
+            Color color = Color.Black;
+            sb.Draw(texture, DisplayManager.scaleTexture(boundingBox), color);
+        }
+
     }
 
     [Serializable]
@@ -122,11 +154,16 @@ namespace Rebirth{
 		//support variables
 		float jumpStartPos;
         public bool allowStanding;
+        bool dropped = false;
+
 
         //Addons
-        public Umbrella umbrella;
+        public Umbrella umbrella = null;
 
-        public Attachment standingChecker;
+        //Properties
+        public Vector2 Center{
+            get {return new Vector2(Position.X + Width/2, Position.Y + Height/2);}
+        }
 
 		public Player(){
 			this.usePhysics = true;
@@ -137,7 +174,9 @@ namespace Rebirth{
 
             textureId = TextureManager.TextureID.player;
 
-            standingChecker = new Attachment(LogicalObject.Treatment.standingCheck, this, 0, CHAR_HEIGHT*0.1f, CHAR_WIDTH, CHAR_HEIGHT*0.9f);
+            Attachment standingChecker = new Attachment(LogicalObject.Treatment.standingCheck, this, 0, CHAR_HEIGHT*0.1f, CHAR_WIDTH, CHAR_HEIGHT*0.9f);
+
+            attachments.AddFirst(standingChecker);
 
             umbrella = new Umbrella(this);
 		}
@@ -159,7 +198,28 @@ namespace Rebirth{
 		}
 
 		public override void Update(GameTime gameTime){
-            umbrella.Update();
+            if (ControllerManager.TriggerDrop){
+                if (grounded && !dropped){
+                    if (umbrella != null) {
+                        umbrella = null;
+                        DroppedUmbrella du = new DroppedUmbrella(this);
+                        GameManager.addObjectToScene(du);
+                        GameManager.globalVariables.droppedUmbrella = du;
+                    }
+                    else if (GameManager.globalVariables.overUmbrella){
+                        umbrella = new Umbrella(this);
+                        GameManager.removeObjectFromScene(GameManager.globalVariables.droppedUmbrella);
+                        GameManager.globalVariables.droppedUmbrella = null;
+
+                    }
+                }
+                dropped = true;
+            }
+            else dropped = false;
+            
+            if (umbrella != null) umbrella.Update();
+
+            
 
 			//updateBounds();
             float acceleration = MOVING_ACCELERATION;
@@ -193,7 +253,7 @@ namespace Rebirth{
                 case playerStates.FALLING:
                     goto case playerStates.FLOATING;
                 case playerStates.FLOATING:
-                    if (umbrella.open && umbrella.rotation > -0.4 && umbrella.rotation < 0.4){
+                    if (umbrella != null && umbrella.open && umbrella.rotation > -0.4 && umbrella.rotation < 0.4){
                         state = playerStates.FLOATING;
                         topVariations = umbrella.rotation/12;
                         if (topVariations < 0) topVariations*=-1;
@@ -258,6 +318,7 @@ namespace Rebirth{
             }
 
             allowStanding = true;
+            if (umbrella != null && MouseManager.mouseWaiting)MouseManager.updateSource(umbrella.rotation);
 
 		}
 
@@ -275,7 +336,7 @@ namespace Rebirth{
 			} else {
 				sb.Draw(texture, DisplayManager.scaleTexture(Position, boundingBox.width, boundingBox.height), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
 			}
-            umbrella.draw(sb,gameTime);
+            if (umbrella != null)umbrella.draw(sb,gameTime);
 		}
 
 		/*public override void setGroundedState(bool newState){

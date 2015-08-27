@@ -31,6 +31,13 @@ namespace Rebirth{
 
         private static double rightAnalogRestingTimeElapsed;
 
+        public static bool increaseRotation;
+        public static bool decreaseRotation;
+
+        public static bool TriggerDrop = false;
+        private static bool prev_dropPressed;
+
+
 #if DEV
         private static bool prev_TPressed = false;
 #endif
@@ -59,6 +66,8 @@ namespace Rebirth{
             else prev_TPressed = false;
 #endif
 
+            
+
 			if (Keyboard.GetState().IsKeyDown(Keys.Right) || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X > analogDeadzone) {
 				direction = TriggerDirection.Right;
 			} else if (Keyboard.GetState().IsKeyDown(Keys.Left) || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X < -analogDeadzone) {
@@ -75,7 +84,7 @@ namespace Rebirth{
                 TriggerFloating = true;
             }
 
-			if (Keyboard.GetState().IsKeyDown(Keys.Up) || GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed) {
+			if (Keyboard.GetState().IsKeyDown(Keys.Up) || GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).Buttons.RightShoulder == ButtonState.Pressed) {
 				if (!prev_SpacePressed)	TriggerJumping = true;
 				prev_SpacePressed = true;
 			} else
@@ -83,6 +92,15 @@ namespace Rebirth{
 				    TriggerJumping = false;
 				    prev_SpacePressed = false;
 			    }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.RightShift) || GamePad.GetState(PlayerIndex.One).Buttons.LeftShoulder == ButtonState.Pressed){
+                if (!prev_dropPressed) TriggerDrop = true;
+                prev_dropPressed = true;
+            } else
+                if (Keyboard.GetState().IsKeyUp(Keys.RightShift) && GamePad.GetState(PlayerIndex.One).Buttons.LeftShoulder == ButtonState.Released){
+                    TriggerDrop = false;
+                    prev_dropPressed = false;
+                }
 
             TriggerStart = false;
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) || GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed) {
@@ -93,21 +111,33 @@ namespace Rebirth{
 				prev_StartPressed = false;
 			}
 
+            increaseRotation = false;
+            decreaseRotation = false;
             float rightAnalogX = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X; 
             float rightAnalogY = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.Y;
             if (rightAnalogX > analogDeadzone || rightAnalogX < -analogDeadzone || rightAnalogY > analogDeadzone || rightAnalogY < -analogDeadzone){
                 rightAnalogRestingTimeElapsed = 0;
                 rightAnalogWaiting = false;
                 rightAnalogRotation = (float)Math.Atan2(rightAnalogX, rightAnalogY);
-                /*if (rightAnalogRotation > 2.7f) rightAnalogRotation = 2.7f;
-                else if (rightAnalogRotation < -2.7f) rightAnalogRotation = -2.7f;*/
             }
             else {
-                if (rightAnalogRestingTimeElapsed < 3000) 
+                if (rightAnalogRestingTimeElapsed < 500) 
                     rightAnalogRestingTimeElapsed += gameTime.ElapsedGameTime.Milliseconds;
-                else
+                else {
+                    if (Keyboard.GetState().IsKeyDown(Keys.E)){
+                        increaseRotation = true;
+                    }
+                    else if (Keyboard.GetState().IsKeyDown(Keys.Q)){
+                        decreaseRotation = true;
+                    }
                     rightAnalogWaiting = true;
+                }
             }
+#if EDITOR
+            if (!GameManager.globalVariables.editorMode)
+#endif
+            MouseManager.Update();
+            
 		}
 	}
 }

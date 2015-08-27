@@ -25,7 +25,6 @@ namespace Rebirth {
             ExtendDownRight
         }
 
-        private bool editorMode = false;
         private bool insertionMode = false;
         public bool insertPermit;
         private Enumerations.ObjectTypes insertionType;
@@ -54,12 +53,13 @@ namespace Rebirth {
 
         public override void Update(GameTime gameTime){
 #if EDITOR
-            if (editorMode){
+            if (GameManager.globalVariables.editorMode){
                 drawPlayer = false;
             }
             else {
 #endif
                 bool updated = LoadManager.Update(scenes,preloadAmount,player.Position);
+                updated = updated || GameManager.wasUpdated();
                 worldPhysics.restart();
                 worldPhysics.addObjects(scenes[preloadAmount-1], scenes[preloadAmount], scenes[preloadAmount+1], player, updated);
                 worldPhysics.Update(gameTime);
@@ -74,7 +74,7 @@ namespace Rebirth {
 
 		public override void Draw(GameTime gameTime){
             
-            //if (!editorMode) sb.Draw(TextureManager.getTexture(TextureManager.TextureID.Background), new Rectangle(0,0,1280,720), Color.White);
+            //if (!GameManager.globalVariables.editorMode) sb.Draw(TextureManager.getTexture(TextureManager.TextureID.Background), new Rectangle(0,0,1280,720), Color.White);
 #if EDITOR
             Color color = Color.LightGray * 0.5f;
             Texture2D texture = TextureManager.load(TextureManager.TextureID.white);
@@ -88,7 +88,7 @@ namespace Rebirth {
                 if (!(currentScene.Right < DisplayManager.screenShift.X)){
                     currentScene.Draw(sb, gameTime);
 #if EDITOR
-                    if (editorMode) {
+                    if (GameManager.globalVariables.editorMode) {
                         currentScene.DrawBounds(sb, gameTime);
                         rectangle.set(currentScene.Shape.Center, currentScene.Shape.width, currentScene.Shape.height);
                         sb.Draw(texture, DisplayManager.scaleTexture(rectangle), color);
@@ -99,7 +99,7 @@ namespace Rebirth {
             if (scenes[preloadAmount] != null){
                 scenes[preloadAmount].Draw(sb, gameTime);
 #if EDITOR
-                if (editorMode) scenes[preloadAmount].DrawBounds(sb, gameTime);
+                if (GameManager.globalVariables.editorMode) scenes[preloadAmount].DrawBounds(sb, gameTime);
 #endif
             }
             if (scenes[preloadAmount+1] != null){
@@ -107,7 +107,7 @@ namespace Rebirth {
                 if (!(currentScene.X > DisplayManager.Right)){
                     currentScene.Draw(sb, gameTime);
 #if EDITOR
-                    if (editorMode) {
+                    if (GameManager.globalVariables.editorMode) {
                         currentScene.DrawBounds(sb, gameTime);
                         rectangle.set(currentScene.Shape.Center, currentScene.Shape.width, currentScene.Shape.height);
                         sb.Draw(texture, DisplayManager.scaleTexture(rectangle), color);
@@ -222,11 +222,11 @@ namespace Rebirth {
 #region EDITOR_FUNCTIONS
 #if EDITOR
         public void editMode(){
-            editorMode = true;
+            GameManager.globalVariables.editorMode = true;
         }
 
         public void leaveEditMode(){
-            editorMode = false;
+            GameManager.globalVariables.editorMode = false;
             drawPlayer = true;
         }
 
@@ -249,6 +249,7 @@ namespace Rebirth {
                     return new Trigger(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2,Ground.DefaultHeight/2), LogicalObject.Treatment.Default, LogicalObject.Treatment.Default, LogicalObject.Treatment.Default);
                 case Enumerations.ObjectTypes.TextureLoader:
                     return new TextureLoader(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2,Ground.DefaultHeight/2), TextureManager.TextureID.ground);
+
             }
             return null;
         }

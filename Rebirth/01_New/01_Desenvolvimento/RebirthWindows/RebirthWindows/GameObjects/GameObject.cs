@@ -33,11 +33,6 @@ namespace Rebirth{
         [NonSerialized]
 		protected Texture2D texture;
 
-#if EDITOR
-        [NonSerialized]
-        Form propertiesForm;
-#endif
-
         public RectangleF BoundingBox{
             get {return boundingBox;}
         }

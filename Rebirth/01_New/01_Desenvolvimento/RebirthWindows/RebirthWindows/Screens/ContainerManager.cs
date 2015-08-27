@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 namespace Rebirth {
 
     [Serializable]
-    struct ContainerProperties{
+    class ContainerProperties{
         public float width, height, y;
         public string name;
         public int id;
