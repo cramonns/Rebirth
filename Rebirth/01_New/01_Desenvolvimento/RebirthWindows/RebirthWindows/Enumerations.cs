@@ -11,7 +11,8 @@ namespace Rebirth {
             Box,
             Ground,
             Trigger,
-            TextureLoader
+            TextureLoader,
+            Canon
         }
 #endif
 

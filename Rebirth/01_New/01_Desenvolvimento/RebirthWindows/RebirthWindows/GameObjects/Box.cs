@@ -16,9 +16,13 @@ namespace Rebirth{
 
             textureId = TextureManager.TextureID.box;
 
-            if (position == null)
-			    boundingBox = new RectangleF(new Vector2 (10f, 10f), DefaultWidth, DefaultHeight);
-            else boundingBox = new RectangleF(position, DefaultWidth, DefaultHeight);
+            if (position == null){
+                boundingBox = new RectangleF(new Vector2 (10f, 10f), DefaultWidth, DefaultHeight);
+            }
+            else {
+                boundingBox = new RectangleF(position, DefaultWidth, DefaultHeight);
+            }
+            
 		}
 
 		public override void Update(GameTime gameTime){

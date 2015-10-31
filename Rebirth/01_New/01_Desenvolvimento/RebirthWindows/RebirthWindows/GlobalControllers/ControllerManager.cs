@@ -40,6 +40,8 @@ namespace Rebirth{
 
 #if DEV
         private static bool prev_TPressed = false;
+        private static bool prev_BPressed = false;
+        private static bool prev_CPressed = false;
 #endif
 
 		public static void Update(GameTime gameTime){
@@ -64,6 +66,22 @@ namespace Rebirth{
                 prev_TPressed = true;
             }
             else prev_TPressed = false;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.B)){
+                if (!prev_BPressed){
+                    DeveloperSettings.drawBoundingBoxes = !DeveloperSettings.drawBoundingBoxes;
+                }
+                prev_BPressed = true;
+            }
+            else prev_BPressed = false;
+          
+            if (Keyboard.GetState().IsKeyDown(Keys.C)){
+                if (!prev_CPressed){
+                    DeveloperSettings.drawColliders = !DeveloperSettings.drawColliders;
+                }
+                prev_CPressed = true;
+            }
+            else prev_CPressed = false;
 #endif
 
             

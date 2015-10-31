@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
 
 namespace Rebirth {
     public static class TextureManager {
@@ -22,12 +23,16 @@ namespace Rebirth {
         private static ContentManager Content;
         public static Texture2D[] textures;
         public static int[] texturesCount;
+        public static Texture2D blankTexture;
 
         public static void initialize(ContentManager cm){
             int count = Enum.GetNames(typeof(TextureID)).Length;
             textures = new Texture2D[count];
             texturesCount = new int[count];
             Content = cm;
+            Color[] colors = new Color[] { Color.White };
+            blankTexture = new Texture2D(GameManager.game.GraphicsDevice, 1, 1);
+            blankTexture.SetData<Color>(colors);
         }
 
         public static bool isLoaded(TextureID id){

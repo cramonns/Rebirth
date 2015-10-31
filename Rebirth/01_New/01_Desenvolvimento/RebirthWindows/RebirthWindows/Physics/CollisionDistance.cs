@@ -1,7 +1,7 @@
 using System;
 
 namespace Rebirth{
-	public class CollisionDistance{
+	public struct CollisionDistance{
 
 		public enum CD_Direction:byte{
 			UP = 0,
@@ -17,6 +17,8 @@ namespace Rebirth{
 			this.direction = direction;
 			this.length = length;
 		}
+
+        public CollisionDistance (float length):this(CD_Direction.UP, length){}
 
 		public CollisionDistance reverse(){
 			CD_Direction dir = this.direction;
@@ -36,6 +38,14 @@ namespace Rebirth{
 			}
 			return new CollisionDistance(dir, this.length);
 		}
+
+        public static bool operator < (CollisionDistance a, CollisionDistance b){
+            return a.length < b.length;
+        }
+
+        public static bool operator > (CollisionDistance a, CollisionDistance b){
+            return a.length > b.length;
+        }
 	}
 }
 

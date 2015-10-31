@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Rebirth{
 
@@ -27,6 +28,7 @@ namespace Rebirth{
 
 		public bool isFixed;
 		protected RectangleF boundingBox;
+        public List<RectangleF> colliders;
         public TextureManager.TextureID textureId;
         protected LinkedList<Attachment> attachments;
 
@@ -66,6 +68,7 @@ namespace Rebirth{
             textureId = TextureManager.TextureID.ground;
             defaultValues();
             attachments = new LinkedList<Attachment>();
+            colliders = new List<RectangleF>();
 		}
 
 		public abstract void Update(GameTime gameTime);
@@ -73,6 +76,10 @@ namespace Rebirth{
 
         public virtual void Draw(SpriteBatch sb, GameTime gameTime){
             sb.Draw(texture, DisplayManager.scaleTexture(boundingBox), Color.White);
+#if DEV
+            DrawBoundingBox(sb);
+            DrawColliders(sb);
+#endif
         }
 
 
@@ -110,6 +117,35 @@ namespace Rebirth{
             TextureManager.unLoad(textureId);
         }
 
+        public virtual void updateBoundingBox(){
+            boundingBox.width = 0;
+            boundingBox.height = 0;
+            foreach (RectangleF c in colliders){
+                if (c.width + c.x > boundingBox.width) boundingBox.width = c.width + c.x;
+                if (c.height + c.y > boundingBox.height) boundingBox.height = c.height + c.y;
+            }
+        }
+
+
+#if DEV
+        public void DrawBoundingBox(SpriteBatch sb){
+            if (DeveloperSettings.drawBoundingBoxes){
+                Rectangle rectangle = DisplayManager.scaleTexture(boundingBox);
+                sb.Draw(TextureManager.blankTexture,rectangle,Color.Yellow*0.5f);
+            }
+        }
+
+        public void DrawColliders(SpriteBatch sb){
+            if (DeveloperSettings.drawColliders && colliders != null){
+                Rectangle rectangle;
+                foreach (RectangleF c in colliders){
+                    RectangleF auxR = new RectangleF(c.x + boundingBox.x, c.y + boundingBox.y, c.width, c.height);
+                    rectangle = DisplayManager.scaleTexture(auxR);
+                    sb.Draw(TextureManager.blankTexture,rectangle,Color.White*0.5f);
+                }
+            }
+        }
+#endif
 
 #if EDITOR
 

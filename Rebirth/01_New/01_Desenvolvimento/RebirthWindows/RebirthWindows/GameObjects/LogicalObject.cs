@@ -10,7 +10,9 @@ namespace Rebirth {
             Default,
             standingCheck,
             droppedUmprellaEnter,
-            droppedUmbrellaLeave
+            droppedUmbrellaLeave,
+            umbrellaDeflect,
+            umbrellaReflect
         }
 
         protected delegate void collisionHandler(GameObject collider, CollisionDistance cd);

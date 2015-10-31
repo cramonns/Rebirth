@@ -28,10 +28,31 @@ namespace Rebirth {
             numericUpDownWidth.Value = (decimal)editingObject.Width;
             numericUpDownHeight.Value = (decimal)editingObject.Height;
 
+            if (g is Trigger){
+                tabControl1.TabPages.RemoveAt(3);
+                string[] events = Enum.GetNames(typeof(LogicalObject.Treatment));
+                foreach (string treatment in events){
+                    comboBoxTriggerOnCollide.Items.Add(treatment);
+                    comboBoxTriggerOnEnter.Items.Add(treatment);
+                    comboBoxTriggerOnLeave.Items.Add(treatment);
+                }
+            }
+            else if (g is LogicalObject){
+                tabControl1.TabPages.RemoveAt(4);
+                string[] events = Enum.GetNames(typeof(LogicalObject.Treatment));
+                foreach (string treatment in events){
+                    comboBoxLogicalOnCollide.Items.Add(treatment);
+                }
+                
+            }
+
             if (g is MoveableObject){
                 tabControl1.TabPages.RemoveAt(0);
+
             }
             else tabControl1.TabPages.RemoveAt(1);
+
+            
             
         }
 

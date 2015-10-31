@@ -31,15 +31,42 @@ namespace Rebirth{
 
 			List<GameObject> candidates = new List<GameObject>();
 
+            CollisionDistance d;
+
 			foreach (MoveableObject g in simulatedObjects) {
 				g.setGroundedState(false);
 				collisionTree.remove(g);
 				candidates.Clear();
 				candidates = collisionTree.retrieve(candidates, g.getCollisionShape());
 				foreach (GameObject h in candidates) {
+                    d = new CollisionDistance(1000);
 					if (h != g) {
 						if (g.getCollisionShape().intersects(h.getCollisionShape())) {
-							CollisionDistance d = g.BoundingBox.AxisDistance(h.BoundingBox);
+                            if (g.colliders != null){
+                                if (h.colliders != null){
+                                    foreach (RectangleF r in g.colliders){
+                                        foreach (RectangleF s in h.colliders){
+                                            CollisionDistance aux = r.AxisDistance(g.BoundingBox.Position, s, h.BoundingBox.Position);
+                                            if (aux < d) d = aux;
+                                        }
+                                    }
+                                }
+                                else {
+                                    foreach (RectangleF r in g.colliders){
+                                        CollisionDistance aux = r.AxisDistance(g.BoundingBox.Position,h.BoundingBox,Vector2.Zero);
+                                        if (aux < d) d = aux;
+                                    }
+                                }
+                            }
+                            else if (h.colliders != null){
+                                foreach (RectangleF r in h.colliders){
+                                    CollisionDistance aux = g.BoundingBox.AxisDistance(Vector2.Zero, r, h.BoundingBox.Position);
+                                    if (aux < d) d = aux;
+                                }
+                            }
+                            else {
+							    d = g.BoundingBox.AxisDistance(h.BoundingBox);
+                            }
 				            currentCollisions.AddFirst(new Collision(g,h,d));
 						}
 					}
@@ -71,7 +98,9 @@ namespace Rebirth{
             if (reload){
                 simulatedObjects.Clear();
                 simulatedObjects.Add(p);
-                //simulatedObjects.Add(p.standingChecker);
+                foreach (Attachment a in p.Attachments){
+                    collisionTree.insert(a);
+                }
             }
             
             RectangleF simulatedZone;
@@ -82,6 +111,9 @@ namespace Rebirth{
                 simulatedZone = left.getHalfRightBounds();
                 foreach (GameObject g in left.objects){ 
                     collisionTree.insert(g);
+                    foreach (Attachment a in g.Attachments){
+                        collisionTree.insert(a);
+                    }
                     if (simulatedZone.intersects(g.BoundingBox) && g is MoveableObject && reload){
                         simulatedObjects.Add(g as MoveableObject);
                     }
@@ -90,6 +122,9 @@ namespace Rebirth{
 
             if (center != null){
                 foreach (GameObject g in center.objects){ 
+                    foreach (Attachment a in g.Attachments){
+                        collisionTree.insert(a);
+                    }
                     if (g is MoveableObject && reload) simulatedObjects.Add(g as MoveableObject);
                     collisionTree.insert(g);
                 }
@@ -98,6 +133,9 @@ namespace Rebirth{
             if (right != null){
                 simulatedZone = right.getHalfLeftBounds();
                 foreach (GameObject g in right.objects){ 
+                    foreach (Attachment a in g.Attachments){
+                        collisionTree.insert(a);
+                    }
                     collisionTree.insert(g);
                     if (simulatedZone.intersects(g.BoundingBox) && g is MoveableObject && reload){
                         simulatedObjects.Add(g as MoveableObject);    

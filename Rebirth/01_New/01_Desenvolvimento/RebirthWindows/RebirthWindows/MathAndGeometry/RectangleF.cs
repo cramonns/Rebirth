@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 namespace Rebirth{
 
     [Serializable]
-	public class RectangleF{
+	public class RectangleF: IShape{
 
 		public float x, y;
 		public float width, height;
@@ -191,6 +191,10 @@ namespace Rebirth{
 			}
 		}
 
+        public CollisionDistance AxisDistance(Vector2 source, RectangleF rect, Vector2 sourceR){
+            return AxisDistance(new RectangleF(rect.Position + sourceR - source, rect.width, rect.height));
+        }
+
 		public CollisionDistance AxisDistance(RectangleF r){
 
 			float distX = 0, distY = 0;
@@ -252,6 +256,20 @@ namespace Rebirth{
             Center = position;
 			//center = new VertexR ((x + width) / 2, (y + height) / 2);
 		}
+
+        public bool intersects(Circle circle){
+            return true;
+        }
+
+        public bool intersects(IShape shape){
+            if (shape is RectangleF){
+                return intersects(shape as RectangleF);
+            }
+            else if (shape is Circle){
+                return intersects(shape as Circle);
+            }
+            return false;
+        }
 
 #if EDITOR
 

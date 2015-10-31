@@ -56,6 +56,8 @@
     <Compile Include="GameObjects\Attachment.cs" />
     <Compile Include="GameObjects\Box.cs" />
     <Compile Include="GameObjects\Character.cs" />
+    <Compile Include="MathAndGeometry\Circle.cs" />
+    <Compile Include="MathAndGeometry\IShape.cs" />
     <Compile Include="Screens\ContainerManager.cs" />
     <Compile Include="EditorClasses\GameObjectForm.cs">
       <SubType>Form</SubType>

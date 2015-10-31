@@ -21,6 +21,12 @@ namespace Rebirth {
                 case Treatment.standingCheck:
                     handler = standingCheck;
                     break;
+                case Treatment.umbrellaDeflect:
+                    handler = umbrellaDeflect;
+                    break;
+                case Treatment.umbrellaReflect:
+                    handler = umbrellaReflect;
+                    break;
             }
         }
 
@@ -40,6 +46,13 @@ namespace Rebirth {
             Player p = owner as Player;
             if (!(collider is LogicalObject)) p.allowStanding = false;
         }
-                
+        
+        private void umbrellaDeflect(GameObject collider, CollisionDistance cd){
+
+        }
+
+        private void umbrellaReflect(GameObject collider, CollisionDistance cd){
+        }
+
     }
 }

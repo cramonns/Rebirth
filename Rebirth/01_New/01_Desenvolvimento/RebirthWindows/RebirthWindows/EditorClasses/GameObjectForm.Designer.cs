@@ -52,6 +52,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPageLogical = new System.Windows.Forms.TabPage();
+            this.comboBoxLogicalOnCollide = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tabPageTriggers = new System.Windows.Forms.TabPage();
+            this.comboBoxTriggerOnEnter = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.comboBoxTriggerOnCollide = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.comboBoxTriggerOnLeave = new System.Windows.Forms.ComboBox();
             this.tabPageMove.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeedY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeedX)).BeginInit();
@@ -68,6 +78,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownX)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabPageLogical.SuspendLayout();
+            this.tabPageTriggers.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPageMove
@@ -509,11 +521,111 @@
             this.tabControl1.Controls.Add(this.tabPageBasic);
             this.tabControl1.Controls.Add(this.tabPageMove);
             this.tabControl1.Controls.Add(this.tabPageTextures);
+            this.tabControl1.Controls.Add(this.tabPageLogical);
+            this.tabControl1.Controls.Add(this.tabPageTriggers);
             this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(226, 260);
             this.tabControl1.TabIndex = 1;
+            // 
+            // tabPageLogical
+            // 
+            this.tabPageLogical.Controls.Add(this.comboBoxLogicalOnCollide);
+            this.tabPageLogical.Controls.Add(this.label9);
+            this.tabPageLogical.Location = new System.Drawing.Point(4, 22);
+            this.tabPageLogical.Name = "tabPageLogical";
+            this.tabPageLogical.Size = new System.Drawing.Size(218, 234);
+            this.tabPageLogical.TabIndex = 4;
+            this.tabPageLogical.Text = "Events";
+            this.tabPageLogical.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxLogicalOnCollide
+            // 
+            this.comboBoxLogicalOnCollide.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxLogicalOnCollide.FormattingEnabled = true;
+            this.comboBoxLogicalOnCollide.Location = new System.Drawing.Point(8, 40);
+            this.comboBoxLogicalOnCollide.Name = "comboBoxLogicalOnCollide";
+            this.comboBoxLogicalOnCollide.Size = new System.Drawing.Size(201, 21);
+            this.comboBoxLogicalOnCollide.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(8, 19);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "OnCollide:";
+            // 
+            // tabPageTriggers
+            // 
+            this.tabPageTriggers.Controls.Add(this.comboBoxTriggerOnLeave);
+            this.tabPageTriggers.Controls.Add(this.label16);
+            this.tabPageTriggers.Controls.Add(this.comboBoxTriggerOnEnter);
+            this.tabPageTriggers.Controls.Add(this.label15);
+            this.tabPageTriggers.Controls.Add(this.comboBoxTriggerOnCollide);
+            this.tabPageTriggers.Controls.Add(this.label14);
+            this.tabPageTriggers.Location = new System.Drawing.Point(4, 22);
+            this.tabPageTriggers.Name = "tabPageTriggers";
+            this.tabPageTriggers.Size = new System.Drawing.Size(218, 234);
+            this.tabPageTriggers.TabIndex = 5;
+            this.tabPageTriggers.Text = "Events";
+            this.tabPageTriggers.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxTriggerOnEnter
+            // 
+            this.comboBoxTriggerOnEnter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTriggerOnEnter.FormattingEnabled = true;
+            this.comboBoxTriggerOnEnter.Location = new System.Drawing.Point(7, 107);
+            this.comboBoxTriggerOnEnter.Name = "comboBoxTriggerOnEnter";
+            this.comboBoxTriggerOnEnter.Size = new System.Drawing.Size(202, 21);
+            this.comboBoxTriggerOnEnter.TabIndex = 5;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(9, 82);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(49, 13);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "OnEnter:";
+            // 
+            // comboBoxTriggerOnCollide
+            // 
+            this.comboBoxTriggerOnCollide.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTriggerOnCollide.FormattingEnabled = true;
+            this.comboBoxTriggerOnCollide.Location = new System.Drawing.Point(8, 40);
+            this.comboBoxTriggerOnCollide.Name = "comboBoxTriggerOnCollide";
+            this.comboBoxTriggerOnCollide.Size = new System.Drawing.Size(201, 21);
+            this.comboBoxTriggerOnCollide.TabIndex = 3;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(8, 19);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(55, 13);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "OnCollide:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(9, 149);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(54, 13);
+            this.label16.TabIndex = 6;
+            this.label16.Text = "OnLeave:";
+            // 
+            // comboBoxTriggerOnLeave
+            // 
+            this.comboBoxTriggerOnLeave.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTriggerOnLeave.FormattingEnabled = true;
+            this.comboBoxTriggerOnLeave.Location = new System.Drawing.Point(8, 173);
+            this.comboBoxTriggerOnLeave.Name = "comboBoxTriggerOnLeave";
+            this.comboBoxTriggerOnLeave.Size = new System.Drawing.Size(201, 21);
+            this.comboBoxTriggerOnLeave.TabIndex = 7;
             // 
             // GameObjectForm
             // 
@@ -543,6 +655,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownX)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabPageLogical.ResumeLayout(false);
+            this.tabPageLogical.PerformLayout();
+            this.tabPageTriggers.ResumeLayout(false);
+            this.tabPageTriggers.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -578,6 +694,16 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown numericUpDownSpeedX;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TabPage tabPageLogical;
+        private System.Windows.Forms.ComboBox comboBoxLogicalOnCollide;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TabPage tabPageTriggers;
+        private System.Windows.Forms.ComboBox comboBoxTriggerOnEnter;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox comboBoxTriggerOnCollide;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox comboBoxTriggerOnLeave;
+        private System.Windows.Forms.Label label16;
 
     }
 }
