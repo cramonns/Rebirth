@@ -31,6 +31,11 @@ namespace Rebirth {
             updated = true;
         }
 
+        public static void removeObject(GameObject g){
+            game.getWorld().removeObject(g);
+            updated = true;
+        }
+
         public static bool wasUpdated(){
             bool returnValue = updated;
             updated = false;

@@ -219,6 +219,12 @@ namespace Rebirth {
             scenes[preloadAmount] = null;
         }
 
+        public void removeObject(GameObject g){
+            if (scenes[preloadAmount-1] != null) scenes[preloadAmount-1].objects.Remove(g);
+            scenes[preloadAmount].objects.Remove(g);
+            if (scenes[preloadAmount+1] != null) scenes[preloadAmount+1].objects.Remove(g);
+        }
+
 #region EDITOR_FUNCTIONS
 #if EDITOR
         public void editMode(){

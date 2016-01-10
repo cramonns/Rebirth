@@ -86,14 +86,14 @@ namespace Rebirth{
 
             
 
-			if (Keyboard.GetState().IsKeyDown(Keys.Right) || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X > analogDeadzone) {
+			if (Keyboard.GetState().IsKeyDown(Keys.D) || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X > analogDeadzone) {
 				direction = TriggerDirection.Right;
-			} else if (Keyboard.GetState().IsKeyDown(Keys.Left) || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X < -analogDeadzone) {
+			} else if (Keyboard.GetState().IsKeyDown(Keys.A) || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X < -analogDeadzone) {
 				direction = TriggerDirection.Left;
 			} else direction = TriggerDirection.None; //IMPROVE THIS CODE
 
             TriggerDown = false;
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y < -analogDeadzone){
+            if (Keyboard.GetState().IsKeyDown(Keys.S) || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y < -analogDeadzone){
                 TriggerDown = true;
             }
 
@@ -102,17 +102,17 @@ namespace Rebirth{
                 TriggerFloating = true;
             }
 
-			if (Keyboard.GetState().IsKeyDown(Keys.Up) || GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).Buttons.RightShoulder == ButtonState.Pressed) {
+			if (Keyboard.GetState().IsKeyDown(Keys.W) || GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).Buttons.RightShoulder == ButtonState.Pressed) {
 				if (!prev_SpacePressed)	TriggerJumping = true;
 				prev_SpacePressed = true;
 			} else
-			    if (Keyboard.GetState().IsKeyUp(Keys.Up) && GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Released) {
+			    if (Keyboard.GetState().IsKeyUp(Keys.W) && GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Released  && GamePad.GetState(PlayerIndex.One).Buttons.RightShoulder == ButtonState.Released) {
 				    TriggerJumping = false;
 				    prev_SpacePressed = false;
 			    }
 
             if (Keyboard.GetState().IsKeyDown(Keys.RightShift) || GamePad.GetState(PlayerIndex.One).Buttons.LeftShoulder == ButtonState.Pressed){
-                if (!prev_dropPressed) TriggerDrop = true;
+                TriggerDrop = !prev_dropPressed;
                 prev_dropPressed = true;
             } else
                 if (Keyboard.GetState().IsKeyUp(Keys.RightShift) && GamePad.GetState(PlayerIndex.One).Buttons.LeftShoulder == ButtonState.Released){

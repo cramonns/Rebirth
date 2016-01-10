@@ -271,23 +271,25 @@ namespace Rebirth{
 
 		public override void Update(GameTime gameTime){
             if (ControllerManager.TriggerDrop){
-                if (grounded && !dropped){
-                    if (umbrella != null) {
-                        umbrella = null;
-                        DroppedUmbrella du = new DroppedUmbrella(this);
-                        GameManager.addObjectToScene(du);
-                        GameManager.globalVariables.droppedUmbrella = du;
+                if (grounded){
+                    if (!dropped){
+                        if (umbrella != null) {
+                            umbrella = null;
+                            DroppedUmbrella du = new DroppedUmbrella(this);
+                            GameManager.addObjectToScene(du);
+                            GameManager.globalVariables.droppedUmbrella = du;
+                            dropped = true;
+                        }
                     }
                     else if (GameManager.globalVariables.overUmbrella){
-                        umbrella = new Umbrella(this);
-                        GameManager.removeObjectFromScene(GameManager.globalVariables.droppedUmbrella);
+                        GameManager.removeObject(GameManager.globalVariables.droppedUmbrella);
                         GameManager.globalVariables.droppedUmbrella = null;
-
+                        umbrella = new Umbrella(this);
+                        dropped = false;
                     }
                 }
-                dropped = true;
             }
-            else dropped = false;
+            
             
             if (umbrella != null) umbrella.Update(gameTime);
 
