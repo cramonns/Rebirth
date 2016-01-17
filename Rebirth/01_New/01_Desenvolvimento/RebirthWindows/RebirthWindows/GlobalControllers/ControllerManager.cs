@@ -37,6 +37,8 @@ namespace Rebirth{
         public static bool TriggerDrop = false;
         private static bool prev_dropPressed;
 
+        public static bool TriggerSunglasses = false;
+        private static bool prev_sunglassesPressed;
 
 #if DEV
         private static bool prev_TPressed = false;
@@ -47,6 +49,20 @@ namespace Rebirth{
 		public static void Update(GameTime gameTime){
 
 #if DEV
+
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad1)){
+                GameManager.globalVariables.currentSeason = Enumerations.Seasons.Winter;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad2)){
+                GameManager.globalVariables.currentSeason = Enumerations.Seasons.Spring;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad3)){
+                GameManager.globalVariables.currentSeason = Enumerations.Seasons.Summer;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad4)){
+                GameManager.globalVariables.currentSeason = Enumerations.Seasons.Autumn;
+            }
+
             float multiplier;
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.RightShift)){
                 multiplier = .005f;
@@ -84,7 +100,15 @@ namespace Rebirth{
             else prev_CPressed = false;
 #endif
 
-            
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Y == ButtonState.Pressed) {
+                TriggerSunglasses = !prev_sunglassesPressed;
+                prev_sunglassesPressed = true;
+            } else {
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Y == ButtonState.Released){
+                    TriggerSunglasses = false;
+                    prev_sunglassesPressed = false;
+                }
+            }
 
 			if (Keyboard.GetState().IsKeyDown(Keys.D) || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X > analogDeadzone) {
 				direction = TriggerDirection.Right;
@@ -103,13 +127,14 @@ namespace Rebirth{
             }
 
 			if (Keyboard.GetState().IsKeyDown(Keys.W) || GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).Buttons.RightShoulder == ButtonState.Pressed) {
-				if (!prev_SpacePressed)	TriggerJumping = true;
+				 if (!prev_SpacePressed) TriggerJumping = true;
 				prev_SpacePressed = true;
-			} else
+			} else {
 			    if (Keyboard.GetState().IsKeyUp(Keys.W) && GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Released  && GamePad.GetState(PlayerIndex.One).Buttons.RightShoulder == ButtonState.Released) {
 				    TriggerJumping = false;
 				    prev_SpacePressed = false;
 			    }
+            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.RightShift) || GamePad.GetState(PlayerIndex.One).Buttons.LeftShoulder == ButtonState.Pressed){
                 TriggerDrop = !prev_dropPressed;

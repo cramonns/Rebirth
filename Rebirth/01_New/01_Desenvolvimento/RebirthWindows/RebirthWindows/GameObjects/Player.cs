@@ -288,12 +288,9 @@ namespace Rebirth{
                         dropped = false;
                     }
                 }
-            }
-            
+            }          
             
             if (umbrella != null) umbrella.Update(gameTime);
-
-            
 
 			//updateBounds();
             float acceleration = MOVING_ACCELERATION;
@@ -407,6 +404,17 @@ namespace Rebirth{
             if (umbrella != null) umbrella.updateColliders();
         }
 
+        private void drawSunglasses(SpriteBatch sb, GameTime gameTime){
+            Vector2 position;
+            if (direction == Directions.RIGHT)
+                position = new Vector2(Position.X + boundingBox.width*0.2f, Position.Y + boundingBox.height*0.7f);
+            else position = new Vector2(Position.X - boundingBox.width*0.2f, Position.Y + boundingBox.height*0.7f);
+            sb.Draw (TextureManager.blankTexture, 
+                     DisplayManager.scaleTexture(position, boundingBox.width, boundingBox.height/6f), 
+                     Color.Black*0.7f
+                    );
+        }
+
         public override void Draw(SpriteBatch sb, GameTime gameTime){
 			if (direction == Directions.RIGHT) {
 				sb.Draw (texture, DisplayManager.scaleTexture(Position, boundingBox.width, boundingBox.height), Color.White);
@@ -414,6 +422,7 @@ namespace Rebirth{
 				sb.Draw(texture, DisplayManager.scaleTexture(Position, boundingBox.width, boundingBox.height), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
 			}
             if (umbrella != null)umbrella.Draw(sb,gameTime);
+            if (GameManager.globalVariables.sunglassesOn) drawSunglasses(sb, gameTime);
 		}
 
 		/*public override void setGroundedState(bool newState){

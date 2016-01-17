@@ -255,6 +255,8 @@ namespace Rebirth {
                     return new Trigger(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2,Ground.DefaultHeight/2), LogicalObject.Treatment.Default, LogicalObject.Treatment.Default, LogicalObject.Treatment.Default);
                 case Enumerations.ObjectTypes.TextureLoader:
                     return new TextureLoader(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2,Ground.DefaultHeight/2), TextureManager.TextureID.ground);
+                case Enumerations.ObjectTypes.Canon:
+                    return new Canon(MouseManager.mousePosition - new Vector2(Canon.DefaultWidth/2,Canon.DefaultHeight/2));
 
             }
             return null;

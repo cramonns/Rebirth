@@ -16,5 +16,12 @@ namespace Rebirth {
         }
 #endif
 
+        public enum Seasons{
+            Winter,
+            Spring,
+            Summer,
+            Autumn
+        }
+
     }
 }

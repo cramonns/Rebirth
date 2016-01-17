@@ -13,5 +13,7 @@ namespace Rebirth {
 #endif
         public bool overUmbrella = false;
         public DroppedUmbrella droppedUmbrella = null;
+        public Enumerations.Seasons currentSeason = Enumerations.Seasons.Winter;
+        public bool sunglassesOn = false;
     }
 }

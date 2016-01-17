@@ -17,13 +17,15 @@ namespace Rebirth {
             white,
             Background,
             grass,
-            cyan
+            cyan,
+            cannonball
         }
 
         private static ContentManager Content;
         public static Texture2D[] textures;
         public static int[] texturesCount;
         public static Texture2D blankTexture;
+        public static Texture2D blackTexture;
 
         public static void initialize(ContentManager cm){
             int count = Enum.GetNames(typeof(TextureID)).Length;
@@ -33,6 +35,8 @@ namespace Rebirth {
             Color[] colors = new Color[] { Color.White };
             blankTexture = new Texture2D(GameManager.game.GraphicsDevice, 1, 1);
             blankTexture.SetData<Color>(colors);
+            colors = new Color[] { Color.Black };
+            blackTexture = new Texture2D(GameManager.game.GraphicsDevice, 1, 1);
         }
 
         public static bool isLoaded(TextureID id){
@@ -75,6 +79,10 @@ namespace Rebirth {
                     case TextureID.cyan:
                         textures[(int)id] = Content.Load<Texture2D>("Texture/cyan");
                         break; 
+                    case TextureID.cannonball:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/cannon");
+                        break;
+
                 }
             }
             texturesCount[(int)id]++;

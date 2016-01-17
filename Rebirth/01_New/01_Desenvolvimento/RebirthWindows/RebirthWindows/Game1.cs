@@ -133,6 +133,9 @@ namespace Rebirth{
 			base.Update(gameTime);
 
             ControllerManager.Update(gameTime);
+            if (ControllerManager.TriggerSunglasses){
+                GameManager.globalVariables.sunglassesOn = !GameManager.globalVariables.sunglassesOn;
+            }
 			screens[(int)currentScreen].Update(gameTime);
 		}
 
@@ -141,7 +144,38 @@ namespace Rebirth{
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime){
-			graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+            Color bgColor = Color.CornflowerBlue;
+#if EDITOR
+            if (!editorMode){
+#endif
+                if (currentScreen == ScreenID.world){
+                    switch (GameManager.globalVariables.currentSeason){
+                        case Enumerations.Seasons.Winter:
+                            if (GameManager.globalVariables.sunglassesOn){
+                                bgColor = Color.DarkOrange;
+                            } else bgColor = Color.White; 
+                            break;
+                        case Enumerations.Seasons.Spring:
+                            if (GameManager.globalVariables.sunglassesOn){
+                                bgColor = Color.DarkGoldenrod;
+                            } else bgColor = Color.DeepSkyBlue;
+                            break;
+                        case Enumerations.Seasons.Summer:
+                            if (GameManager.globalVariables.sunglassesOn){
+                                bgColor = Color.White;
+                            } else bgColor = Color.DarkOrange;
+                            break;
+                        case Enumerations.Seasons.Autumn:
+                            if (GameManager.globalVariables.sunglassesOn){
+                                bgColor = Color.DeepSkyBlue;
+                            } else bgColor = Color.DarkGoldenrod;
+                            break;
+                    }
+                }
+#if EDITOR
+            }
+#endif
+			graphics.GraphicsDevice.Clear(bgColor);
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
 			screens[(int)currentScreen].Draw(gameTime);
