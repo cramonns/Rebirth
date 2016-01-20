@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if EDITOR
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -46,3 +47,4 @@ namespace Rebirth {
 
     }
 }
+#endif

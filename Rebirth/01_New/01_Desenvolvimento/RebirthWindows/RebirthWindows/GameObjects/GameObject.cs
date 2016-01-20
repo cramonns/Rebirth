@@ -16,8 +16,12 @@ namespace Rebirth{
     [Serializable]
 	public abstract class GameObject{
    
-        public const float DefaultWidth = 2f;
-        public const float DefaultHeight = 2f;
+        public static float DefaultWidth{
+            get{return 2f;}
+        }
+        public static float DefaultHeight{
+            get{return 2f;}
+        }
 
 		protected enum Bounds:byte{
 			UPPER = 0,
@@ -61,14 +65,13 @@ namespace Rebirth{
         public LinkedList<Attachment> Attachments{
             get {return attachments;}
         }
-
-        
+       
 		public GameObject(){
 			isFixed = true;
             textureId = TextureManager.TextureID.ground;
             defaultValues();
             attachments = new LinkedList<Attachment>();
-            colliders = new List<RectangleF>();
+            colliders = null;
 		}
 
 		public abstract void Update(GameTime gameTime);
@@ -81,7 +84,6 @@ namespace Rebirth{
             DrawColliders(sb);
 #endif
         }
-
 
 		/*protected void createDefaultBounds(){
 			RectangleF upper, lower, easter, western;
@@ -126,7 +128,6 @@ namespace Rebirth{
             }
         }
 
-
 #if DEV
         public void DrawBoundingBox(SpriteBatch sb){
             if (DeveloperSettings.drawBoundingBoxes){
@@ -165,6 +166,10 @@ namespace Rebirth{
         public void extendDown(float extension){
             Y -= extension;
             Height += extension;
+        }
+
+        public virtual void saveXML(int level){
+
         }
 #endif
 

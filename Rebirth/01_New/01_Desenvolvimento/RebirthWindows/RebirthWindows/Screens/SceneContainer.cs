@@ -135,6 +135,7 @@ namespace Rebirth {
             foreach (GameObject g in objects){
                 g.X -= shapeBox.x;
             }
+            //SAVE BINARY
             BinaryFormatter binFormat = new BinaryFormatter();
             string fileName = "Lvl/" + id.ToString() + ".scn";
             if (!Directory.Exists("Lvl")){
@@ -143,6 +144,7 @@ namespace Rebirth {
             using(Stream fStream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None)){
                 binFormat.Serialize(fStream, this);
             }
+            //SAVE XML
         }
 
         public void remakeObjectsTree(){

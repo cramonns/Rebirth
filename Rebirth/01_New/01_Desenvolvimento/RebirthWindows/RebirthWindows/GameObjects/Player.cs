@@ -14,7 +14,7 @@ namespace Rebirth{
 
         const float CANOPY_THICKNESS = 0.5f;
         const float CANOPY_LENGTH = 1.4f;
-        const int COLLIDERS_COUNT = 4; // (MUST BE 2 OR GREATER) Optimal estimated value: ((int)(CANOPY_LENGTH - CANOPY_THICKNESS)*2/CANOPY_THICKNESS) + 1
+        const int COLLIDERS_COUNT = 6; // (MUST BE 2 OR GREATER) Optimal estimated value: ((int)(CANOPY_LENGTH - CANOPY_THICKNESS)*2/CANOPY_THICKNESS) + 1
 
         float lowering_speed = 0;
 
@@ -25,6 +25,7 @@ namespace Rebirth{
         public const float Length = 1.3f;
 
         public Umbrella(Player p){
+            float collidersSize = CANOPY_THICKNESS*0.7f;
             colliders = new List<RectangleF>(COLLIDERS_COUNT);
             for (int i = 0; i < COLLIDERS_COUNT; i++){
                 colliders.Add(null);
@@ -34,18 +35,18 @@ namespace Rebirth{
             texture.SetData<Color>(colors);
             open = false;
             owner = p;
-            float collidersStartY = owner.Y + owner.Height/2 + Length - CANOPY_THICKNESS;
+            float collidersStartY = owner.Y + owner.Height/2 + Length - collidersSize;
             float collidersStartX = owner.X + owner.Width/2 - CANOPY_LENGTH/2;
-            boundingBox = new RectangleF(collidersStartX, collidersStartY, CANOPY_LENGTH, CANOPY_THICKNESS);
-            colliders[0] = (new RectangleF(collidersStartX, collidersStartY, CANOPY_THICKNESS, CANOPY_THICKNESS));
-            colliders[COLLIDERS_COUNT-1] = new RectangleF(collidersStartX + CANOPY_LENGTH - CANOPY_THICKNESS, collidersStartY, CANOPY_THICKNESS, CANOPY_THICKNESS);
-            float centerX1 = colliders[0].x + CANOPY_THICKNESS/2;
-            float centerX2 = colliders[COLLIDERS_COUNT-1].x + CANOPY_THICKNESS/2;
+            boundingBox = new RectangleF(collidersStartX, collidersStartY, CANOPY_LENGTH, collidersSize);
+            colliders[0] = (new RectangleF(collidersStartX, collidersStartY, collidersSize, collidersSize));
+            colliders[COLLIDERS_COUNT-1] = new RectangleF(collidersStartX + CANOPY_LENGTH - collidersSize, collidersStartY, collidersSize, collidersSize);
+            float centerX1 = colliders[0].x + collidersSize/2;
+            float centerX2 = colliders[COLLIDERS_COUNT-1].x + collidersSize/2;
             int parts = COLLIDERS_COUNT-1;
             if (parts > 0){
                 float lengthX = (centerX2 - centerX1)/(float)parts;
                 for (int i = 1; i < COLLIDERS_COUNT-1; i++){
-                    colliders[i] = new RectangleF(collidersStartX + lengthX*i - CANOPY_THICKNESS/2, collidersStartY, CANOPY_THICKNESS, CANOPY_THICKNESS);
+                    colliders[i] = new RectangleF(collidersStartX + lengthX*i - collidersSize/2, collidersStartY, collidersSize, collidersSize);
                 }
             }
         }
@@ -67,11 +68,16 @@ namespace Rebirth{
 
         public override void collide(GameObject b, CollisionDistance cd) {
             //throw new NotImplementedException();
-            if (b is MoveableObject){
-                MoveableObject bmov = b as MoveableObject;
-                float auxRotation = (float)Math.Atan2(bmov.speed.X, bmov.speed.Y);
-                auxRotation = rotation - auxRotation;
-                bmov.speed =  (Vector2.Transform(bmov.speed, Matrix.CreateRotationZ(auxRotation)));
+            if (b is MoveableObject && !(b is Player)){
+                if (!(b is Projectile && (b as Projectile).isDead)){
+                    MoveableObject bmov = b as MoveableObject;
+                    float auxRotation = (float)Math.Atan2(bmov.speed.X, bmov.speed.Y);
+                    auxRotation = rotation - auxRotation;
+                    bmov.speed =  (Vector2.Transform(bmov.speed, Matrix.CreateRotationZ(auxRotation)));
+                    /*bmov.speed.X *= -1;
+                    bmov.speed.Y *= -1;*/
+                    //bmov.Position += bmov.speed*2;
+                }
             }
         }
 
@@ -238,6 +244,7 @@ namespace Rebirth{
 			state = playerStates.WAITING;
 
             RectangleF collider;
+            colliders = new List<RectangleF>();
 			collider = new RectangleF (new Vector2 (0, 0), CHAR_WIDTH, CHAR_HEIGHT);
             boundingBox = new RectangleF(new Vector2 (0, 100 / 60f), 0, 0);
             colliders.Add(collider);

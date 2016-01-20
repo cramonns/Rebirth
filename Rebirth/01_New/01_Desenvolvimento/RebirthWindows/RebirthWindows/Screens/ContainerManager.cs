@@ -35,6 +35,7 @@ namespace Rebirth {
             texture = TextureManager.load(TextureManager.TextureID.container);
         }
 
+#if EDITOR
         public void addContainer(SceneContainer sc){
             ContainerProperties cp = new ContainerProperties();
             cp.width = sc.Width;
@@ -67,6 +68,25 @@ namespace Rebirth {
             }
         }*/
 
+        public void updateContainer(SceneContainer sc){
+            int index = IdIndexes[sc.id];
+            ContainerProperties cp = containers[index];
+            if (firstContainerID == sc.id){
+                startPositionX = sc.X;
+            }
+            if (cp.width != sc.Width) {
+                float extension = sc.Width - cp.width;
+                cp.width = sc.Width;
+                for (index++; index < containers.Count; index++ ){
+                    SceneContainer scene = LoadManager.Load(containers[index].id);
+                    scene.shiftHorizontal(extension);                
+                    scene.save();
+                }
+            }
+            cp.height = sc.Height;
+            cp.y = sc.Y;
+        }
+#endif
         public void saveContainerManager(){
             BinaryFormatter binFormat = new BinaryFormatter();
             string path = "Lvl/Containers.info";
@@ -138,24 +158,7 @@ namespace Rebirth {
             return containers[index].name;
         }
 
-        public void updateContainer(SceneContainer sc){
-            int index = IdIndexes[sc.id];
-            ContainerProperties cp = containers[index];
-            if (firstContainerID == sc.id){
-                startPositionX = sc.X;
-            }
-            if (cp.width != sc.Width) {
-                float extension = sc.Width - cp.width;
-                cp.width = sc.Width;
-                for (index++; index < containers.Count; index++ ){
-                    SceneContainer scene = LoadManager.Load(containers[index].id);
-                    scene.shiftHorizontal(extension);                
-                    scene.save();
-                }
-            }
-            cp.height = sc.Height;
-            cp.y = sc.Y;
-        }
+        
 
     }
 }

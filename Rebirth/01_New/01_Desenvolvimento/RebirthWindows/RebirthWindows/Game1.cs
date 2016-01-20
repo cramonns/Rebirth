@@ -146,7 +146,7 @@ namespace Rebirth{
 		protected override void Draw(GameTime gameTime){
             Color bgColor = Color.CornflowerBlue;
 #if EDITOR
-            if (!editorMode){
+            if (!editor){
 #endif
                 if (currentScreen == ScreenID.world){
                     switch (GameManager.globalVariables.currentSeason){

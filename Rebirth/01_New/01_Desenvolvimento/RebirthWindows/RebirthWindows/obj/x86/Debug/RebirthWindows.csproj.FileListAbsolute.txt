@@ -75,3 +75,4 @@ D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWind
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Debug\Content\Texture\cyan.png
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.FormTextureHolders.resources
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.GameObjectForm.resources
+D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Debug\Content\Texture\CanonBall.png

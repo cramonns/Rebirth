@@ -83,20 +83,26 @@ namespace Rebirth{
 			float rh = rect.height;
 			rx += sourceR.X - source.X;
 			ry += sourceR.Y - source.Y;
-			if ((rx > x && rx < x + width) || (rx + rw > x && rx + rw < x + width)) {
-				if ((ry > y && ry < y + height) || (ry + rh > y && ry + rh < y + height)) {
+			if ((MathUtils.FLOAT_GREATEQ(rx, x) && MathUtils.FLOAT_LESSEQ(rx,x + width) ) 
+                || (MathUtils.FLOAT_GREATEQ(rx + rw, x) && MathUtils.FLOAT_LESSEQ(rx + rw, x + width))) {
+				if ((MathUtils.FLOAT_GREATEQ(ry, y) && MathUtils.FLOAT_LESSEQ(ry, y + height)) 
+                    || (MathUtils.FLOAT_GREATEQ(ry + rh, y) && MathUtils.FLOAT_LESSEQ(ry + rh, y + height))) {
 					return true;
 				} else {
-					if ((y > ry && y < ry + rh) || (y + height > ry && y + height < ry + rh)) {
+					if ((MathUtils.FLOAT_GREATEQ(y, ry) && MathUtils.FLOAT_LESSEQ(y, ry + rh)) 
+                        || (MathUtils.FLOAT_GREATEQ(y + height, ry) && y + height < ry + rh)) {
 						return true;
 					}
 				}
 			} else {
-				if ((x > rx && x < rx + rw) || (x + width > rx && x + width < rx + rw)) {
-					if ((ry > y && ry < y + height) || (ry + rh > y && ry + rh < y + height)) {
+				if ((MathUtils.FLOAT_GREATEQ(x, rx) && MathUtils.FLOAT_LESSEQ(x, rx + rw))
+                    || (MathUtils.FLOAT_GREATEQ(x + width , rx) && MathUtils.FLOAT_LESSEQ(x + width, rx + rw))) {
+					if ((MathUtils.FLOAT_GREATEQ(ry , y) && MathUtils.FLOAT_LESSEQ(ry, y + height))
+                        || (MathUtils.FLOAT_GREATEQ(ry + rh , y) && MathUtils.FLOAT_LESSEQ(ry + rh, y + height))) {
 						return true;
 					} else {
-						if ((y > ry && y < ry + rh) || (y + height > ry && y + height < ry + rh)) {
+						if ((MathUtils.FLOAT_GREATEQ(y , ry) && MathUtils.FLOAT_LESSEQ(y, ry + rh)) 
+                            || (MathUtils.FLOAT_GREATEQ(y + height , ry) && MathUtils.FLOAT_LESSEQ(y + height, ry + rh))) {
 							return true;
 						}
 					}

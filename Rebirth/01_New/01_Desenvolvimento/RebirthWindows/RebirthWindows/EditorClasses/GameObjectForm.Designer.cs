@@ -1,4 +1,5 @@
-﻿namespace Rebirth {
+﻿#if EDITOR
+namespace Rebirth {
     partial class GameObjectForm {
         /// <summary>
         /// Required designer variable.
@@ -707,3 +708,4 @@
 
     }
 }
+#endif

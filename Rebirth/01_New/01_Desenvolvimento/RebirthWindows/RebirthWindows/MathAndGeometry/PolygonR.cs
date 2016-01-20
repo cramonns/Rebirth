@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace Rebirth{
 
@@ -38,6 +39,11 @@ namespace Rebirth{
 		public bool detectCollision(PolygonR b){
 			return true;
 		}
+
+        /*public abstract bool intersects(RectangleF r);
+        public abstract bool intersects(Circle c);
+        public abstract bool intersects(Vector2 source, RectangleF r, Vector2 source2);
+        public abstract bool intersects(Vector2 source, Circle c, Vector2 source2);*/
 	}
 }
 

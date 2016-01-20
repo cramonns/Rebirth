@@ -34,7 +34,8 @@ namespace Rebirth{
             CollisionDistance d;
 
 			foreach (MoveableObject g in simulatedObjects) {
-				g.setGroundedState(false);
+				bool confirmCollision = false;
+                g.setGroundedState(false);
 				collisionTree.remove(g);
 				candidates.Clear();
 				candidates = collisionTree.retrieve(candidates, g.getCollisionShape());
@@ -46,28 +47,38 @@ namespace Rebirth{
                                 if (h.colliders != null){
                                     foreach (RectangleF r in g.colliders){
                                         foreach (RectangleF s in h.colliders){
-                                            CollisionDistance aux = r.AxisDistance(g.BoundingBox.Position, s, h.BoundingBox.Position);
-                                            if (aux < d) d = aux;
+                                            if (r.intersects(g.Position,s,h.Position)){
+                                                confirmCollision = true;
+                                                CollisionDistance aux = r.AxisDistance(g.BoundingBox.Position, s, h.BoundingBox.Position);
+                                                if (aux < d) d = aux;
+                                            }
                                         }
                                     }
                                 }
                                 else {
                                     foreach (RectangleF r in g.colliders){
-                                        CollisionDistance aux = r.AxisDistance(g.BoundingBox.Position,h.BoundingBox,Vector2.Zero);
-                                        if (aux < d) d = aux;
+                                        if (r.intersects(g.Position,h.getCollisionShape(),Vector2.Zero)){
+                                            confirmCollision = true;
+                                            CollisionDistance aux = r.AxisDistance(g.BoundingBox.Position,h.BoundingBox,Vector2.Zero);
+                                            if (aux < d) d = aux;
+                                        }
                                     }
                                 }
                             }
                             else if (h.colliders != null){
                                 foreach (RectangleF r in h.colliders){
-                                    CollisionDistance aux = g.BoundingBox.AxisDistance(Vector2.Zero, r, h.BoundingBox.Position);
-                                    if (aux < d) d = aux;
+                                    if (g.getCollisionShape().intersects(Vector2.Zero,r,h.Position)){
+                                        confirmCollision = true;
+                                        CollisionDistance aux = g.BoundingBox.AxisDistance(Vector2.Zero, r, h.BoundingBox.Position);
+                                        if (aux < d) d = aux;
+                                    }
                                 }
                             }
                             else {
+                                confirmCollision = true;
 							    d = g.BoundingBox.AxisDistance(h.BoundingBox);
                             }
-				            currentCollisions.AddFirst(new Collision(g,h,d));
+				            if (confirmCollision) currentCollisions.AddFirst(new Collision(g,h,d));
 						}
 					}
 				}
@@ -106,6 +117,7 @@ namespace Rebirth{
             RectangleF simulatedZone;
             
             collisionTree.insert(p);
+            if (p.umbrella != null && p.umbrella.open) collisionTree.insert(p.umbrella);
             
             if (left != null){
                 simulatedZone = left.getHalfRightBounds();

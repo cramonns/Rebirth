@@ -1,4 +1,5 @@
-﻿namespace Rebirth {
+﻿#if EDITOR
+namespace Rebirth {
     partial class FormTextureHolders {
         /// <summary>
         /// Required designer variable.
@@ -115,3 +116,4 @@
         private System.Windows.Forms.Button buttonCancel;
     }
 }
+#endif

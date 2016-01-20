@@ -133,6 +133,9 @@ namespace Rebirth {
                     case Enumerations.ObjectTypes.TextureLoader:
                         rectangle.set(MouseManager.mousePosition, TextureLoader.DefaultWidth, Ground.DefaultHeight);
                         break;
+                    case Enumerations.ObjectTypes.Canon:
+                        rectangle.set(MouseManager.mousePosition, Canon.DefaultWidth, Canon.DefaultHeight);
+                        break;
                 }
                 if (rectangle.inside(scenes[preloadAmount].Shape)){
                     insertPermit = true;
