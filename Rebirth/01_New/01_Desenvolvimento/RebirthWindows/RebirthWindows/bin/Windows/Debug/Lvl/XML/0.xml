@@ -1,0 +1,14 @@
+<SceneContainer id=0 previousScene=-1 nextScene=-1 Y=0 Width=40 Height=20>
+	<Objects>
+		<Canon x=12,07143 y=1,962754 width=2 height=0,5>
+			textureId="black";
+			fireRate=3000;
+		</Canon>
+		<Ground x=12,05761 y=0,5821147 width=2 height=1,376977>
+			textureId="ground";
+		</Ground>
+		<Ground x=0,1401548 y=0,09028327 width=39,74119 height=0,4703353>
+			textureId="ground";
+		</Ground>
+	</Objects>
+</SceneContainer>

@@ -29,5 +29,21 @@ namespace Rebirth{
 
 		}
 
+#if EDITOR
+        public override void saveXML(int level, System.IO.StreamWriter xmlStream) {
+            xmlStream.WriteLine(FileManager.tabs(level) + "<Ground"
+                + " x=" + this.X.ToString()
+                + " y=" + this.Y.ToString()
+                + " width=" + this.Width.ToString()
+                + " height=" + this.Height.ToString()
+                + ">");
+            level++;
+                xmlStream.WriteLine(FileManager.tabs(level)
+                    + "textureId=\"" + Enum.GetNames(typeof(TextureManager.TextureID))[(int)textureId]
+                    + "\";");
+            level--;
+            xmlStream.WriteLine(FileManager.tabs(level) + "</Ground>");
+        }
+#endif
 	}
 }

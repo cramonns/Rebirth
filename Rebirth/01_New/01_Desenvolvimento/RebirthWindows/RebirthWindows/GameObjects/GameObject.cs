@@ -1,6 +1,7 @@
 using System;
 #if EDITOR
 using System.Windows.Forms;
+using System.IO;
 #endif
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
@@ -168,8 +169,19 @@ namespace Rebirth{
             Height += extension;
         }
 
-        public virtual void saveXML(int level){
-
+        public virtual void saveXML(int level, StreamWriter xmlStream){
+            xmlStream.WriteLine(FileManager.tabs(level) + "<GameObject"
+                + " x=" + this.X.ToString()
+                + " y=" + this.Y.ToString()
+                + " width=" + this.Width.ToString()
+                + " height=" + this.Height.ToString()
+                + ">");
+            level++;
+                xmlStream.WriteLine(FileManager.tabs(level)
+                    + "textureId=\"" + Enum.GetNames(typeof(TextureManager.TextureID))[(int)textureId]
+                    + "\";");
+            level--;
+            xmlStream.WriteLine(FileManager.tabs(level) + "</GameObject>");
         }
 #endif
 

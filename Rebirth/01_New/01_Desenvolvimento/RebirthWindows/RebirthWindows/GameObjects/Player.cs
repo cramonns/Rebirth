@@ -6,6 +6,17 @@ using System.Collections.Generic;
 
 namespace Rebirth{
 
+    public class Collided{
+    
+        public GameObject gameObject;
+        public int timer;
+
+        public Collided(GameObject g){
+            this.gameObject = g;
+            timer = 0;
+        }
+    }
+
     public class Umbrella:GameObject{
 
         const float LOWERING_ACCELERATION = 0.002f;
@@ -23,6 +34,10 @@ namespace Rebirth{
         public float rotation;
         public const float Thickness = 0.2f;
         public const float Length = 1.3f;
+
+        private List<Collided> collided;
+        private List<Collided> removal;
+
 
         public Umbrella(Player p){
             float collidersSize = CANOPY_THICKNESS*0.7f;
@@ -49,6 +64,8 @@ namespace Rebirth{
                     colliders[i] = new RectangleF(collidersStartX + lengthX*i - collidersSize/2, collidersStartY, collidersSize, collidersSize);
                 }
             }
+            collided = new List<Collided>();
+            removal = new List<Collided>();
         }
 
         public override void updateBoundingBox() {
@@ -66,10 +83,17 @@ namespace Rebirth{
             base.updateBoundingBox();   
         }
 
+        private bool isInCollided(GameObject b){
+            foreach (Collided c in collided){
+                if (c.gameObject == b) return true;
+            }
+            return false;
+        }
+
         public override void collide(GameObject b, CollisionDistance cd) {
             //throw new NotImplementedException();
             if (b is MoveableObject && !(b is Player)){
-                if (!(b is Projectile && (b as Projectile).isDead)){
+                if (!(/*b is Projectile && (b as Projectile).isDead*/isInCollided(b))){
                     MoveableObject bmov = b as MoveableObject;
                     float auxRotation = (float)Math.Atan2(bmov.speed.X, bmov.speed.Y);
                     auxRotation = rotation - auxRotation;
@@ -140,6 +164,17 @@ namespace Rebirth{
                 if (rotation > MAX_GROUND_ROTATION) rotation = MAX_GROUND_ROTATION;
                 else if (rotation < -MAX_GROUND_ROTATION) rotation = -MAX_GROUND_ROTATION;
             }
+
+            foreach (Collided c in collided){
+                c.timer += gametime.ElapsedGameTime.Milliseconds;
+                if (c.timer > 2000){
+                    removal.Add(c);
+                }
+            }
+            foreach (Collided c in removal){
+                collided.Remove(c);
+            }
+            removal.Clear();
         }
 
         public override void Draw(SpriteBatch sb, GameTime gameTime){

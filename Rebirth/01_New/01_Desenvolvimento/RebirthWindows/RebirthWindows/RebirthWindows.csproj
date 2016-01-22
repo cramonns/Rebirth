@@ -58,6 +58,7 @@
     <Compile Include="GameObjects\Canon.cs" />
     <Compile Include="GameObjects\Character.cs" />
     <Compile Include="GameObjects\Projectile.cs" />
+    <Compile Include="GlobalControllers\FileManager.cs" />
     <Compile Include="MathAndGeometry\Circle.cs" />
     <Compile Include="MathAndGeometry\IShape.cs" />
     <Compile Include="Screens\ContainerManager.cs" />
