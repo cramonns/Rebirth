@@ -32,6 +32,15 @@ namespace Rebirth {
             }
         }
 
+        public static String instanceName(GameObject g){
+            if (g is Ground) return "Ground";
+            if (g is Box) return "Box";
+            if (g is Canon) return "Canon";
+            if (g is TextureLoader) return "TextureLoader";
+            if (g is Trigger) return "Trigger";
+            return "GameObject";
+        }
+
 #endif
     }
 }

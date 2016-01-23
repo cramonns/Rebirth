@@ -169,8 +169,8 @@ namespace Rebirth{
             Height += extension;
         }
 
-        public virtual void saveXML(int level, StreamWriter xmlStream){
-            xmlStream.WriteLine(FileManager.tabs(level) + "<GameObject"
+        public void saveXML(int level, StreamWriter xmlStream){
+            xmlStream.WriteLine(FileManager.tabs(level) + "<" + FileManager.instanceName(this)
                 + " x=" + this.X.ToString()
                 + " y=" + this.Y.ToString()
                 + " width=" + this.Width.ToString()
@@ -180,8 +180,12 @@ namespace Rebirth{
                 xmlStream.WriteLine(FileManager.tabs(level)
                     + "textureId=\"" + Enum.GetNames(typeof(TextureManager.TextureID))[(int)textureId]
                     + "\";");
+                specificXML(level, xmlStream);
             level--;
-            xmlStream.WriteLine(FileManager.tabs(level) + "</GameObject>");
+            xmlStream.WriteLine(FileManager.tabs(level) + "</"+FileManager.instanceName(this)+">");
+        }
+
+        public virtual void specificXML(int level, StreamWriter xmlStream){
         }
 #endif
 
