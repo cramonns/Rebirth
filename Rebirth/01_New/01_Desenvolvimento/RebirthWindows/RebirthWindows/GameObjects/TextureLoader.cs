@@ -23,5 +23,11 @@ namespace Rebirth {
         public override void unLoad(){
         }
 
+#if EDITOR
+        public override void specificXML() { 
+            
+        }
+#endif
+
     }
 }
