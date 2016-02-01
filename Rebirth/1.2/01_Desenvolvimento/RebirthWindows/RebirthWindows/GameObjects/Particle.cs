@@ -13,10 +13,10 @@ namespace Rebirth {
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
             //throw new NotImplementedException();
             Position += speed;
-            if (Position.X < 0) {
+            if (Position.X < -400) {
                 boundingBox.x += DisplayManager.DisplayWidth;
             }
-            if (Position.Y > DisplayManager.DisplayHeight) boundingBox.y -= DisplayManager.DisplayHeight;
+            if (Position.Y > DisplayManager.DisplayHeight-40) boundingBox.y -= DisplayManager.DisplayHeight;
         }
 
         public Particle (){
