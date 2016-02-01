@@ -60,8 +60,8 @@ namespace Rebirth {
             for (int i = 0; i < 15; i++){
                 for (int j = 0; j < 10; j++){
                     rainParticles[i,j] = new Particle();
-                    rainParticles[i,j].X = i*(DisplayManager.DisplayWidth)/15;
-                    rainParticles[i,j].Y = j*(DisplayManager.DisplayHeight)/10;
+                    rainParticles[i,j].X = i*(DisplayManager.DisplayWidth)/15-400;
+                    rainParticles[i,j].Y = j*(DisplayManager.DisplayHeight)/10-40;
                     rainParticles[i,j].speed.X = -1.2f - (float)rand.NextDouble();
                     rainParticles[i,j].speed.Y = 4f + 2*(float)rand.NextDouble();
                 }
