@@ -76,3 +76,4 @@ D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWind
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.GameObjectForm.resources
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\RebirthWindows.csprojResolveAssemblyReference.cache
 D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Release\Content\Texture\CanonBall.png
+D:\svnRebirth\trunk\Rebirth\01_New\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Release\Content\Texture\Rain.png

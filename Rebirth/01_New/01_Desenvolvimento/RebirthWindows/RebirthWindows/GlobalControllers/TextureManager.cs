@@ -19,7 +19,8 @@ namespace Rebirth {
             grass,
             cyan,
             canonball,
-            black
+            black,
+            rain
         }
 
         private static ContentManager Content;
@@ -86,6 +87,9 @@ namespace Rebirth {
                         break;
                     case TextureID.black:
                         textures[(int)id] = blackTexture;
+                        break;
+                    case TextureID.rain:
+                        textures[(int)id] = Content.Load<Texture2D>("Texture/Rain");
                         break;
                 }
             }

@@ -24,9 +24,9 @@ namespace Rebirth {
         }
 
 #if EDITOR
-        public override void specificXML() { 
+        /*public override void specificXML() { 
             
-        }
+        }*/
 #endif
 
     }
