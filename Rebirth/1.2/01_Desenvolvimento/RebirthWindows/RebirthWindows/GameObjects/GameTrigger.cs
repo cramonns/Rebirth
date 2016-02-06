@@ -9,10 +9,12 @@ using Microsoft.Xna.Framework;
 
 namespace Rebirth {
     [Serializable]
-    public class Trigger:LogicalObject {
+    public class GameTrigger:LogicalObject {
 
         List<GameObject> lastFrameColliders;
         List<GameObject> currentFrameColliders;
+        public Treatment enterTreatment;
+        public Treatment leaveTreatment;
         
         protected collisionHandler onEnter;
         protected collisionHandler onLeave;
@@ -28,7 +30,10 @@ namespace Rebirth {
             currentFrameColliders = new List<GameObject>();
         }
 
-        public Trigger(Vector2 position, Treatment collidingTreatment, Treatment enterTreatment, Treatment leaveTreatment):base(position, collidingTreatment){
+        public GameTrigger(Vector2 position, Treatment collidingTreatment, Treatment enterTreatment, Treatment leaveTreatment):base(position, collidingTreatment){
+            this.enterTreatment = enterTreatment;
+            this.leaveTreatment = leaveTreatment;
+            
             lastFrameColliders = new List<GameObject>();
             currentFrameColliders = new List<GameObject>();
             switch (enterTreatment){

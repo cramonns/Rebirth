@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SceneContainer id="1" previousScene="0" nextScene="-1" Y="0" Width="40" Height="20">
+	<Objects>
+		<Ground x="0,0266304" y="0,01461709" width="35,88221" height="2" textureId="ground"/>
+	</Objects>
+</SceneContainer>
