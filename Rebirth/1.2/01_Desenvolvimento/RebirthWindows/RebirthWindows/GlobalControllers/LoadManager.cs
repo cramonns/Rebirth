@@ -81,7 +81,7 @@ namespace Rebirth {
             return updated;
         }
 
-        private static void includePlayerModifications(SceneContainer sc){
+        public static void includePlayerModifications(SceneContainer sc){
             DroppedUmbrella du = GameManager.globalVariables.droppedUmbrella;
             if (du != null){
                 if (sc.Shape.intersects(du.Position + new Vector2(du.Width/2, du.Height/2))){
@@ -126,6 +126,5 @@ namespace Rebirth {
             cm.LoadIdIndexes();
             return cm;
         }
-
     }
 }

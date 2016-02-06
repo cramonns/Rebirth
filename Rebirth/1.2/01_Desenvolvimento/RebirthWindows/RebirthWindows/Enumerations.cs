@@ -23,5 +23,12 @@ namespace Rebirth {
             Autumn
         }
 
+        public enum Weather{
+            Sunshine,
+            Rain,
+            Cloudy,
+            Snow
+        }
+
     }
 }

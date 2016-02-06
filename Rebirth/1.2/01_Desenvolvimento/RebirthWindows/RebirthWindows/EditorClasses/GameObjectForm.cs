@@ -29,7 +29,7 @@ namespace Rebirth {
             numericUpDownWidth.Value = (decimal)editingObject.Width;
             numericUpDownHeight.Value = (decimal)editingObject.Height;
 
-            if (g is Trigger){
+            if (g is GameTrigger){
                 tabControl1.TabPages.RemoveAt(3);
                 string[] events = Enum.GetNames(typeof(LogicalObject.Treatment));
                 foreach (string treatment in events){

@@ -15,5 +15,6 @@ namespace Rebirth {
         public DroppedUmbrella droppedUmbrella = null;
         public Enumerations.Seasons currentSeason = Enumerations.Seasons.Spring;
         public bool sunglassesOn = false;
+        public Enumerations.Weather currentWeather = Enumerations.Weather.Sunshine;
     }
 }

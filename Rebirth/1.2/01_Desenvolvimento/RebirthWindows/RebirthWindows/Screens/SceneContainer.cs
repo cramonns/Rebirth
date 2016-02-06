@@ -23,6 +23,13 @@ namespace Rebirth {
         public LinkedList<GameObject>[] backgroundObjects;
         public LinkedList<GameObject>[] frontObjects;
 
+        public static float DefaultHeight{
+            get {return 20;}
+        }
+        public static float DefaultWidth{
+            get {return 40;}
+        }
+
 #if EDITOR
         [NonSerialized]
         public QuadTree objectsTree;
@@ -60,7 +67,7 @@ namespace Rebirth {
         public RectangleF Shape{
             get {return shapeBox;}
         }
-        
+
         //class constructors
         public SceneContainer(RectangleF sb, int id){
             objects = new LinkedList<GameObject>(); 

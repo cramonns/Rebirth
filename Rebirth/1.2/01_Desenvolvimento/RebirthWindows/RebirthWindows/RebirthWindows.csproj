@@ -56,6 +56,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="EditorClasses\XMLManager.cs" />
+    <Compile Include="Effects\Rain.cs" />
     <Compile Include="GameObjects\Attachment.cs" />
     <Compile Include="GameObjects\Box.cs" />
     <Compile Include="GameObjects\Canon.cs" />
@@ -83,7 +84,7 @@
     </Compile>
     <Compile Include="GlobalControllers\GameManager.cs" />
     <Compile Include="GameObjects\TextureLoader.cs" />
-    <Compile Include="GameObjects\Trigger.cs" />
+    <Compile Include="GameObjects\GameTrigger.cs" />
     <Compile Include="Screens\GameWorld.cs" />
     <Compile Include="Screens\IntroScreen.cs" />
     <Compile Include="EditorClasses\LevelEditor.cs">
@@ -136,6 +137,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Texture\CanonBall.png">

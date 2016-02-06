@@ -150,7 +150,7 @@ namespace Rebirth {
                         rectangle.set(MouseManager.mousePosition, Ground.DefaultWidth, Ground.DefaultHeight);
                         break;
                     case Enumerations.ObjectTypes.Trigger:
-                        rectangle.set(MouseManager.mousePosition, Trigger.DefaultWidth, Ground.DefaultHeight);
+                        rectangle.set(MouseManager.mousePosition, GameTrigger.DefaultWidth, Ground.DefaultHeight);
                         break;
                     case Enumerations.ObjectTypes.TextureLoader:
                         rectangle.set(MouseManager.mousePosition, TextureLoader.DefaultWidth, Ground.DefaultHeight);
@@ -200,18 +200,18 @@ namespace Rebirth {
             
             if (scenes[preloadAmount] != null){
                 foreach (GameObject g in scenes[preloadAmount].objects){
-                    if (g is Trigger && DeveloperSettings.drawTriggers){
+                    if (g is GameTrigger && DeveloperSettings.drawTriggers){
                         sb.Draw(texture, DisplayManager.scaleTexture(g.BoundingBox), color);
                     }
                 }
             }
-
-            foreach (MoveableObject r in rainParticles){
-                sb.Draw(rainTexture, new Rectangle((int)r.Position.X, (int)r.Position.Y, 640,400), Color.White);
-            }
-
 #endif
 #endregion
+            if (GameManager.globalVariables.currentWeather == Enumerations.Weather.Rain){
+                foreach (MoveableObject r in rainParticles){
+                    sb.Draw(rainTexture, new Rectangle((int)r.Position.X, (int)r.Position.Y, 640,400), Color.White);
+                }
+            }
         }
 
 		public override void LoadScreen(){
@@ -281,7 +281,7 @@ namespace Rebirth {
                 case Enumerations.ObjectTypes.Ground:
                     return new Ground(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2,Ground.DefaultHeight/2));
                 case Enumerations.ObjectTypes.Trigger:
-                    return new Trigger(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2,Ground.DefaultHeight/2), LogicalObject.Treatment.Default, LogicalObject.Treatment.Default, LogicalObject.Treatment.Default);
+                    return new GameTrigger(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2,Ground.DefaultHeight/2), LogicalObject.Treatment.Default, LogicalObject.Treatment.Default, LogicalObject.Treatment.Default);
                 case Enumerations.ObjectTypes.TextureLoader:
                     return new TextureLoader(MouseManager.mousePosition - new Vector2(Ground.DefaultWidth/2,Ground.DefaultHeight/2), TextureManager.TextureID.ground);
                 case Enumerations.ObjectTypes.Canon:

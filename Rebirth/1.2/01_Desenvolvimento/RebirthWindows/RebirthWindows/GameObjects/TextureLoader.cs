@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Rebirth {
     [Serializable]
-    public class TextureLoader:Trigger {
+    public class TextureLoader:GameTrigger {
 
         public TextureLoader (Vector2 position, TextureManager.TextureID id):base(position, Treatment.Default, Treatment.Default, Treatment.Default){
             this.textureId = id;

@@ -159,7 +159,8 @@ namespace Rebirth {
                 adjustCamera(gameEditor.SceneManagerView);
             } else {
                 enableContainerOperations();
-                SceneContainer scene = LoadManager.Load(gameEditor.getContainerInTab(index));
+                //SceneContainer scene = LoadManager.Load(gameEditor.getContainerInTab(index));
+                SceneContainer scene = XMLManager.Load(gameEditor.getContainerInTab(index));
                 scene.remakeObjectsTree();
                 gameEntry.getWorld().loadScene(scene);
                 adjustCamera(scene);
@@ -233,7 +234,8 @@ namespace Rebirth {
                 if (id != -1){
                     int tab = gameEditor.getTab(id);
                     if (tab == -1){
-                        addSceneTab(LoadManager.Load(id));
+                        //addSceneTab(LoadManager.Load(id));
+                        addSceneTab(XMLManager.Load(id));
                     }
                     else this.tabControlContainer.SelectedIndex = tab;
                 }

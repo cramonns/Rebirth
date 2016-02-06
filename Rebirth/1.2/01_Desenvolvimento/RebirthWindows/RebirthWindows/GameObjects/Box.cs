@@ -25,6 +25,8 @@ namespace Rebirth{
             
 		}
 
+        public Box():this(new Vector2(0,0)){}
+
 		public override void Update(GameTime gameTime){
 
 		}

@@ -22,6 +22,8 @@ namespace Rebirth{
 
 		}
 
+        public Ground():this(new Vector2(0,0)){}
+
 		public override void Update(GameTime gameTime){
 		}
 

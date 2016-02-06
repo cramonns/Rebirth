@@ -205,7 +205,7 @@ namespace Rebirth{
         }
     }
 
-    public class DroppedUmbrella:Trigger{
+    public class DroppedUmbrella:GameTrigger{
  
         public DroppedUmbrella(Player p):base(new Vector2(p.Center.X - Umbrella.Length/2, p.Y), Treatment.Default, Treatment.droppedUmprellaEnter, Treatment.droppedUmbrellaLeave){
             Color[] colors = new Color[] { Color.White };

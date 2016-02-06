@@ -15,6 +15,8 @@ namespace Rebirth {
             umbrellaReflect
         }
 
+        public Treatment treatment;
+
         protected delegate void collisionHandler(GameObject collider, CollisionDistance cd);
 
         protected collisionHandler handler;
@@ -24,6 +26,7 @@ namespace Rebirth {
 
         public LogicalObject(Vector2 position, Treatment treatment){
 
+            this.treatment = treatment;
             if (position == null)
 			    boundingBox = new RectangleF(new Vector2 (10f, 10f), DefaultWidth, DefaultHeight);
             else boundingBox = new RectangleF(position, DefaultWidth, DefaultHeight);

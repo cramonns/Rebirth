@@ -1,15 +1,24 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace Rebirth {
 
     [Serializable]
     public class Canon:MoveableObject  {
-        public int fireRate = 3000; //miliseconds
+        public int fireRate = DefaultFireRate; //miliseconds
+        
         double time = 0;
         
         new public static float DefaultHeight {
             get {return 0.5f;}
+        }
+        public static int DefaultFireRate{
+            get {return 3000;}
+        }
+
+        public Canon():this(new Vector2(0,0)){
+
         }
 
         public Canon(Vector2 position){
@@ -18,6 +27,7 @@ namespace Rebirth {
             isFixed = false;
             boundingBox = new RectangleF(position, DefaultWidth, DefaultHeight);
             textureId = TextureManager.TextureID.black;
+            attachments = new LinkedList<Attachment>();
         }
 
         public Canon(Vector2 position, int fireRate):this(position){
