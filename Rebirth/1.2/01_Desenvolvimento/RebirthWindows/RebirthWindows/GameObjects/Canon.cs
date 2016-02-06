@@ -5,7 +5,7 @@ namespace Rebirth {
 
     [Serializable]
     public class Canon:MoveableObject  {
-        int fireRate; //miliseconds
+        public int fireRate = 3000; //miliseconds
         double time = 0;
         
         new public static float DefaultHeight {
@@ -17,8 +17,11 @@ namespace Rebirth {
             usePhysics = true;
             isFixed = false;
             boundingBox = new RectangleF(position, DefaultWidth, DefaultHeight);
-            fireRate = 3000;
             textureId = TextureManager.TextureID.black;
+        }
+
+        public Canon(Vector2 position, int fireRate):this(position){
+            this.fireRate = fireRate;
         }
 
         private void fire(){
@@ -37,12 +40,6 @@ namespace Rebirth {
                 time -= fireRate;
             }
         }
-#if EDITOR
-        public override void specificXML(int level, System.IO.StreamWriter xmlStream) { 
-            xmlStream.WriteLine(FileManager.tabs(level)
-                + "fireRate=" + fireRate.ToString()
-                + ";");
-        }
-#endif
+
     }
 }

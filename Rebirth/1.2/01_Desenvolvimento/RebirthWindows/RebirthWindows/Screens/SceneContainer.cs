@@ -145,34 +145,7 @@ namespace Rebirth {
                 binFormat.Serialize(fStream, this);
             }
             //SAVE XML
-            int level = 0;
-            fileName = "Lvl/XML/" + id.ToString() + ".xml";
-            if (!Directory.Exists("Lvl/XML")){
-                Directory.CreateDirectory("Lvl/XML");
-            }
-            StreamWriter xmlStream = new StreamWriter(fileName);
-            string openingTag = "<SceneContainer"
-                + " id=" + this.id.ToString()
-                + " previousScene=" + this.previousScene.ToString()
-                + " nextScene=" + this.nextScene.ToString()
-                + " Y=" + this.shapeBox.y.ToString()
-                + " Width=" + this.shapeBox.width.ToString()
-                + " Height=" + this.shapeBox.height.ToString()
-                + ">";
-            xmlStream.WriteLine(FileManager.tabs(level) + openingTag);
-            level++;
-                if (objects != null && objects.Count > 0){
-                    xmlStream.WriteLine(FileManager.tabs(level) + "<Objects>");
-                    level++;
-                        foreach (GameObject g in objects){
-                            g.saveXML(level, xmlStream);
-                        }
-                    level--;
-                    xmlStream.WriteLine(FileManager.tabs(level) + "</Objects>");
-                }
-            level--;
-            xmlStream.WriteLine("</SceneContainer>");
-            xmlStream.Close();
+            XMLManager.saveXML(this);
         }
 
         public void remakeObjectsTree(){

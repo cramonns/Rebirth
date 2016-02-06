@@ -39,6 +39,7 @@
     <DefineConstants>TRACE;DEBUG;WINDOWS, EDITOR, DEV</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -48,18 +49,19 @@
     <DefineConstants>TRACE;DEBUG;WINDOWS, EDITOR, DEV</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="EditorClasses\XMLManager.cs" />
     <Compile Include="GameObjects\Attachment.cs" />
     <Compile Include="GameObjects\Box.cs" />
     <Compile Include="GameObjects\Canon.cs" />
     <Compile Include="GameObjects\Character.cs" />
     <Compile Include="GameObjects\Particle.cs" />
     <Compile Include="GameObjects\Projectile.cs" />
-    <Compile Include="GlobalControllers\FileManager.cs" />
     <Compile Include="MathAndGeometry\Circle.cs" />
     <Compile Include="MathAndGeometry\IShape.cs" />
     <Compile Include="Screens\ContainerManager.cs" />
