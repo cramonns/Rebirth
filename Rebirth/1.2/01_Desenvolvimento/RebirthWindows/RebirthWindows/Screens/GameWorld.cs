@@ -196,8 +196,11 @@ namespace Rebirth {
             }
 
             color = Color.White * 0.4f;
-            texture = TextureManager.load(TextureManager.TextureID.cyan);
             
+            /////////////////////////
+            texture = TextureManager.load(TextureManager.TextureID.black);
+            /////////////////////////
+
             if (scenes[preloadAmount] != null){
                 foreach (GameObject g in scenes[preloadAmount].objects){
                     if (g is GameTrigger && DeveloperSettings.drawTriggers){

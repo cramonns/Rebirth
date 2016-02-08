@@ -163,7 +163,7 @@ namespace Rebirth {
             LinkedList<GameObject> objects = new LinkedList<GameObject>();
 
             nextScene = int.Parse(xSC.Attribute("nextScene").Value);
-            previousScene = int.Parse(xSC.Attribute("nextScene").Value);
+            previousScene = int.Parse(xSC.Attribute("previousScene").Value);
             loadedScene =  new SceneContainer(new RectangleF(0,y,width,height), nextScene, previousScene);
             loadedScene.id = id;
             foreach (XElement x in xSC.Elements()){
@@ -177,6 +177,7 @@ namespace Rebirth {
                         break;
                 }
             }
+            loadedScene.objects = objects;
             foreach (GameObject g in loadedScene.objects){
                 g.X += loadedScene.X;
                 g.Load();
