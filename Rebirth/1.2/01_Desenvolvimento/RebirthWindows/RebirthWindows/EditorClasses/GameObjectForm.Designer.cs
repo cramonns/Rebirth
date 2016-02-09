@@ -57,12 +57,17 @@ namespace Rebirth {
             this.comboBoxLogicalOnCollide = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tabPageTriggers = new System.Windows.Forms.TabPage();
+            this.comboBoxTriggerOnLeave = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.comboBoxTriggerOnEnter = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.comboBoxTriggerOnCollide = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.comboBoxTriggerOnLeave = new System.Windows.Forms.ComboBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label17 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.tabPageMove.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeedY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeedX)).BeginInit();
@@ -81,6 +86,8 @@ namespace Rebirth {
             this.tabControl1.SuspendLayout();
             this.tabPageLogical.SuspendLayout();
             this.tabPageTriggers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPageMove
@@ -357,6 +364,11 @@ namespace Rebirth {
             // 
             // tabPageBasic
             // 
+            this.tabPageBasic.Controls.Add(this.numericUpDown1);
+            this.tabPageBasic.Controls.Add(this.label17);
+            this.tabPageBasic.Controls.Add(this.numericUpDown2);
+            this.tabPageBasic.Controls.Add(this.label18);
+            this.tabPageBasic.Controls.Add(this.label19);
             this.tabPageBasic.Controls.Add(this.groupBoxDimensions);
             this.tabPageBasic.Location = new System.Drawing.Point(4, 22);
             this.tabPageBasic.Name = "tabPageBasic";
@@ -574,6 +586,24 @@ namespace Rebirth {
             this.tabPageTriggers.Text = "Events";
             this.tabPageTriggers.UseVisualStyleBackColor = true;
             // 
+            // comboBoxTriggerOnLeave
+            // 
+            this.comboBoxTriggerOnLeave.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTriggerOnLeave.FormattingEnabled = true;
+            this.comboBoxTriggerOnLeave.Location = new System.Drawing.Point(8, 173);
+            this.comboBoxTriggerOnLeave.Name = "comboBoxTriggerOnLeave";
+            this.comboBoxTriggerOnLeave.Size = new System.Drawing.Size(201, 21);
+            this.comboBoxTriggerOnLeave.TabIndex = 7;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(9, 149);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(54, 13);
+            this.label16.TabIndex = 6;
+            this.label16.Text = "OnLeave:";
+            // 
             // comboBoxTriggerOnEnter
             // 
             this.comboBoxTriggerOnEnter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -610,23 +640,80 @@ namespace Rebirth {
             this.label14.TabIndex = 2;
             this.label14.Text = "OnCollide:";
             // 
-            // label16
+            // numericUpDown1
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(9, 149);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(54, 13);
-            this.label16.TabIndex = 6;
-            this.label16.Text = "OnLeave:";
+            this.numericUpDown1.DecimalPlaces = 2;
+            this.numericUpDown1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numericUpDown1.Location = new System.Drawing.Point(149, 144);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(49, 20);
+            this.numericUpDown1.TabIndex = 12;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // comboBoxTriggerOnLeave
+            // label17
             // 
-            this.comboBoxTriggerOnLeave.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxTriggerOnLeave.FormattingEnabled = true;
-            this.comboBoxTriggerOnLeave.Location = new System.Drawing.Point(8, 173);
-            this.comboBoxTriggerOnLeave.Name = "comboBoxTriggerOnLeave";
-            this.comboBoxTriggerOnLeave.Size = new System.Drawing.Size(201, 21);
-            this.comboBoxTriggerOnLeave.TabIndex = 7;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(126, 146);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(17, 13);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "Y:";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.DecimalPlaces = 2;
+            this.numericUpDown2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numericUpDown2.Location = new System.Drawing.Point(39, 144);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(49, 20);
+            this.numericUpDown2.TabIndex = 10;
+            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(16, 146);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(17, 13);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "X:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(13, 124);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(68, 13);
+            this.label19.TabIndex = 8;
+            this.label19.Text = "Initial Speed:";
             // 
             // GameObjectForm
             // 
@@ -649,6 +736,7 @@ namespace Rebirth {
             this.tabPageTextures.ResumeLayout(false);
             this.tabPageTextures.PerformLayout();
             this.tabPageBasic.ResumeLayout(false);
+            this.tabPageBasic.PerformLayout();
             this.groupBoxDimensions.ResumeLayout(false);
             this.groupBoxDimensions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWidth)).EndInit();
@@ -660,6 +748,8 @@ namespace Rebirth {
             this.tabPageLogical.PerformLayout();
             this.tabPageTriggers.ResumeLayout(false);
             this.tabPageTriggers.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -705,6 +795,11 @@ namespace Rebirth {
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox comboBoxTriggerOnLeave;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
 
     }
 }
