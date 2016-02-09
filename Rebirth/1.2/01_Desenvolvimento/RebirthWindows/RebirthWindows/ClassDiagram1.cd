@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Rebirth.QuadTree" Collapsed="true">
+    <Position X="24.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAABAAAAEAAAAEAAAARFAAAgAAAACAACAIAA=</HashCode>
+      <FileName>DataStructures\QuadTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Editor" Collapsed="true">
+    <Position X="31.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABJAACAAAAAABAQAAAAAABAgAAAAAAAAAAIAAAAAABA=</HashCode>
+      <FileName>EditorClasses\Editor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.FormTextureHolders" Collapsed="true">
+    <Position X="24.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAACAAgBAAAADABAACEAAAAAAAIAAAAIAFAAA=</HashCode>
+      <FileName>EditorClasses\FormTextureHolders.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.GameObjectForm" Collapsed="true">
+    <Position X="29.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>9yAACYIAAKIAABAQAADQEIAKAUAAQAxAACAIKAACRIA=</HashCode>
+      <FileName>EditorClasses\GameObjectForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.LevelEditor" Collapsed="true">
+    <Position X="33" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>R8AiQDAAgjsKIEAEmCChsJAKwkgOKAAEIMAAEwoBBAA=</HashCode>
+      <FileName>EditorClasses\LevelEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.SceneContainerManager" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EditorClasses\SceneContainerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.XMLManager" Collapsed="true">
+    <Position X="27.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAABAAAAAAAAAAAAAAAAAAAAAEABgAAAAAAA=</HashCode>
+      <FileName>EditorClasses\XMLManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Enumerations" Collapsed="true">
+    <Position X="33" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enumerations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Game1" Collapsed="true">
+    <Position X="26" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAEIAAABBAwAgAAAAAAAQACQAgAkAAAAgAAAAAAQ=</HashCode>
+      <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Attachment" Collapsed="true">
+    <Position X="1.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAAAIAQAAgAAIAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Attachment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Box" Collapsed="true">
+    <Position X="8.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Box.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Canon" Collapsed="true">
+    <Position X="12.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAAIAgAAAAAAAAAAAAAAEAAAABAAAAAAIAAA=</HashCode>
+      <FileName>GameObjects\Canon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Character" Collapsed="true">
+    <Position X="15" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.GameObject" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIwAgAAABUAAAkEoAAAAAMAAACAEAhAoIgAAGIQIYAA=</HashCode>
+      <FileName>GameObjects\GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.GameTrigger" Collapsed="true">
+    <Position X="4.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAAAAAAAAAggAAgAAAEAAAAAUAAAAAAAAAACAECA=</HashCode>
+      <FileName>GameObjects\GameTrigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Ground" Collapsed="true">
+    <Position X="21.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Ground.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.LogicalObject" Collapsed="true">
+    <Position X="3.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAgAgAAQAAAkAAAAAAIACAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\LogicalObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.MoveableObject" Collapsed="true">
+    <Position X="9.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAgAAQAAAAAAAAAAAACAAAAAAQCIACAACAAAAAA=</HashCode>
+      <FileName>GameObjects\MoveableObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Particle" Collapsed="true">
+    <Position X="10.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Particle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Collided" Collapsed="true">
+    <Position X="26" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Umbrella" Collapsed="true">
+    <Position X="19.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQgAAAABAABggAAACCAQABAaAAFAAAAAIAACAAACAA=</HashCode>
+      <FileName>GameObjects\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.DroppedUmbrella" Collapsed="true">
+    <Position X="6" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Player" Collapsed="true">
+    <Position X="15" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAiBIgAAAIgAAEAAQAgiAABBMAQAkAAAQAAAMAAA=</HashCode>
+      <FileName>GameObjects\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Projectile" Collapsed="true">
+    <Position X="17.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAQAAAAAAAAAAAAAAABAEAAAAAAABAAAAAgA=</HashCode>
+      <FileName>GameObjects\Projectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.TextureLoader" Collapsed="true">
+    <Position X="3.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>GameObjects\TextureLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.ControllerManager" Collapsed="true">
+    <Position X="24.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEBAAIAAAQIAAEAAAAAAAQgBAAAAABBIAABAoAAAQ=</HashCode>
+      <FileName>GlobalControllers\ControllerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.DeveloperSettings" Collapsed="true">
+    <Position X="26" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>GlobalControllers\DeveloperSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.DisplayManager" Collapsed="true">
+    <Position X="27.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AiwCAACABAFEAAAAAAECBCAAAAAgACAAAQKAQAAAAAA=</HashCode>
+      <FileName>GlobalControllers\DisplayManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.GameManager" Collapsed="true">
+    <Position X="27.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEQAFAAAAAAAAAEAACAAAAAAAAAIAAAAAEAQAIA=</HashCode>
+      <FileName>GlobalControllers\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.GlobalVariables" Collapsed="true">
+    <Position X="31.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgEAAAAABAAAgAABAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>GlobalControllers\GlobalVariables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.LoadManager" Collapsed="true">
+    <Position X="24.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAAAAAAQAAAAAAAAAACAAAQAAABAAAABgAAA=</HashCode>
+      <FileName>GlobalControllers\LoadManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.MouseManager" Collapsed="true">
+    <Position X="27.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAABAAAAAAAAAEAAAACAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>GlobalControllers\MouseManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.TextureManager" Collapsed="true">
+    <Position X="31.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAABAAAsAAAgAAAAEACEAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>GlobalControllers\TextureManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.UserSettings" Collapsed="true">
+    <Position X="33" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAQAAAAAIAIACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GlobalControllers\UserSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.VideoManager" Collapsed="true">
+    <Position X="26" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAoAAAAAAAAEACAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>GlobalControllers\VideoManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Circle" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAIAAA=</HashCode>
+      <FileName>MathAndGeometry\Circle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Rebirth.Edge" Collapsed="true">
+    <Position X="29.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>MathAndGeometry\Edge.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.MathUtils" Collapsed="true">
+    <Position X="26" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAFAABBAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MathAndGeometry\MathUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.PolygonR" Collapsed="true">
+    <Position X="31.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABgAAAAAAIAAAAAAEAAAAAAAAAAYAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MathAndGeometry\PolygonR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.RectangleF" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAQoQAQAAAAAAAAAAAEgIgBggAAoAQA=</HashCode>
+      <FileName>MathAndGeometry\RectangleF.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Rebirth.VertexR" Collapsed="true">
+    <Position X="24.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>MathAndGeometry\VertexR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Collider" Collapsed="true">
+    <Position X="27.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAQAAAAAAAAAAABAA=</HashCode>
+      <FileName>Physics\Collider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Collision" Collapsed="true">
+    <Position X="29.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgAQAIAAAIAAA=</HashCode>
+      <FileName>Physics\Collision.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.PhysicsManager" Collapsed="true">
+    <Position X="29.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAABAAACEEAAAABIAAAIAAAIAAIACAAAAAAAAAAAA=</HashCode>
+      <FileName>Physics\PhysicsManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Program" Collapsed="true">
+    <Position X="33" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAEAAAAAAAAAAAAAAAAIAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.ContainerProperties" Collapsed="true">
+    <Position X="33" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAQAAAAAAAAAAEAAAAAAAgAAAAAgA=</HashCode>
+      <FileName>Screens\ContainerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.ContainerManager" Collapsed="true">
+    <Position X="31.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAQAAABAhAAAIAAAFAAAASACgAAAAAEACAAAAA=</HashCode>
+      <FileName>Screens\ContainerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.GameScreen" Collapsed="true">
+    <Position X="3" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgADAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Screens\GameScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.GameWorld" Collapsed="true">
+    <Position X="0.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIQAACAAEAAABwAIcIAQQKCACAAYAAABCAIARAgAACA=</HashCode>
+      <FileName>Screens\GameWorld.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.IntroScreen" Collapsed="true">
+    <Position X="3" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAgAAAAAgAAAAAAAAAAAAAAAAABCAAACAAAAAA=</HashCode>
+      <FileName>Screens\IntroScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.MenuScreen" Collapsed="true">
+    <Position X="5.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAgAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Screens\MenuScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.SceneContainer" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIAEAAEEBECAA4AAAAQAIEgAAQAYQCEAEQCAAACKYgI=</HashCode>
+      <FileName>Screens\SceneContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Effects.Rain" Collapsed="true">
+    <Position X="26" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Effects\Rain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rebirth.Properties.Resources" Collapsed="true">
+    <Position X="29.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Rebirth.CollisionDistance" Collapsed="true">
+    <Position X="24.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAECAAgAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Physics\CollisionDistance.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="Rebirth.IShape" Collapsed="true">
+    <Position X="24.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>MathAndGeometry\IShape.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Rebirth.TriggerDirection" Collapsed="true">
+    <Position X="24.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAEAAAA=</HashCode>
+      <FileName>GlobalControllers\ControllerManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
