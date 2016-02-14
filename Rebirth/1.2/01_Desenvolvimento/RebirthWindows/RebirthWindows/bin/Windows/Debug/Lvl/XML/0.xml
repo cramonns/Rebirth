@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SceneContainer id="0" previousScene="-1" nextScene="-1" y="0" width="40" height="20">
 	<Objects>
-		<Ground x="0,1401548" y="0,09028327" width="39,74119" height="0,4703353" textureId="ground"/>
-		<Ground x="12,05761" y="0,5821147" width="5" height="1,380402" textureId="ground"/>
+		<Ground x="21,47807" y="4,533104" width="2" height="3,459157" textureId="ground"/>
 		<Canon x="12,07143" y="1,962754" width="2" height="0,5" textureId="black" speedX="0" speedY="0" fireRate="3000"/>
+		<Ground x="12,05761" y="0,5821147" width="5" height="1,380402" textureId="ground"/>
+		<Ground x="0,1401548" y="0,09028327" width="39,74119" height="0,4703353" textureId="ground"/>
 	</Objects>
 </SceneContainer>
