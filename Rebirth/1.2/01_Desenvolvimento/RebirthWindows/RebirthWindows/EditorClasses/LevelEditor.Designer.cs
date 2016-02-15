@@ -35,12 +35,12 @@ namespace Rebirth {
             this.labelSelectObject = new System.Windows.Forms.Label();
             this.comboBoxObjectList = new System.Windows.Forms.ComboBox();
             this.groupBoxContainer = new System.Windows.Forms.GroupBox();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonNew = new System.Windows.Forms.Button();
             this.buttonTHolders = new System.Windows.Forms.Button();
             this.tabControlContainer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
-            this.buttonNew = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBoxTest.SuspendLayout();
@@ -161,6 +161,26 @@ namespace Rebirth {
             this.groupBoxContainer.TabStop = false;
             this.groupBoxContainer.Text = "Container";
             // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(50, 89);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 2;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.containerToolStripMenuItem1_Click);
+            // 
+            // buttonNew
+            // 
+            this.buttonNew.Location = new System.Drawing.Point(50, 24);
+            this.buttonNew.Name = "buttonNew";
+            this.buttonNew.Size = new System.Drawing.Size(75, 23);
+            this.buttonNew.TabIndex = 1;
+            this.buttonNew.Text = "New";
+            this.buttonNew.UseVisualStyleBackColor = true;
+            this.buttonNew.Click += new System.EventHandler(this.containerToolStripMenuItem_Click);
+            // 
             // buttonTHolders
             // 
             this.buttonTHolders.Location = new System.Drawing.Point(35, 118);
@@ -205,26 +225,6 @@ namespace Rebirth {
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // buttonNew
-            // 
-            this.buttonNew.Location = new System.Drawing.Point(50, 24);
-            this.buttonNew.Name = "buttonNew";
-            this.buttonNew.Size = new System.Drawing.Size(75, 23);
-            this.buttonNew.TabIndex = 1;
-            this.buttonNew.Text = "New";
-            this.buttonNew.UseVisualStyleBackColor = true;
-            this.buttonNew.Click += new System.EventHandler(this.containerToolStripMenuItem_Click);
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.Location = new System.Drawing.Point(50, 89);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 2;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.containerToolStripMenuItem1_Click);
-            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -237,7 +237,6 @@ namespace Rebirth {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LevelEditor";
             this.Text = "LevelEditor";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LevelEditor_FormClosed);
             this.Resize += new System.EventHandler(this.LevelEditor_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).EndInit();

@@ -249,7 +249,14 @@ namespace Rebirth {
 
         private void gameBox_MouseMove(object sender, MouseEventArgs e) {
             GameObject selectedObject = gameEntry.getWorld().selectedObject;
-            MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X - gameBox.Left, PictureBox.MousePosition.Y - gameBox.Top));
+            //old code
+            //MouseManager.mousePosition = DisplayManager.worldPosition(new Vector2(PictureBox.MousePosition.X - gameBox.Left, PictureBox.MousePosition.Y - gameBox.Top));
+            //
+            Vector2 gbMousePosition = new Vector2(PictureBox.MousePosition.X - gameBox.Left, PictureBox.MousePosition.Y - gameBox.Top);
+            //correct mouse position
+            gbMousePosition -= new Vector2(this.ClientRectangle.Left, this.ClientRectangle.Top);
+            //
+            MouseManager.mousePosition = DisplayManager.worldPosition(gbMousePosition);
             if (wasMouseClicked){
                 if (auxBoundingBox != null){
                     switch (gameEntry.getWorld().selectionTransformType){
