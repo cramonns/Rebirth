@@ -150,24 +150,7 @@ namespace Rebirth{
 #endif
                 if (currentScreen == ScreenID.world){
                     switch (GameManager.globalVariables.currentSeason){
-                        case Enumerations.Seasons.Winter:
-                            if (GameManager.globalVariables.sunglassesOn){
-                                bgColor = Color.DarkOrange;
-                            } else bgColor = Color.White; 
-                            break;
-                        case Enumerations.Seasons.Spring:
-                            if (GameManager.globalVariables.sunglassesOn){
-                                bgColor = Color.DarkGoldenrod;
-                            } else bgColor = Color.DeepSkyBlue;
-                            break;
-                        case Enumerations.Seasons.Summer:
-                            if (GameManager.globalVariables.sunglassesOn){
-                                bgColor = Color.White;
-                            } else bgColor = Color.DarkOrange;
-                            break;
-                        case Enumerations.Seasons.Autumn:
-                            if (GameManager.globalVariables.sunglassesOn){
-                                bgColor = Color.DeepSkyBlue;
+                      Color.DeepSkyBlue;
                             } else bgColor = Color.DarkGoldenrod;
                             break;
                     }

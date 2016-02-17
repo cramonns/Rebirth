@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebirth", "Rebirth\Rebirth.csproj", "{2191FA94-C0BF-4A69-983B-87C92918A1B5}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebirth", "Rebirth\Rebirth.csproj", "{67D6496A-AE6C-4D58-ACD9-7779C6003BA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2191FA94-C0BF-4A69-983B-87C92918A1B5}.Debug|x86.ActiveCfg = Debug|x86
-		{2191FA94-C0BF-4A69-983B-87C92918A1B5}.Debug|x86.Build.0 = Debug|x86
-		{2191FA94-C0BF-4A69-983B-87C92918A1B5}.Release|x86.ActiveCfg = Release|x86
-		{2191FA94-C0BF-4A69-983B-87C92918A1B5}.Release|x86.Build.0 = Release|x86
+		{67D6496A-AE6C-4D58-ACD9-7779C6003BA6}.Debug|x86.ActiveCfg = Debug|x86
+		{67D6496A-AE6C-4D58-ACD9-7779C6003BA6}.Debug|x86.Build.0 = Debug|x86
+		{67D6496A-AE6C-4D58-ACD9-7779C6003BA6}.Release|x86.ActiveCfg = Release|x86
+		{67D6496A-AE6C-4D58-ACD9-7779C6003BA6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Rebirth\Rebirth.csproj

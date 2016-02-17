@@ -1,3 +1,0 @@
-Organizando diagrama de fases.
-Preparando modificações na historia.
-Criando Lvl Design completo.

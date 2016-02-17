@@ -1,6 +1,10 @@
 ﻿<Properties StartupItem="Rebirth/Rebirth.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x86" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Rebirth/Game1.cs">
+    <Files>
+      <File FileName="Rebirth/Game1.cs" Line="153" Column="22" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\Users\cedrik\Documents\42bits\Rebirth\trunk\Rebirth\01_New\01_Desenvolvimento\Rebirth\Rebirth\Player.cs" line="1" column="1" />
