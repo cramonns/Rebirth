@@ -9,7 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 
-namespace Rebirth {
+namespace Rebirth.EditorClasses {
     public partial class LevelEditor : Form {
         
         RectangleF auxBoundingBox = null;
@@ -129,6 +129,8 @@ namespace Rebirth {
         private void InitializeExtra(){
             foreach (string s in Enum.GetNames(typeof(Enumerations.ObjectTypes))) this.comboBoxObjectList.Items.Add(s);
             this.gameBox.MouseWheel += gameBox_MouseWheel;
+            
+            
         }
 
         public void startEditor(){

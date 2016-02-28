@@ -1,5 +1,5 @@
 ﻿#if EDITOR
-namespace Rebirth {
+namespace Rebirth.EditorClasses {
     partial class GameObjectForm {
         /// <summary>
         /// Required designer variable.

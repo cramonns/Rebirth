@@ -1,5 +1,5 @@
 ﻿#if EDITOR
-namespace Rebirth {
+namespace Rebirth.EditorClasses {
     partial class FormTextureHolders {
         /// <summary>
         /// Required designer variable.

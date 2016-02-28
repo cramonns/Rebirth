@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-namespace Rebirth {
+namespace Rebirth.EditorClasses {
 
     public class Editor{
 

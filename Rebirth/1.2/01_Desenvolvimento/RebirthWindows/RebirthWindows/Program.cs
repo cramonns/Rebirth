@@ -1,8 +1,8 @@
 using System;
 using System.Diagnostics;
-using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using Rebirth.EditorClasses;
+using System.Windows.Forms;
 
 namespace Rebirth{
     static class Program{
@@ -34,20 +34,28 @@ namespace Rebirth{
                 else {
                     callKiller();
 
-                    if (args[0].Equals("-editor")){
-
-                        LevelEditor form = new LevelEditor();
-                        form.Show();
-                        // This line creates a Game1 object in the gameEntry field created earlier.
-                        form.gameEntry = new Game1(form.gameBox.Handle, form, form.gameBox);
-                        form.gameEntry.Run();
+                    switch (args[0]){
+                        case ("-editor"):
+                            LevelEditor form = new LevelEditor();
+                            form.Show();
+                            // This line creates a Game1 object in the gameEntry field created earlier.
+                            form.gameEntry = new Game1(form.gameBox.Handle, form, form.gameBox);
+                            form.gameEntry.Run();
+                            break;
+                        case ("-loadDemo"):
+                            DisplayManager.LoadingDemo();
+                            game = new Game1();
+                            game.Run();
+                            break;
+                        case ("-formTest"):
+                            //Application.EnableVisualStyles();
+                            //Application.SetCompatibleTextRenderingDefault(false);
+                            Application.Run(new Form1());
+                            break;
+                        default:
+                            printError();
+                            break;
                     }
-                    else if (args[0].Equals("-loadDemo")){
-                        DisplayManager.LoadingDemo();
-                        game = new Game1();
-                        game.Run();
-                    }
-                    else printError();
                 }
             }
             else {

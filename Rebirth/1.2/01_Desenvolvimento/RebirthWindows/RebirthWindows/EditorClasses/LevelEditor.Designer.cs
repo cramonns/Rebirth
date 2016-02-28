@@ -1,6 +1,6 @@
 ﻿#if EDITOR
 using System;
-namespace Rebirth {
+namespace Rebirth.EditorClasses {
     partial class LevelEditor {
         /// <summary>
         /// Required designer variable.

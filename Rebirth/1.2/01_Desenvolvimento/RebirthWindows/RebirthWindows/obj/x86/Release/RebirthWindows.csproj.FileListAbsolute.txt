@@ -115,10 +115,11 @@ D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Release\SharpDX.RawInput.xml
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Release\SharpDX.Direct3D9.xml
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\RebirthWindows.csprojResolveAssemblyReference.cache
-D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.FormTextureHolders.resources
-D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.GameObjectForm.resources
-D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.LevelEditor.resources
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.Properties.Resources.resources
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\RebirthWindows.csproj.GenerateResource.Cache
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\RebirthWindows.exe
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\RebirthWindows.pdb
+D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.EditorClasses.FormTextureHolders.resources
+D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.EditorClasses.GameObjectForm.resources
+D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.EditorClasses.LevelEditor.resources
+D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.EditorClasses.UserControl2.resources

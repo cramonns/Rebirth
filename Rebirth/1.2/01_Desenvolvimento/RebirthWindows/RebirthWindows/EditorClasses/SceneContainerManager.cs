@@ -3,7 +3,7 @@ using System;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace Rebirth {
+namespace Rebirth.EditorClasses {
     public class SceneContainerManager: SceneContainer {
 
         ContainerManager manager;

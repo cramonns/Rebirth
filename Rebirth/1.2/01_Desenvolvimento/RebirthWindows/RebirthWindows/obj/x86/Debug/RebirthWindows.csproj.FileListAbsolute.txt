@@ -117,9 +117,6 @@ D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Debug\SharpDX.RawInput.xml
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\bin\Windows\Debug\SharpDX.Direct3D9.xml
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\RebirthWindows.csprojResolveAssemblyReference.cache
-D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.FormTextureHolders.resources
-D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.GameObjectForm.resources
-D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.LevelEditor.resources
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.Properties.Resources.resources
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\RebirthWindows.csproj.GenerateResource.Cache
 C:\Users\Thales\Desktop\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\RebirthWindows.exe
@@ -167,3 +164,7 @@ C:\Users\Thales\Desktop\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\R
 C:\Users\Thales\Desktop\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.LevelEditor.resources
 C:\Users\Thales\Desktop\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.Properties.Resources.resources
 C:\Users\Thales\Desktop\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\RebirthWindows.csproj.GenerateResource.Cache
+D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.EditorClasses.FormTextureHolders.resources
+D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.EditorClasses.GameObjectForm.resources
+D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.EditorClasses.LevelEditor.resources
+D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.EditorClasses.UserControl2.resources

@@ -55,6 +55,24 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="EditorClasses\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorClasses\PropertiesItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\Properties.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\UserControl2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\UserControl2.Designer.cs">
+      <DependentUpon>UserControl2.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditorClasses\XMLManager.cs" />
     <Compile Include="Effects\Rain.cs" />
     <Compile Include="GameObjects\Attachment.cs" />
@@ -199,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditorClasses\LevelEditor.resx">
       <DependentUpon>LevelEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorClasses\UserControl2.resx">
+      <DependentUpon>UserControl2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -4,7 +4,7 @@ using System;
 using System.Xml.Linq;
 using System.Collections.Generic;
 
-namespace Rebirth {
+namespace Rebirth.EditorClasses {
     public static class XMLManager {
 
         public static string tabs(int level){

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using Rebirth.EditorClasses;
 
 namespace Rebirth {
     [Serializable]
