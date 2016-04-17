@@ -50,6 +50,7 @@ namespace Rebirth{
                         case ("-formTest"):
                             //Application.EnableVisualStyles();
                             //Application.SetCompatibleTextRenderingDefault(false);
+                            goto case ("-loadDemo");
                             Application.Run(new Form1());
                             break;
                         default:

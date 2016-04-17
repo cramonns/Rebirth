@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Content;
 
+/*
 namespace Rebirth {
     public static class VideoManager {
          
@@ -38,3 +39,4 @@ namespace Rebirth {
 
     }
 }
+ * */

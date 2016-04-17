@@ -39,9 +39,8 @@ namespace Rebirth {
         bool drawPlayer;
 
         public Player player;
-
-        Texture2D rainTexture;
-        MoveableObject[,] rainParticles;
+        
+        Effects.Rain rainEffect = new Effects.Rain(15,10);
 
         public GameWorld(SpriteBatch sb){
             this.sb = sb;
@@ -52,20 +51,6 @@ namespace Rebirth {
             player = new Player();
             player.Load();
             drawPlayer = true;
-
-            rainTexture = TextureManager.load(TextureManager.TextureID.rain);
-            rainParticles = new Particle[15,10];
-
-            Random rand = new Random();
-            for (int i = 0; i < 15; i++){
-                for (int j = 0; j < 10; j++){
-                    rainParticles[i,j] = new Particle();
-                    rainParticles[i,j].X = i*(DisplayManager.DisplayWidth)/15-400;
-                    rainParticles[i,j].Y = j*(DisplayManager.DisplayHeight)/10-40;
-                    rainParticles[i,j].speed.X = -1.2f - (float)rand.NextDouble();
-                    rainParticles[i,j].speed.Y = 4f + 2*(float)rand.NextDouble();
-                }
-            }
             
         }
 
@@ -85,9 +70,8 @@ namespace Rebirth {
 			    worldPhysics.treatCollisions();
 			    worldPhysics.integratePosition();
                 DisplayManager.Update(player.Position);
-                foreach (Particle p in rainParticles) {
-                    //if (p != null)
-                    p.Update(gameTime);
+                if (GameManager.globalVariables.currentWeather == Enumerations.Weather.Rain){
+                    rainEffect.Update(gameTime);
                 }
 #if EDITOR
             }
@@ -211,9 +195,7 @@ namespace Rebirth {
 #endif
 #endregion
             if (GameManager.globalVariables.currentWeather == Enumerations.Weather.Rain){
-                foreach (MoveableObject r in rainParticles){
-                    sb.Draw(rainTexture, new Rectangle((int)r.Position.X, (int)r.Position.Y, 640,400), Color.White);
-                }
+                rainEffect.Draw(sb, gameTime);
             }
         }
 
@@ -257,8 +239,8 @@ namespace Rebirth {
             if (scenes[preloadAmount+1] != null) scenes[preloadAmount+1].objects.Remove(g);
         }
 
-#region EDITOR_FUNCTIONS
-#if EDITOR
+        #region EDITOR_FUNCTIONS
+        #if EDITOR
         public void editMode(){
             GameManager.globalVariables.editorMode = true;
         }
@@ -359,8 +341,8 @@ namespace Rebirth {
             }
         }
 
-#endif
-#endregion
+        #endif
+        #endregion
 
     }
 }

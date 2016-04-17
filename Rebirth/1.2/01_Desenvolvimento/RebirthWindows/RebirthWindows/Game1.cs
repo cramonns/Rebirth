@@ -99,7 +99,7 @@ namespace Rebirth{
 
             //create the content managers
             TextureManager.initialize(Content);
-            VideoManager.initialize(Content);
+            //VideoManager.initialize(Content);
 
 			//create all screens
             screens[(int)ScreenID.intro] = new IntroScreen(spriteBatch);
