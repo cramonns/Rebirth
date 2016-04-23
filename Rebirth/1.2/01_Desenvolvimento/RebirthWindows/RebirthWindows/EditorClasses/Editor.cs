@@ -20,19 +20,19 @@ namespace Rebirth.EditorClasses {
 
         List<int> containerTab;
 
-        public Editor(){
-            cm = LoadManager.LoadContainerManager();
+        public Editor(string projectDirectory = ""){
+            cm = LoadManager.LoadContainerManager(projectDirectory);
             scm = new SceneContainerManager(cm);
             containerTab = new List<int>();
             containerTab.Add(-1);
         }
 
-        public SceneContainer newContainer(){
+        public SceneContainer newContainer(string projectDirectory){
             SceneContainer sc = new SceneContainer(new RectangleF(cm.newPosition(), 40, 20), cm.lastContainerID+1);
             cm.addContainer(sc);
             cm.LoadIdIndexes();
-            sc.save();
-            cm.saveContainerManager();
+            sc.save(projectDirectory);
+            cm.saveContainerManager(projectDirectory);
             return sc;
         }
 

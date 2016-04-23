@@ -40,13 +40,20 @@ namespace Rebirth.EditorClasses {
             this.buttonTHolders = new System.Windows.Forms.Button();
             this.tabControlContainer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.containToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.containerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBoxTest.SuspendLayout();
             this.groupBoxObjects.SuspendLayout();
             this.groupBoxContainer.SuspendLayout();
             this.tabControlContainer.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gameBox
@@ -54,9 +61,9 @@ namespace Rebirth.EditorClasses {
             this.gameBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gameBox.Location = new System.Drawing.Point(197, 27);
+            this.gameBox.Location = new System.Drawing.Point(197, 97);
             this.gameBox.Name = "gameBox";
-            this.gameBox.Size = new System.Drawing.Size(712, 531);
+            this.gameBox.Size = new System.Drawing.Size(712, 461);
             this.gameBox.TabIndex = 0;
             this.gameBox.TabStop = false;
             this.gameBox.Click += new System.EventHandler(this.gameBox_Click);
@@ -75,15 +82,15 @@ namespace Rebirth.EditorClasses {
             this.panel1.Controls.Add(this.groupBoxTest);
             this.panel1.Controls.Add(this.groupBoxObjects);
             this.panel1.Controls.Add(this.groupBoxContainer);
-            this.panel1.Location = new System.Drawing.Point(1, 0);
+            this.panel1.Location = new System.Drawing.Point(1, 72);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(190, 558);
+            this.panel1.Size = new System.Drawing.Size(190, 486);
             this.panel1.TabIndex = 1;
             // 
             // groupBoxTest
             // 
             this.groupBoxTest.Controls.Add(this.buttonPlay);
-            this.groupBoxTest.Location = new System.Drawing.Point(3, 175);
+            this.groupBoxTest.Location = new System.Drawing.Point(3, 194);
             this.groupBoxTest.Name = "groupBoxTest";
             this.groupBoxTest.Size = new System.Drawing.Size(184, 68);
             this.groupBoxTest.TabIndex = 2;
@@ -109,9 +116,9 @@ namespace Rebirth.EditorClasses {
             this.groupBoxObjects.Controls.Add(this.buttonInsertObject);
             this.groupBoxObjects.Controls.Add(this.labelSelectObject);
             this.groupBoxObjects.Controls.Add(this.comboBoxObjectList);
-            this.groupBoxObjects.Location = new System.Drawing.Point(3, 249);
+            this.groupBoxObjects.Location = new System.Drawing.Point(3, 268);
             this.groupBoxObjects.Name = "groupBoxObjects";
-            this.groupBoxObjects.Size = new System.Drawing.Size(184, 114);
+            this.groupBoxObjects.Size = new System.Drawing.Size(184, 122);
             this.groupBoxObjects.TabIndex = 2;
             this.groupBoxObjects.TabStop = false;
             this.groupBoxObjects.Text = "Objects";
@@ -154,9 +161,9 @@ namespace Rebirth.EditorClasses {
             this.groupBoxContainer.Controls.Add(this.buttonSave);
             this.groupBoxContainer.Controls.Add(this.buttonNew);
             this.groupBoxContainer.Controls.Add(this.buttonTHolders);
-            this.groupBoxContainer.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxContainer.Location = new System.Drawing.Point(3, 74);
             this.groupBoxContainer.Name = "groupBoxContainer";
-            this.groupBoxContainer.Size = new System.Drawing.Size(184, 165);
+            this.groupBoxContainer.Size = new System.Drawing.Size(184, 114);
             this.groupBoxContainer.TabIndex = 1;
             this.groupBoxContainer.TabStop = false;
             this.groupBoxContainer.Text = "Container";
@@ -196,10 +203,10 @@ namespace Rebirth.EditorClasses {
             this.tabControlContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlContainer.Controls.Add(this.tabPage1);
-            this.tabControlContainer.Location = new System.Drawing.Point(197, 0);
+            this.tabControlContainer.Location = new System.Drawing.Point(197, 72);
             this.tabControlContainer.Name = "tabControlContainer";
             this.tabControlContainer.SelectedIndex = 0;
-            this.tabControlContainer.Size = new System.Drawing.Size(684, 26);
+            this.tabControlContainer.Size = new System.Drawing.Size(715, 26);
             this.tabControlContainer.TabIndex = 2;
             this.tabControlContainer.SelectedIndexChanged += new System.EventHandler(this.tabControlContainer_SelectedIndexChanged);
             // 
@@ -208,33 +215,77 @@ namespace Rebirth.EditorClasses {
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(676, 0);
+            this.tabPage1.Size = new System.Drawing.Size(707, 0);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "ContainerView";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // menuStrip1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(883, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(26, 26);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "X";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.buildToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(909, 24);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.containToolStripMenuItem,
+            this.containerToolStripMenuItem});
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Text = "New";
+            // 
+            // containToolStripMenuItem
+            // 
+            this.containToolStripMenuItem.Name = "containToolStripMenuItem";
+            this.containToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.containToolStripMenuItem.Text = "Project";
+            this.containToolStripMenuItem.Click += new System.EventHandler(this.containToolStripMenuItem_Click);
+            // 
+            // containerToolStripMenuItem
+            // 
+            this.containerToolStripMenuItem.Name = "containerToolStripMenuItem";
+            this.containerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.containerToolStripMenuItem.Text = "Container";
+            // 
+            // buildToolStripMenuItem
+            // 
+            this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
+            this.buildToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.buildToolStripMenuItem.Text = "Build";
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 24);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(909, 30);
+            this.panel2.TabIndex = 4;
             // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(909, 558);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.tabControlContainer);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gameBox);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "LevelEditor";
             this.Text = "LevelEditor";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LevelEditor_FormClosed);
@@ -246,7 +297,10 @@ namespace Rebirth.EditorClasses {
             this.groupBoxObjects.PerformLayout();
             this.groupBoxContainer.ResumeLayout(false);
             this.tabControlContainer.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -262,11 +316,17 @@ namespace Rebirth.EditorClasses {
         private System.Windows.Forms.Label labelSelectObject;
         private System.Windows.Forms.GroupBox groupBoxTest;
         private System.Windows.Forms.Button buttonInsertObject;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonTHolders;
         private System.Windows.Forms.Button buttonPlay;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonNew;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem containToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem containerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem buildToolStripMenuItem;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 #endif

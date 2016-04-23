@@ -114,15 +114,17 @@ namespace Rebirth {
 			}
         }
 
-        public static ContainerManager LoadContainerManager(){
-            if (File.Exists("Lvl/Containers.info")){
+        public static ContainerManager LoadContainerManager(string directory=""){
+            directory = (directory != "")?directory+"/Containers.info":"Containers.info";
+            if (File.Exists(directory)){
                 BinaryFormatter binFormat = new BinaryFormatter();
-                string path = "Lvl/Containers.info";
+                string path = directory;
                 using ( Stream fStream = File.OpenRead(path) ){
                     cm = (ContainerManager)binFormat.Deserialize(fStream);
                 }
                 cm.texture = TextureManager.load(TextureManager.TextureID.container);
-            } else cm = new ContainerManager();
+            } 
+            else cm = new ContainerManager();
             cm.LoadIdIndexes();
             return cm;
         }

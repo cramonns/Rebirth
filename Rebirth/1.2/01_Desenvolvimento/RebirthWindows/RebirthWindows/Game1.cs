@@ -110,10 +110,11 @@ namespace Rebirth{
             int totalScreens = Enum.GetNames(typeof(ScreenID)).Length;
             for (int i = 0; i < totalScreens; i++)
 			    screens[i].LoadScreen();
+
 #if EDITOR
             if (editor) {
                 (screens[(int)ScreenID.world] as GameWorld).editMode();
-                (parentForm as LevelEditor).startEditor();
+                //(parentForm as LevelEditor).startEditor();
             }
             else               
 #endif

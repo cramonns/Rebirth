@@ -206,3 +206,6 @@ C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\
 C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\RebirthWindows.csproj.GenerateResource.Cache
 C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\RebirthWindows.exe
 C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\RebirthWindows.pdb
+D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\Rebirth.EditorClasses.FormNewProject.resources
+D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\WinExplorer.AboutDlg.resources
+D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Debug\My_Explorer.Explorer.resources

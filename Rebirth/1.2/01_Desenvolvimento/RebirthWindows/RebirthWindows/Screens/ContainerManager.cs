@@ -87,9 +87,9 @@ namespace Rebirth {
             cp.y = sc.Y;
         }
 #endif
-        public void saveContainerManager(){
+        public void saveContainerManager(string workingDirectory = ""){
             BinaryFormatter binFormat = new BinaryFormatter();
-            string path = "Lvl/Containers.info";
+            string path = workingDirectory + "/Lvl/Containers.info";
             using (Stream fStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None) ){
                 binFormat.Serialize(fStream, this);
             }

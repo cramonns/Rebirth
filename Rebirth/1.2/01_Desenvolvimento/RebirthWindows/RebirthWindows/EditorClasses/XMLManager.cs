@@ -42,11 +42,11 @@ namespace Rebirth.EditorClasses {
             return "GameObject";
         }
 
-        public static void saveXML(SceneContainer sc){
+        public static void saveXML(SceneContainer sc, string projectDirectory){
             int level = 0;
-            string fileName = "Lvl/XML/" + sc.id.ToString() + ".xml";
-            if (!Directory.Exists("Lvl/XML")){
-                Directory.CreateDirectory("Lvl/XML");
+            string fileName = projectDirectory + sc.id.ToString() + ".xml";
+            if (!Directory.Exists(projectDirectory)){
+                Directory.CreateDirectory(projectDirectory);
             }
             StreamWriter xmlStream = new StreamWriter(fileName);
             StringBuilder openingTag = new StringBuilder("<?xml version=\"1.0\" encoding=\"utf-8\"?>");

@@ -55,12 +55,25 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BaseForms\AboutDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseForms\Explorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EditorClasses\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditorClasses\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditorClasses\FormNewProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\FormNewProject.Designer.cs">
+      <DependentUpon>FormNewProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorClasses\Project.cs" />
     <Compile Include="EditorClasses\PropertiesItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -152,12 +165,29 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BaseForms\35FLOPPY.ICO" />
+    <Content Include="BaseForms\525FLOP1.ICO" />
+    <Content Include="BaseForms\About.bmp" />
+    <Content Include="BaseForms\App.ico" />
+    <Content Include="BaseForms\CDDRIVE.ICO" />
+    <Content Include="BaseForms\Close.bmp" />
+    <Content Include="BaseForms\DRIVENET.ICO" />
+    <Content Include="BaseForms\Explorer.bmp" />
+    <Content Include="BaseForms\File.bmp" />
+    <Content Include="BaseForms\FloppyDrive.bmp" />
+    <Content Include="BaseForms\FolderClose.bmp" />
+    <Content Include="BaseForms\FolderOpen.bmp" />
+    <Content Include="BaseForms\MyComputer.bmp" />
+    <Content Include="BaseForms\Recycle.bmp" />
+    <Content Include="BaseForms\Refresh.bmp" />
     <Content Include="Content\Texture\CanonBall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -209,6 +239,15 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BaseForms\AboutDlg.resx">
+      <DependentUpon>AboutDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseForms\Explorer.resx">
+      <DependentUpon>Explorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorClasses\FormNewProject.resx">
+      <DependentUpon>FormNewProject.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditorClasses\FormTextureHolders.resx">
       <DependentUpon>FormTextureHolders.cs</DependentUpon>
     </EmbeddedResource>

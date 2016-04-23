@@ -291,6 +291,7 @@ namespace Rebirth {
         }
 
         public GameObject objectAt(Vector2 mousePosition){
+            if (scenes[preloadAmount] == null) return null;
             foreach (GameObject g in scenes[preloadAmount].objects){
                 if (g.BoundingBox.intersects(mousePosition)){
                     return g;
