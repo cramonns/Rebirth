@@ -4,6 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Rebirth.EditorClasses;
 
 namespace Rebirth {
 
@@ -36,7 +37,7 @@ namespace Rebirth {
         }
 
 #if EDITOR
-        public void addContainer(SceneContainer sc){
+        public void addContainer(SceneContainer sc, Project gameProject){
             ContainerProperties cp = new ContainerProperties();
             cp.width = sc.Width;
             cp.height = sc.Height;
@@ -49,9 +50,10 @@ namespace Rebirth {
                 firstContainerID = sc.id;
             }
             else{
-                SceneContainer prevScene = LoadManager.Load(lastContainerID);
+                //SceneContainer prevScene = LoadManager.Load(lastContainerID);
+                SceneContainer prevScene = XMLManager.Load(lastContainerID, gameProject);
                 prevScene.nextScene = sc.id;
-                prevScene.save();
+                prevScene.save(gameProject);
             }
             containers.Add(cp);
             lastContainerID++;
@@ -68,7 +70,7 @@ namespace Rebirth {
             }
         }*/
 
-        public void updateContainer(SceneContainer sc){
+        public void updateContainer(SceneContainer sc, Project gameProject){
             int index = IdIndexes[sc.id];
             ContainerProperties cp = containers[index];
             if (firstContainerID == sc.id){
@@ -80,16 +82,16 @@ namespace Rebirth {
                 for (index++; index < containers.Count; index++ ){
                     SceneContainer scene = LoadManager.Load(containers[index].id);
                     scene.shiftHorizontal(extension);                
-                    scene.save();
+                    scene.save(gameProject);
                 }
             }
             cp.height = sc.Height;
             cp.y = sc.Y;
         }
 #endif
-        public void saveContainerManager(string workingDirectory = ""){
+        public void saveContainerManager(Project gameProject){
             BinaryFormatter binFormat = new BinaryFormatter();
-            string path = workingDirectory + "/Lvl/Containers.info";
+            string path = gameProject.DirectoryPath + "/Lvl/Containers.info";
             using (Stream fStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None) ){
                 binFormat.Serialize(fStream, this);
             }

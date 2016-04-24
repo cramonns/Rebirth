@@ -165,3 +165,6 @@ C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.EditorClasses.FormNewProject.resources
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\WinExplorer.AboutDlg.resources
 D:\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\My_Explorer.Explorer.resources
+C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\WinExplorer.AboutDlg.resources
+C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\My_Explorer.Explorer.resources
+C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindows\RebirthWindows\obj\x86\Release\Rebirth.EditorClasses.FormNewProject.resources

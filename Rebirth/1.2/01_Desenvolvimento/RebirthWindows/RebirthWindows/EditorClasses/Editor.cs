@@ -27,12 +27,12 @@ namespace Rebirth.EditorClasses {
             containerTab.Add(-1);
         }
 
-        public SceneContainer newContainer(string projectDirectory){
+        public SceneContainer newContainer(Project gameProject){
             SceneContainer sc = new SceneContainer(new RectangleF(cm.newPosition(), 40, 20), cm.lastContainerID+1);
-            cm.addContainer(sc);
+            cm.addContainer(sc, gameProject);
             cm.LoadIdIndexes();
-            sc.save(projectDirectory);
-            cm.saveContainerManager(projectDirectory);
+            sc.save(gameProject);
+            cm.saveContainerManager(gameProject);
             return sc;
         }
 
@@ -44,10 +44,10 @@ namespace Rebirth.EditorClasses {
             containerTab.Add(containerID);
         }
 
-        public void saveContainer(SceneContainer sc){
-            sc.save();
-            cm.updateContainer(sc);
-            cm.saveContainerManager();
+        public void saveContainer(SceneContainer sc, Project gameProject){
+            sc.save(gameProject);
+            cm.updateContainer(sc, gameProject);
+            cm.saveContainerManager(gameProject);
         }
 
         public SceneContainer SceneManagerView{

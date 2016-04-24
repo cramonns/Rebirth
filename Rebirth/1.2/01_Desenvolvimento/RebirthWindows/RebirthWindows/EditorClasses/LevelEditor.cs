@@ -90,13 +90,13 @@ namespace Rebirth.EditorClasses {
         #region Functionalities
         
         public void newScene(){
-            addSceneTab(gameProject.gameEditor.newContainer(gameProject.DirectoryPath));
+            addSceneTab(gameProject.gameEditor.newContainer(gameProject));
         }
 
         public void saveScene(){
             int index = tabControlContainer.SelectedIndex;
             if (index > 0){
-                gameProject.gameEditor.saveContainer(gameEntry.getWorld().currentContainer());
+                gameProject.gameEditor.saveContainer(gameEntry.getWorld().currentContainer(), gameProject);
             }
         }
 
@@ -171,7 +171,7 @@ namespace Rebirth.EditorClasses {
             gameEntry.getWorld().selectedObject = null;
             int index = tabControlContainer.SelectedIndex;
             if (lastTabIndex != 0){
-                gameEntry.getWorld().saveScene();
+                gameEntry.getWorld().saveScene(gameProject);
             }
             if (index == 0){
                 disableCointainerOperations();
@@ -181,7 +181,7 @@ namespace Rebirth.EditorClasses {
             } else {
                 enableContainerOperations();
                 //SceneContainer scene = LoadManager.Load(gameEditor.getContainerInTab(index));
-                SceneContainer scene = XMLManager.Load(gameProject.gameEditor.getContainerInTab(index));
+                SceneContainer scene = XMLManager.Load(gameProject.gameEditor.getContainerInTab(index),gameProject);
                 scene.remakeObjectsTree();
                 gameEntry.getWorld().loadScene(scene);
                 adjustCamera(scene);
@@ -253,7 +253,7 @@ namespace Rebirth.EditorClasses {
                     int tab = gameProject.gameEditor.getTab(id);
                     if (tab == -1){
                         //addSceneTab(LoadManager.Load(id));
-                        addSceneTab(XMLManager.Load(id));
+                        addSceneTab(XMLManager.Load(id,gameProject));
                     }
                     else this.tabControlContainer.SelectedIndex = tab;
                 }
@@ -417,7 +417,7 @@ namespace Rebirth.EditorClasses {
 
         private void buttonTHolders_Click(object sender, EventArgs e) {
             SceneContainer c = gameEntry.getWorld().currentContainer();
-            FormTextureHolders formTextureHolders = new FormTextureHolders(c, gameProject.gameEditor.containerManager.getName(c.id));
+            FormTextureHolders formTextureHolders = new FormTextureHolders(c, gameProject.gameEditor.containerManager.getName(c.id), gameProject);
             formTextureHolders.Show();
         }
 

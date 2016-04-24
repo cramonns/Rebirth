@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
+using Rebirth.EditorClasses;
 
 namespace Rebirth {
 
@@ -282,9 +283,11 @@ namespace Rebirth {
             g.Load();
         }
 
-        public void saveScene(){
-            scenes[preloadAmount].save();
+#if EDITOR
+        public void saveScene(Project gameProject){
+            scenes[preloadAmount].save(gameProject);
         }
+#endif
 
         public bool isInInsertMode(){
             return insertionMode;

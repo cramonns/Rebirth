@@ -12,10 +12,12 @@ namespace Rebirth.EditorClasses {
     public partial class FormTextureHolders : Form {
         
         SceneContainer container;
+        Project gameProject;
 
-        public FormTextureHolders(SceneContainer sc, string containerName) {
+        public FormTextureHolders(SceneContainer sc, string containerName, Project gameProject) {
             InitializeComponent();
-            container = sc; 
+            container = sc;
+            this.gameProject = gameProject;
             labelContainerName.Text = containerName;
             checkedListBox1.Items.Clear();
             foreach (string s in Enum.GetNames(typeof(TextureManager.TextureID))){
@@ -41,7 +43,7 @@ namespace Rebirth.EditorClasses {
             foreach (int i in checkedListBox1.CheckedIndices){
                 container.textureHolders.AddFirst((TextureManager.TextureID)i);
             }
-            container.save();
+            container.save(gameProject);
             Close();
         }
 

@@ -42,11 +42,11 @@ namespace Rebirth.EditorClasses {
             return "GameObject";
         }
 
-        public static void saveXML(SceneContainer sc, string projectDirectory){
+        public static void saveXML(SceneContainer sc, Project gameProject){
             int level = 0;
-            string fileName = projectDirectory + sc.id.ToString() + ".xml";
-            if (!Directory.Exists(projectDirectory)){
-                Directory.CreateDirectory(projectDirectory);
+            string fileName = gameProject.DirectoryPath + sc.id.ToString() + ".xml";
+            if (!Directory.Exists(gameProject.DirectoryPath)){
+                Directory.CreateDirectory(gameProject.DirectoryPath);
             }
             StreamWriter xmlStream = new StreamWriter(fileName);
             StringBuilder openingTag = new StringBuilder("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
@@ -153,12 +153,12 @@ namespace Rebirth.EditorClasses {
             else xmlStream.WriteLine("\"/>");
         }
 
-        public static SceneContainer Load(int id){
+        public static SceneContainer Load(int id, Project gameProject){
             XElement xSC;
             SceneContainer loadedScene;
             float y = 0, width = 40, height = 20;
             int nextScene = -1, previousScene = -1;
-            string fileName = "Lvl/XML/" + id.ToString() + ".xml";
+            string fileName = gameProject.DirectoryPath + "/Lvl/XML/" + id.ToString() + ".xml";
             xSC = XElement.Load(fileName);
             LinkedList<GameObject> objects = new LinkedList<GameObject>();
 

@@ -139,13 +139,13 @@ namespace Rebirth {
             sb.Draw(line, new Rectangle((int)DisplayManager.getScreenX(shapeBox.x),(int)DisplayManager.getScreenY(shapeBox.y),(int)DisplayManager.screenLength(shapeBox.width),1),Color.White);
         }
 
-        public void save(string projectDirectory){
+        public void save(Project gameProject){
             foreach (GameObject g in objects){
                 g.X -= shapeBox.x;
             }
             //SAVE BINARY
             BinaryFormatter binFormat = new BinaryFormatter();
-            projectDirectory += "/Lvl";
+            string projectDirectory = gameProject.DirectoryPath + "/Lvl";
             string fileName = projectDirectory + "/" + id.ToString() + ".scn";
             if (!Directory.Exists(projectDirectory)){
                 Directory.CreateDirectory(projectDirectory);
@@ -154,7 +154,7 @@ namespace Rebirth {
                 binFormat.Serialize(fStream, this);
             }
             //SAVE XML
-            XMLManager.saveXML(this, projectDirectory);
+            XMLManager.saveXML(this, gameProject);
         }
 
         public void remakeObjectsTree(){
