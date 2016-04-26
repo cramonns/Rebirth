@@ -50,6 +50,17 @@ namespace Rebirth.EditorClasses {
             cm.saveContainerManager(gameProject);
         }
 
+        public void buildContainer(SceneContainer sc){
+            sc.build();
+            cm.updateContainer(sc);
+            cm.buildContainerManager();
+        }
+
+        public void buildAll(Project gameProject){
+            cm.buildAll(gameProject);
+            cm.buildContainerManager();
+        }
+
         public SceneContainer SceneManagerView{
             get {return scm;}
         }

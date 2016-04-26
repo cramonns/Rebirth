@@ -44,5 +44,9 @@ namespace Rebirth.EditorClasses {
             return newProject;
         }
 
+        public void build(){
+            gameEditor.buildAll(this);
+        }
+
     }
 }

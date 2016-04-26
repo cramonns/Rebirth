@@ -100,9 +100,23 @@ namespace Rebirth.EditorClasses {
             }
         }
 
+        public void buildScene(){
+            int index = tabControlContainer.SelectedIndex;
+            if (index > 0){
+                gameProject.gameEditor.buildContainer(gameEntry.getWorld().currentContainer());
+            }
+        }
+
         public void createProject(string name, string path){
             gameProject = new Project(name, path);
             startEditor();
+        }
+
+        public void buildCurrentContainer(){
+            int index = tabControlContainer.SelectedIndex;
+            if (index > 0){
+                gameProject.gameEditor.buildContainer(gameEntry.getWorld().currentContainer());
+            }
         }
         #endregion
 
@@ -429,6 +443,22 @@ namespace Rebirth.EditorClasses {
             Explorer formExp = new Explorer();
             formExp.Show();
             */
+        }
+
+        private void buildProjectToolStripMenuItem_Click(object sender, EventArgs e) {
+            gameProject.build();
+        }
+
+        private void buildContainerToolStripMenuItem_Click(object sender, EventArgs e) {
+            buildCurrentContainer();
+        }
+
+        private void saveAllToolStripMenuItem_Click(object sender, EventArgs e) {
+            
+        }
+
+        private void saveToolStripMenuItem1_Click(object sender, EventArgs e) {
+            saveScene();
         }
         
 

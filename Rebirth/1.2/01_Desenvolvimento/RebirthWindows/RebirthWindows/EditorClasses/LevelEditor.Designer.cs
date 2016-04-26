@@ -45,8 +45,15 @@ namespace Rebirth.EditorClasses {
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.containToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.containerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
+            this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buildProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buildContainerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBoxTest.SuspendLayout();
@@ -54,6 +61,7 @@ namespace Rebirth.EditorClasses {
             this.groupBoxContainer.SuspendLayout();
             this.tabControlContainer.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // gameBox
@@ -61,7 +69,7 @@ namespace Rebirth.EditorClasses {
             this.gameBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gameBox.Location = new System.Drawing.Point(197, 97);
+            this.gameBox.Location = new System.Drawing.Point(197, 88);
             this.gameBox.Name = "gameBox";
             this.gameBox.Size = new System.Drawing.Size(712, 461);
             this.gameBox.TabIndex = 0;
@@ -82,7 +90,7 @@ namespace Rebirth.EditorClasses {
             this.panel1.Controls.Add(this.groupBoxTest);
             this.panel1.Controls.Add(this.groupBoxObjects);
             this.panel1.Controls.Add(this.groupBoxContainer);
-            this.panel1.Location = new System.Drawing.Point(1, 72);
+            this.panel1.Location = new System.Drawing.Point(1, 60);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(190, 486);
             this.panel1.TabIndex = 1;
@@ -90,7 +98,7 @@ namespace Rebirth.EditorClasses {
             // groupBoxTest
             // 
             this.groupBoxTest.Controls.Add(this.buttonPlay);
-            this.groupBoxTest.Location = new System.Drawing.Point(3, 194);
+            this.groupBoxTest.Location = new System.Drawing.Point(3, 123);
             this.groupBoxTest.Name = "groupBoxTest";
             this.groupBoxTest.Size = new System.Drawing.Size(184, 68);
             this.groupBoxTest.TabIndex = 2;
@@ -116,7 +124,7 @@ namespace Rebirth.EditorClasses {
             this.groupBoxObjects.Controls.Add(this.buttonInsertObject);
             this.groupBoxObjects.Controls.Add(this.labelSelectObject);
             this.groupBoxObjects.Controls.Add(this.comboBoxObjectList);
-            this.groupBoxObjects.Location = new System.Drawing.Point(3, 268);
+            this.groupBoxObjects.Location = new System.Drawing.Point(3, 197);
             this.groupBoxObjects.Name = "groupBoxObjects";
             this.groupBoxObjects.Size = new System.Drawing.Size(184, 122);
             this.groupBoxObjects.TabIndex = 2;
@@ -161,7 +169,7 @@ namespace Rebirth.EditorClasses {
             this.groupBoxContainer.Controls.Add(this.buttonSave);
             this.groupBoxContainer.Controls.Add(this.buttonNew);
             this.groupBoxContainer.Controls.Add(this.buttonTHolders);
-            this.groupBoxContainer.Location = new System.Drawing.Point(3, 74);
+            this.groupBoxContainer.Location = new System.Drawing.Point(3, 3);
             this.groupBoxContainer.Name = "groupBoxContainer";
             this.groupBoxContainer.Size = new System.Drawing.Size(184, 114);
             this.groupBoxContainer.TabIndex = 1;
@@ -203,7 +211,7 @@ namespace Rebirth.EditorClasses {
             this.tabControlContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlContainer.Controls.Add(this.tabPage1);
-            this.tabControlContainer.Location = new System.Drawing.Point(197, 72);
+            this.tabControlContainer.Location = new System.Drawing.Point(197, 60);
             this.tabControlContainer.Name = "tabControlContainer";
             this.tabControlContainer.SelectedIndex = 0;
             this.tabControlContainer.Size = new System.Drawing.Size(715, 26);
@@ -234,7 +242,11 @@ namespace Rebirth.EditorClasses {
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem});
+            this.newToolStripMenuItem,
+            this.openProjectToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.saveToolStripMenuItem1,
+            this.saveAllToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -259,21 +271,73 @@ namespace Rebirth.EditorClasses {
             // 
             this.containerToolStripMenuItem.Name = "containerToolStripMenuItem";
             this.containerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.containerToolStripMenuItem.Text = "Container";
+            this.containerToolStripMenuItem.Text = "Scene";
+            // 
+            // openProjectToolStripMenuItem
+            // 
+            this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
+            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openProjectToolStripMenuItem.Text = "Open Project";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(149, 6);
+            // 
+            // saveToolStripMenuItem1
+            // 
+            this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem1.Text = "Save";
+            this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem1_Click);
+            // 
+            // saveAllToolStripMenuItem
+            // 
+            this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAllToolStripMenuItem.Text = "Save All";
+            this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
             // buildToolStripMenuItem
             // 
+            this.buildToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buildProjectToolStripMenuItem,
+            this.buildContainerToolStripMenuItem});
             this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
             this.buildToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.buildToolStripMenuItem.Text = "Build";
             // 
+            // buildProjectToolStripMenuItem
+            // 
+            this.buildProjectToolStripMenuItem.Name = "buildProjectToolStripMenuItem";
+            this.buildProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.buildProjectToolStripMenuItem.Text = "Project";
+            this.buildProjectToolStripMenuItem.Click += new System.EventHandler(this.buildProjectToolStripMenuItem_Click);
+            // 
+            // buildContainerToolStripMenuItem
+            // 
+            this.buildContainerToolStripMenuItem.Name = "buildContainerToolStripMenuItem";
+            this.buildContainerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.buildContainerToolStripMenuItem.Text = "Scene";
+            this.buildContainerToolStripMenuItem.Click += new System.EventHandler(this.buildContainerToolStripMenuItem_Click);
+            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.button1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 24);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(909, 30);
             this.panel2.TabIndex = 4;
+            // 
+            // button1
+            // 
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(4, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // LevelEditor
             // 
@@ -299,6 +363,7 @@ namespace Rebirth.EditorClasses {
             this.tabControlContainer.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -327,6 +392,13 @@ namespace Rebirth.EditorClasses {
         private System.Windows.Forms.ToolStripMenuItem containerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolStripMenuItem buildProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem saveAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem buildContainerToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
     }
 }
 #endif

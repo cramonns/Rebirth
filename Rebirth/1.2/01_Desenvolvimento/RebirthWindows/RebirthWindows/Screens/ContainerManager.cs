@@ -70,7 +70,7 @@ namespace Rebirth {
             }
         }*/
 
-        public void updateContainer(SceneContainer sc, Project gameProject){
+        public void updateContainer(SceneContainer sc, Project gameProject = null){
             int index = IdIndexes[sc.id];
             ContainerProperties cp = containers[index];
             if (firstContainerID == sc.id){
@@ -80,13 +80,30 @@ namespace Rebirth {
                 float extension = sc.Width - cp.width;
                 cp.width = sc.Width;
                 for (index++; index < containers.Count; index++ ){
-                    SceneContainer scene = LoadManager.Load(containers[index].id);
-                    scene.shiftHorizontal(extension);                
-                    scene.save(gameProject);
+                    if (gameProject != null){
+                        SceneContainer scene = XMLManager.Load(containers[index].id, gameProject);
+                        scene.shiftHorizontal(extension);                
+                        scene.save(gameProject);
+                    }
+                    else {
+                        SceneContainer scene = LoadManager.Load(containers[index].id);
+                        if (scene != null){
+                            scene.shiftHorizontal(extension);                
+                            scene.build();
+                        }
+                    }
                 }
             }
             cp.height = sc.Height;
             cp.y = sc.Y;
+        }
+
+        public void buildAll(Project gameProject){
+            foreach (ContainerProperties cp in containers){
+                SceneContainer sc = XMLManager.Load(cp.id, gameProject);
+                sc.build();
+                updateContainer(sc);
+            }
         }
 #endif
         public void saveContainerManager(Project gameProject){
@@ -96,6 +113,15 @@ namespace Rebirth {
                 binFormat.Serialize(fStream, this);
             }
         }
+
+        public void buildContainerManager(){
+            BinaryFormatter binFormat = new BinaryFormatter();
+            string path = "/Lvl/Containers.info";
+            using (Stream fStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None) ){
+                binFormat.Serialize(fStream, this);
+            }
+        }
+
 
         public void Draw(SpriteBatch sb){
             float x = startPositionX;

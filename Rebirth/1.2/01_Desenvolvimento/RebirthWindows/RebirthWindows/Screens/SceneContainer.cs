@@ -143,18 +143,22 @@ namespace Rebirth {
             foreach (GameObject g in objects){
                 g.X -= shapeBox.x;
             }
-            //SAVE BINARY
+            //SAVE XML
+            XMLManager.saveXML(this, gameProject);
+        }
+
+        public void build(){
+            foreach (GameObject g in objects){
+                g.X -= shapeBox.x;
+            }
             BinaryFormatter binFormat = new BinaryFormatter();
-            string projectDirectory = gameProject.DirectoryPath + "/Lvl";
-            string fileName = projectDirectory + "/" + id.ToString() + ".scn";
-            if (!Directory.Exists(projectDirectory)){
-                Directory.CreateDirectory(projectDirectory);
+            string fileName = "/Lvl/" + id.ToString() + ".scn";
+            if (!Directory.Exists("/Lvl")){
+                Directory.CreateDirectory("/Lvl");
             }
             using(Stream fStream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None)){
                 binFormat.Serialize(fStream, this);
             }
-            //SAVE XML
-            XMLManager.saveXML(this, gameProject);
         }
 
         public void remakeObjectsTree(){
