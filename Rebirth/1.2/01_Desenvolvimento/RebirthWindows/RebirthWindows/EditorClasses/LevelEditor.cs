@@ -93,14 +93,14 @@ namespace Rebirth.EditorClasses {
             addSceneTab(gameProject.gameEditor.newContainer(gameProject));
         }
 
-        public void saveScene(){
+        public void saveCurrentScene(){
             int index = tabControlContainer.SelectedIndex;
             if (index > 0){
                 gameProject.gameEditor.saveContainer(gameEntry.getWorld().currentContainer(), gameProject);
             }
         }
 
-        public void buildScene(){
+        public void buildCurrentScene(){
             int index = tabControlContainer.SelectedIndex;
             if (index > 0){
                 gameProject.gameEditor.buildContainer(gameEntry.getWorld().currentContainer());
@@ -117,6 +117,11 @@ namespace Rebirth.EditorClasses {
             if (index > 0){
                 gameProject.gameEditor.buildContainer(gameEntry.getWorld().currentContainer());
             }
+        }
+
+        public void saveAll(){
+            gameProject.gameEditor.saveAll(gameProject);
+            gameProject.Save();
         }
         #endregion
 
@@ -454,11 +459,11 @@ namespace Rebirth.EditorClasses {
         }
 
         private void saveAllToolStripMenuItem_Click(object sender, EventArgs e) {
-            
+            saveAll();
         }
 
         private void saveToolStripMenuItem1_Click(object sender, EventArgs e) {
-            saveScene();
+            saveCurrentScene();
         }
         
 

@@ -35,6 +35,17 @@ namespace Rebirth.EditorClasses {
         }
 
         public static Project Open(string path){
+            Project newProject = null;
+            if (File.Exists(path)){
+                BinaryFormatter binFormat = new BinaryFormatter();
+                using (Stream fStream = File.OpenRead(path)){
+                    newProject = (Project)binFormat.Deserialize(fStream);
+                }
+            }
+            return newProject;
+        }
+
+        public static Project Open(string path){
             Project newProject;
             BinaryFormatter binFormat = new BinaryFormatter();
             using ( Stream fStream = File.OpenRead(path) ){

@@ -115,10 +115,9 @@ namespace Rebirth {
         }
 
         public static ContainerManager LoadContainerManager(string directory=""){
-            directory = (directory != "")?directory+"/Containers.info":"Containers.info";
-            if (File.Exists(directory)){
+            string path = (directory != "")?directory+"/Containers.info":"Containers.info";
+            if (File.Exists(path)){
                 BinaryFormatter binFormat = new BinaryFormatter();
-                string path = directory;
                 using ( Stream fStream = File.OpenRead(path) ){
                     cm = (ContainerManager)binFormat.Deserialize(fStream);
                 }

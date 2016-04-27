@@ -98,6 +98,14 @@ namespace Rebirth {
             cp.y = sc.Y;
         }
 
+        public void saveAll(Project gameProject){
+            foreach (ContainerProperties cp in containers){
+                SceneContainer sc = XMLManager.Load(cp.id, gameProject);
+                sc.save(gameProject);
+                updateContainer(sc);
+            }
+        }
+
         public void buildAll(Project gameProject){
             foreach (ContainerProperties cp in containers){
                 SceneContainer sc = XMLManager.Load(cp.id, gameProject);
@@ -105,7 +113,7 @@ namespace Rebirth {
                 updateContainer(sc);
             }
         }
-#endif
+
         public void saveContainerManager(Project gameProject){
             BinaryFormatter binFormat = new BinaryFormatter();
             string path = gameProject.DirectoryPath + "/Lvl/Containers.info";
@@ -122,7 +130,6 @@ namespace Rebirth {
             }
         }
 
-
         public void Draw(SpriteBatch sb){
             float x = startPositionX;
             foreach (ContainerProperties cp in containers){
@@ -130,6 +137,7 @@ namespace Rebirth {
                 x += cp.width;
             }
         }
+#endif
 
         public Vector2 newPosition(){
             float x = startPositionX;
