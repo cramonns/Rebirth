@@ -44,11 +44,12 @@ namespace Rebirth.EditorClasses {
 
         public static void saveXML(SceneContainer sc, Project gameProject){
             int level = 0;
-            string fileName = gameProject.DirectoryPath + "/Lvl/" + sc.id.ToString() + ".xml";
-            if (!Directory.Exists(gameProject.DirectoryPath)){
-                Directory.CreateDirectory(gameProject.DirectoryPath);
+            string fileName = gameProject.DirectoryPath + "\\Lvl\\" + sc.id.ToString() + ".xml";
+            if (!Directory.Exists(gameProject.DirectoryPath + "\\Lvl\\")){
+                Directory.CreateDirectory(gameProject.DirectoryPath + "\\Lvl\\");
             }
             StreamWriter xmlStream = new StreamWriter(fileName);
+
             StringBuilder openingTag = new StringBuilder("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
             xmlStream.WriteLine(XMLManager.tabs(level) + openingTag.ToString());
             openingTag.Clear();

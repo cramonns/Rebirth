@@ -116,8 +116,11 @@ namespace Rebirth {
 
         public void saveContainerManager(Project gameProject){
             BinaryFormatter binFormat = new BinaryFormatter();
-            string path = gameProject.DirectoryPath + "/Lvl/Containers.info";
-            using (Stream fStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None) ){
+            string path = gameProject.DirectoryPath + "/Lvl/";
+            if (!Directory.Exists(path)){
+                Directory.CreateDirectory(path);
+            }
+            using (Stream fStream = new FileStream(path+"Containers.info", FileMode.Create, FileAccess.Write, FileShare.None) ){
                 binFormat.Serialize(fStream, this);
             }
         }

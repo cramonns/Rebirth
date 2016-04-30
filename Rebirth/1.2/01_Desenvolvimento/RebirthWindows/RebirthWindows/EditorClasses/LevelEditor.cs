@@ -75,8 +75,8 @@ namespace Rebirth.EditorClasses {
 
         private void setContainerOperationsAvaiability(bool state){
             buttonInsertObject.Enabled = state;
-            buttonSave.Enabled = state;
-            buttonTHolders.Enabled = state;
+            //buttonSave.Enabled = state;
+            //buttonTHolders.Enabled = state;
         }
 
         private void enableContainerOperations(){
@@ -97,6 +97,7 @@ namespace Rebirth.EditorClasses {
             int index = tabControlContainer.SelectedIndex;
             if (index > 0){
                 gameProject.gameEditor.saveContainer(gameEntry.getWorld().currentContainer(), gameProject);
+                gameProject.Save();
             }
         }
 
@@ -104,24 +105,29 @@ namespace Rebirth.EditorClasses {
             int index = tabControlContainer.SelectedIndex;
             if (index > 0){
                 gameProject.gameEditor.buildContainer(gameEntry.getWorld().currentContainer());
+                gameProject.Save();
             }
         }
 
         public void createProject(string name, string path){
             gameProject = new Project(name, path);
+            saveAll();
             startEditor();
-        }
-
-        public void buildCurrentContainer(){
-            int index = tabControlContainer.SelectedIndex;
-            if (index > 0){
-                gameProject.gameEditor.buildContainer(gameEntry.getWorld().currentContainer());
-            }
         }
 
         public void saveAll(){
             gameProject.gameEditor.saveAll(gameProject);
             gameProject.Save();
+        }
+
+        public void openProject(){
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                gameProject = Project.Open(openFileDialog1.FileName);
+            }
+            else {
+                //openFileDialog1.Dispose();
+            }
         }
         #endregion
 
@@ -158,6 +164,7 @@ namespace Rebirth.EditorClasses {
         public void updateScreenShift(){
             DisplayManager.screenShift = lastScreenShift - (MouseManager.mousePosition - lastMousePosition);
         }
+
         #endregion
 
         #region Initialization
@@ -227,7 +234,7 @@ namespace Rebirth.EditorClasses {
         }
 
         private void containerToolStripMenuItem1_Click(object sender, EventArgs e) {
-            saveScene();
+            saveCurrentScene();
         }
 
         private void buttonInsertObject_Click(object sender, EventArgs e) {
@@ -455,7 +462,7 @@ namespace Rebirth.EditorClasses {
         }
 
         private void buildContainerToolStripMenuItem_Click(object sender, EventArgs e) {
-            buildCurrentContainer();
+            buildCurrentScene();
         }
 
         private void saveAllToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -465,7 +472,23 @@ namespace Rebirth.EditorClasses {
         private void saveToolStripMenuItem1_Click(object sender, EventArgs e) {
             saveCurrentScene();
         }
+
+        private void openProjectToolStripMenuItem_Click(object sender, EventArgs e) {
+            openProject();
+        }
+
+        private void containerToolStripMenuItem_Click_1(object sender, EventArgs e) {
+            newScene();
+        }
         
+        private void highLightOn(object sender, EventArgs e){
+
+            (sender as PictureBox).BackColor = System.Drawing.Color.LightGoldenrodYellow;
+        }
+
+        private void highlight_Off(object sender, EventArgs e){
+            (sender as PictureBox).BackColor = System.Drawing.Color.LightGray;
+        }
 
     }
 }

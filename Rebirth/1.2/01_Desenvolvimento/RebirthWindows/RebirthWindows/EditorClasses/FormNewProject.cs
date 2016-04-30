@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Management;
 
 namespace Rebirth.EditorClasses {
     public partial class FormNewProject : Form {
@@ -15,10 +16,10 @@ namespace Rebirth.EditorClasses {
 
         public FormNewProject() {
             InitializeComponent();
-            PopulateTreeView();
+           
         }
 
-        private void PopulateTreeView()
+        /*private void PopulateTreeView()
         {
             TreeNode rootNode;
             DirectoryInfo info = new DirectoryInfo(@"../..");
@@ -27,7 +28,7 @@ namespace Rebirth.EditorClasses {
                 rootNode = new TreeNode(info.Name);
                 rootNode.Tag = info;
                 GetDirectories(info.GetDirectories(), rootNode);
-                treeView1.Nodes.Add(rootNode);
+                tvFolders.Nodes.Add(rootNode);
             }
         }
 
@@ -46,11 +47,23 @@ namespace Rebirth.EditorClasses {
                 }
                 nodeToAddTo.Nodes.Add(aNode);
             }
-        }
+        }*/
+
+        
 
         private void button1_Click(object sender, EventArgs e) {
             this.Caller.createProject(txtName.Text, txtPath.Text);
             this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e) {
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK){
+                txtPath.Text = folderBrowserDialog1.SelectedPath;
+            }
+            else {
+                folderBrowserDialog1.Dispose();
+            }
         }
     }
 }

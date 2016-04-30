@@ -29,20 +29,9 @@ namespace Rebirth.EditorClasses {
 
         public void Save(){
             BinaryFormatter binFormat = new BinaryFormatter();
-            using (Stream fStream = new FileStream(_directory, FileMode.Create, FileAccess.Write, FileShare.None) ){
+            using (Stream fStream = new FileStream(_directory+".rlep", FileMode.Create, FileAccess.Write, FileShare.None) ){
                 binFormat.Serialize(fStream, this);
             }
-        }
-
-        public static Project Open(string path){
-            Project newProject = null;
-            if (File.Exists(path)){
-                BinaryFormatter binFormat = new BinaryFormatter();
-                using (Stream fStream = File.OpenRead(path)){
-                    newProject = (Project)binFormat.Deserialize(fStream);
-                }
-            }
-            return newProject;
         }
 
         public static Project Open(string path){
@@ -57,6 +46,7 @@ namespace Rebirth.EditorClasses {
 
         public void build(){
             gameEditor.buildAll(this);
+            Save();
         }
 
     }

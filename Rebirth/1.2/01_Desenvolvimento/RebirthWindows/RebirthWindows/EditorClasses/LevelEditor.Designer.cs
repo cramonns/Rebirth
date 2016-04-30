@@ -28,16 +28,10 @@ namespace Rebirth.EditorClasses {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelEditor));
             this.gameBox = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBoxTest = new System.Windows.Forms.GroupBox();
-            this.buttonPlay = new System.Windows.Forms.Button();
             this.groupBoxObjects = new System.Windows.Forms.GroupBox();
             this.buttonInsertObject = new System.Windows.Forms.Button();
             this.labelSelectObject = new System.Windows.Forms.Label();
             this.comboBoxObjectList = new System.Windows.Forms.ComboBox();
-            this.groupBoxContainer = new System.Windows.Forms.GroupBox();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonNew = new System.Windows.Forms.Button();
-            this.buttonTHolders = new System.Windows.Forms.Button();
             this.tabControlContainer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -53,15 +47,33 @@ namespace Rebirth.EditorClasses {
             this.buildProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildContainerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.pbBtnSaveAll = new System.Windows.Forms.PictureBox();
+            this.pbBtnSaveScene = new System.Windows.Forms.PictureBox();
+            this.pbBtnOpenProject = new System.Windows.Forms.PictureBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.pbBtnNewScene = new System.Windows.Forms.PictureBox();
+            this.pbBtnNewProject = new System.Windows.Forms.PictureBox();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).BeginInit();
             this.panel1.SuspendLayout();
-            this.groupBoxTest.SuspendLayout();
             this.groupBoxObjects.SuspendLayout();
-            this.groupBoxContainer.SuspendLayout();
             this.tabControlContainer.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBtnSaveAll)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBtnSaveScene)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBtnOpenProject)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBtnNewScene)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBtnNewProject)).BeginInit();
             this.SuspendLayout();
             // 
             // gameBox
@@ -69,7 +81,7 @@ namespace Rebirth.EditorClasses {
             this.gameBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gameBox.Location = new System.Drawing.Point(197, 88);
+            this.gameBox.Location = new System.Drawing.Point(197, 93);
             this.gameBox.Name = "gameBox";
             this.gameBox.Size = new System.Drawing.Size(712, 461);
             this.gameBox.TabIndex = 0;
@@ -87,34 +99,11 @@ namespace Rebirth.EditorClasses {
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel1.Controls.Add(this.groupBoxTest);
             this.panel1.Controls.Add(this.groupBoxObjects);
-            this.panel1.Controls.Add(this.groupBoxContainer);
-            this.panel1.Location = new System.Drawing.Point(1, 60);
+            this.panel1.Location = new System.Drawing.Point(1, 68);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(190, 486);
             this.panel1.TabIndex = 1;
-            // 
-            // groupBoxTest
-            // 
-            this.groupBoxTest.Controls.Add(this.buttonPlay);
-            this.groupBoxTest.Location = new System.Drawing.Point(3, 123);
-            this.groupBoxTest.Name = "groupBoxTest";
-            this.groupBoxTest.Size = new System.Drawing.Size(184, 68);
-            this.groupBoxTest.TabIndex = 2;
-            this.groupBoxTest.TabStop = false;
-            this.groupBoxTest.Text = "Test";
-            // 
-            // buttonPlay
-            // 
-            this.buttonPlay.Enabled = false;
-            this.buttonPlay.Image = ((System.Drawing.Image)(resources.GetObject("buttonPlay.Image")));
-            this.buttonPlay.Location = new System.Drawing.Point(14, 24);
-            this.buttonPlay.Name = "buttonPlay";
-            this.buttonPlay.Size = new System.Drawing.Size(30, 30);
-            this.buttonPlay.TabIndex = 0;
-            this.buttonPlay.UseVisualStyleBackColor = true;
-            this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
             // 
             // groupBoxObjects
             // 
@@ -124,9 +113,9 @@ namespace Rebirth.EditorClasses {
             this.groupBoxObjects.Controls.Add(this.buttonInsertObject);
             this.groupBoxObjects.Controls.Add(this.labelSelectObject);
             this.groupBoxObjects.Controls.Add(this.comboBoxObjectList);
-            this.groupBoxObjects.Location = new System.Drawing.Point(3, 197);
+            this.groupBoxObjects.Location = new System.Drawing.Point(3, 3);
             this.groupBoxObjects.Name = "groupBoxObjects";
-            this.groupBoxObjects.Size = new System.Drawing.Size(184, 122);
+            this.groupBoxObjects.Size = new System.Drawing.Size(184, 480);
             this.groupBoxObjects.TabIndex = 2;
             this.groupBoxObjects.TabStop = false;
             this.groupBoxObjects.Text = "Objects";
@@ -161,57 +150,12 @@ namespace Rebirth.EditorClasses {
             this.comboBoxObjectList.TabIndex = 0;
             this.comboBoxObjectList.SelectedIndexChanged += new System.EventHandler(this.comboBoxObjectList_SelectedIndexChanged);
             // 
-            // groupBoxContainer
-            // 
-            this.groupBoxContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxContainer.Controls.Add(this.buttonSave);
-            this.groupBoxContainer.Controls.Add(this.buttonNew);
-            this.groupBoxContainer.Controls.Add(this.buttonTHolders);
-            this.groupBoxContainer.Location = new System.Drawing.Point(3, 3);
-            this.groupBoxContainer.Name = "groupBoxContainer";
-            this.groupBoxContainer.Size = new System.Drawing.Size(184, 114);
-            this.groupBoxContainer.TabIndex = 1;
-            this.groupBoxContainer.TabStop = false;
-            this.groupBoxContainer.Text = "Container";
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.Location = new System.Drawing.Point(50, 89);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 2;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.containerToolStripMenuItem1_Click);
-            // 
-            // buttonNew
-            // 
-            this.buttonNew.Location = new System.Drawing.Point(50, 24);
-            this.buttonNew.Name = "buttonNew";
-            this.buttonNew.Size = new System.Drawing.Size(75, 23);
-            this.buttonNew.TabIndex = 1;
-            this.buttonNew.Text = "New";
-            this.buttonNew.UseVisualStyleBackColor = true;
-            this.buttonNew.Click += new System.EventHandler(this.containerToolStripMenuItem_Click);
-            // 
-            // buttonTHolders
-            // 
-            this.buttonTHolders.Location = new System.Drawing.Point(35, 118);
-            this.buttonTHolders.Name = "buttonTHolders";
-            this.buttonTHolders.Size = new System.Drawing.Size(115, 23);
-            this.buttonTHolders.TabIndex = 0;
-            this.buttonTHolders.Text = "Texture Holders...";
-            this.buttonTHolders.UseVisualStyleBackColor = true;
-            this.buttonTHolders.Click += new System.EventHandler(this.buttonTHolders_Click);
-            // 
             // tabControlContainer
             // 
             this.tabControlContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlContainer.Controls.Add(this.tabPage1);
-            this.tabControlContainer.Location = new System.Drawing.Point(197, 60);
+            this.tabControlContainer.Location = new System.Drawing.Point(197, 68);
             this.tabControlContainer.Name = "tabControlContainer";
             this.tabControlContainer.SelectedIndex = 0;
             this.tabControlContainer.Size = new System.Drawing.Size(715, 26);
@@ -257,44 +201,46 @@ namespace Rebirth.EditorClasses {
             this.containToolStripMenuItem,
             this.containerToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // containToolStripMenuItem
             // 
             this.containToolStripMenuItem.Name = "containToolStripMenuItem";
-            this.containToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.containToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.containToolStripMenuItem.Text = "Project";
             this.containToolStripMenuItem.Click += new System.EventHandler(this.containToolStripMenuItem_Click);
             // 
             // containerToolStripMenuItem
             // 
             this.containerToolStripMenuItem.Name = "containerToolStripMenuItem";
-            this.containerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.containerToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.containerToolStripMenuItem.Text = "Scene";
+            this.containerToolStripMenuItem.Click += new System.EventHandler(this.containerToolStripMenuItem_Click_1);
             // 
             // openProjectToolStripMenuItem
             // 
             this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
-            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.openProjectToolStripMenuItem.Text = "Open Project";
+            this.openProjectToolStripMenuItem.Click += new System.EventHandler(this.openProjectToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(149, 6);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(140, 6);
             // 
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem1_Click);
             // 
             // saveAllToolStripMenuItem
             // 
             this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.saveAllToolStripMenuItem.Text = "Save All";
             this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
@@ -310,34 +256,159 @@ namespace Rebirth.EditorClasses {
             // buildProjectToolStripMenuItem
             // 
             this.buildProjectToolStripMenuItem.Name = "buildProjectToolStripMenuItem";
-            this.buildProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.buildProjectToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.buildProjectToolStripMenuItem.Text = "Project";
             this.buildProjectToolStripMenuItem.Click += new System.EventHandler(this.buildProjectToolStripMenuItem_Click);
             // 
             // buildContainerToolStripMenuItem
             // 
             this.buildContainerToolStripMenuItem.Name = "buildContainerToolStripMenuItem";
-            this.buildContainerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.buildContainerToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.buildContainerToolStripMenuItem.Text = "Scene";
             this.buildContainerToolStripMenuItem.Click += new System.EventHandler(this.buildContainerToolStripMenuItem_Click);
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.BackColor = System.Drawing.Color.LightGray;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.panel7);
+            this.panel2.Controls.Add(this.pbBtnSaveAll);
+            this.panel2.Controls.Add(this.pbBtnSaveScene);
+            this.panel2.Controls.Add(this.pbBtnOpenProject);
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.pbBtnNewScene);
+            this.panel2.Controls.Add(this.pbBtnNewProject);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 24);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(909, 30);
+            this.panel2.Size = new System.Drawing.Size(909, 38);
             this.panel2.TabIndex = 4;
             // 
-            // button1
+            // panel7
             // 
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(4, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.panel8);
+            this.panel7.Location = new System.Drawing.Point(184, 1);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(1, 34);
+            this.panel7.TabIndex = 6;
+            // 
+            // panel8
+            // 
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Location = new System.Drawing.Point(170, 1);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(1, 38);
+            this.panel8.TabIndex = 3;
+            // 
+            // pbBtnSaveAll
+            // 
+            this.pbBtnSaveAll.BackColor = System.Drawing.Color.LightGray;
+            this.pbBtnSaveAll.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbBtnSaveAll.BackgroundImage")));
+            this.pbBtnSaveAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbBtnSaveAll.Location = new System.Drawing.Point(149, 1);
+            this.pbBtnSaveAll.Name = "pbBtnSaveAll";
+            this.pbBtnSaveAll.Size = new System.Drawing.Size(32, 32);
+            this.pbBtnSaveAll.TabIndex = 5;
+            this.pbBtnSaveAll.TabStop = false;
+            this.pbBtnSaveAll.MouseEnter += new System.EventHandler(this.highLightOn);
+            this.pbBtnSaveAll.MouseLeave += new System.EventHandler(this.highlight_Off);
+            // 
+            // pbBtnSaveScene
+            // 
+            this.pbBtnSaveScene.BackColor = System.Drawing.Color.LightGray;
+            this.pbBtnSaveScene.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbBtnSaveScene.BackgroundImage")));
+            this.pbBtnSaveScene.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbBtnSaveScene.Location = new System.Drawing.Point(114, 1);
+            this.pbBtnSaveScene.Name = "pbBtnSaveScene";
+            this.pbBtnSaveScene.Size = new System.Drawing.Size(32, 32);
+            this.pbBtnSaveScene.TabIndex = 4;
+            this.pbBtnSaveScene.TabStop = false;
+            this.pbBtnSaveScene.MouseEnter += new System.EventHandler(this.highLightOn);
+            this.pbBtnSaveScene.MouseLeave += new System.EventHandler(this.highlight_Off);
+            // 
+            // pbBtnOpenProject
+            // 
+            this.pbBtnOpenProject.BackColor = System.Drawing.Color.LightGray;
+            this.pbBtnOpenProject.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbBtnOpenProject.BackgroundImage")));
+            this.pbBtnOpenProject.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbBtnOpenProject.Location = new System.Drawing.Point(79, 1);
+            this.pbBtnOpenProject.Name = "pbBtnOpenProject";
+            this.pbBtnOpenProject.Size = new System.Drawing.Size(32, 32);
+            this.pbBtnOpenProject.TabIndex = 3;
+            this.pbBtnOpenProject.TabStop = false;
+            this.pbBtnOpenProject.MouseEnter += new System.EventHandler(this.highLightOn);
+            this.pbBtnOpenProject.MouseLeave += new System.EventHandler(this.highlight_Off);
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.panel5);
+            this.panel3.Controls.Add(this.panel4);
+            this.panel3.Location = new System.Drawing.Point(74, 1);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1, 34);
+            this.panel3.TabIndex = 2;
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.panel6);
+            this.panel5.Location = new System.Drawing.Point(0, -1);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(1, 34);
+            this.panel5.TabIndex = 4;
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Location = new System.Drawing.Point(170, 1);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1, 38);
+            this.panel6.TabIndex = 3;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Location = new System.Drawing.Point(170, 1);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1, 38);
+            this.panel4.TabIndex = 3;
+            // 
+            // pbBtnNewScene
+            // 
+            this.pbBtnNewScene.BackColor = System.Drawing.Color.LightGray;
+            this.pbBtnNewScene.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbBtnNewScene.BackgroundImage")));
+            this.pbBtnNewScene.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbBtnNewScene.Location = new System.Drawing.Point(38, 1);
+            this.pbBtnNewScene.Name = "pbBtnNewScene";
+            this.pbBtnNewScene.Size = new System.Drawing.Size(32, 32);
+            this.pbBtnNewScene.TabIndex = 1;
+            this.pbBtnNewScene.TabStop = false;
+            this.pbBtnNewScene.MouseEnter += new System.EventHandler(this.highLightOn);
+            this.pbBtnNewScene.MouseLeave += new System.EventHandler(this.highlight_Off);
+            // 
+            // pbBtnNewProject
+            // 
+            this.pbBtnNewProject.BackColor = System.Drawing.Color.LightGray;
+            this.pbBtnNewProject.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbBtnNewProject.BackgroundImage")));
+            this.pbBtnNewProject.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbBtnNewProject.Location = new System.Drawing.Point(3, 1);
+            this.pbBtnNewProject.Name = "pbBtnNewProject";
+            this.pbBtnNewProject.Size = new System.Drawing.Size(32, 32);
+            this.pbBtnNewProject.TabIndex = 0;
+            this.pbBtnNewProject.TabStop = false;
+            this.pbBtnNewProject.MouseEnter += new System.EventHandler(this.highLightOn);
+            this.pbBtnNewProject.MouseLeave += new System.EventHandler(this.highlight_Off);
+            // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Rebirth Level Editor Project (*.rlep)|*.rlep";
             // 
             // LevelEditor
             // 
@@ -356,14 +427,20 @@ namespace Rebirth.EditorClasses {
             this.Resize += new System.EventHandler(this.LevelEditor_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.groupBoxTest.ResumeLayout(false);
             this.groupBoxObjects.ResumeLayout(false);
             this.groupBoxObjects.PerformLayout();
-            this.groupBoxContainer.ResumeLayout(false);
             this.tabControlContainer.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbBtnSaveAll)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBtnSaveScene)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBtnOpenProject)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbBtnNewScene)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBtnNewProject)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -374,17 +451,11 @@ namespace Rebirth.EditorClasses {
         public System.Windows.Forms.PictureBox gameBox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBoxObjects;
-        private System.Windows.Forms.GroupBox groupBoxContainer;
         private System.Windows.Forms.TabControl tabControlContainer;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ComboBox comboBoxObjectList;
         private System.Windows.Forms.Label labelSelectObject;
-        private System.Windows.Forms.GroupBox groupBoxTest;
         private System.Windows.Forms.Button buttonInsertObject;
-        private System.Windows.Forms.Button buttonTHolders;
-        private System.Windows.Forms.Button buttonPlay;
-        private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.Button buttonNew;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
@@ -398,7 +469,19 @@ namespace Rebirth.EditorClasses {
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem saveAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildContainerToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.PictureBox pbBtnNewScene;
+        private System.Windows.Forms.PictureBox pbBtnNewProject;
+        private System.Windows.Forms.PictureBox pbBtnOpenProject;
+        private System.Windows.Forms.PictureBox pbBtnSaveScene;
+        private System.Windows.Forms.PictureBox pbBtnSaveAll;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 #endif
