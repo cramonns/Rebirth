@@ -73,20 +73,6 @@ namespace Rebirth.EditorClasses {
             return new RectangleF(boundingBox.x - worldPixel + boundingBox.width, boundingBox.y - worldPixel,3*worldPixel,3*worldPixel);
         }
 
-        private void setContainerOperationsAvaiability(bool state){
-            buttonInsertObject.Enabled = state;
-            //buttonSave.Enabled = state;
-            //buttonTHolders.Enabled = state;
-        }
-
-        private void enableContainerOperations(){
-            setContainerOperationsAvaiability(true);
-        }
-
-        private void disableCointainerOperations(){
-            setContainerOperationsAvaiability(false);
-        }
-
         #region Functionalities
         
         public void newScene(){
@@ -201,12 +187,10 @@ namespace Rebirth.EditorClasses {
                 gameEntry.getWorld().saveScene(gameProject);
             }
             if (index == 0){
-                disableCointainerOperations();
                 gameEntry.getWorld().leaveInsertMode();
                 gameEntry.getWorld().loadScene(gameProject.gameEditor.SceneManagerView, gameProject);
                 adjustCamera(gameProject.gameEditor.SceneManagerView);
             } else {
-                enableContainerOperations();
                 //SceneContainer scene = LoadManager.Load(gameEditor.getContainerInTab(index));
                 SceneContainer scene = XMLManager.Load(gameProject.gameEditor.getContainerInTab(index),gameProject);
                 scene.remakeObjectsTree();
@@ -239,7 +223,12 @@ namespace Rebirth.EditorClasses {
         }
 
         private void buttonInsertObject_Click(object sender, EventArgs e) {
-            gameEntry.getWorld().insertMode((Enumerations.ObjectTypes)comboBoxObjectList.SelectedIndex);
+            if (gameProject == null){
+                
+            }
+            else {
+                gameEntry.getWorld().insertMode((Enumerations.ObjectTypes)comboBoxObjectList.SelectedIndex);
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {

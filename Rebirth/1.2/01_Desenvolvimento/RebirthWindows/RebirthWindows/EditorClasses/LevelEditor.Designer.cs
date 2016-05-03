@@ -110,7 +110,7 @@ namespace Rebirth.EditorClasses {
             this.groupBoxObjects.Controls.Add(this.buttonInsertObject);
             this.groupBoxObjects.Controls.Add(this.labelSelectObject);
             this.groupBoxObjects.Controls.Add(this.comboBoxObjectList);
-            this.groupBoxObjects.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxObjects.Location = new System.Drawing.Point(3, 6);
             this.groupBoxObjects.Name = "groupBoxObjects";
             this.groupBoxObjects.Size = new System.Drawing.Size(184, 480);
             this.groupBoxObjects.TabIndex = 2;
@@ -119,7 +119,6 @@ namespace Rebirth.EditorClasses {
             // 
             // buttonInsertObject
             // 
-            this.buttonInsertObject.Enabled = false;
             this.buttonInsertObject.Location = new System.Drawing.Point(50, 85);
             this.buttonInsertObject.Name = "buttonInsertObject";
             this.buttonInsertObject.Size = new System.Drawing.Size(75, 23);

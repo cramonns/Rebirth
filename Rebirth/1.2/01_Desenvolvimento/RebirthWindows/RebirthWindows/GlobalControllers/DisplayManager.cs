@@ -20,7 +20,7 @@ namespace Rebirth{
             get{ return screenWidth; }          
             set{
                 screenWidth = value; 
-                GameManager.game.graphics.PreferredBackBufferWidth = (int)screenWidth;
+                if (GameManager.game != null) GameManager.game.graphics.PreferredBackBufferWidth = (int)screenWidth;
                 Ratio = WORLD_WIDTH / screenWidth;
             }
         }
@@ -28,7 +28,7 @@ namespace Rebirth{
             get{ return screenHeight; }          
             set{ 
                 screenHeight = value; 
-                GameManager.game.graphics.PreferredBackBufferHeight = (int)screenHeight;
+                if (GameManager.game != null) GameManager.game.graphics.PreferredBackBufferHeight = (int)screenHeight;
             }
         }
         public static float WorldWidth{
