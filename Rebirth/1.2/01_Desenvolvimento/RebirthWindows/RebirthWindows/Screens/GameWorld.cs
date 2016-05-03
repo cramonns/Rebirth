@@ -210,14 +210,24 @@ namespace Rebirth {
 
         public void loadScene(SceneContainer sc, Project gameProject){
             scenes[preloadAmount] = sc;
-            if (sc.previousScene == -1){
-                scenes[preloadAmount-1] = null;
+            if (sc.previousScene == -1)
+            {
+                scenes[preloadAmount - 1] = null;
             }
-            else scenes[preloadAmount-1] = XMLManager.Load(sc.previousScene, gameProject);
-            if (sc.nextScene == -1){
-                scenes[preloadAmount+1] = null;
+            else
+            {
+                scenes[preloadAmount - 1] = XMLManager.Load(sc.previousScene, gameProject);
+                scenes[preloadAmount - 1].shiftHorizontal(-sc.Width);
             }
-            else scenes[preloadAmount+1] = XMLManager.Load(sc.nextScene, gameProject);
+            if (sc.nextScene == -1)
+            {
+                scenes[preloadAmount + 1] = null;
+            }
+            else
+            {
+                scenes[preloadAmount + 1] = XMLManager.Load(sc.nextScene, gameProject);
+                scenes[preloadAmount + 1].shiftHorizontal(sc.Width);
+            }
         }
 
         public void loadScene(int sceneId, Project gameProject){

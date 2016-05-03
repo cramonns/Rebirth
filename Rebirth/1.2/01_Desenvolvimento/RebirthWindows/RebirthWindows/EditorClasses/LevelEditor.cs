@@ -116,6 +116,16 @@ namespace Rebirth.EditorClasses {
             fmp.Caller = this;
             fmp.Show();
         }
+
+        public void deleteSelectedObject(){
+            GameObject selectedObject = gameEntry.getWorld().selectedObject;
+            if (selectedObject != null){
+                GameManager.removeObjectFromScene(selectedObject);
+            }
+            gameEntry.getWorld().selectedObject = null;
+            if (objectForm != null && objectForm.Visible) objectForm.Close();
+        }
+
         #endregion
 
         #region cameraSettings
