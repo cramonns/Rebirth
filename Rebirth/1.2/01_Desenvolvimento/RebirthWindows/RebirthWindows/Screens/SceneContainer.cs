@@ -152,9 +152,9 @@ namespace Rebirth {
                 g.X -= shapeBox.x;
             }
             BinaryFormatter binFormat = new BinaryFormatter();
-            string fileName = "/Lvl/" + id.ToString() + ".scn";
-            if (!Directory.Exists("/Lvl")){
-                Directory.CreateDirectory("/Lvl");
+            string fileName = "Lvl/" + id.ToString() + ".scn";
+            if (!Directory.Exists("Lvl")){
+                Directory.CreateDirectory("Lvl");
             }
             using(Stream fStream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None)){
                 binFormat.Serialize(fStream, this);

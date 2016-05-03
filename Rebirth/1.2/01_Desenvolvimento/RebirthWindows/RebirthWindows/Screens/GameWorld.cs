@@ -208,21 +208,21 @@ namespace Rebirth {
             player.Load(tm);*/
         }
 
-        public void loadScene(SceneContainer sc){
+        public void loadScene(SceneContainer sc, Project gameProject){
             scenes[preloadAmount] = sc;
             if (sc.previousScene == -1){
                 scenes[preloadAmount-1] = null;
             }
-            else scenes[preloadAmount-1] = LoadManager.Load(sc.previousScene);
+            else scenes[preloadAmount-1] = XMLManager.Load(sc.previousScene, gameProject);
             if (sc.nextScene == -1){
                 scenes[preloadAmount+1] = null;
             }
-            else scenes[preloadAmount+1] = LoadManager.Load(sc.nextScene);
+            else scenes[preloadAmount+1] = XMLManager.Load(sc.nextScene, gameProject);
         }
 
-        public void loadScene(int sceneId){
+        public void loadScene(int sceneId, Project gameProject){
             if (File.Exists("Lvl/"+sceneId.ToString()+".scn"))
-                loadScene(LoadManager.Load(sceneId));
+                loadScene(LoadManager.Load(sceneId), gameProject);
         }
 
         public SceneContainer currentContainer(){

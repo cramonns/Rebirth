@@ -15,7 +15,7 @@ namespace Rebirth.EditorClasses {
         public Editor gameEditor;
 
         public Project(string name, string path){
-            if (!path.EndsWith("/")){
+            if (!(path.EndsWith("/") || path.EndsWith("\\"))){
                 path += "/";
             }
             _name = name;
@@ -29,7 +29,7 @@ namespace Rebirth.EditorClasses {
 
         public void Save(){
             BinaryFormatter binFormat = new BinaryFormatter();
-            using (Stream fStream = new FileStream(_directory+".rlep", FileMode.Create, FileAccess.Write, FileShare.None) ){
+            using (Stream fStream = new FileStream(_directory+"/"+_name+".rlep", FileMode.Create, FileAccess.Write, FileShare.None) ){
                 binFormat.Serialize(fStream, this);
             }
         }

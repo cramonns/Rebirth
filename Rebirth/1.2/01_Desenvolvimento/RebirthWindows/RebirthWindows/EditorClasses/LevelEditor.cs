@@ -111,23 +111,24 @@ namespace Rebirth.EditorClasses {
 
         public void createProject(string name, string path){
             gameProject = new Project(name, path);
-            saveAll();
             startEditor();
-        }
-
-        public void saveAll(){
-            gameProject.gameEditor.saveAll(gameProject);
-            gameProject.Save();
         }
 
         public void openProject(){
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 gameProject = Project.Open(openFileDialog1.FileName);
+                startEditor(gameProject.DirectoryPath);
             }
             else {
                 //openFileDialog1.Dispose();
             }
+        }
+
+        public void newProject(){
+            FormNewProject fmp = new FormNewProject();
+            fmp.Caller = this;
+            fmp.Show();
         }
         #endregion
 
@@ -178,9 +179,9 @@ namespace Rebirth.EditorClasses {
             this.gameBox.MouseWheel += gameBox_MouseWheel;            
         }
 
-        public void startEditor(){
-            gameProject.gameEditor = new Editor();
-            gameEntry.getWorld().loadScene(gameProject.gameEditor.SceneManagerView);
+        public void startEditor(string path = ""){
+            gameProject.gameEditor = new Editor(path);
+            gameEntry.getWorld().loadScene(gameProject.gameEditor.SceneManagerView, gameProject);
             adjustCamera(gameProject.gameEditor.SceneManagerView);
             DisplayManager.followPlayer = false;
         }
@@ -202,14 +203,14 @@ namespace Rebirth.EditorClasses {
             if (index == 0){
                 disableCointainerOperations();
                 gameEntry.getWorld().leaveInsertMode();
-                gameEntry.getWorld().loadScene(gameProject.gameEditor.SceneManagerView);
+                gameEntry.getWorld().loadScene(gameProject.gameEditor.SceneManagerView, gameProject);
                 adjustCamera(gameProject.gameEditor.SceneManagerView);
             } else {
                 enableContainerOperations();
                 //SceneContainer scene = LoadManager.Load(gameEditor.getContainerInTab(index));
                 SceneContainer scene = XMLManager.Load(gameProject.gameEditor.getContainerInTab(index),gameProject);
                 scene.remakeObjectsTree();
-                gameEntry.getWorld().loadScene(scene);
+                gameEntry.getWorld().loadScene(scene, gameProject);
                 adjustCamera(scene);
             }
         }
@@ -259,7 +260,8 @@ namespace Rebirth.EditorClasses {
         #region gameBoxEvents
 
         private void gameBox_Resize(object sender, EventArgs e) {
-            
+            DisplayManager.DisplayHeight = gameBox.Height;
+            DisplayManager.DisplayWidth = gameBox.Width;
         }
 
         private void gameBox_MouseUp(object sender, MouseEventArgs e) {
@@ -448,9 +450,7 @@ namespace Rebirth.EditorClasses {
         }
 
         private void containToolStripMenuItem_Click(object sender, EventArgs e) {
-            FormNewProject fmp = new FormNewProject();
-            fmp.Caller = this;
-            fmp.Show();
+            newProject();
             /*
             Explorer formExp = new Explorer();
             formExp.Show();
@@ -463,10 +463,6 @@ namespace Rebirth.EditorClasses {
 
         private void buildContainerToolStripMenuItem_Click(object sender, EventArgs e) {
             buildCurrentScene();
-        }
-
-        private void saveAllToolStripMenuItem_Click(object sender, EventArgs e) {
-            saveAll();
         }
 
         private void saveToolStripMenuItem1_Click(object sender, EventArgs e) {
@@ -488,6 +484,22 @@ namespace Rebirth.EditorClasses {
 
         private void highlight_Off(object sender, EventArgs e){
             (sender as PictureBox).BackColor = System.Drawing.Color.LightGray;
+        }
+
+        private void pbBtnNewProject_Click(object sender, EventArgs e) {
+            newProject();
+        }
+
+        private void pbBtnNewScene_Click(object sender, EventArgs e) {
+            newScene();
+        }
+
+        private void pbBtnOpenProject_Click(object sender, EventArgs e) {
+            openProject();
+        }
+
+        private void pbBtnSaveScene_Click(object sender, EventArgs e) {
+            saveCurrentScene();
         }
 
     }

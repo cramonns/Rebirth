@@ -42,14 +42,12 @@ namespace Rebirth.EditorClasses {
             this.openProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildContainerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.pbBtnSaveAll = new System.Windows.Forms.PictureBox();
             this.pbBtnSaveScene = new System.Windows.Forms.PictureBox();
             this.pbBtnOpenProject = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -67,7 +65,6 @@ namespace Rebirth.EditorClasses {
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBtnSaveAll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBtnSaveScene)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBtnOpenProject)).BeginInit();
             this.panel3.SuspendLayout();
@@ -189,8 +186,7 @@ namespace Rebirth.EditorClasses {
             this.newToolStripMenuItem,
             this.openProjectToolStripMenuItem,
             this.saveToolStripMenuItem,
-            this.saveToolStripMenuItem1,
-            this.saveAllToolStripMenuItem});
+            this.saveToolStripMenuItem1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -237,13 +233,6 @@ namespace Rebirth.EditorClasses {
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem1_Click);
             // 
-            // saveAllToolStripMenuItem
-            // 
-            this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.saveAllToolStripMenuItem.Text = "Save All";
-            this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
-            // 
             // buildToolStripMenuItem
             // 
             this.buildToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -272,7 +261,6 @@ namespace Rebirth.EditorClasses {
             this.panel2.BackColor = System.Drawing.Color.LightGray;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.panel7);
-            this.panel2.Controls.Add(this.pbBtnSaveAll);
             this.panel2.Controls.Add(this.pbBtnSaveScene);
             this.panel2.Controls.Add(this.pbBtnOpenProject);
             this.panel2.Controls.Add(this.panel3);
@@ -288,7 +276,7 @@ namespace Rebirth.EditorClasses {
             // 
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.panel8);
-            this.panel7.Location = new System.Drawing.Point(184, 1);
+            this.panel7.Location = new System.Drawing.Point(151, 1);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1, 34);
             this.panel7.TabIndex = 6;
@@ -301,19 +289,6 @@ namespace Rebirth.EditorClasses {
             this.panel8.Size = new System.Drawing.Size(1, 38);
             this.panel8.TabIndex = 3;
             // 
-            // pbBtnSaveAll
-            // 
-            this.pbBtnSaveAll.BackColor = System.Drawing.Color.LightGray;
-            this.pbBtnSaveAll.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbBtnSaveAll.BackgroundImage")));
-            this.pbBtnSaveAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbBtnSaveAll.Location = new System.Drawing.Point(149, 1);
-            this.pbBtnSaveAll.Name = "pbBtnSaveAll";
-            this.pbBtnSaveAll.Size = new System.Drawing.Size(32, 32);
-            this.pbBtnSaveAll.TabIndex = 5;
-            this.pbBtnSaveAll.TabStop = false;
-            this.pbBtnSaveAll.MouseEnter += new System.EventHandler(this.highLightOn);
-            this.pbBtnSaveAll.MouseLeave += new System.EventHandler(this.highlight_Off);
-            // 
             // pbBtnSaveScene
             // 
             this.pbBtnSaveScene.BackColor = System.Drawing.Color.LightGray;
@@ -324,6 +299,7 @@ namespace Rebirth.EditorClasses {
             this.pbBtnSaveScene.Size = new System.Drawing.Size(32, 32);
             this.pbBtnSaveScene.TabIndex = 4;
             this.pbBtnSaveScene.TabStop = false;
+            this.pbBtnSaveScene.Click += new System.EventHandler(this.pbBtnSaveScene_Click);
             this.pbBtnSaveScene.MouseEnter += new System.EventHandler(this.highLightOn);
             this.pbBtnSaveScene.MouseLeave += new System.EventHandler(this.highlight_Off);
             // 
@@ -337,6 +313,7 @@ namespace Rebirth.EditorClasses {
             this.pbBtnOpenProject.Size = new System.Drawing.Size(32, 32);
             this.pbBtnOpenProject.TabIndex = 3;
             this.pbBtnOpenProject.TabStop = false;
+            this.pbBtnOpenProject.Click += new System.EventHandler(this.pbBtnOpenProject_Click);
             this.pbBtnOpenProject.MouseEnter += new System.EventHandler(this.highLightOn);
             this.pbBtnOpenProject.MouseLeave += new System.EventHandler(this.highlight_Off);
             // 
@@ -385,6 +362,7 @@ namespace Rebirth.EditorClasses {
             this.pbBtnNewScene.Size = new System.Drawing.Size(32, 32);
             this.pbBtnNewScene.TabIndex = 1;
             this.pbBtnNewScene.TabStop = false;
+            this.pbBtnNewScene.Click += new System.EventHandler(this.pbBtnNewScene_Click);
             this.pbBtnNewScene.MouseEnter += new System.EventHandler(this.highLightOn);
             this.pbBtnNewScene.MouseLeave += new System.EventHandler(this.highlight_Off);
             // 
@@ -398,6 +376,7 @@ namespace Rebirth.EditorClasses {
             this.pbBtnNewProject.Size = new System.Drawing.Size(32, 32);
             this.pbBtnNewProject.TabIndex = 0;
             this.pbBtnNewProject.TabStop = false;
+            this.pbBtnNewProject.Click += new System.EventHandler(this.pbBtnNewProject_Click);
             this.pbBtnNewProject.MouseEnter += new System.EventHandler(this.highLightOn);
             this.pbBtnNewProject.MouseLeave += new System.EventHandler(this.highlight_Off);
             // 
@@ -434,7 +413,6 @@ namespace Rebirth.EditorClasses {
             this.menuStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbBtnSaveAll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBtnSaveScene)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBtnOpenProject)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -467,7 +445,6 @@ namespace Rebirth.EditorClasses {
         private System.Windows.Forms.ToolStripMenuItem openProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem saveAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildContainerToolStripMenuItem;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Panel panel3;
@@ -475,7 +452,6 @@ namespace Rebirth.EditorClasses {
         private System.Windows.Forms.PictureBox pbBtnNewProject;
         private System.Windows.Forms.PictureBox pbBtnOpenProject;
         private System.Windows.Forms.PictureBox pbBtnSaveScene;
-        private System.Windows.Forms.PictureBox pbBtnSaveAll;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel8;

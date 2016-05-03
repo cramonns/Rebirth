@@ -20,12 +20,16 @@ namespace Rebirth{
             get{ return screenWidth; }          
             set{
                 screenWidth = value; 
+                GameManager.game.graphics.PreferredBackBufferWidth = (int)screenWidth;
                 Ratio = WORLD_WIDTH / screenWidth;
             }
         }
         public static float DisplayHeight{
             get{ return screenHeight; }          
-            set{ screenHeight = value; }
+            set{ 
+                screenHeight = value; 
+                GameManager.game.graphics.PreferredBackBufferHeight = (int)screenHeight;
+            }
         }
         public static float WorldWidth{
             get{ return WORLD_WIDTH; }

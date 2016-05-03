@@ -127,7 +127,10 @@ namespace Rebirth {
 
         public void buildContainerManager(){
             BinaryFormatter binFormat = new BinaryFormatter();
-            string path = "/Lvl/Containers.info";
+            string path = "Lvl/Containers.info";
+            if (!Directory.Exists("Lvl/")){
+                Directory.CreateDirectory("Lvl/");
+            }
             using (Stream fStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None) ){
                 binFormat.Serialize(fStream, this);
             }
