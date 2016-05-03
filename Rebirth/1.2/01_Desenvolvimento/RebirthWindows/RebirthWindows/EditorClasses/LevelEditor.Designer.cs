@@ -402,6 +402,7 @@ namespace Rebirth.EditorClasses {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "LevelEditor";
             this.Text = "LevelEditor";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LevelEditor_FormClosed);
             this.Resize += new System.EventHandler(this.LevelEditor_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).EndInit();
