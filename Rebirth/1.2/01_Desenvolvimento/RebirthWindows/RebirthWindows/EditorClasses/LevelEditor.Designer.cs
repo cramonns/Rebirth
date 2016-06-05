@@ -58,6 +58,7 @@ namespace Rebirth.EditorClasses {
             this.pbBtnNewProject = new System.Windows.Forms.PictureBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.gameBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBoxObjects.SuspendLayout();
@@ -71,6 +72,7 @@ namespace Rebirth.EditorClasses {
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbBtnNewScene)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBtnNewProject)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // gameBox
@@ -259,6 +261,7 @@ namespace Rebirth.EditorClasses {
             // 
             this.panel2.BackColor = System.Drawing.Color.LightGray;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.panel7);
             this.panel2.Controls.Add(this.pbBtnSaveScene);
             this.panel2.Controls.Add(this.pbBtnOpenProject);
@@ -388,6 +391,20 @@ namespace Rebirth.EditorClasses {
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Rebirth Level Editor Project (*.rlep)|*.rlep";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(155, 1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseEnter += new System.EventHandler(this.highLightOn);
+            this.pictureBox1.MouseLeave += new System.EventHandler(this.highlight_Off);
+            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -419,6 +436,7 @@ namespace Rebirth.EditorClasses {
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbBtnNewScene)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBtnNewProject)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -458,6 +476,7 @@ namespace Rebirth.EditorClasses {
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 #endif

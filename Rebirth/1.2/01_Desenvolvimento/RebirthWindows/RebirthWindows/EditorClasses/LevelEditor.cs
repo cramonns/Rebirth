@@ -233,10 +233,7 @@ namespace Rebirth.EditorClasses {
         }
 
         private void buttonInsertObject_Click(object sender, EventArgs e) {
-            if (gameProject == null){
-                
-            }
-            else {
+            if (gameProject != null) {
                 gameEntry.getWorld().insertMode((Enumerations.ObjectTypes)comboBoxObjectList.SelectedIndex);
             }
         }
@@ -476,12 +473,11 @@ namespace Rebirth.EditorClasses {
             newScene();
         }
         
-        private void highLightOn(object sender, EventArgs e){
-
+        private void highLightOn(object sender, EventArgs e) {
             (sender as PictureBox).BackColor = System.Drawing.Color.LightGoldenrodYellow;
         }
 
-        private void highlight_Off(object sender, EventArgs e){
+        private void highlight_Off(object sender, EventArgs e) {
             (sender as PictureBox).BackColor = System.Drawing.Color.LightGray;
         }
 

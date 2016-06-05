@@ -22,6 +22,7 @@ namespace Rebirth {
         public float startPositionX = 0;
         public int lastContainerID;
         public int firstContainerID;
+        public Vector2 playerStartPosition;
 
         [NonSerialized]
         public Texture2D texture;
@@ -34,6 +35,7 @@ namespace Rebirth {
             lastContainerID = -1;
             containers = new List<ContainerProperties>();
             texture = TextureManager.load(TextureManager.TextureID.container);
+            playerStartPosition = new Vector2(0,0);
         }
 
 #if EDITOR

@@ -43,6 +43,11 @@ namespace Rebirth.EditorClasses {
             this.comboBoxTexture = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPageBasic = new System.Windows.Forms.TabPage();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label17 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.groupBoxDimensions = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.numericUpDownWidth = new System.Windows.Forms.NumericUpDown();
@@ -63,11 +68,6 @@ namespace Rebirth.EditorClasses {
             this.label15 = new System.Windows.Forms.Label();
             this.comboBoxTriggerOnCollide = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label17 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.tabPageMove.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeedY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeedX)).BeginInit();
@@ -78,6 +78,8 @@ namespace Rebirth.EditorClasses {
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
             this.tabPageTextures.SuspendLayout();
             this.tabPageBasic.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.groupBoxDimensions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeight)).BeginInit();
@@ -86,8 +88,6 @@ namespace Rebirth.EditorClasses {
             this.tabControl1.SuspendLayout();
             this.tabPageLogical.SuspendLayout();
             this.tabPageTriggers.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPageMove
@@ -378,6 +378,81 @@ namespace Rebirth.EditorClasses {
             this.tabPageBasic.Text = "Basic Properties";
             this.tabPageBasic.UseVisualStyleBackColor = true;
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DecimalPlaces = 2;
+            this.numericUpDown1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numericUpDown1.Location = new System.Drawing.Point(149, 144);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(49, 20);
+            this.numericUpDown1.TabIndex = 12;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(126, 146);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(17, 13);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "Y:";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.DecimalPlaces = 2;
+            this.numericUpDown2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numericUpDown2.Location = new System.Drawing.Point(39, 144);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(49, 20);
+            this.numericUpDown2.TabIndex = 10;
+            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(16, 146);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(17, 13);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "X:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(13, 124);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(68, 13);
+            this.label19.TabIndex = 8;
+            this.label19.Text = "Initial Speed:";
+            // 
             // groupBoxDimensions
             // 
             this.groupBoxDimensions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -640,81 +715,6 @@ namespace Rebirth.EditorClasses {
             this.label14.TabIndex = 2;
             this.label14.Text = "OnCollide:";
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.numericUpDown1.Location = new System.Drawing.Point(149, 144);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(49, 20);
-            this.numericUpDown1.TabIndex = 12;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(126, 146);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(17, 13);
-            this.label17.TabIndex = 11;
-            this.label17.Text = "Y:";
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.DecimalPlaces = 2;
-            this.numericUpDown2.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.numericUpDown2.Location = new System.Drawing.Point(39, 144);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(49, 20);
-            this.numericUpDown2.TabIndex = 10;
-            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(16, 146);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(17, 13);
-            this.label18.TabIndex = 9;
-            this.label18.Text = "X:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(13, 124);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(68, 13);
-            this.label19.TabIndex = 8;
-            this.label19.Text = "Initial Speed:";
-            // 
             // GameObjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -723,6 +723,7 @@ namespace Rebirth.EditorClasses {
             this.Controls.Add(this.tabControl1);
             this.Name = "GameObjectForm";
             this.Text = "Properties";
+            this.TopMost = true;
             this.tabPageMove.ResumeLayout(false);
             this.tabPageMove.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeedY)).EndInit();
@@ -737,6 +738,8 @@ namespace Rebirth.EditorClasses {
             this.tabPageTextures.PerformLayout();
             this.tabPageBasic.ResumeLayout(false);
             this.tabPageBasic.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.groupBoxDimensions.ResumeLayout(false);
             this.groupBoxDimensions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWidth)).EndInit();
@@ -748,8 +751,6 @@ namespace Rebirth.EditorClasses {
             this.tabPageLogical.PerformLayout();
             this.tabPageTriggers.ResumeLayout(false);
             this.tabPageTriggers.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }

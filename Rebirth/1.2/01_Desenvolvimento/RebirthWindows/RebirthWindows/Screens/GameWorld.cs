@@ -266,6 +266,10 @@ namespace Rebirth {
             insertionType = type;
         }
 
+        public void insertPlayer(){
+            insertionMode = true;
+        }
+
         public void leaveInsertMode(){
             insertionMode = false;
         }
@@ -349,7 +353,7 @@ namespace Rebirth {
                 scenes[preloadAmount].shiftHorizontal(diff);
                 DisplayManager.screenShift.X += diff;
             }
-            if (scenes[preloadAmount+1] != null) {
+            if (scenes[preloadAmount + 1] != null) {
                 diff = scenes[preloadAmount].X + scenes[preloadAmount].Width - scenes[preloadAmount + 1].X;
                 scenes[preloadAmount+1].shiftHorizontal(diff);
             }
