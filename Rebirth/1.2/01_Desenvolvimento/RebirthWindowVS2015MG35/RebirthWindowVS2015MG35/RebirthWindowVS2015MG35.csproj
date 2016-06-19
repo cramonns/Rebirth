@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7922C9A0-0B37-455E-A0C3-5A6E97242328}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RebirthWindowVS2015MG35</RootNamespace>
+    <AssemblyName>RebirthWindowVS2015MG35</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MonoGamePlatform>Windows</MonoGamePlatform>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WINDOWS;EDITOR</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DataStructures\QuadTree.cs" />
+    <Compile Include="EditorClasses\Editor.cs" />
+    <Compile Include="EditorClasses\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorClasses\FormNewProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\FormNewProject.Designer.cs">
+      <DependentUpon>FormNewProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorClasses\FormTextureHolders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\FormTextureHolders.Designer.cs">
+      <DependentUpon>FormTextureHolders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorClasses\GameObjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\GameObjectForm.Designer.cs">
+      <DependentUpon>GameObjectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorClasses\LevelEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\LevelEditor.Designer.cs">
+      <DependentUpon>LevelEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorClasses\Project.cs" />
+    <Compile Include="EditorClasses\Properties.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\PropertiesItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\SceneContainerManager.cs" />
+    <Compile Include="EditorClasses\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorClasses\UserControl2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditorClasses\UserControl2.Designer.cs">
+      <DependentUpon>UserControl2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorClasses\XMLManager.cs" />
+    <Compile Include="Effects\Rain.cs" />
+    <Compile Include="Enumerations.cs" />
+    <Compile Include="Game1.cs" />
+    <Compile Include="GameObjects\Attachment.cs" />
+    <Compile Include="GameObjects\Box.cs" />
+    <Compile Include="GameObjects\Canon.cs" />
+    <Compile Include="GameObjects\Character.cs" />
+    <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="GameObjects\GameTrigger.cs" />
+    <Compile Include="GameObjects\Ground.cs" />
+    <Compile Include="GameObjects\LogicalObject.cs" />
+    <Compile Include="GameObjects\MoveableObject.cs" />
+    <Compile Include="GameObjects\Particle.cs" />
+    <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="GameObjects\Projectile.cs" />
+    <Compile Include="GameObjects\TextureLoader.cs" />
+    <Compile Include="GlobalControllers\ControllerManager.cs" />
+    <Compile Include="GlobalControllers\DeveloperSettings.cs" />
+    <Compile Include="GlobalControllers\DisplayManager.cs" />
+    <Compile Include="GlobalControllers\GameManager.cs" />
+    <Compile Include="GlobalControllers\GlobalVariables.cs" />
+    <Compile Include="GlobalControllers\LoadManager.cs" />
+    <Compile Include="GlobalControllers\MouseManager.cs" />
+    <Compile Include="GlobalControllers\TextureManager.cs" />
+    <Compile Include="GlobalControllers\UserSettings.cs" />
+    <Compile Include="GlobalControllers\VideoManager.cs" />
+    <Compile Include="MathAndGeometry\Circle.cs" />
+    <Compile Include="MathAndGeometry\Edge.cs" />
+    <Compile Include="MathAndGeometry\IShape.cs" />
+    <Compile Include="MathAndGeometry\MathUtils.cs" />
+    <Compile Include="MathAndGeometry\PolygonR.cs" />
+    <Compile Include="MathAndGeometry\RectangleF.cs" />
+    <Compile Include="MathAndGeometry\VertexR.cs" />
+    <Compile Include="Physics\Collider.cs" />
+    <Compile Include="Physics\Collision.cs" />
+    <Compile Include="Physics\CollisionDistance.cs" />
+    <Compile Include="Physics\PhysicsManager.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\ContainerManager.cs" />
+    <Compile Include="Screens\GameScreen.cs" />
+    <Compile Include="Screens\GameWorld.cs" />
+    <Compile Include="Screens\IntroScreen.cs" />
+    <Compile Include="Screens\MenuScreen.cs" />
+    <Compile Include="Screens\SceneContainer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Texture\Background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\blackSquare.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\Bowling_grass_pxr128.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\CanonBall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\Container.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\cyan.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\ground.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\LogoVideo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\PlayerInclusion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\Rain.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\red.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\SelectedContainer.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\Shale_rock_pxr128.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\startButton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Texture\White_square.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EditorClasses\FormNewProject.resx">
+      <DependentUpon>FormNewProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorClasses\FormTextureHolders.resx">
+      <DependentUpon>FormTextureHolders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorClasses\GameObjectForm.resx">
+      <DependentUpon>GameObjectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorClasses\LevelEditor.resx">
+      <DependentUpon>LevelEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorClasses\UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorClasses\UserControl2.resx">
+      <DependentUpon>UserControl2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
