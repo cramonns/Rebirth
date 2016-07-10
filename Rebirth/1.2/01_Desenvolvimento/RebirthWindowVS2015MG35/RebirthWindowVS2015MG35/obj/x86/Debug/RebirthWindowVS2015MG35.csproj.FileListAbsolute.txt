@@ -45,3 +45,6 @@ C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\
 C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindowVS2015MG35\RebirthWindowVS2015MG35\bin\Windows\x86\Debug\Content\Texture\startButton.png
 C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindowVS2015MG35\RebirthWindowVS2015MG35\bin\Windows\x86\Debug\Content\Texture\White_square.png
 C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindowVS2015MG35\RebirthWindowVS2015MG35\obj\x86\Debug\RebirthWindowVS2015MG35.csprojResolveAssemblyReference.cache
+C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindowVS2015MG35\RebirthWindowVS2015MG35\bin\Windows\x86\Debug\Content\notEmpty.txt
+C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindowVS2015MG35\RebirthWindowVS2015MG35\bin\Windows\x86\Debug\RebirthWindowVS2015MG35.exe.CodeAnalysisLog.xml
+C:\Users\Ramon\Documents\42bits\svnRebirth\trunk\Rebirth\1.2\01_Desenvolvimento\RebirthWindowVS2015MG35\RebirthWindowVS2015MG35\bin\Windows\x86\Debug\RebirthWindowVS2015MG35.exe.lastcodeanalysissucceeded

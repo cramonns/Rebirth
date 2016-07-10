@@ -98,6 +98,7 @@ namespace Rebirth.EditorClasses
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 gameProject = Project.Open(openFileDialog1.FileName);
+                
                 startEditor(gameProject.DirectoryPath);
             }
             else {
@@ -475,15 +476,12 @@ namespace Rebirth.EditorClasses
             (sender as PictureBox).BackColor = System.Drawing.Color.LightGray;
         }
 
-        private void highLightGreen_On(object sender, MouseEventArgs e)
-        {
+        private void highLightGreen_On(object sender, MouseEventArgs e) {
             (sender as PictureBox).BackColor = System.Drawing.Color.LightGreen;
         }
 
-        private void highLightGreen_Off(object sender, MouseEventArgs e)
-        {
-            if ((sender as PictureBox).ClientRectangle.Contains(PointToClient(Control.MousePosition)))
-            {
+        private void highLightGreen_Off(object sender, MouseEventArgs e) {
+            if ((sender as PictureBox).ClientRectangle.Contains(PointToClient(Control.MousePosition))) {
                 (sender as PictureBox).BackColor = System.Drawing.Color.LightGreen;
             }
             (sender as PictureBox).BackColor = System.Drawing.Color.LightGray;

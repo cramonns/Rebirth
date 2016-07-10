@@ -293,7 +293,7 @@ namespace Rebirth.EditorClasses {
             // 
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.panel8);
-            this.panel7.Location = new System.Drawing.Point(151, 1);
+            this.panel7.Location = new System.Drawing.Point(150, 1);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1, 34);
             this.panel7.TabIndex = 6;

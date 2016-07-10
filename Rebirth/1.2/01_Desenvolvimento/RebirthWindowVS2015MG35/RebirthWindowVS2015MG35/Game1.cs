@@ -116,6 +116,10 @@ namespace Rebirth
             for (int i = 0; i < totalScreens; i++)
                 screens[i].LoadScreen();
 
+            //load textures
+            TextureManager.load(TextureManager.TextureID.white);
+            TextureManager.load(TextureManager.TextureID.black);
+
 #if EDITOR
             if (editor) {
                 (screens[(int)ScreenID.world] as GameWorld).editMode();

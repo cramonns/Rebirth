@@ -83,7 +83,7 @@ namespace Rebirth
             //if (!GameManager.globalVariables.editorMode) sb.Draw(TextureManager.getTexture(TextureManager.TextureID.Background), new Rectangle(0,0,1280,720), Color.White);
 #if EDITOR
             Color color = Color.LightGray * 0.5f;
-            Texture2D texture = TextureManager.load(TextureManager.TextureID.white);
+            Texture2D texture = TextureManager.getTexture(TextureManager.TextureID.white);
             RectangleF rectangle = new RectangleF(0,0,0,0);
             List<GameObject> candidates = new List<GameObject>();
 #endif
@@ -182,7 +182,7 @@ namespace Rebirth
             color = Color.White * 0.4f;
             
             /////////////////////////
-            texture = TextureManager.load(TextureManager.TextureID.black);
+            //texture = TextureManager.load(TextureManager.TextureID.black);
             /////////////////////////
 #if DEV
             if (scenes[preloadAmount] != null){
